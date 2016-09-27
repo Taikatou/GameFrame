@@ -1,7 +1,0 @@
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\bin\Debug\GameFrame.dll
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\bin\Debug\GameFrame.pdb
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\bin\Debug\MonoGame.Extended.dll
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\bin\Debug\MonoGame.Framework.dll
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\obj\Debug\GameFrame.csprojResolveAssemblyReference.cache
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\obj\Debug\GameFrame.dll
-c:\users\conor\onedrive\documents\visual studio 2015\Projects\GameFrame\GameFrame\obj\Debug\GameFrame.pdb
