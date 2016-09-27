@@ -1,11 +1,25 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace GameFrame
 {
     public class JoyStickButton
     {
-        public Buttons Button;
+        public Buttons CachedButton;
+        public Buttons Button
+        {
+            get
+            {
+                var capabilities = GamePad.GetCapabilities(PlayerIndex.One);
+                if (capabilities.IsConnected)
+                {
+                    var state = GamePad.GetState(PlayerIndex.One);
+                    Update(state);
+                }
+                return CachedButton;
+            }
+        }
         public float ThumbstickTolerance = 0.35f;
         private readonly bool _leftStick;
 
@@ -24,16 +38,16 @@ namespace GameFrame
             {
                 if (absX > ThumbstickTolerance)
                 {
-                    Button = direction.X > 0 ? Buttons.DPadRight : Buttons.DPadLeft;
+                    CachedButton = direction.X > 0 ? Buttons.DPadRight : Buttons.DPadLeft;
                 }
             }
             else if (absY > ThumbstickTolerance)
             {
-                Button = direction.Y > 0 ? Buttons.DPadUp : Buttons.DPadDown;
+                CachedButton = direction.Y > 0 ? Buttons.DPadUp : Buttons.DPadDown;
             }
             else
             {
-                Button = 0;
+                CachedButton = 0;
             }
         }
     }
