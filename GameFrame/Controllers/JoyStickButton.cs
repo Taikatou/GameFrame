@@ -4,28 +4,20 @@ using Microsoft.Xna.Framework;
 
 namespace GameFrame.Controllers
 {
-    public class JoyStickButton
+    public class JoyStickButton : IButtonAble
     {
-        public Buttons CachedButton;
-        public Buttons Button
-        {
-            get
-            {
-                var capabilities = GamePad.GetCapabilities(PlayerIndex.One);
-                if (capabilities.IsConnected)
-                {
-                    var state = GamePad.GetState(PlayerIndex.One);
-                    Update(state);
-                }
-                return CachedButton;
-            }
-        }
         public float ThumbstickTolerance = 0.35f;
         private readonly bool _leftStick;
+        public bool Connected;
+        public Buttons Button { get; set; }
+        public bool Active { get; set; }
+        public readonly PlayerIndex Player;
+        public bool PreviouslyActive { get; set; }
 
-        public JoyStickButton(bool leftStick = true)
+        public JoyStickButton(bool leftStick = true, PlayerIndex player=PlayerIndex.One)
         {
             _leftStick = leftStick;
+            Player = player;
         }
 
         public void Update(GamePadState state)
@@ -38,16 +30,27 @@ namespace GameFrame.Controllers
             {
                 if (absX > ThumbstickTolerance)
                 {
-                    CachedButton = direction.X > 0 ? Buttons.DPadRight : Buttons.DPadLeft;
+                    Button = direction.X > 0 ? Buttons.DPadRight : Buttons.DPadLeft;
                 }
             }
             else if (absY > ThumbstickTolerance)
             {
-                CachedButton = direction.Y > 0 ? Buttons.DPadUp : Buttons.DPadDown;
+                Button = direction.Y > 0 ? Buttons.DPadUp : Buttons.DPadDown;
             }
             else
             {
-                CachedButton = 0;
+                Button = 0;
+            }
+        }
+
+        public void Update()
+        {
+            var capabilities = GamePad.GetCapabilities(Player);
+            Connected = capabilities.IsConnected;
+            if (Connected)
+            {
+                var state = GamePad.GetState(Player);
+                Update(state);
             }
         }
     }
