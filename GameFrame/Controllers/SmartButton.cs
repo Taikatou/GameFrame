@@ -21,7 +21,6 @@ namespace GameFrame.Controllers
         public void Update()
         {
             _button.Update();
-            // Just 
             if(ButtonJustPressed)
             {
                 OnButtonJustPressed?.Invoke(this, null);

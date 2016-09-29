@@ -34,6 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AbstractGamePadButton.cs" />
+    <Compile Include="Controllers\GamePadButton.cs" />
     <Compile Include="Controllers\KeyButton.cs" />
     <Compile Include="Controllers\IButtonAble.cs" />
     <Compile Include="Controllers\JoyStickButton.cs" />

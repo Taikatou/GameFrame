@@ -4,15 +4,10 @@ using Microsoft.Xna.Framework;
 
 namespace GameFrame.Controllers
 {
-    public class JoyStickButton : IButtonAble
+    public class JoyStickButton : AbstractGamePadButton
     {
         public float ThumbstickTolerance = 0.35f;
         private readonly bool _leftStick;
-        public bool Connected;
-        public Buttons Button { get; set; }
-        public bool Active { get; set; }
-        public readonly PlayerIndex Player;
-        public bool PreviouslyActive { get; set; }
 
         public JoyStickButton(bool leftStick = true, PlayerIndex player=PlayerIndex.One)
         {
@@ -20,7 +15,7 @@ namespace GameFrame.Controllers
             Player = player;
         }
 
-        public void Update(GamePadState state)
+        public override void Update(GamePadState state)
         {
             var direction = _leftStick ? state.ThumbSticks.Left : state.ThumbSticks.Right;
 
@@ -40,17 +35,6 @@ namespace GameFrame.Controllers
             else
             {
                 Button = 0;
-            }
-        }
-
-        public void Update()
-        {
-            var capabilities = GamePad.GetCapabilities(Player);
-            Connected = capabilities.IsConnected;
-            if (Connected)
-            {
-                var state = GamePad.GetState(Player);
-                Update(state);
             }
         }
     }
