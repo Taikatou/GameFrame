@@ -40,15 +40,26 @@
     <Compile Include="Controllers\IButtonAble.cs" />
     <Compile Include="Controllers\JoyStickButton.cs" />
     <Compile Include="Controllers\SmartButton.cs" />
+    <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
+    <Compile Include="MediaAdapter\IMediaPlayer.cs" />
+    <Compile Include="MediaAdapter\MediaAdapter.cs" />
+    <Compile Include="MediaAdapter\Mp4Player.cs" />
+    <Compile Include="MediaAdapter\SoundPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
