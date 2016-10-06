@@ -2,19 +2,15 @@
 using GameFrame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class DemoGame : GameFrameGame
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private IDemoScene _demoScene;
+        private AbstractScene _demoScene;
 
         public DemoGame()
         {
@@ -39,7 +35,7 @@ namespace Demos
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _demoScene.Draw(_spriteBatch);
             base.Draw(gameTime);
         }

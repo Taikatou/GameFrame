@@ -10,13 +10,13 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\PureGame\Dependencies\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\Dependencies\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
 #begin TopDownRpg/Fonts/montserrat-32.fnt
-/importer:
-/processor:
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
 /build:TopDownRpg/Fonts/montserrat-32.fnt
 
 #begin TopDownRpg/Fonts/montserrat-32_0.png
@@ -32,13 +32,13 @@
 /build:TopDownRpg/Fonts/montserrat-32_0.png
 
 #begin TopDownRpg/level01.tmx
-/importer:
-/processor:
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
 /build:TopDownRpg/level01.tmx
 
 #begin TopDownRpg/level02.tmx
-/importer:
-/processor:
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
 /build:TopDownRpg/level02.tmx
 
 #begin TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
@@ -64,4 +64,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/tileset.png
+
+#begin TopDownRpg/Character.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/Character.png
 
