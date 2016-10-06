@@ -1,12 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.Maps.Tiled;
 
 namespace GameFrame.CollisionSystems.Tiled
 {
     public class TiledCollisionSystem : ICollisionSystem
     {
-        public TiledMap Map;
         public TiledTileLayer TileCollisionLayer;
 
         public bool CheckCollision(int x, int y)
@@ -20,11 +18,9 @@ namespace GameFrame.CollisionSystems.Tiled
             return CheckCollision(position.X, position.Y);
         }
 
-        public TiledCollisionSystem(string mapName, ContentManager content)
+        public TiledCollisionSystem(TiledMap map, string collisionLayerName="Collision-Layer")
         {
-            string fileName = $"TileMaps/{mapName}";
-            Map = content.Load<TiledMap>(fileName);
-            TileCollisionLayer = Map.GetLayer<TiledTileLayer>("Collision-Layer");
+            TileCollisionLayer = map.GetLayer<TiledTileLayer>(collisionLayerName);
         }
     }
 }
