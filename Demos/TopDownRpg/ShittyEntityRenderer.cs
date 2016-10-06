@@ -22,7 +22,7 @@ namespace Demos.TopDownRpg
 
         public Vector2 Position
         {
-            get { return _position.ToVector2(); }
+            get { return (_position* _tileSize).ToVector2(); }
             set { _position = value.ToPoint(); }
         }
 

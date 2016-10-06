@@ -1,4 +1,5 @@
-﻿using MonoGame.Extended;
+﻿using System.Diagnostics;
+using MonoGame.Extended;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.Common
@@ -16,7 +17,9 @@ namespace GameFrame.Common
 
         public void Update(GameTime gameTime)
         {
+            Debug.WriteLine("Moving " + _follower.Position + " to " + _following.Position);
             _follower.Position = _following.Position;
+            Debug.WriteLine("Moved " + _follower.Position + " to " + _following.Position);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Demos
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _demoScene.Draw(_spriteBatch);
             base.Draw(gameTime);
         }

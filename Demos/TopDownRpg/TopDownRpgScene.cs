@@ -2,6 +2,7 @@
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
+using GameFrame.Common;
 using GameFrame.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -37,7 +38,9 @@ namespace Demos.TopDownRpg
             collisionSystem.AddCollisionSystem(tileMapCollisionSystem);
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
             CollisionSystem = collisionSystem;
+            var followCamera = new CameraTracker(Camera, EntityRenderer);
             UpdateList.Add(expiringSpatialHash);
+            UpdateList.Add(followCamera);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
