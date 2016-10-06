@@ -35,7 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DemoGame.cs" />
+    <Compile Include="IDemoScene.cs" />
+    <Compile Include="Platformer\Entity.cs" />
+    <Compile Include="Platformer\PlatformerScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopDownRpg\TopDownRpgScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended">
@@ -51,6 +55,7 @@
       <Name>GameFrame</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
