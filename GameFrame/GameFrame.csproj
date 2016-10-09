@@ -42,6 +42,7 @@
     <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
     <Compile Include="Common\ExpiringKey.cs" />
     <Compile Include="Common\CameraTracker.cs" />
+    <Compile Include="Common\IFocusAble.cs" />
     <Compile Include="Common\FollowTracker.cs" />
     <Compile Include="Content\ContentManagerFactory.cs" />
     <Compile Include="Controllers\AbstractGamePadButton.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Controllers\JoyStickButton.cs" />
     <Compile Include="Controllers\SmartButton.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="Movers\IMover.cs" />
+    <Compile Include="Movers\PlayerMover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

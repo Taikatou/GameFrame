@@ -4,6 +4,7 @@ using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
+using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,6 +40,8 @@ namespace Demos.TopDownRpg
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
+            var playerMover = new PlayerMover(collisionSystem, EntityRenderer);
+            UpdateList.Add(playerMover);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
         }

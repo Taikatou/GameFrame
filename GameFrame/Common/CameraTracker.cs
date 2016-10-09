@@ -6,10 +6,10 @@ namespace GameFrame.Common
     public class CameraTracker : IUpdate
     {
         private readonly Camera2D _follower;
-        private readonly IMovable _following;
+        private readonly IFocusAble _following;
         private Vector2 _cachedPosition;
 
-        public CameraTracker(Camera2D follower, IMovable following)
+        public CameraTracker(Camera2D follower, IFocusAble following)
         {
             _follower = follower;
             _following = following;
@@ -17,10 +17,10 @@ namespace GameFrame.Common
 
         public void Update(GameTime gameTime)
         {
-            if (_cachedPosition != _following.Position)
+            if (_cachedPosition != _following.ScreenPosition)
             {
-                _follower.LookAt(_following.Position);
-                _cachedPosition = _following.Position;
+                _follower.LookAt(_following.ScreenPosition);
+                _cachedPosition = _following.ScreenPosition;
             }
         }
     }
