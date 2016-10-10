@@ -26,6 +26,7 @@ namespace Demos.TopDownRpg
         {
             _content = ContentManagerFactory.RequestContentManager();
             Camera = new Camera2D(viewPort);
+            Camera.Zoom = 2.0f;
         }
         public override void LoadScene()
         {

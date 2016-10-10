@@ -19,7 +19,7 @@ namespace GameFrame.Common
         {
             if (_cachedPosition != _following.ScreenPosition)
             {
-                var focusOn = _following.ScreenPosition - _following.Offset;
+                var focusOn = _following.ScreenPosition + _following.Offset;
                 _follower.LookAt(focusOn.ToVector2());
                 _cachedPosition = _following.ScreenPosition;
             }
