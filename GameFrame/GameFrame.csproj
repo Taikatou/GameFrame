@@ -53,7 +53,7 @@
     <Compile Include="Controllers\GamePad\JoyStickButton.cs" />
     <Compile Include="Controllers\SmartButton\AbstractSmartButton.cs" />
     <Compile Include="Controllers\SmartButton\BaseSmartButton.cs" />
-    <Compile Include="Controllers\SmartButton\AlternativeSmartButton.cs" />
+    <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="Movers\IMover.cs" />

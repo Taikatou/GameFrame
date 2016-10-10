@@ -1,8 +1,9 @@
-﻿using MonoGame.Extended;
+﻿using Microsoft.Xna.Framework;
 
 namespace GameFrame.Movers
 {
-    public interface IMover : IUpdate
+    public interface IMover
     {
+        void RequestMovement(Vector2 position);
     }
 }
