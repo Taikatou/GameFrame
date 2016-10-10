@@ -4,6 +4,7 @@ using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
+using GameFrame.Controllers;
 using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -41,9 +42,11 @@ namespace Demos.TopDownRpg
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new PlayerMover(collisionSystem, EntityRenderer);
+            var smartController = new SmartController();
             UpdateList.Add(playerMover);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
+            UpdateList.Add(smartController);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

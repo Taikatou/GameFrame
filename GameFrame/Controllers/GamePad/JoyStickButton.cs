@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
-namespace GameFrame.Controllers
+namespace GameFrame.Controllers.GamePad
 {
     public class JoyStickButton : AbstractGamePadButton
     {

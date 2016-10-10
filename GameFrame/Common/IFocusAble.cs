@@ -5,6 +5,7 @@ namespace GameFrame.Common
 {
     public interface IFocusAble : IMovable
     {
-        Vector2 ScreenPosition { get; }
+        Point ScreenPosition { get; }
+        Point Offset { get; }
     }
 }

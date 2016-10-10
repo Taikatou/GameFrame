@@ -1,26 +1,19 @@
 ﻿using System;
 
-namespace GameFrame.Controllers
+namespace GameFrame.Controllers.SmartButton
 {
-    public class SmartButton
+    public abstract class AbstractSmartButton
     {
-        private readonly IButtonAble _button;
         public event EventHandler OnButtonJustPressed;
         public event EventHandler OnButtonReleased;
         public event EventHandler OnButtonHeldDown;
 
-        public bool ButtonJustPressed => _button.Active && !_button.PreviouslyActive;
-        public bool ButtonReleased => !_button.Active && _button.PreviouslyActive;
-        public bool ButtonHeldDown => _button.Active && _button.PreviouslyActive;
+        public abstract bool ButtonJustPressed { get; }
+        public abstract bool ButtonReleased { get; }
+        public abstract bool ButtonHeldDown { get; }
 
-        public SmartButton(IButtonAble button)
+        public virtual void Update()
         {
-            _button = button;
-        }
-
-        public void Update()
-        {
-            _button.Update();
             if(ButtonJustPressed)
             {
                 OnButtonJustPressed?.Invoke(this, null);
