@@ -19,16 +19,16 @@ namespace Demos.TopDownRpg
         {
             _entity = entity;
             _smartController = new SmartController();
-            var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new GamePadButton(Buttons.DPadUp) };
+            var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new DirectionGamePadButton(Buttons.DPadUp) };
             CreateCompositeButton(upButtons, entityMover, new Vector2(0, -1));
 
-            var downButtons = new List<IButtonAble> { new KeyButton(Keys.S), new KeyButton(Keys.Down), new GamePadButton(Buttons.DPadDown) };
+            var downButtons = new List<IButtonAble> { new KeyButton(Keys.S), new KeyButton(Keys.Down), new DirectionGamePadButton(Buttons.DPadDown) };
             CreateCompositeButton(downButtons, entityMover, new Vector2(0, 1));
 
-            var leftButtons = new List<IButtonAble> { new KeyButton(Keys.A), new KeyButton(Keys.Left), new GamePadButton(Buttons.DPadLeft) };
+            var leftButtons = new List<IButtonAble> { new KeyButton(Keys.A), new KeyButton(Keys.Left), new DirectionGamePadButton(Buttons.DPadLeft) };
             CreateCompositeButton(leftButtons, entityMover, new Vector2(-1, 0));
 
-            var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right), new GamePadButton(Buttons.DPadRight) };
+            var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right), new DirectionGamePadButton(Buttons.DPadRight) };
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0));
         }
 
