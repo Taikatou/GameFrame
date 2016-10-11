@@ -1,5 +1,4 @@
-﻿using Demos.Platformer;
-using GameFrame.CollisionSystems;
+﻿using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
@@ -33,19 +32,21 @@ namespace Demos.TopDownRpg
             var fileName = "TopDownRpg/level01";
             Map = _content.Load<TiledMap>(fileName);
             var tileSize = new Point(Map.TileWidth, Map.TileHeight);
-            EntityRenderer = new EntityRenderer(_content, new Point(5, 5), tileSize);
+            var entity = new Entity(new Vector2(5, 5));
             var collisionSystem = new CompositeCollisionSystem();
             var tileMapCollisionSystem = new TiledCollisionSystem(Map);
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
+            EntityRenderer = new EntityRenderer(_content, expiringSpatialHash, entity, tileSize);
             collisionSystem.AddCollisionSystem(tileMapCollisionSystem);
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
-            var playerMover = new PlayerMover(collisionSystem, EntityRenderer);
-            var entityController = new EntityController(EntityRenderer, playerMover);
+            var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
+            var entityController = new EntityController(entity, entity, expiringSpatialHash);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
             UpdateList.Add(entityController);
+            UpdateList.Add(playerMover);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

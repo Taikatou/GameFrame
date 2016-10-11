@@ -58,7 +58,7 @@
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="Movers\IMover.cs" />
-    <Compile Include="Movers\PlayerMover.cs" />
+    <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
