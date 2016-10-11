@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameFrame.Controllers;
+using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
@@ -18,16 +19,16 @@ namespace Demos.TopDownRpg
         {
             _entity = entity;
             _smartController = new SmartController();
-            var upButtons = new List<IButtonAble> {new KeyButton(Keys.W), new KeyButton(Keys.Up)};
+            var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new GamePadButton(Buttons.DPadUp) };
             CreateCompositeButton(upButtons, entityMover, new Vector2(0, -1));
 
-            var downButtons = new List<IButtonAble> { new KeyButton(Keys.S), new KeyButton(Keys.Down) };
+            var downButtons = new List<IButtonAble> { new KeyButton(Keys.S), new KeyButton(Keys.Down), new GamePadButton(Buttons.DPadDown) };
             CreateCompositeButton(downButtons, entityMover, new Vector2(0, 1));
 
-            var leftButtons = new List<IButtonAble> { new KeyButton(Keys.A), new KeyButton(Keys.Left) };
+            var leftButtons = new List<IButtonAble> { new KeyButton(Keys.A), new KeyButton(Keys.Left), new GamePadButton(Buttons.DPadLeft) };
             CreateCompositeButton(leftButtons, entityMover, new Vector2(-1, 0));
 
-            var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right) };
+            var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right), new GamePadButton(Buttons.DPadRight) };
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0));
         }
 
