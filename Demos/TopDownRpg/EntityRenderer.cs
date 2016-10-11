@@ -1,5 +1,4 @@
-﻿using System;
-using GameFrame.CollisionSystems.SpatialHash;
+﻿using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
