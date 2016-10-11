@@ -34,17 +34,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AbstractGamePadButton.cs" />
-    <Compile Include="Controllers\GamePadButton.cs" />
-    <Compile Include="Controllers\KeyButton.cs" />
+    <Compile Include="CollisionSystems\CompositeCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\ICollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\ISpatialCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
+    <Compile Include="Common\ExpiringKey.cs" />
+    <Compile Include="Common\CameraTracker.cs" />
+    <Compile Include="Common\IFocusAble.cs" />
+    <Compile Include="Common\FollowTracker.cs" />
+    <Compile Include="Content\ContentManagerFactory.cs" />
+    <Compile Include="Controllers\ButtonMethods.cs" />
+    <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\DirectionGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\GamePadButton.cs" />
+    <Compile Include="Controllers\KeyBoard\KeyButton.cs" />
     <Compile Include="Controllers\IButtonAble.cs" />
-    <Compile Include="Controllers\JoyStickButton.cs" />
-    <Compile Include="Controllers\SmartButton.cs" />
-    <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
-    <Compile Include="MediaAdapter\IMediaPlayer.cs" />
-    <Compile Include="MediaAdapter\MediaAdapter.cs" />
-    <Compile Include="MediaAdapter\Mp4Player.cs" />
-    <Compile Include="MediaAdapter\SoundPlayer.cs" />
+    <Compile Include="Controllers\GamePad\JoyStick.cs" />
+    <Compile Include="Controllers\SmartButton\AbstractSmartButton.cs" />
+    <Compile Include="Controllers\SmartButton\BaseSmartButton.cs" />
+    <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
+    <Compile Include="Controllers\SmartController.cs" />
+    <Compile Include="GameFrameGame.cs" />
+    <Compile Include="Movers\IMover.cs" />
+    <Compile Include="Movers\PlayerMover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +71,9 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TiledExtensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
