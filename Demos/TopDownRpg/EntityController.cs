@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
@@ -12,12 +13,26 @@ namespace Demos.TopDownRpg
 {
     public class EntityController : IUpdate
     {
-        private readonly EntityRenderer _entity;
+        private readonly Entity _entity;
         private readonly SmartController _smartController;
+        private readonly ExpiringSpatialHashCollisionSystem<Entity> _spatialHashLayer;
+        public int ButtonsDown;
+        public bool PlayerMove => ButtonsDown != 0;
 
-        public EntityController(EntityRenderer entity, IMover entityMover)
+        public bool EntityMoving
+        {
+            get
+            {
+                var position = _entity.Position.ToPoint();
+                var entityMoving = _spatialHashLayer.Moving(position);
+                return entityMoving;;
+            }
+        }
+
+        public EntityController(Entity entity, IMover entityMover, ExpiringSpatialHashCollisionSystem<Entity> spatialHashLayer)
         {
             _entity = entity;
+            _spatialHashLayer = spatialHashLayer;
             _smartController = new SmartController();
             var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new DirectionGamePadButton(Buttons.DPadUp) };
             CreateCompositeButton(upButtons, entityMover, new Vector2(0, -1));
@@ -41,18 +56,25 @@ namespace Demos.TopDownRpg
             }
             smartButton.OnButtonJustPressed = (sender, args) =>
             {
-                _entity.Walking = true;
-                var position = _entity.Position + direction;
-                entityMover.RequestMovement(position);
+                ButtonsDown++;
+                if (!EntityMoving)
+                {
+                    _entity.Direction = direction;
+                    _entity.Moving = PlayerMove;
+                }
             };
             smartButton.OnButtonHeldDown = (sender, args) =>
             {
-                var position = _entity.Position + direction;
-                entityMover.RequestMovement(position);
+                if (!EntityMoving && ButtonsDown == 1)
+                {
+                    _entity.Direction = direction;
+                    _entity.Moving = PlayerMove;
+                }
             };
             smartButton.OnButtonReleased = (sender, args) =>
             {
-                _entity.Walking = false;
+                ButtonsDown--;
+                _entity.Moving = PlayerMove;
             };
             _smartController.AddButton(smartButton);
         }
