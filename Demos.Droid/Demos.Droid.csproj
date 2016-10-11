@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +86,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demos\Demos.csproj">
+      <Project>{a0778009-be06-4dd2-8f41-8e9f665f385f}</Project>
+      <Name>Demos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameFrame\GameFrame.csproj">
+      <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
+      <Name>GameFrame</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -1,21 +1,20 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
 
-namespace GameFrame.Controllers
+namespace GameFrame.Controllers.GamePad
 {
-    public class JoyStickButton : AbstractGamePadButton
+    public class JoyStick
     {
         public float ThumbstickTolerance = 0.35f;
         private readonly bool _leftStick;
+        public Buttons Button;
 
-        public JoyStickButton(bool leftStick = true, PlayerIndex player=PlayerIndex.One)
+        public JoyStick(bool leftStick = true)
         {
             _leftStick = leftStick;
-            Player = player;
         }
 
-        public override void Update(GamePadState state)
+        public void Update(GamePadState state)
         {
             var direction = _leftStick ? state.ThumbSticks.Left : state.ThumbSticks.Right;
 

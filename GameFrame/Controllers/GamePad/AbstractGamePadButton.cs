@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameFrame.Controllers
+namespace GameFrame.Controllers.GamePad
 {
     public abstract class AbstractGamePadButton : IButtonAble
     {
@@ -20,11 +15,11 @@ namespace GameFrame.Controllers
 
         public virtual void Update()
         {
-            var capabilities = GamePad.GetCapabilities(Player);
+            var capabilities = Microsoft.Xna.Framework.Input.GamePad.GetCapabilities(Player);
             Connected = capabilities.IsConnected;
             if (Connected)
             {
-                var state = GamePad.GetState(Player);
+                var state = Microsoft.Xna.Framework.Input.GamePad.GetState(Player);
                 Update(state);
             }
         }

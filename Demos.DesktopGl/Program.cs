@@ -13,9 +13,8 @@ namespace Demos.DesktopGl
         [STAThread]
         static void Main()
         {
-            var game = new Game1();
-            //using (var game = new Game1())
-              game.Run();
+            using (var game = new DemoGame())
+                game.Run();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace GameFrame.Controllers
+namespace GameFrame.Controllers.KeyBoard
 {
     public class KeyButton : IButtonAble
     {
