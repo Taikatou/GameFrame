@@ -47,10 +47,11 @@
     <Compile Include="Content\ContentManagerFactory.cs" />
     <Compile Include="Controllers\ButtonMethods.cs" />
     <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\DirectionGamePadButton.cs" />
     <Compile Include="Controllers\GamePad\GamePadButton.cs" />
     <Compile Include="Controllers\KeyBoard\KeyButton.cs" />
     <Compile Include="Controllers\IButtonAble.cs" />
-    <Compile Include="Controllers\GamePad\JoyStickButton.cs" />
+    <Compile Include="Controllers\GamePad\JoyStick.cs" />
     <Compile Include="Controllers\SmartButton\AbstractSmartButton.cs" />
     <Compile Include="Controllers\SmartButton\BaseSmartButton.cs" />
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
@@ -70,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TiledExtensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
