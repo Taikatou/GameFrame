@@ -64,6 +64,10 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Demos\Demos.csproj">
+      <Project>{A0778009-BE06-4DD2-8F41-8E9F665F385F}</Project>
+      <Name>Demos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameFrame\GameFrame.csproj">
       <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
       <Name>GameFrame</Name>
