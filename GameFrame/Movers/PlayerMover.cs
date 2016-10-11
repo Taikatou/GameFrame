@@ -6,8 +6,8 @@ namespace GameFrame.Movers
 {
     public class PlayerMover : IMover
     {
-        private ICollisionSystem _collisionSystem;
-        private IMovable _playerCharacter;
+        private readonly ICollisionSystem _collisionSystem;
+        private readonly IMovable _playerCharacter;
 
         public PlayerMover(ICollisionSystem collisionSystem, IMovable playerCharacter)
         {
@@ -15,8 +15,12 @@ namespace GameFrame.Movers
             _playerCharacter = playerCharacter;
         }
 
-        public void Update(GameTime gameTime)
+        public void RequestMovement(Vector2 position)
         {
+            if (!_collisionSystem.CheckCollision((int)position.X, (int)position.Y))
+            {
+                _playerCharacter.Position = position;
+            }
         }
     }
 }

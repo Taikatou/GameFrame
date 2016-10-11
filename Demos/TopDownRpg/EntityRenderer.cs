@@ -5,11 +5,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Demos.TopDownRpg
 {
-    public class ShittyEntityRenderer : IFocusAble
+    public class EntityRenderer : IFocusAble
     {
         private readonly Texture2D _entityTexture;
         private readonly Point _tileSize;
         private Point _position;
+        public bool Walking;
         public Point Offset { get; }
         public Point ScreenPosition => _position * _tileSize;
 
@@ -19,7 +20,7 @@ namespace Demos.TopDownRpg
             set { _position = value.ToPoint(); }
         }
 
-        public ShittyEntityRenderer(ContentManager content, Point position, Point tileSize)
+        public EntityRenderer(ContentManager content, Point position, Point tileSize)
         {
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             _position = position;

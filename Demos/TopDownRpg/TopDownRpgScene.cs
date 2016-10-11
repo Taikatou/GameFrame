@@ -4,7 +4,6 @@ using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
-using GameFrame.Controllers;
 using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -21,19 +20,20 @@ namespace Demos.TopDownRpg
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
         public ICollisionSystem CollisionSystem;
-        public ShittyEntityRenderer EntityRenderer;
+        public EntityRenderer EntityRenderer;
 
         public TopDownRpgScene(ViewportAdapter viewPort)
         {
             _content = ContentManagerFactory.RequestContentManager();
             Camera = new Camera2D(viewPort);
+            Camera.Zoom = 2.0f;
         }
         public override void LoadScene()
         {
             var fileName = "TopDownRpg/level01";
             Map = _content.Load<TiledMap>(fileName);
             var tileSize = new Point(Map.TileWidth, Map.TileHeight);
-            EntityRenderer = new ShittyEntityRenderer(_content, new Point(5, 5), tileSize);
+            EntityRenderer = new EntityRenderer(_content, new Point(5, 5), tileSize);
             var collisionSystem = new CompositeCollisionSystem();
             var tileMapCollisionSystem = new TiledCollisionSystem(Map);
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
@@ -42,11 +42,10 @@ namespace Demos.TopDownRpg
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new PlayerMover(collisionSystem, EntityRenderer);
-            var smartController = new SmartController();
-            UpdateList.Add(playerMover);
+            var entityController = new EntityController(EntityRenderer, playerMover);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
-            UpdateList.Add(smartController);
+            UpdateList.Add(entityController);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
