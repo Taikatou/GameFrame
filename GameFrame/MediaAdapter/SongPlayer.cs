@@ -1,33 +1,47 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using System.Diagnostics;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Content;
 using GameFrame.Content;
 using Microsoft.Xna.Framework.Content;
-using System;
 
 namespace GameFrame.MediaAdapter
 {
-    public class SongPlayer : IAdvancedMediaPlayer
-    {
-        Song song { get; set; }
-        ContentManager content;
+    public class SongPlayer { 
+
+        private Song _song { get; set; }
+
+        public ContentManager Content { get; }
 
         public SongPlayer()
         {
-            content = ContentManagerFactory.RequestContentManager();
+            Content = ContentManagerFactory.RequestContentManager();
         }
 
         public void play(string fileName)
         {
-            content.Load<Song>("Ghost-in-the-house");
-            System.Diagnostics.Debug.WriteLine("playing wav with soudnplayer");
+            _song = Content.Load<Song>(fileName);
+            System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
+            MediaPlayer.Play(_song);
+            MediaPlayer.Volume = 100;
+            MediaPlayer.IsRepeating = true;
+        }
+
+        public void pause()
+        {
+            MediaPlayer.Pause();
+            Debug.WriteLine("SongPlayer::Pause()");
+
+        }
+
+        public void resume()
+        {
+            MediaPlayer.Resume();
+            Debug.WriteLine("SongPlayer::Resume()");
+
         }
 
         public void Dispose()
         {
-            content.Unload();
+            Content.Unload();
         }
     }
 }

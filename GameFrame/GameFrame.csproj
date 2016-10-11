@@ -57,6 +57,11 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="MediaAdapter\AudioPlayer.cs" />
+    <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
+    <Compile Include="MediaAdapter\IAudioPlayer.cs" />
+    <Compile Include="MediaAdapter\AudioAdapter.cs" />
+    <Compile Include="MediaAdapter\SongPlayer.cs" />
     <Compile Include="Movers\IMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

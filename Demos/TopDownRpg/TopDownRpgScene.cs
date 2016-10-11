@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
+using GameFrame.MediaAdapter;
 
 namespace Demos.TopDownRpg
 {
@@ -47,6 +48,16 @@ namespace Demos.TopDownRpg
             UpdateList.Add(followCamera);
             UpdateList.Add(entityController);
             UpdateList.Add(playerMover);
+
+            //Testing Media-Adapter
+            IAudioPlayer audio1 = new AudioAdapter();
+            audio1.play("mp3", "piano");
+            audio1.pause();
+            audio1.resume();
+            IAudioPlayer effect = new AudioAdapter();
+            effect.play("wav", "BirabutoKingdom");
+            effect.pause();
+            effect.resume();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
