@@ -40,6 +40,10 @@
     <Compile Include="CollisionSystems\SpatialHash\ISpatialCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
+    <Compile Include="CollisionTest\AABB.cs" />
+    <Compile Include="CollisionTest\BBCollision.cs" />
+    <Compile Include="CollisionTest\BBObject.cs" />
+    <Compile Include="CollisionTest\Vector2d.cs" />
     <Compile Include="Common\ExpiringKey.cs" />
     <Compile Include="Common\CameraTracker.cs" />
     <Compile Include="Common\IFocusAble.cs" />
