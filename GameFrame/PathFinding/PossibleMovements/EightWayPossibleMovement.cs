@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameFrame.PathFinding.PossibleMovements
 {
-    public class EightWayPossibleMovement : FourWayPossibleMovement
+    public class EightWayPossibleMovement : IPossibleMovements
     {
         public Point[] GetAdjacentLocations(Point fromLocation)
         {
