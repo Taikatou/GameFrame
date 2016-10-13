@@ -29,7 +29,6 @@ namespace GameFrame.Movers
             if (_pathList.Count > 0)
             {
                 var direction = _pathList[0] - ToMove.Position.ToPoint();
-                Debug.WriteLine(direction);
                 ToMove.Direction = direction.ToVector2();
             }
         }

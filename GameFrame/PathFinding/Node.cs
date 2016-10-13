@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GameFrame.PathFinding.Heuristics;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.PathFinding
@@ -7,6 +7,7 @@ namespace GameFrame.PathFinding
     {
         private Node _parentNode;
 
+        private readonly IHeuristic _heuristic;
         public Point Location { get; }
 
         public int G { get; private set; }
@@ -22,27 +23,21 @@ namespace GameFrame.PathFinding
             {
                 // When setting the parent, also calculate the traversal cost from the start node to here (the 'G' value)
                 _parentNode = value;
-                G = _parentNode.G + GetTraversalCost(Location, _parentNode.Location);
+                G = _parentNode.G + _heuristic.GetTraversalCost(Location, _parentNode.Location);
             }
         }
 
-        public Node(Point point, Point endLocation, int max)
+        public Node(Point point, Point endLocation, IHeuristic heuristic, int max)
         {
             Location = point;
-            H = GetTraversalCost(Location, endLocation);
+            _heuristic = heuristic;
+            H = _heuristic.GetTraversalCost(Location, endLocation);
             G = max;
         }
 
         public override string ToString()
         {
             return $"{Location.X}, {Location.Y}";
-        }
-
-        internal static int GetTraversalCost(Point location, Point otherLocation)
-        {
-            var deltaX = otherLocation.X - location.X;
-            var deltaY = otherLocation.Y - location.Y;
-            return Math.Abs(deltaX) + Math.Abs(deltaY);
         }
     }
 
