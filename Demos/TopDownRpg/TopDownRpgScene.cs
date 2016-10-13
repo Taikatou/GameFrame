@@ -4,6 +4,7 @@ using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Movers;
+using GameFrame.PathFinding;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,8 +25,7 @@ namespace Demos.TopDownRpg
         public TopDownRpgScene(ViewportAdapter viewPort)
         {
             _content = ContentManagerFactory.RequestContentManager();
-            Camera = new Camera2D(viewPort);
-            Camera.Zoom = 2.0f;
+            Camera = new Camera2D(viewPort) {Zoom = 2.0f};
         }
         public override void LoadScene()
         {
@@ -43,10 +43,14 @@ namespace Demos.TopDownRpg
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
             var entityController = new EntityController(entity, entity, expiringSpatialHash);
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), new Point(5, 7), CollisionSystem, new Rectangle(new Point(), tileSize));
+            var path = new AStarPathFinder(searchParams).FindPath();
+            var pathMover = new PathMover(entity, path);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
             UpdateList.Add(entityController);
             UpdateList.Add(playerMover);
+            UpdateList.Add(pathMover);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
