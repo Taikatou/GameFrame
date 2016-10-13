@@ -5,6 +5,8 @@ using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
+using GameFrame.PathFinding.Heuristics;
+using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -44,7 +46,7 @@ namespace Demos.TopDownRpg
             var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
             var entityController = new EntityController(entity, entity, expiringSpatialHash);
             var searchParams = new SearchParameters(entity.Position.ToPoint(), new Point(5, 7), CollisionSystem, new Rectangle(new Point(), tileSize));
-            var path = new AStarPathFinder(searchParams).FindPath();
+            var path = new AStarPathFinder(searchParams, new ManhattanDistance(), new FourWayPossibleMovement()).FindPath();
             var pathMover = new PathMover(entity, path);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);

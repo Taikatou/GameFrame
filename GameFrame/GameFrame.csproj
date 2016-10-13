@@ -70,7 +70,12 @@
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
+    <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />
     <Compile Include="PathFinding\Node.cs" />
+    <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
     <Compile Include="PathFinding\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

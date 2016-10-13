@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using GameFrame.PathFinding.Heuristics;
+using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.PathFinding
@@ -10,6 +12,9 @@ namespace GameFrame.PathFinding
         private readonly Node _endNode;
         private readonly int _max;
         public readonly SearchParameters SearchParameters;
+        private readonly IHeuristic _heuristic;
+        private readonly IPossibleMovements _possibleMovements;
+
         //node has to be walkable
         private Node GetNode(Point p)
         {
@@ -20,7 +25,7 @@ namespace GameFrame.PathFinding
             }
             else if (ValidPosition(p))
             {
-                MapNodes[p] = new Node(p, SearchParameters.EndLocation, _max);
+                MapNodes[p] = new Node(p, SearchParameters.EndLocation, _heuristic, _max);
                 toReturn = MapNodes[p];
             }
             else
@@ -30,8 +35,10 @@ namespace GameFrame.PathFinding
             return toReturn;
         }
 
-        public AStarPathFinder(SearchParameters searchParameters)
+        public AStarPathFinder(SearchParameters searchParameters, IHeuristic heuristic, IPossibleMovements possibleMovements)
         {
+            _heuristic = heuristic;
+            _possibleMovements = possibleMovements;
             var width = searchParameters.Space.Width;
             var height = searchParameters.Space.Height;
             _max = width * height;
@@ -45,7 +52,7 @@ namespace GameFrame.PathFinding
 
         public Node ForceNode(Point start, Point end, int max)
         {
-            var node = new Node(start, end, max);
+            var node = new Node(start, end, _heuristic, max);
             return node;
         }
 
@@ -95,7 +102,7 @@ namespace GameFrame.PathFinding
 
         private void GetNodesToAnalysis(Node fromNode, ICollection<Node> queue)
         {
-            var nextLocations = GetAdjacentLocations(fromNode.Location);
+            var nextLocations = _possibleMovements.GetAdjacentLocations(fromNode.Location);
 
             foreach (var location in nextLocations)
             {
@@ -115,7 +122,7 @@ namespace GameFrame.PathFinding
                     }
                     else
                     {
-                        var traversalCost = Node.GetTraversalCost(node.Location, fromNode.Location);
+                        var traversalCost = _heuristic.GetTraversalCost(node.Location, fromNode.Location);
                         var gTemp = fromNode.G + traversalCost;
                         if (gTemp < node.G)
                         {
@@ -131,17 +138,6 @@ namespace GameFrame.PathFinding
         {
             var collision = SearchParameters.CollisionSystem.CheckCollision(point.X, point.Y); 
             return !collision;
-        }
-
-        private static IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
-        {
-            return new[]
-            {
-                new Point(fromLocation.X-1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y+1),
-                new Point(fromLocation.X+1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y-1)
-            };
         }
     }
 }
