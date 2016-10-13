@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
 {
-    public class Entity : IMover
+    public class Entity : IMoving
     {
         public Vector2 Position { get; set; }
         public bool Moving { get; set; }

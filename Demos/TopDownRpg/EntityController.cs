@@ -11,25 +11,17 @@ using MonoGame.Extended;
 
 namespace Demos.TopDownRpg
 {
-    public class EntityController : IUpdate
+    public class EntityController : AbstractMover<Entity>, IUpdate
     {
         private readonly Entity _entity;
         private readonly SmartController _smartController;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _spatialHashLayer;
         public int ButtonsDown;
         public bool PlayerMove => ButtonsDown != 0;
+        public override IMovable ToMove => _entity;
 
-        public bool EntityMoving
-        {
-            get
-            {
-                var position = _entity.Position.ToPoint();
-                var entityMoving = _spatialHashLayer.Moving(position);
-                return entityMoving;;
-            }
-        }
-
-        public EntityController(Entity entity, IMover entityMover, ExpiringSpatialHashCollisionSystem<Entity> spatialHashLayer)
+        public EntityController(Entity entity, IMoving entityMover, ExpiringSpatialHashCollisionSystem<Entity> spatialHashLayer) : 
+            base(spatialHashLayer)
         {
             _entity = entity;
             _spatialHashLayer = spatialHashLayer;
@@ -47,7 +39,7 @@ namespace Demos.TopDownRpg
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0));
         }
 
-        public void CreateCompositeButton(List<IButtonAble> buttons, IMover entityMover, Vector2 direction)
+        public void CreateCompositeButton(List<IButtonAble> buttons, IMoving entityMover, Vector2 direction)
         {
             var smartButton = new CompositeSmartButton();
             foreach (var button in buttons)
@@ -57,7 +49,7 @@ namespace Demos.TopDownRpg
             smartButton.OnButtonJustPressed = (sender, args) =>
             {
                 ButtonsDown++;
-                if (!EntityMoving)
+                if (!MoveAbleMoving)
                 {
                     _entity.Direction = direction;
                     _entity.Moving = PlayerMove;
@@ -65,7 +57,7 @@ namespace Demos.TopDownRpg
             };
             smartButton.OnButtonHeldDown = (sender, args) =>
             {
-                if (!EntityMoving && ButtonsDown == 1)
+                if (!MoveAbleMoving && ButtonsDown == 1)
                 {
                     _entity.Direction = direction;
                     _entity.Moving = PlayerMove;

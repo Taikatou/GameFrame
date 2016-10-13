@@ -46,6 +46,11 @@
     <Compile Include="Common\FollowTracker.cs" />
     <Compile Include="Content\ContentManagerFactory.cs" />
     <Compile Include="Controllers\ButtonMethods.cs" />
+    <Compile Include="Controllers\Click\ClickController.cs" />
+    <Compile Include="Controllers\Click\MouseClick\MouseControl.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\ITouchScreenControl.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\SmartGesture.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\TouchScreenControl.cs" />
     <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
     <Compile Include="Controllers\GamePad\DirectionGamePadButton.cs" />
     <Compile Include="Controllers\GamePad\GamePadButton.cs" />
@@ -57,8 +62,14 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
-    <Compile Include="Movers\IMover.cs" />
+    <Compile Include="Movers\AbstractMover.cs" />
+    <Compile Include="Movers\IMoverManager.cs" />
+    <Compile Include="Movers\IMoving.cs" />
+    <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
+    <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Node.cs" />
+    <Compile Include="PathFinding\SearchParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,12 +83,7 @@
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TiledExtensions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
