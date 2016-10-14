@@ -1,35 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+using GameFrame.Paths;
 
 namespace GameFrame.Movers
 {
     public class PathMover : IUpdate
     {
-        private readonly List<Point> _pathList;
+        private readonly IPath _path;
         public IMoving ToMove;
 
-        public PathMover(IMoving toMove, List<Point> pathList) 
+        public PathMover(IMoving toMove, IPath path) 
         {
             ToMove = toMove;
-            _pathList = pathList;
+            _path = path;
             ToMove.Moving = true;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (_pathList.Count > 0)
+            if (_path.ToMove)
             {
-                if (ToMove.Position.ToPoint() == _pathList[0])
+                var position = ToMove.Position.ToPoint();
+                _path.Update(position);
+                if(_path.ToMove)
                 {
-                    _pathList.RemoveAt(0);
+                    var direction = _path.NextPosition - ToMove.Position.ToPoint();
+                    ToMove.Direction = direction.ToVector2();
                 }
             }
-            if (_pathList.Count > 0)
+            else
             {
-                var direction = _pathList[0] - ToMove.Position.ToPoint();
-                ToMove.Direction = direction.ToVector2();
+                ToMove.Moving = false;
             }
         }
     }
