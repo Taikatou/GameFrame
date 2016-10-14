@@ -77,6 +77,10 @@
     <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
     <Compile Include="PathFinding\SearchParameters.cs" />
+    <Compile Include="Paths\CyclicalCounter.cs" />
+    <Compile Include="Paths\CyclicalPath.cs" />
+    <Compile Include="Paths\FinitePath.cs" />
+    <Compile Include="Paths\IPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
