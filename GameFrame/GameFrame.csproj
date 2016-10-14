@@ -70,6 +70,7 @@
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\DiagonalDistance.cs" />
     <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
     <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />
     <Compile Include="PathFinding\Node.cs" />
