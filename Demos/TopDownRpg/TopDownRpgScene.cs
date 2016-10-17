@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GameFrame.CollisionSystems;
+﻿using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
@@ -11,6 +10,7 @@ using GameFrame.PathFinding;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
+using GameFrame.Renderers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,6 +28,10 @@ namespace Demos.TopDownRpg
         public readonly Camera2D Camera;
         public ICollisionSystem CollisionSystem;
         public EntityRenderer EntityRenderer;
+        public PathRenderer PathRenderer;
+        private MoverManager _moverManager;
+        private Entity _entity;
+        private Vector2 _tileSize;
 
         public TopDownRpgScene(ViewportAdapter viewPort)
         {
@@ -36,21 +40,33 @@ namespace Demos.TopDownRpg
         }
         public override void LoadScene()
         {
+            var texture = _content.Load<Texture2D>("TopDownRpg/Path");
+            PathRenderer = new PathRenderer(texture);
             var fileName = "TopDownRpg/level01";
             Map = _content.Load<TiledMap>(fileName);
-            var tileSize = new Point(Map.TileWidth, Map.TileHeight);
-            var entity = new Entity(new Vector2(5, 5));
+            _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
+            _entity = new Entity(new Vector2(5, 5));
             var collisionSystem = new CompositeCollisionSystem();
             var tileMapCollisionSystem = new TiledCollisionSystem(Map);
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
-            EntityRenderer = new EntityRenderer(_content, expiringSpatialHash, entity, tileSize);
+            EntityRenderer = new EntityRenderer(_content, expiringSpatialHash, _entity, _tileSize.ToPoint());
             collisionSystem.AddCollisionSystem(tileMapCollisionSystem);
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
-            var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
-            var moverManager = new MoverManager();
-            var entityController = new EntityController(entity, entity, moverManager);
+            var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, _entity, expiringSpatialHash);
+            _moverManager = new MoverManager();
+            var entityController = new EntityController(_entity, _entity, _moverManager);
+            AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
+            UpdateList.Add(expiringSpatialHash);
+            UpdateList.Add(followCamera);
+            UpdateList.Add(entityController);
+            UpdateList.Add(playerMover);
+            UpdateList.Add(_moverManager);
+        }
+
+        public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
+        {
             var clickController = new ClickController();
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
@@ -64,12 +80,7 @@ namespace Demos.TopDownRpg
                 MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            UpdateList.Add(expiringSpatialHash);
-            UpdateList.Add(followCamera);
-            UpdateList.Add(entityController);
-            UpdateList.Add(playerMover);
             UpdateList.Add(clickController);
-            UpdateList.Add(moverManager);
         }
 
         public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
@@ -87,6 +98,8 @@ namespace Demos.TopDownRpg
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
             Map.Draw(transformMatrix);
             EntityRenderer.Draw(spriteBatch);
+            var points = _moverManager.PathPoints(_entity);
+            PathRenderer.Draw(spriteBatch, points, _tileSize);
             spriteBatch.End();
         }
     }
