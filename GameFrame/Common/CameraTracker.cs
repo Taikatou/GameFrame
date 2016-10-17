@@ -7,7 +7,7 @@ namespace GameFrame.Common
     {
         private readonly Camera2D _follower;
         private readonly IFocusAble _following;
-        private Point _cachedPosition;
+        private Vector2 _cachedPosition;
 
         public CameraTracker(Camera2D follower, IFocusAble following)
         {
@@ -20,7 +20,7 @@ namespace GameFrame.Common
             if (_cachedPosition != _following.ScreenPosition)
             {
                 var focusOn = _following.ScreenPosition + _following.Offset;
-                _follower.LookAt(focusOn.ToVector2());
+                _follower.LookAt(focusOn);
                 _cachedPosition = _following.ScreenPosition;
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
@@ -11,20 +10,16 @@ using MonoGame.Extended;
 
 namespace Demos.TopDownRpg
 {
-    public class EntityController : AbstractMover<Entity>, IUpdate
+    public class EntityController : IUpdate
     {
-        private readonly Entity _entity;
         private readonly SmartController _smartController;
-        private readonly ExpiringSpatialHashCollisionSystem<Entity> _spatialHashLayer;
         public int ButtonsDown;
         public bool PlayerMove => ButtonsDown != 0;
-        public override IMovable ToMove => _entity;
+        public BaseMovable ToMove;
 
-        public EntityController(Entity entity, IMoving entityMover, ExpiringSpatialHashCollisionSystem<Entity> spatialHashLayer) : 
-            base(spatialHashLayer)
+        public EntityController(Entity entity, BaseMovable entityMover)
         {
-            _entity = entity;
-            _spatialHashLayer = spatialHashLayer;
+            ToMove = entity;
             _smartController = new SmartController();
             var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new DirectionGamePadButton(Buttons.DPadUp) };
             CreateCompositeButton(upButtons, entityMover, new Vector2(0, -1));
@@ -39,7 +34,7 @@ namespace Demos.TopDownRpg
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0));
         }
 
-        public void CreateCompositeButton(List<IButtonAble> buttons, IMoving entityMover, Vector2 direction)
+        public void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 direction)
         {
             var smartButton = new CompositeSmartButton();
             foreach (var button in buttons)
@@ -49,24 +44,18 @@ namespace Demos.TopDownRpg
             smartButton.OnButtonJustPressed = (sender, args) =>
             {
                 ButtonsDown++;
-                if (!MoveAbleMoving)
-                {
-                    _entity.Direction = direction;
-                    _entity.Moving = PlayerMove;
-                }
+                ToMove.MovingDirection = direction;
+                ToMove.Moving = PlayerMove;
             };
             smartButton.OnButtonHeldDown = (sender, args) =>
             {
-                if (!MoveAbleMoving && ButtonsDown == 1)
-                {
-                    _entity.Direction = direction;
-                    _entity.Moving = PlayerMove;
-                }
+                ToMove.MovingDirection = direction;
+                ToMove.Moving = PlayerMove;
             };
             smartButton.OnButtonReleased = (sender, args) =>
             {
                 ButtonsDown--;
-                _entity.Moving = PlayerMove;
+                ToMove.Moving = PlayerMove;
             };
             _smartController.AddButton(smartButton);
         }

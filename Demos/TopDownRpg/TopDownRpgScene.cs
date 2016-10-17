@@ -45,15 +45,15 @@ namespace Demos.TopDownRpg
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
-            var entityController = new EntityController(entity, entity, expiringSpatialHash);
+            var entityController = new EntityController(entity, entity);
             var searchParams = new SearchParameters(entity.Position.ToPoint(), new Point(10, 15), CollisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, new ManhattanDistance(), new FourWayPossibleMovement()).FindPath();
-            var pathMover = new PathMover(entity, new CyclicalPath(path));
+            //var pathMover = new PathMover(entity, new CyclicalPath(path));
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
             UpdateList.Add(entityController);
             UpdateList.Add(playerMover);
-            UpdateList.Add(pathMover);
+            //UpdateList.Add(pathMover);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
