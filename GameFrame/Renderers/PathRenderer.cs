@@ -7,16 +7,23 @@ namespace GameFrame.Renderers
     public class PathRenderer
     {
         private readonly Texture2D _texture;
-        public PathRenderer(Texture2D texture)
+        private readonly Texture2D _endTexture;
+        public PathRenderer(Texture2D texture, Texture2D endTexture)
         {
             _texture = texture;
+            _endTexture = endTexture;
         }
 
-        public void Draw(SpriteBatch spriteBatch, List<Point> points, Vector2 tileSize)
+        public void Draw(SpriteBatch spriteBatch, List<Point> points, Vector2 pointSize)
         {
-            foreach (var point in points)
+            if (points.Count > 0)
             {
-                spriteBatch.Draw(_texture, point.ToVector2() * tileSize, null, Color.White);
+                var lastIndex = points.Count - 1;
+                for (var i = 0; i < lastIndex; i++)
+                {
+                    spriteBatch.Draw(_texture, points[i].ToVector2() * pointSize, null, Color.White);
+                }
+                spriteBatch.Draw(_endTexture, points[lastIndex].ToVector2() * pointSize, null, Color.White);
             }
         }
     }

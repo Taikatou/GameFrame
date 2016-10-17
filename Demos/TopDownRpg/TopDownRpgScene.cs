@@ -41,11 +41,13 @@ namespace Demos.TopDownRpg
         public override void LoadScene()
         {
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
-            PathRenderer = new PathRenderer(texture);
+            var endTexture = _content.Load<Texture2D>("TopDownRpg/PathEnd");
+            PathRenderer = new PathRenderer(texture, endTexture);
             var fileName = "TopDownRpg/level01";
             Map = _content.Load<TiledMap>(fileName);
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _entity = new Entity(new Vector2(5, 5));
+            _moverManager = new MoverManager();
             var collisionSystem = new CompositeCollisionSystem();
             var tileMapCollisionSystem = new TiledCollisionSystem(Map);
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
@@ -55,7 +57,6 @@ namespace Demos.TopDownRpg
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, _entity, expiringSpatialHash);
-            _moverManager = new MoverManager();
             var entityController = new EntityController(_entity, _entity, _moverManager);
             AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
             UpdateList.Add(expiringSpatialHash);
