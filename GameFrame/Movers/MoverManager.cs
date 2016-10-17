@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -6,30 +7,30 @@ namespace GameFrame.Movers
 {
     public class MoverManager : IUpdate
     {
-        private readonly Dictionary<BaseMovable, PathMover> _movers;
+        public Dictionary<BaseMovable, PathMover> Movers;
 
         public MoverManager()
         {
-            _movers = new Dictionary<BaseMovable, PathMover>();
+            Movers = new Dictionary<BaseMovable, PathMover>();
         }
 
         public void AddMover(PathMover mover)
         {
-            _movers[mover.ToMove] = mover;
+            Movers[mover.ToMove] = mover;
         }
 
         public void RemoveMover(BaseMovable baseMover)
         {
-            if (_movers.ContainsKey(baseMover))
+            if (Movers.ContainsKey(baseMover))
             {
-                _movers.Remove(baseMover);
+                Movers.Remove(baseMover);
             }
         }
 
         public void Update(GameTime gameTime)
         {
             var toRemoveList = new List<BaseMovable>();
-            foreach (var mover in _movers)
+            foreach (var mover in Movers)
             {
                 mover.Value.Update(gameTime);
                 if (mover.Value.Complete)
@@ -40,6 +41,18 @@ namespace GameFrame.Movers
             foreach (var toRemove in toRemoveList)
             {
                 RemoveMover(toRemove);
+            }
+        }
+
+        public List<Point> PathPoints(BaseMovable mover)
+        {
+            if (Movers.ContainsKey(mover))
+            {
+                return Movers[mover].Path.PathPoints;
+            }
+            else
+            {
+                return new List<Point>();
             }
         }
     }
