@@ -8,6 +8,7 @@ namespace GameFrame.Movers
     {
         private readonly AbstractPath _path;
         public BaseMovable ToMove;
+        public bool Complete => !_path.ToMove;
 
         public PathMover(BaseMovable toMove, AbstractPath path) 
         {
@@ -18,15 +19,12 @@ namespace GameFrame.Movers
 
         public void Update(GameTime gameTime)
         {
+            var position = ToMove.Position.ToPoint();
+            _path.Update(position);
             if (_path.ToMove)
             {
-                var position = ToMove.Position.ToPoint();
-                _path.Update(position);
-                if(_path.ToMove)
-                {
-                    var direction = _path.NextPosition - ToMove.Position.ToPoint();
-                    ToMove.MovingDirection = direction.ToVector2();
-                }
+                var direction = _path.NextPosition - ToMove.Position.ToPoint();
+                ToMove.MovingDirection = direction.ToVector2();
             }
             else
             {

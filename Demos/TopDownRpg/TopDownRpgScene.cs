@@ -1,8 +1,11 @@
-﻿using GameFrame.CollisionSystems;
+﻿using System.Diagnostics;
+using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
+using GameFrame.Controllers.Click;
+using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.Heuristics;
@@ -11,6 +14,7 @@ using GameFrame.Paths;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
@@ -45,21 +49,42 @@ namespace Demos.TopDownRpg
             CollisionSystem = collisionSystem;
             var followCamera = new CameraTracker(Camera, EntityRenderer);
             var playerMover = new SpatialHashMoverManager<Entity>(collisionSystem, entity, expiringSpatialHash);
-            var entityController = new EntityController(entity, entity);
-            var searchParams = new SearchParameters(entity.Position.ToPoint(), new Point(10, 15), CollisionSystem, new Rectangle(new Point(), tileSize));
-            var path = new AStarPathFinder(searchParams, new ManhattanDistance(), new FourWayPossibleMovement()).FindPath();
-            //var pathMover = new PathMover(entity, new CyclicalPath(path));
+            var moverManager = new MoverManager();
+            var entityController = new EntityController(entity, entity, moverManager);
+            var clickController = new ClickController();
+            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            {
+                var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
+                MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+            };
+            var moveGesture = new SmartGesture(GestureType.Tap);
+            moveGesture.GestureEvent += gesture =>
+            {
+                var endPoint = Camera.ScreenToWorld(gesture.Position);
+                MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+            };
+            clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(expiringSpatialHash);
             UpdateList.Add(followCamera);
             UpdateList.Add(entityController);
             UpdateList.Add(playerMover);
-            //UpdateList.Add(pathMover);
+            UpdateList.Add(clickController);
+            UpdateList.Add(moverManager);
+        }
+
+        public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
+        {
+            endPoint /= tileSize;
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
+            var path = new AStarPathFinder(searchParams, new ManhattanDistance(), new FourWayPossibleMovement()).FindPath();
+            var pathMover = new PathMover(entity, new FinitePath(path));
+            moverManager.AddMover(pathMover);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             var transformMatrix = Camera.GetViewMatrix();
-            spriteBatch.Begin(transformMatrix: transformMatrix);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
             Map.Draw(transformMatrix);
             EntityRenderer.Draw(spriteBatch);
             spriteBatch.End();
