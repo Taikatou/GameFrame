@@ -9,22 +9,23 @@ namespace Demos.TopDownRpg
     public class EntityRenderer : IFocusAble
     {
         private readonly Texture2D _entityTexture;
-        private readonly Point _tileSize;
+        private Point _tileSize;
         private readonly Entity _entity;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
-        public Point Offset { get; }
+        public Rectangle FrameRectangle;
+        public Vector2 Offset { get; }
 
-        public Point ScreenPosition
+        public Vector2 ScreenPosition
         {
             get
             {
-                var value = _entity.Position.ToPoint() * _tileSize;
+                var value = _entity.Position * _tileSize.ToVector2();
                 var position = _entity.Position.ToPoint();
                 if (_spaitalHash.Moving(position))
                 {
-                    var movedBy = _entity.Direction * _spaitalHash.Progress(position);
+                    var movedBy = _entity.FacingDirection * _spaitalHash.Progress(position);
                     var directionOffset = movedBy * _tileSize.ToVector2();
-                    value -= directionOffset.ToPoint();
+                    value -= directionOffset;
                 }
                 return value;
             }
@@ -41,14 +42,14 @@ namespace Demos.TopDownRpg
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             _entity = entity;
             _tileSize = tileSize;
-            Offset = new Point(_tileSize.X/2, _tileSize.Y/2);
+            Offset = new Vector2(_tileSize.X/2, _tileSize.Y/2);
             _spaitalHash = spaitalHash;
+            FrameRectangle = new Rectangle(new Point(), _tileSize);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var rect = new Rectangle(ScreenPosition, _tileSize);
-            spriteBatch.Draw(_entityTexture, rect, new Rectangle(new Point(), _tileSize), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0);
+            spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
         }
     }
 }

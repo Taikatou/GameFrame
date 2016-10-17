@@ -38,11 +38,7 @@ namespace GameFrame.CollisionSystems
             var found = false;
             foreach (var system in _collisionSystems)
             {
-                found = system.CheckCollision(x, y);
-                if (found)
-                {
-                    break;
-                }
+                found = found || system.CheckCollision(x, y);
             }
             return found;
         }

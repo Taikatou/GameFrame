@@ -1,25 +1,16 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace GameFrame.Paths
 {
-    public class FinitePath : IPath
+    public class FinitePath : AbstractPath
     {
-        private List<Point> _pathPoints;
-        public Point NextPosition => _pathPoints[0];
-        public Boolean ToMove => _pathPoints.Count > 0;
+        public override Point NextPosition => PathPoints[0];
+        public bool ToMove => PathPoints.Count > 0;
 
         public FinitePath(List<Point> pathPoints)
         {
-            _pathPoints = pathPoints;
-        }
-        public void Update(Point currentLocation)
-        {
-            if(ToMove && currentLocation == NextPosition)
-            {
-                _pathPoints.RemoveAt(0);
-            }
+            PathPoints = pathPoints;
         }
     }
 }

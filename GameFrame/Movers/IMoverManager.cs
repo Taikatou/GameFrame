@@ -4,6 +4,6 @@ namespace GameFrame.Movers
 {
     public interface IMoverManager
     {
-        void RequestMovement(Vector2 position);
+        bool RequestMovement(Vector2 position);
     }
 }

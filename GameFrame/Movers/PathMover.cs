@@ -6,10 +6,10 @@ namespace GameFrame.Movers
 {
     public class PathMover : IUpdate
     {
-        private readonly IPath _path;
-        public IMoving ToMove;
+        private readonly AbstractPath _path;
+        public BaseMovable ToMove;
 
-        public PathMover(IMoving toMove, IPath path) 
+        public PathMover(BaseMovable toMove, AbstractPath path) 
         {
             ToMove = toMove;
             _path = path;
@@ -25,7 +25,7 @@ namespace GameFrame.Movers
                 if(_path.ToMove)
                 {
                     var direction = _path.NextPosition - ToMove.Position.ToPoint();
-                    ToMove.Direction = direction.ToVector2();
+                    ToMove.MovingDirection = direction.ToVector2();
                 }
             }
             else

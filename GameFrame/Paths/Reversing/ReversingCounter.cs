@@ -1,12 +1,12 @@
-﻿namespace GameFrame.Paths
+﻿namespace GameFrame.Paths.Reversing
 {
-    public class CyclicalCounter
+    public class ReversingCounter
     {
         private int _direction;
         public int CurrentIndex;
         public readonly int EndIndex;
 
-        public CyclicalCounter(int startIndex, int endIndex, int direction=1)
+        public ReversingCounter(int startIndex, int endIndex, int direction=1)
         {
             CurrentIndex = startIndex;
             EndIndex = endIndex;
