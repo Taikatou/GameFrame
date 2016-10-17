@@ -21,7 +21,7 @@ using Android.App;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ac823f2f-b26e-48fb-b4e4-137fb1e69cea")]
+[assembly: Guid("c0e68dd4-a365-4619-a820-c87f3c8d7917")]
 
 // Version information for an assembly consists of the following four values:
 //
