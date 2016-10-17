@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace GameFrame.Paths.Reversing
@@ -9,14 +8,14 @@ namespace GameFrame.Paths.Reversing
         private readonly ReversingCounter _counter;
         public override Point NextPosition => PathPoints[_counter.CurrentIndex];
 
-        public Boolean ToMove => true;
+        public override bool ToMove => true;
 
         public ReversingPath(List<Point> pathPoints, int startIndex=0)
         {
             _counter = new ReversingCounter(startIndex, pathPoints.Count);
             PathPoints = pathPoints;
         }
-        public void Update(Point currentLocation)
+        public override void Update(Point currentLocation)
         {
             if(NextPosition == currentLocation)
             {

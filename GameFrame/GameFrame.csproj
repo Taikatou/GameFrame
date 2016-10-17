@@ -66,6 +66,7 @@
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\MoverManager.cs" />
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="PathFinding\AStarPathFinder.cs" />

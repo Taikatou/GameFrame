@@ -7,14 +7,8 @@ namespace GameFrame.Paths
     {
         public List<Point> PathPoints;
         public abstract Point NextPosition { get; }
-        public bool ToMove;
+        public virtual bool ToMove { get; }
 
-        public void Update(Point currentLocation)
-        {
-            if (ToMove && currentLocation == NextPosition)
-            {
-                PathPoints.RemoveAt(0);
-            }
-        }
+        public abstract void Update(Point currentLocation);
     }
 }
