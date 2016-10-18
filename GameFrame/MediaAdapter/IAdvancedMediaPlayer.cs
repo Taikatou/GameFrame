@@ -8,8 +8,8 @@ namespace GameFrame.MediaAdapter
 {
     public interface IAdvancedAudioPlayer
     {
-        void play(string fileName);
-        void resume();
-        void pause();
+        void Play(string fileName);
+        void Resume();
+        void Pause();
     }
 }

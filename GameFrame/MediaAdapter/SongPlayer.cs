@@ -16,7 +16,7 @@ namespace GameFrame.MediaAdapter
             Content = ContentManagerFactory.RequestContentManager();
         }
 
-        public void play(string fileName)
+        public void Play(string fileName)
         {
             _song = Content.Load<Song>(fileName);
             System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
@@ -25,14 +25,14 @@ namespace GameFrame.MediaAdapter
             MediaPlayer.IsRepeating = true;
         }
 
-        public void pause()
+        public void Pause()
         {
             MediaPlayer.Pause();
             Debug.WriteLine("SongPlayer::Pause()");
 
         }
 
-        public void resume()
+        public void Resume()
         {
             MediaPlayer.Resume();
             Debug.WriteLine("SongPlayer::Resume()");

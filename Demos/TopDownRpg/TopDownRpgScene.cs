@@ -51,13 +51,13 @@ namespace Demos.TopDownRpg
 
             //Testing Media-Adapter
             IAudioPlayer audio1 = new AudioAdapter();
-            audio1.play("mp3", "piano");
-            audio1.pause();
-            audio1.resume();
+            audio1.Play("mp3", "piano");
+            audio1.Pause();
+            audio1.Resume();
             IAudioPlayer effect = new AudioAdapter();
-            effect.play("wav", "BirabutoKingdom");
-            effect.pause();
-            effect.resume();
+            effect.Play("wav", "BirabutoKingdom");
+            effect.Pause();
+            effect.Resume();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

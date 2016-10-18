@@ -17,7 +17,7 @@ namespace GameFrame.MediaAdapter
         private SoundEffectInstance _instance;
 
 
-        public void play(string audioType, string fileName)
+        public void Play(string audioType, string fileName)
         {
             if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
@@ -33,13 +33,13 @@ namespace GameFrame.MediaAdapter
             }
         }
 
-        public void pause()
+        public void Pause()
         {
             _instance?.Pause();
             Debug.WriteLine("AudioPLayer::pause()");
         }
 
-        public void resume()
+        public void Resume()
         {
             Debug.WriteLine("AudioPLayer::resume()");
         }

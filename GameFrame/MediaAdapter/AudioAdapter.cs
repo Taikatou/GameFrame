@@ -8,12 +8,12 @@ namespace GameFrame.MediaAdapter
 {
     public class AudioAdapter : IAudioPlayer
     {
-        public AudioPlayer _audioPlayer
+        public AudioPlayer AudioPlayer
         {get; set; }
 
         public SongPlayer SongPlayer { get; set; }
 
-        public void play(string audioType, string fileName)
+        public void Play(string audioType, string fileName)
         {
             if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
             {
@@ -22,22 +22,22 @@ namespace GameFrame.MediaAdapter
             }
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                _audioPlayer = new AudioPlayer();
-                _audioPlayer.play("wav",fileName);
+                AudioPlayer = new AudioPlayer();
+                AudioPlayer.Play("wav",fileName);
             }
         }
 
-        public void pause()
+        public void Pause()
         {
             SongPlayer?.pause();
-            _audioPlayer?.pause();
+            AudioPlayer?.Pause();
         }
 
        
-        public void resume()
+        public void Resume()
         {
             SongPlayer?.resume();
-            _audioPlayer?.resume();
+            AudioPlayer?.Resume();
         }
     }
 }
