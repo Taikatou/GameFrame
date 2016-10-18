@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GameFrame.CollisionTest
 {
-    interface Interface1
+    public interface IObserver
     {
+        void Update();
     }
 }

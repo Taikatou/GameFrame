@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameFrame.CollisionTest
 {
-    interface ISubject
+    public interface ISubject
     {
+        void RegisterObserver(IObserver observer);
+        void UnRegisterObserver(IObserver observer);
+        void NotifyObservers();
     }
 }
