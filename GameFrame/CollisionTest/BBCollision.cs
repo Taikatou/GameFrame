@@ -11,8 +11,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace GameFrame.CollisionTest
 {
-    public class BBCollision : Game
+    public class BBCollision : Game, ISubject
     {
+        private List<IObserver> observers;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         BBObject object1;
@@ -21,6 +22,24 @@ namespace GameFrame.CollisionTest
         BBObject bottomWall;
         BBObject leftWall;
         BBObject rightWall;
+
+        public void RegisterObserver(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void UnRegisterObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach(IObserver ob in observers)
+            {
+                ob.Update();
+            }
+        }
 
         public BBCollision()
         {
@@ -36,11 +55,11 @@ namespace GameFrame.CollisionTest
             base.Update(gametime);
         }
 
-        private void CheckObjectCollision()
+        public void CheckObjectCollision()
         {
             if (object1.BoundingBox.Intersects(object2.BoundingBox))
             {
-
+                NotifyObservers();
             }
         }
 
@@ -48,25 +67,20 @@ namespace GameFrame.CollisionTest
         {
             if (object1.BoundingBox.Intersects(topWall.BoundingBox))
             {
-
+                NotifyObservers();
             }
             if (object1.BoundingBox.Intersects(bottomWall.BoundingBox))
             {
-
+                NotifyObservers();
             }
             if (object1.BoundingBox.Intersects(leftWall.BoundingBox))
             {
-
+                NotifyObservers();
             }
             if (object1.BoundingBox.Intersects(rightWall.BoundingBox))
             {
-
+                NotifyObservers();
             }
         }
-
-
-
-
-
     }
 }
