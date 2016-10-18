@@ -95,11 +95,6 @@
     <Compile Include="Renderers\AbstractPathRenderer.cs" />
     <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
-    <Compile Include="SpeedState\ISpeedState.cs" />
-    <Compile Include="SpeedState\Speed.cs" />
-    <Compile Include="SpeedState\SpeedGrass.cs" />
-    <Compile Include="SpeedState\SpeedMud.cs" />
-    <Compile Include="SpeedState\SpeedWater.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended">

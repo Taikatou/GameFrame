@@ -31,17 +31,7 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/Fonts/montserrat-32_0.png
 
-#begin TopDownRpg/level01.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/level01.tmx
-
-#begin TopDownRpg/level02.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/level02.tmx
-
-#begin TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
+#begin TopDownRpg/BluePathEnd.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -51,19 +41,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
-
-#begin TopDownRpg/tileset.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TopDownRpg/tileset.png
+/build:TopDownRpg/BluePathEnd.png
 
 #begin TopDownRpg/Character.png
 /importer:TextureImporter
@@ -76,6 +54,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/Character.png
+
+#begin TopDownRpg/level01.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level01.tmx
+
+#begin TopDownRpg/level02.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level02.tmx
 
 #begin TopDownRpg/Path.png
 /importer:TextureImporter
@@ -101,7 +89,7 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/PathEnd.png
 
-#begin TopDownRpg/BluePathEnd.png
+#begin TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -111,17 +99,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:TopDownRpg/BluePathEnd.png
+/build:TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
 
-#begin TopDownRpg/BirabutoKingdom.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:TopDownRpg/BirabutoKingdom.wav
-
-#begin TopDownRpg/piano.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:TopDownRpg/piano.mp3
+#begin TopDownRpg/tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/tileset.png
 
