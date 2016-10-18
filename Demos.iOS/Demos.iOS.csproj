@@ -5,11 +5,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{BC9241B8-57A2-43B4-AFD1-2EF1D94EB2B1}</ProjectGuid>
+    <ProjectGuid>{C22D0493-504A-49A4-859F-480B680AE7FC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Demos.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>DemosiOS</AssemblyName>
+    <AssemblyName>Demos.iOS</AssemblyName>
     <MonoGamePlatform>iOS</MonoGamePlatform>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
