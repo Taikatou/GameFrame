@@ -14,12 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Ghost-in-the-house.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Ghost-in-the-house.mp3
-
 #begin TopDownRpg/Fonts/montserrat-32.fnt
 /importer:BitmapFontImporter
 /processor:BitmapFontProcessor
@@ -118,4 +112,15 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/BluePathEnd.png
+=======
+#begin BirabutoKingdom.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:BirabutoKingdom.wav
 
+#begin piano.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:piano.mp3

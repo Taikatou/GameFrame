@@ -18,6 +18,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
+using GameFrame.MediaAdapter;
 
 namespace Demos.TopDownRpg
 {

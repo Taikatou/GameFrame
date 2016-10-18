@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameFrame.MediaAdapter
 {
-    public interface IAdvancedMediaPlayer
+    public interface IAdvancedAudioPlayer
     {
-        void play(string fileName);
+        void Play(string fileName);
+        void Resume();
+        void Pause();
     }
 }
