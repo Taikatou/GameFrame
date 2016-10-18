@@ -112,15 +112,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/BluePathEnd.png
-=======
-#begin BirabutoKingdom.wav
+
+#begin TopDownRpg/BirabutoKingdom.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:BirabutoKingdom.wav
+/build:TopDownRpg/BirabutoKingdom.wav
 
-#begin piano.mp3
+#begin TopDownRpg/piano.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:piano.mp3
+/build:TopDownRpg/piano.mp3
+
