@@ -8,5 +8,21 @@ namespace GameFrame.SpeedState
 {
     public class SpeedWater : ISpeedState
     {
+        public int Speed { get; set; }
+
+        public SpeedWater()
+        {
+            Speed = 100;
+        }
+
+        public void Increment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Decrement()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

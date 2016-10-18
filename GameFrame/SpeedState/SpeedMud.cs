@@ -8,5 +8,21 @@ namespace GameFrame.SpeedState
 {
     public class SpeedMud : ISpeedState
     {
+        public int Speed { get; set; }
+
+        public SpeedMud()
+        {
+            Speed = 150;
+        }
+
+        public void Increment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Decrement()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

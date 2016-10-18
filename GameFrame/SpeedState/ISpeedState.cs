@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameFrame.SpeedState
+﻿namespace GameFrame.SpeedState
 {
     public interface ISpeedState
     {
+        int Speed { get; set; }
+
+        void Increment();
+        void Decrement();
     }
 }

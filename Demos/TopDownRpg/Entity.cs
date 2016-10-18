@@ -1,4 +1,5 @@
 ﻿using GameFrame.Movers;
+using GameFrame.SpeedState;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
@@ -9,7 +10,7 @@ namespace Demos.TopDownRpg
         public Entity(Vector2 position)
         {
             Position = position;
-            Speed = 200;
+            Speed = new Speed(new SpeedGrass());
             MovingDirection = new Vector2();
         }
     }
