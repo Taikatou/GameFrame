@@ -14,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <HockeyAppResourceId>cfc6e7fee0634e058ec65d02b8e805a4</HockeyAppResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -65,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demos\Demos.csproj">
-      <Project>{a0778009-be06-4dd2-8f41-8e9f665f385f}</Project>
+      <Project>{A0778009-BE06-4DD2-8F41-8E9F665F385F}</Project>
       <Name>Demos</Name>
     </ProjectReference>
     <ProjectReference Include="..\GameFrame\GameFrame.csproj">

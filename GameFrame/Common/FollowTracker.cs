@@ -17,9 +17,7 @@ namespace GameFrame.Common
 
         public void Update(GameTime gameTime)
         {
-            Debug.WriteLine("Moving " + _follower.Position + " to " + _following.Position);
             _follower.Position = _following.Position;
-            Debug.WriteLine("Moved " + _follower.Position + " to " + _following.Position);
         }
     }
 }

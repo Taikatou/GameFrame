@@ -2,18 +2,16 @@
 
 namespace GameFrame.Common
 {
-    public class ExpiringKey<T>
+    public class ExpiringKey
     {
-        public readonly T Value;
         public bool Complete => TimeLeft <= 0;
         public int TimeLeft { get; internal set; }
         public int TotalTime { get; }
 
         public float Progress => Complete ? 0.0f : (float)TimeLeft / TotalTime;
 
-        public ExpiringKey(T key, int time)
+        public ExpiringKey(int time)
         {
-            Value = key;
             TimeLeft = time;
             TotalTime = time;
         }

@@ -39,6 +39,8 @@
     <Compile Include="Platformer\Entity.cs" />
     <Compile Include="Platformer\PlatformerScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Puzzle\PuzzleScene.cs" />
+    <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityController.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\TopDownRpgScene.cs" />

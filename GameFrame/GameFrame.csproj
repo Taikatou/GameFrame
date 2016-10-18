@@ -40,25 +40,54 @@
     <Compile Include="CollisionSystems\SpatialHash\ISpatialCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
+    <Compile Include="CollisionTest\BBCollision.cs" />
+    <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="Common\ExpiringKey.cs" />
     <Compile Include="Common\CameraTracker.cs" />
     <Compile Include="Common\IFocusAble.cs" />
     <Compile Include="Common\FollowTracker.cs" />
     <Compile Include="Content\ContentManagerFactory.cs" />
     <Compile Include="Controllers\ButtonMethods.cs" />
+    <Compile Include="Controllers\Click\ClickController.cs" />
+    <Compile Include="Controllers\Click\MouseClick\MouseControl.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\ITouchScreenControl.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\SmartGesture.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\TouchScreenControl.cs" />
     <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\DirectionGamePadButton.cs" />
     <Compile Include="Controllers\GamePad\GamePadButton.cs" />
     <Compile Include="Controllers\KeyBoard\KeyButton.cs" />
     <Compile Include="Controllers\IButtonAble.cs" />
-    <Compile Include="Controllers\GamePad\JoyStickButton.cs" />
+    <Compile Include="Controllers\GamePad\JoyStick.cs" />
     <Compile Include="Controllers\SmartButton\AbstractSmartButton.cs" />
     <Compile Include="Controllers\SmartButton\BaseSmartButton.cs" />
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
-    <Compile Include="Movers\IMover.cs" />
-    <Compile Include="Movers\PlayerMover.cs" />
+    <Compile Include="Movers\IMoverManager.cs" />
+    <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\MoverManager.cs" />
+    <Compile Include="Movers\PathMover.cs" />
+    <Compile Include="Movers\SpatialHashMoverManager.cs" />
+    <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\DiagonalDistance.cs" />
+    <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
+    <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />
+    <Compile Include="PathFinding\Node.cs" />
+    <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
+    <Compile Include="PathFinding\SearchParameters.cs" />
+    <Compile Include="Paths\Cyclical\CyclicalCounter.cs" />
+    <Compile Include="Paths\Cyclical\CyclicalPath.cs" />
+    <Compile Include="Paths\Reversing\ReversingCounter.cs" />
+    <Compile Include="Paths\Reversing\ReversingPath.cs" />
+    <Compile Include="Paths\FinitePath.cs" />
+    <Compile Include="Paths\AbstractPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\AbstractPathRenderer.cs" />
+    <Compile Include="Renderers\EndPointPathRenderer.cs" />
+    <Compile Include="Renderers\PathRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended">
@@ -68,9 +97,7 @@
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TiledExtensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
