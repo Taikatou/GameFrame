@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using GameFrame.Common;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
