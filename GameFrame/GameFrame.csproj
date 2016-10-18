@@ -85,12 +85,11 @@
     <Compile Include="Paths\FinitePath.cs" />
     <Compile Include="Paths\AbstractPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\AbstractPathRenderer.cs" />
+    <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
