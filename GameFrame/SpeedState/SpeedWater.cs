@@ -12,7 +12,7 @@ namespace GameFrame.SpeedState
 
         public SpeedWater()
         {
-            Speed = 100;
+            Speed = 300;
         }
 
         public void Increment()

@@ -12,7 +12,7 @@ namespace GameFrame.SpeedState
 
         public SpeedMud()
         {
-            Speed = 150;
+            Speed = 400;
         }
 
         public void Increment()
