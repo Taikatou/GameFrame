@@ -47,7 +47,7 @@ namespace Demos.TopDownRpg
             _moverManager = new MoverManager();
             var collisionSystem = new CompositeCollisionSystem();
             var tileMapCollisionSystem = new TiledCollisionSystem(Map);
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(Map.Width);
             EntityRenderer = new EntityRenderer(_content, expiringSpatialHash, _entity, _tileSize.ToPoint());
             collisionSystem.AddCollisionSystem(tileMapCollisionSystem);
             collisionSystem.AddCollisionSystem(expiringSpatialHash);

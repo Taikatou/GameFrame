@@ -10,9 +10,9 @@ namespace GameFrame.CollisionSystems.SpatialHash
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
         public readonly Dictionary<Point, ExpiringKey> MovingEntities;
 
-        public ExpiringSpatialHashCollisionSystem()
+        public ExpiringSpatialHashCollisionSystem(int width)
         {
-            _spatialHash = new SpatialHashCollisionSystem<T>();
+            _spatialHash = new SpatialHashCollisionSystem<T>(width);
             MovingEntities = new Dictionary<Point, ExpiringKey>();
         }
 
