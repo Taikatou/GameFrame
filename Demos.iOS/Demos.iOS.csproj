@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Demos.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Demos.iOS</AssemblyName>
+    <AssemblyName>DemosiOS</AssemblyName>
     <MonoGamePlatform>iOS</MonoGamePlatform>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">

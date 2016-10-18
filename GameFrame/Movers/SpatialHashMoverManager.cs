@@ -30,7 +30,7 @@ namespace GameFrame.Movers
             if (!_collisionSystem.CheckCollision((int)position.X, (int)position.Y))
             {
                 //William timer
-                if(_spatialHashLayer.MoveNode(character.Position.ToPoint(), position.ToPoint(), character.Speed))
+                if(_spatialHashLayer.MoveNode(character.Position.ToPoint(), position.ToPoint(), character.GetSpeed()))
                 {
                     character.Position = position;
                     return true;
