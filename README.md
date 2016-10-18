@@ -1,5 +1,5 @@
 # GameFrame
-https://travis-ci.org/Taikatou/GameFrame.svg?branch=master
+[![Build Status](https://travis-ci.org/Taikatou/GameFrame.svg?branch=master)](https://travis-ci.org/Taikatou/GameFrame)
 
 ### Setup
 Install Visual Studio or MonoDevelop
