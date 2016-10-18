@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameFrame.MediaAdapter
 {
@@ -18,7 +14,7 @@ namespace GameFrame.MediaAdapter
             if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
             {
                 SongPlayer = new SongPlayer();
-                SongPlayer.play(fileName);
+                SongPlayer.Play(fileName);
             }
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
@@ -29,14 +25,14 @@ namespace GameFrame.MediaAdapter
 
         public void Pause()
         {
-            SongPlayer?.pause();
+            SongPlayer?.Pause();
             AudioPlayer?.Pause();
         }
 
        
         public void Resume()
         {
-            SongPlayer?.resume();
+            SongPlayer?.Resume();
             AudioPlayer?.Resume();
         }
     }

@@ -71,8 +71,6 @@
     <Compile Include="MediaAdapter\IAudioPlayer.cs" />
     <Compile Include="MediaAdapter\AudioAdapter.cs" />
     <Compile Include="MediaAdapter\SongPlayer.cs" />
-    <Compile Include="Movers\IMover.cs" />
-    <Compile Include="Movers\AbstractMover.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
     <Compile Include="Movers\MoverManager.cs" />
