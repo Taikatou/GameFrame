@@ -2,8 +2,8 @@
 
 namespace GameFrame.Movers
 {
-    public interface IMoverManager
+    public interface IMoverManager <T>
     {
-        bool RequestMovement(Vector2 position);
+        bool RequestMovement(T character, Vector2 position);
     }
 }

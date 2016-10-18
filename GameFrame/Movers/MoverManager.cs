@@ -52,7 +52,7 @@ namespace GameFrame.Movers
             }
             else
             {
-                return new List<Point>();
+                return null;
             }
         }
     }

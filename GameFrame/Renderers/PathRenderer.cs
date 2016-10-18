@@ -1,30 +1,31 @@
 ﻿using System.Collections.Generic;
+using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameFrame.Renderers
 {
-    public class PathRenderer
+    public class PathRenderer : AbstractPathRenderer
     {
         private readonly Texture2D _texture;
         private readonly Texture2D _endTexture;
-        public PathRenderer(Texture2D texture, Texture2D endTexture)
+        private readonly Point _pointSize;
+        public PathRenderer(MoverManager mover, BaseMovable moving, Texture2D texture, Texture2D endTexture, Point pointSize) : 
+            base(mover, moving)
         {
             _texture = texture;
             _endTexture = endTexture;
+            _pointSize = pointSize;
         }
 
-        public void Draw(SpriteBatch spriteBatch, List<Point> points, Vector2 pointSize)
+        public override void Draw(SpriteBatch spriteBatch, List<Point> points)
         {
-            if (points.Count > 0)
+            var lastIndex = points.Count - 1;
+            for (var i = 0; i < lastIndex; i++)
             {
-                var lastIndex = points.Count - 1;
-                for (var i = 0; i < lastIndex; i++)
-                {
-                    spriteBatch.Draw(_texture, points[i].ToVector2() * pointSize, null, Color.White);
-                }
-                spriteBatch.Draw(_endTexture, points[lastIndex].ToVector2() * pointSize, null, Color.White);
+                spriteBatch.Draw(_texture, (points[i] * _pointSize).ToVector2(), null, Color.White);
             }
+            spriteBatch.Draw(_endTexture, (points[lastIndex] * _pointSize).ToVector2(), null, Color.White);
         }
     }
 }
