@@ -5,34 +5,47 @@ namespace GameFrame.CollisionSystems.SpatialHash
 {
     public class SpatialHashCollisionSystem<T> : ISpatialCollisionSystem<T>
     {
-        private readonly Dictionary<Point, T> _spatialHash;
+        private readonly Dictionary<int, T> _spatialHash;
+        private readonly int _width;
 
-        public SpatialHashCollisionSystem()
+        public SpatialHashCollisionSystem(int width)
         {
-            _spatialHash = new Dictionary<Point, T>();
+            _width = width;
+            _spatialHash = new Dictionary<int, T>();
+        }
+
+        public int HashKey(int x, int y)
+        {
+            return y*_width + x;
+        }
+
+        public int PointToHash(Point point)
+        {
+            return HashKey(point.X, point.Y);
         }
 
         public void AddNode(Point position, T node)
         {
-            _spatialHash[position] = node;
+            var hashPosition = PointToHash(position);
+            _spatialHash[hashPosition] = node;
         }
 
-        public void RemoveNode(Point point)
+        public void RemoveNode(Point position)
         {
-            _spatialHash.Remove(point);
+            var hashPosition = PointToHash(position);
+            _spatialHash.Remove(hashPosition);
         }
 
         public bool CheckCollision(int x, int y)
         {
-            var point = new Point(x, y);
-            var found = CheckCollision(point);
+            var hashPosition = HashKey(x, y);
+            var found = _spatialHash.ContainsKey(hashPosition);
             return found;
         }
 
-        public bool CheckCollision(Point p)
+        public bool CheckCollision(Point position)
         {
-            var found = _spatialHash.ContainsKey(p);
-            return found;
+            return CheckCollision(position.X, position.Y);
         }
 
         public T ValueAt(Point position)
@@ -40,7 +53,8 @@ namespace GameFrame.CollisionSystems.SpatialHash
             var valueAt = default(T);
             if (CheckCollision(position))
             {
-                valueAt = _spatialHash[position];
+                var hashPosition = PointToHash(position);
+                valueAt = _spatialHash[hashPosition];
             }
             return valueAt;
         }
