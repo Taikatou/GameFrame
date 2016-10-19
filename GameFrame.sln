@@ -128,6 +128,7 @@ Global
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|ARM.ActiveCfg = Debug|x86
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|iPhone.ActiveCfg = Debug|x86
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|iPhoneSimulator.Build.0 = Debug|x86
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{CDAF3542-C333-4DDD-A50F-B339F6ACC208}.Debug|x64.ActiveCfg = Debug|x86

@@ -2,6 +2,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Demos.Common;
+using HockeyApp.Android;
+using HockeyApp.Android.Metrics;
 
 namespace Demos.Droid
 {
@@ -18,6 +21,8 @@ namespace Demos.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            CrashManager.Register(this, IdManager.HockeyAppId);
+            MetricsManager.Register(Application, IdManager.HockeyAppId);
             var g = new DemoGame();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();

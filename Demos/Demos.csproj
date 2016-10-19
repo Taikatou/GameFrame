@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AbstractScene.cs" />
+    <Compile Include="Common\IdManager.cs" />
     <Compile Include="DemoGame.cs" />
     <Compile Include="Platformer\Entity.cs" />
     <Compile Include="Platformer\PlatformerScene.cs" />
