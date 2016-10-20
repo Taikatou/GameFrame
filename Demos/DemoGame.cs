@@ -1,7 +1,9 @@
-﻿using Demos.TopDownRpg;
+﻿using Demos.Screens;
+using Demos.TopDownRpg;
 using GameFrame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Screens;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos
@@ -10,34 +12,36 @@ namespace Demos
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private AbstractScene _demoScene;
+        private readonly ScreenComponent _screenComponent;
 
         public DemoGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Components.Add(_screenComponent = new ScreenComponent(this));
+
+            _screenComponent.Register(new MainMenuScreen(Services, this));
+            _screenComponent.Register(new LoadGameScreen(Services));
+            _screenComponent.Register(new OptionsScreen(Services));
+            _screenComponent.Register(new AudioOptionsScreen(Services));
+            _screenComponent.Register(new VideoOptionsScreen(Services));
+            _screenComponent.Register(new KeyboardOptionsScreen(Services));
+            _screenComponent.Register(new MouseOptionsScreen(Services));
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
-            _demoScene = new TopDownRpgScene(viewportAdapter);
-            _demoScene.LoadScene();
+            var demoScene = new TopDownRpgScene(viewportAdapter);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            _demoScene.Update(gameTime);
-            base.Update(gameTime);
+            _screenComponent.Register(demoScene);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _demoScene.Draw(_spriteBatch);
             base.Draw(gameTime);
         }
     }

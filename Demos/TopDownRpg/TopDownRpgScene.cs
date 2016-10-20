@@ -18,11 +18,10 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
-using GameFrame.MediaAdapter;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : AbstractScene
+    public class TopDownRpgScene : AbstractScreen
     {
         public TiledMap Map;
         private readonly ContentManager _content;
@@ -39,7 +38,7 @@ namespace Demos.TopDownRpg
             _content = ContentManagerFactory.RequestContentManager();
             Camera = new Camera2D(viewPort) {Zoom = 2.0f};
         }
-        public override void LoadScene()
+        public override void LoadContent()
         {
             var fileName = "TopDownRpg/level01";
             Map = _content.Load<TiledMap>(fileName);
