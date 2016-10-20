@@ -64,12 +64,10 @@ namespace Demos.TopDownRpg
             smartButton.OnButtonJustPressed = (sender, args) =>
             {
                 entity.SpeedContext.SetSpeed(new SpeedRunning());
-                Debug.WriteLine(entity.Speed);
             };
             smartButton.OnButtonReleased = (sender, args) =>
             {
                 entity.SpeedContext.SetSpeed(new SpeedNormal());
-                Debug.WriteLine(entity.Speed);
             };
             _smartController.AddButton(smartButton);
         }
