@@ -9,7 +9,7 @@ namespace GameFrame.Movers
         public Vector2 FacingDirection { get; internal set; }
         public Vector2 MovingDirection { get; set; }
         public Vector2 Position { get; set; }
-        public virtual int Speed { get; }
+        public virtual float Speed { get; }
 
         public void FaceMovingDirection()
         {

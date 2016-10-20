@@ -37,7 +37,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             _spatialHash.AddNode(position, node);
         }
 
-        public bool MoveNode(Point startPosition, Point endPosition, int timer)
+        public bool MoveNode(Point startPosition, Point endPosition, float timer)
         {
             var moving = MovingEntities.ContainsKey(startPosition);
             var collision = CheckCollision(endPosition);

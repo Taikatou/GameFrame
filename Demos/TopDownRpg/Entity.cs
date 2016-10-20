@@ -7,12 +7,12 @@ namespace Demos.TopDownRpg
 {
     public class Entity : BaseMovable
     {
-        public IState<int> SpeedState;
-        public override int Speed => SpeedState.Modifier;
+        public SpeedContext SpeedContext;
+        public override float Speed => SpeedContext.GetSpeed(200);
         //william state pattern
         public Entity(Vector2 position)
         {
-            SpeedState = new SpeedNormal<int>();
+            SpeedContext = new SpeedContext(new SpeedNormal());
             Position = position;
             MovingDirection = new Vector2();
         }

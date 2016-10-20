@@ -2,8 +2,8 @@
 
 namespace Demos.TopDownRpg.SpeedState
 {
-    public class SpeedGrass<T> : IState<int>
+    public class SpeedGrass : IState<float>
     {
-        public int Modifier => 150;
+        public float Modifier => 1.5f;
     }
 }

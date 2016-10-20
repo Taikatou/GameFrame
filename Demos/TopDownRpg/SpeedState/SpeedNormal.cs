@@ -2,8 +2,8 @@
 
 namespace Demos.TopDownRpg.SpeedState
 {
-    class SpeedNormal<T> : IState<int>
+    public class SpeedNormal : IState<float>
     {
-        public int Modifier => 200;
+        public float Modifier => 2.0f;
     }
 }

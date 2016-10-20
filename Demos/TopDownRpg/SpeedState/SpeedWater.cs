@@ -1,9 +1,9 @@
 ﻿using GameFrame.State;
 
-namespace GameFrame.SpeedState
+namespace Demos.TopDownRpg.SpeedState
 {
-    public class SpeedWater<T> : IState<int>
+    public class SpeedWater : IState<float>
     {
-        public int Modifier => 300;
+        public float Modifier => 1.2f;
     }
 }
