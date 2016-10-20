@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Demos.TopDownRpg.SpeedState;
 using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
@@ -21,17 +23,55 @@ namespace Demos.TopDownRpg
         {
             ToMove = entity;
             _smartController = new SmartController();
-            var upButtons = new List<IButtonAble> { new KeyButton(Keys.W), new KeyButton(Keys.Up), new DirectionGamePadButton(Buttons.DPadUp) };
+            var upButtons = new List<IButtonAble>
+            {
+                new KeyButton(Keys.W),
+                new KeyButton(Keys.Up),
+                new DirectionGamePadButton(Buttons.DPadUp)
+            };
             CreateCompositeButton(upButtons, entityMover, new Vector2(0, -1), moverManager);
 
-            var downButtons = new List<IButtonAble> { new KeyButton(Keys.S), new KeyButton(Keys.Down), new DirectionGamePadButton(Buttons.DPadDown) };
+            var downButtons = new List<IButtonAble>
+            {
+                new KeyButton(Keys.S),
+                new KeyButton(Keys.Down),
+                new DirectionGamePadButton(Buttons.DPadDown)
+            };
             CreateCompositeButton(downButtons, entityMover, new Vector2(0, 1), moverManager);
 
-            var leftButtons = new List<IButtonAble> { new KeyButton(Keys.A), new KeyButton(Keys.Left), new DirectionGamePadButton(Buttons.DPadLeft) };
+            var leftButtons = new List<IButtonAble>
+            {
+                new KeyButton(Keys.A),
+                new KeyButton(Keys.Left),
+                new DirectionGamePadButton(Buttons.DPadLeft)
+            };
             CreateCompositeButton(leftButtons, entityMover, new Vector2(-1, 0), moverManager);
 
-            var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right), new DirectionGamePadButton(Buttons.DPadRight) };
+            var rightButtons = new List<IButtonAble>
+            {
+                new KeyButton(Keys.D),
+                new KeyButton(Keys.Right),
+                new DirectionGamePadButton(Buttons.DPadRight)
+            };
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0), moverManager);
+
+            var runningButton = new List<IButtonAble> {new KeyButton(Keys.B), new GamePadButton(Buttons.B)};
+            var smartButton = new CompositeSmartButton();
+            foreach (var button in runningButton)
+            {
+                smartButton.AddButton(button);
+            }
+            smartButton.OnButtonJustPressed = (sender, args) =>
+            {
+                entity.SpeedState = new SpeedRunning<int>();
+                Debug.WriteLine(entity.Speed);
+            };
+            smartButton.OnButtonReleased = (sender, args) =>
+            {
+                entity.SpeedState = new SpeedNormal<int>();
+                Debug.WriteLine(entity.Speed);
+            };
+            _smartController.AddButton(smartButton);
         }
 
         public void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 direction, MoverManager moverManager)
