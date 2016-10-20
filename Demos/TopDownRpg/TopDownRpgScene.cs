@@ -1,4 +1,5 @@
-﻿using GameFrame.CollisionSystems;
+﻿using System.Diagnostics;
+using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;

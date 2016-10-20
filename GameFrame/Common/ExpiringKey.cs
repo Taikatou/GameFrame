@@ -5,12 +5,12 @@ namespace GameFrame.Common
     public class ExpiringKey
     {
         public bool Complete => TimeLeft <= 0;
-        public int TimeLeft { get; internal set; }
-        public int TotalTime { get; }
+        public float TimeLeft { get; internal set; }
+        public float TotalTime { get; }
 
         public float Progress => Complete ? 0.0f : (float)TimeLeft / TotalTime;
 
-        public ExpiringKey(int time)
+        public ExpiringKey(float time)
         {
             TimeLeft = time;
             TotalTime = time;

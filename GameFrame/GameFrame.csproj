@@ -73,6 +73,7 @@
     <Compile Include="MediaAdapter\SongPlayer.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\ISpeed.cs" />
     <Compile Include="Movers\MoverManager.cs" />
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
@@ -95,12 +96,7 @@
     <Compile Include="Renderers\AbstractPathRenderer.cs" />
     <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
-    <Compile Include="SpeedState\ISpeed.cs" />
-    <Compile Include="SpeedState\ISpeedState.cs" />
-    <Compile Include="SpeedState\Speed.cs" />
-    <Compile Include="SpeedState\SpeedGrass.cs" />
-    <Compile Include="SpeedState\SpeedMud.cs" />
-    <Compile Include="SpeedState\SpeedWater.cs" />
+    <Compile Include="State\IState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended">

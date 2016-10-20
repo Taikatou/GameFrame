@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameFrame.SpeedState
 {
-    public class SpeedWater : ISpeedState
+    public class SpeedMud : ISpeedState
     {
         public int Speed { get; set; }
 
-        public SpeedWater()
+        public SpeedMud()
         {
-            Speed = 100;
+            Speed = 400;
         }
 
         public void Increment()
