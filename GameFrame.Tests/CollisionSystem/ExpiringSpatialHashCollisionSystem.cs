@@ -30,7 +30,7 @@ namespace GameFrame.Tests.CollisionSystem
             var toMove = new BaseMovable { Position = startPoint.ToVector2() };
             expiringSpatialHash.AddNode(startPoint, toMove);
             expiringSpatialHash.MoveNode(startPoint, endPoint, 0);
-            Assert.IsFalse(expiringSpatialHash.CheckCollision(startPoint));
+            Assert.IsTrue(expiringSpatialHash.CheckCollision(startPoint));
             Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
         }
     }

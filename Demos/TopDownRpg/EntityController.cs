@@ -32,6 +32,22 @@ namespace Demos.TopDownRpg
 
             var rightButtons = new List<IButtonAble> { new KeyButton(Keys.D), new KeyButton(Keys.Right), new DirectionGamePadButton(Buttons.DPadRight) };
             CreateCompositeButton(rightButtons, entityMover, new Vector2(1, 0), moverManager);
+
+            var runningButton = new List<IButtonAble> {new KeyButton(Keys.B), new GamePadButton(Buttons.B)};
+            var smartButton = new CompositeSmartButton();
+            foreach (var button in runningButton)
+            {
+                smartButton.AddButton(button);
+            }
+            smartButton.OnButtonJustPressed = (sender, args) =>
+            {
+                entity.SpeedContext.SetSpeed(new SpeedRunning());
+            };
+            smartButton.OnButtonReleased = (sender, args) =>
+            {
+                entity.SpeedContext.SetSpeed(new SpeedNormal());
+            };
+            _smartController.AddButton(smartButton);
         }
 
         public void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 direction, MoverManager moverManager)
