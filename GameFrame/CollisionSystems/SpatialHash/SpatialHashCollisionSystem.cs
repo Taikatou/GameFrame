@@ -5,13 +5,13 @@ namespace GameFrame.CollisionSystems.SpatialHash
 {
     public class SpatialHashCollisionSystem<T> : ISpatialCollisionSystem<T>
     {
-        private readonly Dictionary<int, T> _spatialHash;
+        public readonly Dictionary<int, T> SpatialHash;
         private readonly int _width;
 
         public SpatialHashCollisionSystem(int width)
         {
             _width = width;
-            _spatialHash = new Dictionary<int, T>();
+            SpatialHash = new Dictionary<int, T>();
         }
 
         public int HashKey(int x, int y)
@@ -27,19 +27,19 @@ namespace GameFrame.CollisionSystems.SpatialHash
         public void AddNode(Point position, T node)
         {
             var hashPosition = PointToHash(position);
-            _spatialHash[hashPosition] = node;
+            SpatialHash[hashPosition] = node;
         }
 
         public void RemoveNode(Point position)
         {
             var hashPosition = PointToHash(position);
-            _spatialHash.Remove(hashPosition);
+            SpatialHash.Remove(hashPosition);
         }
 
         public bool CheckCollision(int x, int y)
         {
             var hashPosition = HashKey(x, y);
-            var found = _spatialHash.ContainsKey(hashPosition);
+            var found = SpatialHash.ContainsKey(hashPosition);
             return found;
         }
 
@@ -54,7 +54,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             if (CheckCollision(position))
             {
                 var hashPosition = PointToHash(position);
-                valueAt = _spatialHash[hashPosition];
+                valueAt = SpatialHash[hashPosition];
             }
             return valueAt;
         }
