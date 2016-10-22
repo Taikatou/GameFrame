@@ -1,6 +1,6 @@
 ﻿namespace GameFrame.State
 {
-    public interface IState <out T>
+    public interface IStateModifier <out T>
     {
         T Modifier { get; }
     }
