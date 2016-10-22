@@ -43,6 +43,7 @@
     <Compile Include="Puzzle\PuzzleScene.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityController.cs" />
+    <Compile Include="TopDownRpg\EntityRendererFactory.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />

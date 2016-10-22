@@ -27,7 +27,7 @@ namespace GameFrame.Movers
 
         public bool RequestMovement(T character, Vector2 position)
         {
-            if (!_collisionSystem.CheckCollision((int)position.X, (int)position.Y))
+            if (!_collisionSystem.CheckCollision(position.ToPoint()))
             {
                 //William timer
                 if(_spatialHashLayer.MoveNode(character.Position.ToPoint(), position.ToPoint(), character.Speed))
