@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameFrame;
+using GameFrame.Controllers.Click;
+using GameFrame.Controllers.Click.TouchScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended.BitmapFonts;
-using MonoGame.Extended.Screens;
 
 namespace Demos.Screens
 {
-    public abstract class MenuScreen : Screen
+    public abstract class MenuScreen : GameFrameScreen
     {
         private readonly IServiceProvider _serviceProvider;
         private SpriteBatch _spriteBatch;
-        private MouseState _previousState;
         public List<MenuItem> MenuItems { get; }
         protected BitmapFont Font { get; private set; }
         protected ContentManager Content { get; private set; }
@@ -22,6 +24,19 @@ namespace Demos.Screens
         {
             _serviceProvider = serviceProvider;
             MenuItems = new List<MenuItem>();
+
+            var clickController = new ClickController();
+            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            {
+                CheckClick(mouseState.Position);
+            };
+            var moveGesture = new SmartGesture(GestureType.Tap);
+            moveGesture.GestureEvent += gesture =>
+            {
+                CheckClick(gesture.Position.ToPoint());
+            };
+            clickController.TouchScreenControl.AddSmartGesture(moveGesture);
+            UpdateList.Add(clickController);
         }
 
         protected void AddMenuItem(string text, Action action)
@@ -67,27 +82,28 @@ namespace Demos.Screens
             base.UnloadContent();
         }
 
+        public void CheckClick(Point point)
+        {
+            foreach (var menuItem in MenuItems)
+            {
+                var isClicked = menuItem.BoundingRectangle.Contains(point);
+
+                if (isClicked)
+                {
+                    menuItem.Action?.Invoke();
+                }
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
             var mouseState = Mouse.GetState();
-            var isPressed = mouseState.LeftButton == ButtonState.Released && _previousState.LeftButton == ButtonState.Pressed;
-
             foreach (var menuItem in MenuItems)
             {
                 var isHovered = menuItem.BoundingRectangle.Contains(mouseState.X, mouseState.Y);
-                
                 menuItem.Color = isHovered ? Color.Yellow : Color.White;
-
-                if (isHovered && isPressed)
-                {
-                    menuItem.Action?.Invoke();
-                    break;
-                }
             }
-
-            _previousState = mouseState;
         }
 
         public override void Draw(GameTime gameTime)
