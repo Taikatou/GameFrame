@@ -10,9 +10,9 @@ namespace GameFrame.CollisionSystems.SpatialHash
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
         public readonly Dictionary<Point, ExpiringKey> MovingEntities;
 
-        public ExpiringSpatialHashCollisionSystem(int width)
+        public ExpiringSpatialHashCollisionSystem()
         {
-            _spatialHash = new SpatialHashCollisionSystem<T>(width);
+            _spatialHash = new SpatialHashCollisionSystem<T>();
             MovingEntities = new Dictionary<Point, ExpiringKey>();
         }
 
@@ -47,14 +47,8 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 var node = ValueAt(startPosition);
                 AddNode(endPosition, node);
                 MovingEntities[startPosition] = new ExpiringKey(timer);
-                MovingEntities[endPosition] = new ExpiringKey(timer);
             }
             return validMove;
-        }
-
-        public bool CheckCollision(int x, int y)
-        {
-            return _spatialHash.CheckCollision(x, y);
         }
 
         public void RemoveNode(Point point)

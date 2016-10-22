@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Movers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,46 +11,30 @@ namespace GameFrame.Tests.CollisionSystem
     public class ExpiringSpatialHashCollisionSystem
     {
         [TestMethod]
-        public void ExpiringCheckerBoxTest()
+        public void TestMovement()
         {
-            var collisionSystem = new ExpiringSpatialHashCollisionSystem<BaseMovable>(10);
-            for (var i = 0; i < 10; i++)
-            {
-                for (var j = 0; j < 10; j++)
-                {
-                    if (Common.CheckerBox(i, j))
-                    {
-                        collisionSystem.AddNode(new Point(i, j), new BaseMovable());
-                    }
-                }
-            }
-            for (var i = 0; i < 10; i++)
-            {
-                for (var j = 0; j < 10; j++)
-                {
-                    Assert.AreEqual(Common.CheckerBox(i, j), collisionSystem.CheckCollision(i, j));
-                }
-            }
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>();
+            var startPoint = new Point(3, 4);
+            var endPoint = new Point(3, 5);
+            var toMove = new BaseMovable { Position = startPoint.ToVector2() };
+            expiringSpatialHash.AddNode(startPoint, toMove);
+            expiringSpatialHash.MoveNode(startPoint, endPoint, 200);
+            Assert.IsTrue(expiringSpatialHash.CheckCollision(startPoint));
+            Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
         }
 
         [TestMethod]
-        public void ExpiringPointListTest()
+        public void TestUpdate()
         {
-            var collisionSystem = new ExpiringSpatialHashCollisionSystem<BaseMovable>(10);
-            var points = new List<Point> { new Point(3, 4), new Point(4, 5), new Point(7, 8) };
-            var notPoints = new List<Point> { new Point(13, 14), new Point(14, 15), new Point(17, 18) };
-            foreach (var point in points)
-            {
-                collisionSystem.AddNode(point, new BaseMovable());
-            }
-            foreach (var point in points)
-            {
-                Assert.IsTrue(collisionSystem.CheckCollision(point));
-            }
-            foreach (var point in notPoints)
-            {
-                Assert.IsFalse(collisionSystem.CheckCollision(point));
-            }
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>();
+            var startPoint = new Point(3, 4);
+            var endPoint = new Point(3, 5);
+            var toMove = new BaseMovable {Position = startPoint.ToVector2()};
+            expiringSpatialHash.AddNode(startPoint, toMove);
+            expiringSpatialHash.MoveNode(startPoint, endPoint, 0);
+            expiringSpatialHash.Update(new GameTime {ElapsedGameTime = new TimeSpan(0,0,0,1)});
+            Assert.IsFalse(expiringSpatialHash.CheckCollision(startPoint));
+            Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
         }
     }
 }

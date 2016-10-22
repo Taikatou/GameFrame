@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GameFrame.CollisionSystems;
+﻿using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
@@ -19,7 +18,6 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
-using GameFrame.MediaAdapter;
 
 namespace Demos.TopDownRpg
 {
@@ -29,7 +27,6 @@ namespace Demos.TopDownRpg
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
         public ICollisionSystem CollisionSystem;
-        public EntityRenderer EntityRenderer;
         public AbstractPathRenderer PathRenderer;
         private MoverManager _moverManager;
         private Entity _entity;
@@ -42,32 +39,32 @@ namespace Demos.TopDownRpg
         }
         public override void LoadScene()
         {
-            var fileName = "TopDownRpg/level01";
-            Map = _content.Load<TiledMap>(fileName);
+            Map = _content.Load<TiledMap>("TopDownRpg/level01");
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
-            _entity = new Entity(new Vector2(5, 5));
             _moverManager = new MoverManager();
             var collisionSystem = new CompositeCollisionSystem();
-            var tileMapCollisionSystem = new TiledCollisionSystem(Map);
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(Map.Width);
-            EntityRenderer = new EntityRenderer(_content, expiringSpatialHash, _entity, _tileSize.ToPoint());
-            collisionSystem.AddCollisionSystem(tileMapCollisionSystem);
-            collisionSystem.AddCollisionSystem(expiringSpatialHash);
-            CollisionSystem = collisionSystem;
-            var followCamera = new CameraTracker(Camera, EntityRenderer);
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
+            var entityRenderer = new EntityRenderer(_content, expiringSpatialHash,
+                                                    _entity = new Entity(new Vector2(5, 5)),
+                                                    _tileSize.ToPoint());
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, expiringSpatialHash);
-            spatialHashMover.Add(_entity);
             var entityController = new EntityController(_entity, _entity, _moverManager);
-            AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
-
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
+
+            collisionSystem.AddCollisionSystem(new TiledCollisionSystem(Map));
+            collisionSystem.AddCollisionSystem(expiringSpatialHash);
+            CollisionSystem = collisionSystem;
+
+            AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
+            spatialHashMover.Add(_entity);
             PathRenderer = new PathRenderer(_moverManager, _entity, texture, endTexture, _tileSize.ToPoint());
             UpdateList.Add(expiringSpatialHash);
-            UpdateList.Add(followCamera);
+            UpdateList.Add(new CameraTracker(Camera, entityRenderer));
             UpdateList.Add(entityController);
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(_moverManager);
+            RenderList.Add(entityRenderer);
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
@@ -102,7 +99,10 @@ namespace Demos.TopDownRpg
             var transformMatrix = Camera.GetViewMatrix();
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
             Map.Draw(transformMatrix);
-            EntityRenderer.Draw(spriteBatch);
+            foreach (var toRender in RenderList)
+            {
+                toRender.Draw(spriteBatch);
+            }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();
         }

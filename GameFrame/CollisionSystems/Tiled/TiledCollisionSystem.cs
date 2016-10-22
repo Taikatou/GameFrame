@@ -7,15 +7,10 @@ namespace GameFrame.CollisionSystems.Tiled
     {
         public TiledTileLayer TileCollisionLayer;
 
-        public bool CheckCollision(int x, int y)
+        public bool CheckCollision(Point p)
         {
-            var tile = TileCollisionLayer.GetTile(x, y);
+            var tile = TileCollisionLayer.GetTile(p.X, p.Y);
             return !(tile == null || tile.Id == 0);
-        }
-
-        public bool CheckCollision(Point position)
-        {
-            return CheckCollision(position.X, position.Y);
         }
 
         public TiledCollisionSystem(TiledMap map, string collisionLayerName="Collision-Layer")
