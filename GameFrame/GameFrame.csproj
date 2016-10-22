@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeCollisionSystem.cs" />
     <Compile Include="CollisionSystems\ICollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />

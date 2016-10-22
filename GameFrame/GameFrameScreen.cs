@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
-using GameFrame;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.Screens;
 
-namespace Demos
+namespace GameFrame
 {
-    public abstract  class AbstractScene : IUpdate
+    public abstract class GameFrameScreen : Screen
     {
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
-        public abstract void LoadScene();
-        public abstract void Draw(SpriteBatch spriteBatch);
 
-        protected AbstractScene()
+        protected GameFrameScreen()
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             foreach (var element in UpdateList)
             {
                 element.Update(gameTime);

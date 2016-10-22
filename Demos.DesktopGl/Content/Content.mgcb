@@ -31,18 +31,6 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/Fonts/montserrat-32_0.png
 
-#begin TopDownRpg/BluePathEnd.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TopDownRpg/BluePathEnd.png
-
 #begin TopDownRpg/Character.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -112,6 +100,17 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/tileset.png
+
+#begin TopDownRpg/BluePathEnd.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:TopDownRpg/BluePathEnd.png
 
 #begin TopDownRpg/BirabutoKingdom.wav
@@ -125,3 +124,21 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:TopDownRpg/piano.mp3
+
+#begin montserrat-32.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:montserrat-32.fnt
+
+#begin montserrat-32_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:montserrat-32_0.png
+

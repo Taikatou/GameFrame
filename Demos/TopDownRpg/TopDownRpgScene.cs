@@ -1,4 +1,5 @@
-﻿using GameFrame.CollisionSystems;
+﻿using GameFrame;
+using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
@@ -21,7 +22,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : AbstractScene
+    public class TopDownRpgScene : GameFrameScreen
     {
         public TiledMap Map;
         private readonly ContentManager _content;
@@ -31,14 +32,17 @@ namespace Demos.TopDownRpg
         private MoverManager _moverManager;
         private Entity _entity;
         private Vector2 _tileSize;
+        private readonly SpriteBatch _spriteBatch;
 
-        public TopDownRpgScene(ViewportAdapter viewPort)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
+            _spriteBatch = spriteBatch;
             _content = ContentManagerFactory.RequestContentManager();
             Camera = new Camera2D(viewPort) {Zoom = 2.0f};
         }
-        public override void LoadScene()
+        public override void LoadContent()
         {
+            base.LoadContent();
             Map = _content.Load<TiledMap>("TopDownRpg/level01");
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
@@ -94,17 +98,17 @@ namespace Demos.TopDownRpg
             moverManager.AddMover(pathMover);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
             var transformMatrix = Camera.GetViewMatrix();
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
             Map.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {
-                toRender.Draw(spriteBatch);
+                toRender.Draw(_spriteBatch);
             }
-            PathRenderer.Draw(spriteBatch);
-            spriteBatch.End();
+            PathRenderer.Draw(_spriteBatch);
+            _spriteBatch.End();
         }
     }
 }
