@@ -97,7 +97,8 @@
     <Compile Include="Renderers\AbstractPathRenderer.cs" />
     <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
-    <Compile Include="State\IState.cs" />
+    <Compile Include="State\IStateEvent.cs" />
+    <Compile Include="State\IStateModifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended">

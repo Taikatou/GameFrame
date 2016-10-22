@@ -2,7 +2,7 @@
 
 namespace Demos.TopDownRpg.SpeedState
 {
-    public class SpeedWater : IState<float>
+    public class SpeedWater : IStateModifier<float>
     {
         public float Modifier => 1.2f;
     }
