@@ -47,6 +47,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 var node = ValueAt(startPosition);
                 AddNode(endPosition, node);
                 MovingEntities[startPosition] = new ExpiringKey(timer);
+                MovingEntities[endPosition] = new ExpiringKey(timer);
             }
             return validMove;
         }
