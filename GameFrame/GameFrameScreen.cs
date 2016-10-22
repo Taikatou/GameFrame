@@ -19,9 +19,12 @@ namespace GameFrame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach (var element in UpdateList)
+            if (IsVisible)
             {
-                element.Update(gameTime);
+                foreach (var element in UpdateList)
+                {
+                    element.Update(gameTime);
+                }
             }
         }
     }
