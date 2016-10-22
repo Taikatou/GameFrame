@@ -33,9 +33,10 @@ namespace Demos
         protected override void LoadContent()
         {
             base.LoadContent();
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
-            var demoScene = new TopDownRpgScene(viewportAdapter);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
+            var demoScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
+            demoScene.LoadContent();
             _screenComponent.Register(demoScene);
         }
 

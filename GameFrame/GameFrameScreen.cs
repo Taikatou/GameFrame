@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
-using GameFrame;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 
-namespace Demos
+namespace GameFrame
 {
-    public abstract class AbstractScreen : Screen
+    public abstract class GameFrameScreen : Screen
     {
         public List<IUpdate> UpdateList;
-        public abstract void LoadScene();
-        public abstract void Draw(SpriteBatch spriteBatch);
+        public List<IRenderable> RenderList;
 
-        protected AbstractScreen()
+        protected GameFrameScreen()
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();

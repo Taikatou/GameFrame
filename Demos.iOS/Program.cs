@@ -1,5 +1,5 @@
 ﻿using Foundation;
-using HockeyApp.iOS
+using HockeyApp.iOS;
 using UIKit;
 using Demos.Common;
 
@@ -12,13 +12,7 @@ namespace Demos.iOS
 
         internal static void RunGame()
         {
-            _game = new Game1();
-        }
-
-        internal static void RunGame()
-        {
             _game = new DemoGame();
-            _game.Run();
         }
 
         static void Main(string[] args)
