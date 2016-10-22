@@ -4,9 +4,9 @@ namespace Demos.TopDownRpg.SpeedState
 {
     public class SpeedContext
     {
-        private IState<float> _speed;
+        private IStateModifier<float> _speed;
 
-        public SpeedContext(IState<float> speedState)
+        public SpeedContext(IStateModifier<float> speedState)
         {
             _speed = speedState;
         }
@@ -16,7 +16,7 @@ namespace Demos.TopDownRpg.SpeedState
             return baseSpeed * _speed.Modifier;
         }
 
-        public void SetSpeed(IState<float> state )
+        public void SetSpeed(IStateModifier<float> state )
         {
             _speed = state;
         }
