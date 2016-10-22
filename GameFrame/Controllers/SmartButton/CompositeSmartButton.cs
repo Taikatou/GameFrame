@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameFrame.Controllers.SmartButton
 {
@@ -6,50 +7,12 @@ namespace GameFrame.Controllers.SmartButton
     {
         private readonly List<IButtonAble> _buttons;
 
-        public override bool ButtonJustPressed
-        {
-            get
-            {
-                foreach (var button in _buttons)
-                {
-                    if (ButtonMethods.ButtonJustPressed(button))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
+        public override bool ButtonJustPressed => _buttons.Any(ButtonMethods.ButtonJustPressed);
 
-        public override bool ButtonReleased
-        {
-            get
-            {
-                foreach (var button in _buttons)
-                {
-                    if (ButtonMethods.ButtonReleased(button))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
+        public override bool ButtonReleased => _buttons.Any(ButtonMethods.ButtonReleased);
 
-        public override bool ButtonHeldDown
-        {
-            get
-            {
-                foreach (var button in _buttons)
-                {
-                    if (ButtonMethods.ButtonHeldDown(button))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
+        public override bool ButtonHeldDown => _buttons.Any(ButtonMethods.ButtonHeldDown);
+
         public CompositeSmartButton()
         {
             _buttons = new List<IButtonAble>();

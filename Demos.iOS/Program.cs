@@ -1,16 +1,23 @@
 ﻿using Foundation;
+using HockeyApp.iOS
 using UIKit;
+using Demos.Common;
 
 namespace Demos.iOS
 {
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
     {
-        private static Game1 _game;
+        private static DemoGame _game;
 
         internal static void RunGame()
         {
             _game = new Game1();
+        }
+
+        internal static void RunGame()
+        {
+            _game = new DemoGame();
             _game.Run();
         }
 
@@ -21,6 +28,10 @@ namespace Demos.iOS
 
         public override void FinishedLaunching(UIApplication app)
         {
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure(IdManager.HockeyAppId);
+            manager.StartManager();
+            manager.Authenticator.AuthenticateInstallation();
             RunGame();
         }
     }

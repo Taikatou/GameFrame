@@ -91,6 +91,7 @@
     <None Include="Content\TopDownRpg\Fonts\montserrat-32.fnt" />
     <None Include="Content\TopDownRpg\level01.tmx" />
     <None Include="Content\TopDownRpg\level02.tmx" />
+    <None Include="packages.config" />
     <None Include="RawContent\PathYellow.piskel" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

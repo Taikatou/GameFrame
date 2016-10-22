@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AbstractScreen.cs" />
+    <Compile Include="Common\IdManager.cs" />
     <Compile Include="DemoGame.cs" />
     <Compile Include="Platformer\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,7 +50,14 @@
     <Compile Include="Screens\VideoOptionsScreen.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityController.cs" />
+    <Compile Include="TopDownRpg\EntityRendererFactory.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedGrass.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedMud.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedRunning.cs" />
+    <Compile Include="TopDownRpg\SpeedState\SpeedWater.cs" />
     <Compile Include="TopDownRpg\TopDownRpgScene.cs" />
   </ItemGroup>
   <ItemGroup>

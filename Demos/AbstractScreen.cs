@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameFrame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -9,11 +10,13 @@ namespace Demos
     public abstract class AbstractScreen : Screen
     {
         public List<IUpdate> UpdateList;
+        public abstract void LoadScene();
         public abstract void Draw(SpriteBatch spriteBatch);
 
         protected AbstractScreen()
         {
             UpdateList = new List<IUpdate>();
+            RenderList = new List<IRenderable>();
         }
 
         public override void Update(GameTime gameTime)
