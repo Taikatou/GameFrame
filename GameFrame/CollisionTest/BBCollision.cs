@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -16,8 +17,8 @@ namespace GameFrame.CollisionTest
         private List<IObserver> observers;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        BBObject object1;
-        BBObject object2;
+        BBObject player;
+        BBObject enemy;
         BBObject topWall;
         BBObject bottomWall;
         BBObject leftWall;
@@ -57,29 +58,34 @@ namespace GameFrame.CollisionTest
 
         public void CheckObjectCollision()
         {
-            if (object1.BoundingBox.Intersects(object2.BoundingBox))
+            if (player.BoundingBox.Intersects(enemy.BoundingBox))
             {
                 NotifyObservers();
+                Debug.WriteLine("Collision Detected with another object");
             }
         }
 
         private void CheckWallCollision()
         {
-            if (object1.BoundingBox.Intersects(topWall.BoundingBox))
+            if (player.BoundingBox.Intersects(topWall.BoundingBox))
             {
                 NotifyObservers();
+                Debug.WriteLine("Colision with top wall");
             }
-            if (object1.BoundingBox.Intersects(bottomWall.BoundingBox))
+            if (player.BoundingBox.Intersects(bottomWall.BoundingBox))
             {
                 NotifyObservers();
+                Debug.WriteLine("Colision with bottom wall");
             }
-            if (object1.BoundingBox.Intersects(leftWall.BoundingBox))
+            if (player.BoundingBox.Intersects(leftWall.BoundingBox))
             {
                 NotifyObservers();
+                Debug.WriteLine("Colision with left wall");
             }
-            if (object1.BoundingBox.Intersects(rightWall.BoundingBox))
+            if (player.BoundingBox.Intersects(rightWall.BoundingBox))
             {
                 NotifyObservers();
+                Debug.WriteLine("Colision with right wall");
             }
         }
     }
