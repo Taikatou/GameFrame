@@ -1,7 +1,9 @@
-﻿namespace GameFrame.CollisionSystems
+﻿using Microsoft.Xna.Framework;
+
+namespace GameFrame.CollisionSystems
 {
     public interface ICollisionSystem
     {
-        bool CheckCollision(int x, int y);
+        bool CheckCollision(Point p);
     }
 }

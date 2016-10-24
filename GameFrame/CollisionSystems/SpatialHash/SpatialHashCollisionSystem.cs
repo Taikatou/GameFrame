@@ -5,47 +5,27 @@ namespace GameFrame.CollisionSystems.SpatialHash
 {
     public class SpatialHashCollisionSystem<T> : ISpatialCollisionSystem<T>
     {
-        private readonly Dictionary<int, T> _spatialHash;
-        private readonly int _width;
+        public readonly Dictionary<Point, T> SpatialHash;
 
-        public SpatialHashCollisionSystem(int width)
+        public SpatialHashCollisionSystem()
         {
-            _width = width;
-            _spatialHash = new Dictionary<int, T>();
-        }
-
-        public int HashKey(int x, int y)
-        {
-            return y*_width + x;
-        }
-
-        public int PointToHash(Point point)
-        {
-            return HashKey(point.X, point.Y);
+            SpatialHash = new Dictionary<Point, T>();
         }
 
         public void AddNode(Point position, T node)
         {
-            var hashPosition = PointToHash(position);
-            _spatialHash[hashPosition] = node;
+            SpatialHash[position] = node;
         }
 
         public void RemoveNode(Point position)
         {
-            var hashPosition = PointToHash(position);
-            _spatialHash.Remove(hashPosition);
-        }
-
-        public bool CheckCollision(int x, int y)
-        {
-            var hashPosition = HashKey(x, y);
-            var found = _spatialHash.ContainsKey(hashPosition);
-            return found;
+            SpatialHash.Remove(position);
         }
 
         public bool CheckCollision(Point position)
         {
-            return CheckCollision(position.X, position.Y);
+            var found = SpatialHash.ContainsKey(position);
+            return found;
         }
 
         public T ValueAt(Point position)
@@ -53,8 +33,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             var valueAt = default(T);
             if (CheckCollision(position))
             {
-                var hashPosition = PointToHash(position);
-                valueAt = _spatialHash[hashPosition];
+                valueAt = SpatialHash[position];
             }
             return valueAt;
         }

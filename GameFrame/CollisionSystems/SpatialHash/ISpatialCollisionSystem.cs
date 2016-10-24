@@ -6,7 +6,6 @@ namespace GameFrame.CollisionSystems.SpatialHash
     {
         void AddNode(Point position, T node);
         void RemoveNode(Point point);
-        bool CheckCollision(Point p);
         T ValueAt(Point position);
     }
 }

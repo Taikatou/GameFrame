@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeCollisionSystem.cs" />
     <Compile Include="CollisionSystems\ICollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
@@ -66,8 +67,15 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="IRenderable.cs" />
+    <Compile Include="MediaAdapter\AudioPlayer.cs" />
+    <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
+    <Compile Include="MediaAdapter\IAudioPlayer.cs" />
+    <Compile Include="MediaAdapter\AudioAdapter.cs" />
+    <Compile Include="MediaAdapter\SongPlayer.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\ISpeed.cs" />
     <Compile Include="Movers\MoverManager.cs" />
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
@@ -90,11 +98,10 @@
     <Compile Include="Renderers\AbstractPathRenderer.cs" />
     <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
+    <Compile Include="State\IStateEvent.cs" />
+    <Compile Include="State\IStateModifier.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v7.0\Mono.Android.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>

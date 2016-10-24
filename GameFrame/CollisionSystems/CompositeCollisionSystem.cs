@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace GameFrame.CollisionSystems
 {
@@ -33,12 +34,12 @@ namespace GameFrame.CollisionSystems
             }
         }
 
-        public bool CheckCollision(int x, int y)
+        public bool CheckCollision(Point point)
         {
             var found = false;
             foreach (var system in _collisionSystems)
             {
-                found = found || system.CheckCollision(x, y);
+                found = found || system.CheckCollision(point);
             }
             return found;
         }

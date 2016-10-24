@@ -4,33 +4,44 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameFrame.Content;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameFrame.MediaAdapter
 {
-    public class AudioPlayer : IMediaPlayer
+    public class AudioPlayer : IAudioPlayer
     {
-        MediaAdapter mediaAdapter;
+        ContentManager _content;
+        private SoundEffect _effect;
+        private SoundEffectInstance _instance;
 
-        public void play(string audioType, string fileName)
+
+        public void Play(string audioType, string fileName)
         {
-            //inbuilt support to play mp3 music files
-            if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
+            if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                Debug.WriteLine("Playing mp3 file. Name: " + fileName);
+                System.Diagnostics.Debug.WriteLine("AudioPlayer::play(): " + fileName);
+                _content = ContentManagerFactory.RequestContentManager();
+                _effect = _content.Load<SoundEffect>(fileName);
+                _instance = _effect.CreateInstance();
+                _instance.Play();
             }
-
-            //mediaAdapter is providing support to play other file formats
-            else if (audioType.Equals("vlc", StringComparison.OrdinalIgnoreCase) 
-                || audioType.Equals("mp4", StringComparison.OrdinalIgnoreCase))
-            {
-                mediaAdapter = new MediaAdapter(audioType);
-                mediaAdapter.play(audioType, fileName);
-            }
-
             else
             {
                 Debug.WriteLine("Invalid media. " + audioType + " format not supported");
             }
+        }
+
+        public void Pause()
+        {
+            _instance?.Pause();
+            Debug.WriteLine("AudioPLayer::pause()");
+        }
+
+        public void Resume()
+        {
+            Debug.WriteLine("AudioPLayer::resume()");
         }
     }
 }

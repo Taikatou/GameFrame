@@ -136,7 +136,7 @@ namespace GameFrame.PathFinding
 
         public bool ValidPosition(Point point)
         {
-            var collision = SearchParameters.CollisionSystem.CheckCollision(point.X, point.Y); 
+            var collision = SearchParameters.CollisionSystem.CheckCollision(point); 
             return !collision;
         }
     }
