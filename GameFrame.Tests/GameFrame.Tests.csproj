@@ -61,7 +61,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -69,6 +71,7 @@
     <Compile Include="CollisionSystem\Common.cs" />
     <Compile Include="CollisionSystem\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
+    <Compile Include="Common\CommonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
