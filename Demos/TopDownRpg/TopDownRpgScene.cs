@@ -13,48 +13,41 @@ using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : GameFrameScreen
+    public class TopDownRpgScene : DemoScreen
     {
         public TiledMap Map;
-        private readonly ContentManager _content;
-        public readonly Camera2D Camera;
         public ICollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private MoverManager _moverManager;
         private Entity _entity;
         private Vector2 _tileSize;
-        private readonly SpriteBatch _spriteBatch;
 
-        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
-            _spriteBatch = spriteBatch;
-            _content = ContentManagerFactory.RequestContentManager();
-            Camera = new Camera2D(viewPort) {Zoom = 2.0f};
         }
+
         public override void LoadContent()
         {
             base.LoadContent();
-            Map = _content.Load<TiledMap>("TopDownRpg/level01");
+            Map = Content.Load<TiledMap>("TopDownRpg/level01");
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
             var collisionSystem = new CompositeCollisionSystem();
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
-            var entityRenderer = new EntityRenderer(_content, expiringSpatialHash,
+            var entityRenderer = new EntityRenderer(Content, expiringSpatialHash,
                                                     _entity = new Entity(new Vector2(5, 5)),
                                                     _tileSize.ToPoint());
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, expiringSpatialHash);
             var entityController = new EntityController(_entity, _entity, _moverManager);
-            var texture = _content.Load<Texture2D>("TopDownRpg/Path");
-            var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
+            var texture = Content.Load<Texture2D>("TopDownRpg/Path");
+            var endTexture = Content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
             collisionSystem.AddCollisionSystem(new TiledCollisionSystem(Map));
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
@@ -69,6 +62,7 @@ namespace Demos.TopDownRpg
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(_moverManager);
             RenderList.Add(entityRenderer);
+            RenderList.Add(PathRenderer);
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
@@ -101,14 +95,14 @@ namespace Demos.TopDownRpg
         public override void Draw(GameTime gameTime)
         {
             var transformMatrix = Camera.GetViewMatrix();
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
             Map.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {
-                toRender.Draw(_spriteBatch);
+                toRender.Draw(SpriteBatch);
             }
-            PathRenderer.Draw(_spriteBatch);
-            _spriteBatch.End();
+            SpriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

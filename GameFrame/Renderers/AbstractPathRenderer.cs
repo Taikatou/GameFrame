@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameFrame.Renderers
 {
-    public abstract class AbstractPathRenderer
+    public abstract class AbstractPathRenderer : IRenderable
     {
         public MoverManager Mover;
         public BaseMovable Moving;

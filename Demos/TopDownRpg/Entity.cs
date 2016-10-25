@@ -1,6 +1,5 @@
 ﻿using Demos.TopDownRpg.SpeedState;
 using GameFrame.Movers;
-using GameFrame.State;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
