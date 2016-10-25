@@ -34,13 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Common\Distance.cs" />
     <Compile Include="GameFrameScreen.cs" />
-    <Compile Include="CollisionSystems\CompositeCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\ICollisionSystem.cs" />
+    <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\SpatialHash\ISpatialCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\AbstractSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\Tiled\TiledAbstractCollisionSystem.cs" />
     <Compile Include="CollisionTest\BBCollision.cs" />
     <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="CollisionTest\IObserver.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Controllers\ButtonMethods.cs" />
     <Compile Include="Controllers\Click\ClickController.cs" />
     <Compile Include="Controllers\Click\MouseClick\MouseControl.cs" />
-    <Compile Include="Controllers\Click\TouchScreen\ITouchScreenControl.cs" />
     <Compile Include="Controllers\Click\TouchScreen\SmartGesture.cs" />
     <Compile Include="Controllers\Click\TouchScreen\TouchScreenControl.cs" />
     <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\CrowDistance.cs" />
     <Compile Include="PathFinding\Heuristics\DiagonalDistance.cs" />
     <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
     <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />

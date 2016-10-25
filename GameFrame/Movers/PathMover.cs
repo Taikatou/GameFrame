@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using GameFrame.Paths;
 
@@ -9,6 +10,7 @@ namespace GameFrame.Movers
         public readonly AbstractPath Path;
         public BaseMovable ToMove;
         public bool Complete => !Path.ToMove;
+        public EventHandler OnCompleteEvent;
 
         public PathMover(BaseMovable toMove, AbstractPath path) 
         {
@@ -27,9 +29,10 @@ namespace GameFrame.Movers
                 var direction = Path.NextPosition - ToMove.Position.ToPoint();
                 ToMove.MovingDirection = direction.ToVector2();
             }
-            else
+            else if(ToMove.Moving)
             {
                 ToMove.Moving = false;
+                OnCompleteEvent?.Invoke(this, null);
             }
         }
     }

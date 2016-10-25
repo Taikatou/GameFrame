@@ -7,15 +7,15 @@ namespace GameFrame.PathFinding
     {
         public Point StartLocation { get; set; }
         public Point EndLocation { get; set; }
-        public ICollisionSystem CollisionSystem { get; set; }
+        public AbstractCollisionSystem AbstractCollisionSystem { get; set; }
         public Rectangle Space { get; set; }
 
-        public SearchParameters(Point startLocation, Point endLocation, ICollisionSystem collisionSystem, Rectangle space)
+        public SearchParameters(Point startLocation, Point endLocation, AbstractCollisionSystem abstractCollisionSystem, Rectangle space)
         {
             Space = space;
             StartLocation = startLocation;
             EndLocation = endLocation;
-            CollisionSystem = collisionSystem;
+            AbstractCollisionSystem = abstractCollisionSystem;
         }
     }
 }

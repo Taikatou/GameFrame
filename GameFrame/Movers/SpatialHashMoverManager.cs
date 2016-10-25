@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
+using GameFrame.Common;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -8,13 +9,13 @@ namespace GameFrame.Movers
 {
     public class SpatialHashMoverManager<T> : IMoverManager<T>, IUpdate where T : BaseMovable
     {
-        private readonly ICollisionSystem _collisionSystem;
+        private readonly AbstractCollisionSystem _abstractCollisionSystem;
         private readonly ExpiringSpatialHashCollisionSystem<T> _spatialHashLayer;
         private readonly List<T> _characterList;
 
-        public SpatialHashMoverManager(ICollisionSystem collisionSystem, ExpiringSpatialHashCollisionSystem<T> spatialHashLayer)
+        public SpatialHashMoverManager(AbstractCollisionSystem abstractCollisionSystem, ExpiringSpatialHashCollisionSystem<T> spatialHashLayer)
         {
-            _collisionSystem = collisionSystem;
+            _abstractCollisionSystem = abstractCollisionSystem;
             _characterList = new List<T>();
             _spatialHashLayer = spatialHashLayer;
         }
@@ -27,10 +28,13 @@ namespace GameFrame.Movers
 
         public bool RequestMovement(T character, Vector2 position)
         {
-            if (!_collisionSystem.CheckCollision(position.ToPoint()))
+            var startPoint = character.Position.ToPoint();
+            var endPoint = position.ToPoint();
+            if (!_abstractCollisionSystem.CheckMovementCollision(startPoint, endPoint))
             {
-                //William timer
-                if(_spatialHashLayer.MoveNode(character.Position.ToPoint(), position.ToPoint(), character.Speed))
+                var distance = Distance.GetDistance(character.Position, position);
+                var timer = distance/character.Speed;
+                if(_spatialHashLayer.MoveNode(startPoint, endPoint, character.Speed))
                 {
                     character.Position = position;
                     return true;

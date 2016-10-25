@@ -27,12 +27,13 @@ namespace Demos.TopDownRpg
         public TiledMap Map;
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
-        public ICollisionSystem CollisionSystem;
+        public AbstractCollisionSystem AbstractCollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private MoverManager _moverManager;
         private Entity _entity;
         private Vector2 _tileSize;
         private readonly SpriteBatch _spriteBatch;
+        private EightWayPossibleMovement _possibleMovements;
 
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
@@ -46,8 +47,9 @@ namespace Demos.TopDownRpg
             Map = _content.Load<TiledMap>("TopDownRpg/level01");
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
-            var collisionSystem = new CompositeCollisionSystem();
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>();
+            _possibleMovements = new EightWayPossibleMovement(new CrowDistance());
+            var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             var entityRenderer = new EntityRenderer(_content, expiringSpatialHash,
                                                     _entity = new Entity(new Vector2(5, 5)),
                                                     _tileSize.ToPoint());
@@ -56,9 +58,9 @@ namespace Demos.TopDownRpg
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
-            collisionSystem.AddCollisionSystem(new TiledCollisionSystem(Map));
+            collisionSystem.AddCollisionSystem(new TiledAbstractCollisionSystem(_possibleMovements, Map));
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
-            CollisionSystem = collisionSystem;
+            AbstractCollisionSystem = collisionSystem;
 
             AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
             spatialHashMover.Add(_entity);
@@ -92,8 +94,8 @@ namespace Demos.TopDownRpg
         public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
             endPoint /= tileSize;
-            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
-            var path = new AStarPathFinder(searchParams, new ManhattanDistance(), new FourWayPossibleMovement()).FindPath();
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, AbstractCollisionSystem, new Rectangle(new Point(), tileSize));
+            var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
             var pathMover = new PathMover(entity, new FinitePath(path));
             moverManager.AddMover(pathMover);
         }

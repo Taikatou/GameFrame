@@ -5,7 +5,7 @@ namespace GameFrame.PathFinding.Heuristics
 {
     public class ManhattanDistance : IHeuristic
     {
-        public int GetTraversalCost(Point location, Point otherLocation)
+        public double GetTraversalCost(Point location, Point otherLocation)
         {
             var deltaX = otherLocation.X - location.X;
             var deltaY = otherLocation.Y - location.Y;
