@@ -33,7 +33,7 @@ namespace Demos.TopDownRpg
         private Entity _entity;
         private Vector2 _tileSize;
         private readonly SpriteBatch _spriteBatch;
-        private EightWayPossibleMovement _possibleMovements;
+        private IPossibleMovements _possibleMovements;
 
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
@@ -54,7 +54,7 @@ namespace Demos.TopDownRpg
                                                     _entity = new Entity(new Vector2(5, 5)),
                                                     _tileSize.ToPoint());
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, expiringSpatialHash);
-            var entityController = new EntityController(_entity, _entity, _moverManager);
+            var entityController = new EntityController(_entity, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -71,16 +71,24 @@ namespace Demos.TopDownRpg
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(_moverManager);
             RenderList.Add(entityRenderer);
+
+            var npc = new Entity(new Vector2(5, 4));
+            spatialHashMover.Add(npc);
+            var npcRenderer = new EntityRenderer(_content, expiringSpatialHash,
+                                                 npc,
+                                                 _tileSize.ToPoint());
+            RenderList.Add(npcRenderer);
+            UpdateList.Add(new DelayTracker(npc, _entity));
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
         {
             var clickController = new ClickController();
-            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            /*clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
                 MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
-            };
+            };*/
             var moveGesture = new SmartGesture(GestureType.Tap);
             moveGesture.GestureEvent += gesture =>
             {

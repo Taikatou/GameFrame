@@ -24,7 +24,7 @@ namespace Demos.TopDownRpg
             set { ToMove.MovingDirection = value; }
         }
 
-        public EntityController(Entity entity, BaseMovable entityMover, MoverManager moverManager)
+        public EntityController(Entity entity, MoverManager moverManager)
         {
             ToMove = entity;
             _smartController = new SmartController();
@@ -34,7 +34,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Up),
                 new DirectionGamePadButton(Buttons.DPadUp)
             };
-            var upButton = CreateCompositeButton(upButtons, entityMover, moverManager);
+            var upButton = CreateCompositeButton(upButtons, entity, moverManager);
             upButton.OnButtonJustPressed += (sender, args) =>
             {
                 MovingDirection = new Vector2(MovingDirection.X, -1);
@@ -53,7 +53,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Down),
                 new DirectionGamePadButton(Buttons.DPadDown)
             };
-            var downButton = CreateCompositeButton(downButtons, entityMover, moverManager);
+            var downButton = CreateCompositeButton(downButtons, entity, moverManager);
             downButton.OnButtonJustPressed += (sender, args) =>
             {
                 MovingDirection = new Vector2(MovingDirection.X, 1);
@@ -72,7 +72,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Left),
                 new DirectionGamePadButton(Buttons.DPadLeft)
             };
-            var leftButton = CreateCompositeButton(leftButtons, entityMover, moverManager);
+            var leftButton = CreateCompositeButton(leftButtons, entity, moverManager);
             leftButton.OnButtonJustPressed += (sender, args) =>
             {
                 MovingDirection = new Vector2(-1, MovingDirection.Y);
@@ -91,7 +91,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Right),
                 new DirectionGamePadButton(Buttons.DPadRight)
             };
-            var rightButton = CreateCompositeButton(rightButtons, entityMover, moverManager);
+            var rightButton = CreateCompositeButton(rightButtons, entity, moverManager);
             rightButton.OnButtonJustPressed += (sender, args) =>
             {
                 MovingDirection = new Vector2(1, MovingDirection.Y);
