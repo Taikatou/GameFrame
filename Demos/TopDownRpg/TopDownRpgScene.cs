@@ -27,7 +27,7 @@ namespace Demos.TopDownRpg
         public TiledMap Map;
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
-        public AbstractCollisionSystem AbstractCollisionSystem;
+        public AbstractCollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private MoverManager _moverManager;
         private Entity _entity;
@@ -60,7 +60,7 @@ namespace Demos.TopDownRpg
 
             collisionSystem.AddCollisionSystem(new TiledAbstractCollisionSystem(_possibleMovements, Map));
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
-            AbstractCollisionSystem = collisionSystem;
+            CollisionSystem = collisionSystem;
 
             AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
             spatialHashMover.Add(_entity);
@@ -102,9 +102,10 @@ namespace Demos.TopDownRpg
         public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
             endPoint /= tileSize;
-            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, AbstractCollisionSystem, new Rectangle(new Point(), tileSize));
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
             var pathMover = new PathMover(entity, new FinitePath(path));
+            pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
             moverManager.AddMover(pathMover);
         }
 
