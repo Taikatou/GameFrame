@@ -1,0 +1,15 @@
+Fix expiring spatial hash
+
+Add viewport and camera to screens
+
+Update Click and touch screen controller. (Only one event)
+	Mouse events
+		Click
+		Drag
+		Zoom
+
+PathMover
+	OnComplete event
+
+Service locator
+	Settings

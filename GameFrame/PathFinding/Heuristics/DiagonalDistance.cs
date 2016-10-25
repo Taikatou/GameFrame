@@ -5,10 +5,10 @@ namespace GameFrame.PathFinding.Heuristics
 {
     public class DiagonalDistance : IHeuristic
     {
-        public Int32 GetTraversalCost(Point location, Point otherLocation)
+        public double GetTraversalCost(Point location, Point otherLocation)
         {
-            var deltaX = otherLocation.X - location.X;
-            var deltaY = otherLocation.Y - location.Y;
+            var deltaX = Math.Abs(otherLocation.X - location.X);
+            var deltaY = Math.Abs(otherLocation.Y - location.Y);
             return Math.Max(deltaX, deltaY);
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 
@@ -12,32 +11,30 @@ namespace GameFrame.PathFinding
         private readonly Node _endNode;
         private readonly int _max;
         public readonly SearchParameters SearchParameters;
-        private readonly IHeuristic _heuristic;
         private readonly IPossibleMovements _possibleMovements;
 
         //node has to be walkable
-        private Node GetNode(Point p)
+        private Node GetNode(Point fromPoint, Point point)
         {
             Node toReturn = null;
-            if (MapNodes.ContainsKey(p))
+            if (MapNodes.ContainsKey(point))
             {
-                toReturn = MapNodes[p];
+                toReturn = MapNodes[point];
             }
-            else if (ValidPosition(p))
+            else if (!ValidPosition(point))
             {
-                MapNodes[p] = new Node(p, SearchParameters.EndLocation, _heuristic, _max);
-                toReturn = MapNodes[p];
+                ClosedNodes.Add(point);
             }
-            else
+            else if (ValidMovement(fromPoint, point))
             {
-                ClosedNodes.Add(p);
+                MapNodes[point] = new Node(point, SearchParameters.EndLocation, _possibleMovements.Heuristic, _max);
+                toReturn = MapNodes[point];
             }
             return toReturn;
         }
 
-        public AStarPathFinder(SearchParameters searchParameters, IHeuristic heuristic, IPossibleMovements possibleMovements)
+        public AStarPathFinder(SearchParameters searchParameters, IPossibleMovements possibleMovements)
         {
-            _heuristic = heuristic;
             _possibleMovements = possibleMovements;
             var width = searchParameters.Space.Width;
             var height = searchParameters.Space.Height;
@@ -52,7 +49,7 @@ namespace GameFrame.PathFinding
 
         public Node ForceNode(Point start, Point end, int max)
         {
-            var node = new Node(start, end, _heuristic, max);
+            var node = new Node(start, end, _possibleMovements.Heuristic, max);
             return node;
         }
 
@@ -110,7 +107,7 @@ namespace GameFrame.PathFinding
                 Node node = null;
                 if (!nodeClosed)
                 {
-                    node = GetNode(location);
+                    node = GetNode(fromNode.Location, location);
                 }
                 if (node != null)
                 {
@@ -122,7 +119,7 @@ namespace GameFrame.PathFinding
                     }
                     else
                     {
-                        var traversalCost = _heuristic.GetTraversalCost(node.Location, fromNode.Location);
+                        var traversalCost = _possibleMovements.Heuristic.GetTraversalCost(node.Location, fromNode.Location);
                         var gTemp = fromNode.G + traversalCost;
                         if (gTemp < node.G)
                         {
@@ -134,9 +131,15 @@ namespace GameFrame.PathFinding
             }
         }
 
-        public bool ValidPosition(Point point)
+        public bool ValidPosition(Point position)
         {
-            var collision = SearchParameters.CollisionSystem.CheckCollision(point); 
+            var collision = SearchParameters.AbstractCollisionSystem.CheckCollision(position); 
+            return !collision;
+        }
+
+        public bool ValidMovement(Point startPosition, Point endPosition)
+        {
+            var collision = SearchParameters.AbstractCollisionSystem.CheckMovementCollision(startPosition, endPosition);
             return !collision;
         }
     }

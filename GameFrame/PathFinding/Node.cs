@@ -6,15 +6,14 @@ namespace GameFrame.PathFinding
     public class Node
     {
         private Node _parentNode;
-
         private readonly IHeuristic _heuristic;
         public Point Location { get; }
 
-        public int G { get; private set; }
+        public double G { get; private set; }
 
-        public int H { get; }
+        public double H { get; }
 
-        public int F => G + H;
+        public double F => G + H;
 
         public Node ParentNode
         {
@@ -34,12 +33,5 @@ namespace GameFrame.PathFinding
             H = _heuristic.GetTraversalCost(Location, endLocation);
             G = max;
         }
-
-        public override string ToString()
-        {
-            return $"{Location.X}, {Location.Y}";
-        }
     }
-
-    public enum NodeState { Untested, Open, Closed }
 }
