@@ -84,11 +84,11 @@ namespace Demos.TopDownRpg
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
         {
             var clickController = new ClickController();
-            /*clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
                 MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
-            };*/
+            };
             var moveGesture = new SmartGesture(GestureType.Tap);
             moveGesture.GestureEvent += gesture =>
             {
