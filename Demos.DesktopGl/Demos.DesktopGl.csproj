@@ -62,6 +62,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <Content Include="Content\BirabutoKingdom.wav" />
+    <Content Include="Content\DemoScreen\backButton.png" />
     <Content Include="Content\piano.mp3" />
     <Content Include="Content\TopDownRpg\BluePathEnd.png" />
     <Content Include="Content\TopDownRpg\Character.png" />
@@ -94,6 +95,7 @@
     <None Include="packages.config" />
     <None Include="RawContent\PathYellow.piskel" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

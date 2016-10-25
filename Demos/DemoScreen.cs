@@ -8,8 +8,10 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
+using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using System.Diagnostics;
 
 namespace Demos
 {
@@ -19,6 +21,8 @@ namespace Demos
         public readonly Camera2D Camera;
         public readonly SpriteBatch SpriteBatch;
         private BackButton _backButton;
+        private Entity _entity;
+        private Vector2 _tileSize;
 
         public DemoScreen(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
@@ -30,7 +34,9 @@ namespace Demos
         public override void LoadContent()
         {
             base.LoadContent();
-            _backButton = new BackButton();
+            _backButton = new BackButton(Content);
+
+
             var clickController = new ClickController();
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
@@ -43,10 +49,12 @@ namespace Demos
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(clickController);
+            RenderList.Add(_backButton);
         }
 
         public void CheckHit(Point point)
         {
+            Debug.WriteLine("" + point);
             if (_backButton.Hit(point))
             {
                 Action action = Show<MainMenuScreen>;
