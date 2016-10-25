@@ -10,10 +10,5 @@ namespace GameFrame.Movers
         public Vector2 MovingDirection { get; set; }
         public Vector2 Position { get; set; }
         public virtual float Speed { get; }
-
-        public void FaceMovingDirection()
-        {
-            FacingDirection = MovingDirection;
-        }
     }
 }

@@ -11,6 +11,12 @@ namespace GameFrame.Movers
         public BaseMovable ToMove;
         public bool Complete => !Path.ToMove;
         public EventHandler OnCompleteEvent;
+        public EventHandler OnCancelEvent;
+
+        public void Cancel()
+        {
+            OnCancelEvent?.Invoke(this, null);
+        }
 
         public PathMover(BaseMovable toMove, AbstractPath path) 
         {

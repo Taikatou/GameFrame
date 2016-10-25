@@ -49,6 +49,14 @@ namespace GameFrame.CollisionSystems.SpatialHash
             {
                 var node = ValueAt(startPosition);
                 AddNode(endPosition, node);
+                foreach (var position in PossibleMovements.PositionsToCheck(startPosition, endPosition))
+                {
+                    if (position != endPosition)
+                    {
+                        MovingEntities[position] = new ExpiringKey(timer);
+                        ToRemove.Add(position);
+                    }
+                }
                 MovingEntities[startPosition] = new ExpiringKey(timer);
                 ToRemove.Add(startPosition);
                 MovingEntities[endPosition] = new ExpiringKey(timer);

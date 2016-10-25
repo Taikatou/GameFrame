@@ -27,13 +27,13 @@ namespace Demos.TopDownRpg
         public TiledMap Map;
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
-        public AbstractCollisionSystem AbstractCollisionSystem;
+        public AbstractCollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private MoverManager _moverManager;
         private Entity _entity;
         private Vector2 _tileSize;
         private readonly SpriteBatch _spriteBatch;
-        private EightWayPossibleMovement _possibleMovements;
+        private IPossibleMovements _possibleMovements;
 
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
@@ -54,13 +54,13 @@ namespace Demos.TopDownRpg
                                                     _entity = new Entity(new Vector2(5, 5)),
                                                     _tileSize.ToPoint());
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, expiringSpatialHash);
-            var entityController = new EntityController(_entity, _entity, _moverManager);
+            var entityController = new EntityController(_entity, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
             collisionSystem.AddCollisionSystem(new TiledAbstractCollisionSystem(_possibleMovements, Map));
             collisionSystem.AddCollisionSystem(expiringSpatialHash);
-            AbstractCollisionSystem = collisionSystem;
+            CollisionSystem = collisionSystem;
 
             AddClickController(_entity, _tileSize.ToPoint(), _moverManager);
             spatialHashMover.Add(_entity);
@@ -71,6 +71,14 @@ namespace Demos.TopDownRpg
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(_moverManager);
             RenderList.Add(entityRenderer);
+
+            var npc = new Entity(new Vector2(5, 4));
+            spatialHashMover.Add(npc);
+            var npcRenderer = new EntityRenderer(_content, expiringSpatialHash,
+                                                 npc,
+                                                 _tileSize.ToPoint());
+            RenderList.Add(npcRenderer);
+            UpdateList.Add(new DelayTracker(npc, _entity));
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
@@ -94,9 +102,10 @@ namespace Demos.TopDownRpg
         public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
             endPoint /= tileSize;
-            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, AbstractCollisionSystem, new Rectangle(new Point(), tileSize));
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
             var pathMover = new PathMover(entity, new FinitePath(path));
+            pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
             moverManager.AddMover(pathMover);
         }
 

@@ -23,6 +23,7 @@ namespace GameFrame.Movers
         {
             if (Movers.ContainsKey(baseMover))
             {
+                Movers[baseMover].Cancel();
                 Movers.Remove(baseMover);
             }
         }
