@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Common;
@@ -32,9 +33,10 @@ namespace GameFrame.Movers
             var endPoint = position.ToPoint();
             if (!_abstractCollisionSystem.CheckMovementCollision(startPoint, endPoint))
             {
-                var distance = Distance.GetDistance(character.Position, position);
+                var distance = (float)Distance.GetDistance(character.Position, position);
                 var timer = distance/character.Speed;
-                if(_spatialHashLayer.MoveNode(startPoint, endPoint, character.Speed))
+                timer *= 1000; //milliseconds in second
+                if (_spatialHashLayer.MoveNode(startPoint, endPoint, timer))
                 {
                     character.Position = position;
                     return true;

@@ -8,7 +8,6 @@ namespace GameFrame.PathFinding.PossibleMovements
     {
         public IHeuristic Heuristic { get; set; }
 
-
         public EightWayPossibleMovement(IHeuristic heuristic)
         {
             Heuristic = heuristic;
