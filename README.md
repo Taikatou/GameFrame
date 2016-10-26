@@ -14,6 +14,8 @@ Command
 
 State
 
+Service Locator
+
 ###In progress
 Observer
 
