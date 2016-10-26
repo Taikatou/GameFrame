@@ -8,4 +8,5 @@ before_script:
   - nuget restore GameFrameTests.sln
 script:
   - xbuild GameFrameTests.sln
+  - ls
   - nunit-console GameFrame.Tests/bin/Debug/GameFrame.Tests.dll
