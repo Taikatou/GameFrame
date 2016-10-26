@@ -19,11 +19,7 @@ namespace GameFrame.Tests.Common
         [Test]
         public void TestCameraUpdate()
         {
-            Camera2D Camera2D = null;
-            IFocusAble focusAble = null;
-            var tracker = new CameraTracker(Camera2D, focusAble);
-            tracker.Update(null);
-            //Assert.IsNull(tracker);
+
         }
     }
 }
