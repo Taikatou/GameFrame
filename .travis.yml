@@ -1,2 +1,11 @@
 language: csharp
 solution: GameFrameTests.sln
+
+install:
+  - sudo apt-get install nunit-console
+  
+before_script:
+  - nuget restore GameFrameTests.sln
+script:
+  - xbuild ink.sln
+  - nunit-console GameFrame.Tests/bin/Debug/GameFrame.Tests.dll
