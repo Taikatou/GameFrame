@@ -7,6 +7,9 @@ Install Monogame 3.5
 
 ### Completed design patterns;
 Adapter
+
 Bridge
+
 Command
+
 State
