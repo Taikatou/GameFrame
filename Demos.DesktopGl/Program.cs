@@ -1,4 +1,5 @@
 ﻿using System;
+using GameFrame.ServiceLocator;
 
 namespace Demos.DesktopGl
 {
@@ -7,6 +8,7 @@ namespace Demos.DesktopGl
         [STAThread]
         static void Main()
         {
+            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             using (var game = new DemoGame())
                 game.Run();
         }

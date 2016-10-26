@@ -1,18 +1,34 @@
 ﻿namespace GameFrame.ServiceLocator
 {
-    public class StaticServiceLocator
+    public class StaticServiceLocator : IServiceLocator
     {
-        private static ServiceLocator _instance;
-        public static ServiceLocator Instance
+        private readonly IServiceLocator _serviceLocator;
+        private static IServiceLocator _instance;
+        public static IServiceLocator Instance => _instance ?? (_instance = new StaticServiceLocator());
+
+        public StaticServiceLocator()
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ServiceLocator();
-                }
-                return _instance;
-            }
+            _serviceLocator = new ServiceLocator();
+        }
+
+        public static T GetService<T>()
+        {
+            return Instance.GetService<T>();
+        }
+
+        void IServiceLocator.AddService<T>(T service)
+        {
+            _serviceLocator.AddService(service);
+        }
+
+        T IServiceLocator.GetService<T>()
+        {
+            return _serviceLocator.GetService<T>();
+        }
+
+        public static void AddService<T>(T service)
+        {
+            Instance.AddService<T>(service);
         }
     }
 }
