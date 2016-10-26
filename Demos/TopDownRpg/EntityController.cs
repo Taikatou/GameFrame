@@ -142,6 +142,7 @@ namespace Demos.TopDownRpg
             {
                 ButtonsDown--;
                 ToMove.Moving = PlayerMove;
+                moverManager.RemoveMover(entityMover);
             };
             _smartController.AddButton(smartButton);
             return smartButton;
