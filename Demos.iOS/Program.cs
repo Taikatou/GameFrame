@@ -13,6 +13,7 @@ namespace Demos.iOS
         internal static void RunGame()
         {
             _game = new DemoGame();
+            _game.Run();
         }
 
         static void Main(string[] args)
