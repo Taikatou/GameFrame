@@ -13,3 +13,14 @@ Bridge
 Command
 
 State
+
+###In progress
+Observer
+
+Prototype
+
+Factory
+
+###Todo
+Interceptor
+
