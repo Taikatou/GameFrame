@@ -8,7 +8,7 @@ namespace GameFrame.Content
 
         private readonly ContentManager _baseManager;
 
-        public ContentManagerFactory(ContentManager baseManager)
+        protected ContentManagerFactory(ContentManager baseManager)
         {
             _baseManager = baseManager;
         }
