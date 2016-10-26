@@ -2,6 +2,8 @@
 using HockeyApp.iOS;
 using UIKit;
 using Demos.Common;
+using Demos.MobileShared;
+using GameFrame.ServiceLocator;
 
 namespace Demos.iOS
 {
@@ -12,6 +14,7 @@ namespace Demos.iOS
 
         internal static void RunGame()
         {
+            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             _game = new DemoGame();
             _game.Run();
         }

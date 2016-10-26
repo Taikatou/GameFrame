@@ -5,6 +5,7 @@ using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
@@ -26,6 +27,7 @@ namespace Demos.TopDownRpg
 
         public EntityController(Entity entity, MoverManager moverManager)
         {
+            var controllerSettings = StaticServiceLocator.Instance.GetService<IControllerSettings>();
             ToMove = entity;
             _smartController = new SmartController();
             var upButtons = new List<IButtonAble>
