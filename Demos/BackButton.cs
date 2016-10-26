@@ -47,7 +47,7 @@ namespace Demos
         public bool Hit(Point point)
         {
             Debug.WriteLine("Screen Position   " + ScreenPosition);
-            if (((point.X >= 15) && (point.X <= 65)) && ((point.Y >= 15) && (point.Y <=65)))
+            if (((point.X >= 20) && (point.X <= 60)) && ((point.Y >= 20) && (point.Y <=60)))
             {
                 return true;
             }

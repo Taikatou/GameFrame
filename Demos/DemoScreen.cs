@@ -49,7 +49,6 @@ namespace Demos
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(clickController);
-            RenderList.Add(_backButton);
         }
 
         public void CheckHit(Point point)
