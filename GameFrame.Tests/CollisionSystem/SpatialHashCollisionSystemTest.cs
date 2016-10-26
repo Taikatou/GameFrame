@@ -3,15 +3,15 @@ using System.Diagnostics;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
+using NUnit.Framework;
 
 namespace GameFrame.Tests.CollisionSystem
 {
-    [TestClass]
+    [TestFixture]
     public class SpatialHashCollisionSystemTest
     {
-        [TestMethod]
+        [Test]
         public void CheckerBoxTest()
         {
             var collisionSystem = new SpatialHashCollisionSystem<BaseMovable>(new FourWayPossibleMovement());
@@ -37,7 +37,7 @@ namespace GameFrame.Tests.CollisionSystem
             }
         }
 
-        [TestMethod]
+        [Test]
         public void PointListTest()
         {
             var collisionSystem = new SpatialHashCollisionSystem<BaseMovable>(new FourWayPossibleMovement());

@@ -1,14 +1,13 @@
-﻿using System;
-using GameFrame.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using GameFrame.Common;
 using MonoGame.Extended;
+using NUnit.Framework;
 
 namespace GameFrame.Tests.Common
 {
-    [TestClass]
+    [TestFixture]
     public class CommonTest
     {
-        [TestMethod]
+        [Test]
         public void TestCameraTracker()
         {
             Camera2D Camera2D = null;
@@ -17,7 +16,7 @@ namespace GameFrame.Tests.Common
             Assert.IsNotNull(tracker);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCameraUpdate()
         {
             Camera2D Camera2D = null;

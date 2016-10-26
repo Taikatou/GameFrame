@@ -3,15 +3,15 @@ using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Movers;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
+using NUnit.Framework;
 
 namespace GameFrame.Tests.CollisionSystem
 {
-    [TestClass]
+    [TestFixture]
     public class ExpiringSpatialHashCollisionSystem
     {
-        [TestMethod]
+        [Test]
         public void TestMovement()
         {
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>(new EightWayPossibleMovement(new CrowDistance()));
@@ -24,7 +24,7 @@ namespace GameFrame.Tests.CollisionSystem
             Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
         }
 
-        [TestMethod]
+        [Test]
         public void TestUpdate()
         {
             var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>(new EightWayPossibleMovement(new CrowDistance()));
