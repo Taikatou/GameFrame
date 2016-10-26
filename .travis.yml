@@ -7,5 +7,5 @@ install:
 before_script:
   - nuget restore GameFrameTests.sln
 script:
-  - xbuild ink.sln
+  - xbuild GameFrameTests.sln
   - nunit-console GameFrame.Tests/bin/Debug/GameFrame.Tests.dll
