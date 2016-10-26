@@ -62,7 +62,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <Content Include="Content\BirabutoKingdom.wav" />
-    <Content Include="Content\DemoScreen\backButton.png" />
+    <Content Include="Content\DemoScreen\BackButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\piano.mp3" />
     <Content Include="Content\TopDownRpg\BluePathEnd.png" />
     <Content Include="Content\TopDownRpg\Character.png" />

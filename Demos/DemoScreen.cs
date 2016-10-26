@@ -21,8 +21,8 @@ namespace Demos
         public readonly Camera2D Camera;
         public readonly SpriteBatch SpriteBatch;
         private BackButton _backButton;
-        private Entity _entity;
-        private Vector2 _tileSize;
+       // private Entity _entity;
+        //private Vector2 _tileSize;
 
         public DemoScreen(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {

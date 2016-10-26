@@ -14,7 +14,7 @@ namespace Demos
         private readonly Texture2D buttonTexture;
         private Point _tileSize;
         public readonly Entity Entity;
-        private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
+        //private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
         public Rectangle FrameRectangle;
         public Vector2 Offset { get; }
 
@@ -22,7 +22,7 @@ namespace Demos
         {
             get
             {
-                return new Vector2(50, 30);
+                return new Vector2(15, 15);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Demos
 
         public BackButton(ContentManager content)
         {
-            buttonTexture = content.Load<Texture2D>("TopDownRPG/Character");
+            buttonTexture = content.Load<Texture2D>("DemoScreen/BackButton");
             Offset = new Vector2(_tileSize.X / 2, _tileSize.Y / 2);
             FrameRectangle = new Rectangle(new Point(), _tileSize);
         }
@@ -47,7 +47,7 @@ namespace Demos
         public bool Hit(Point point)
         {
             Debug.WriteLine("Screen Position   " + ScreenPosition);
-            if (point.X == 50)
+            if (((point.X >= 15) && (point.X <= 65)) && ((point.Y >= 15) && (point.Y <=65)))
             {
                 return true;
             }
