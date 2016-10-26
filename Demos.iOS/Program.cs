@@ -23,10 +23,10 @@ namespace Demos.iOS
 
         public override void FinishedLaunching(UIApplication app)
         {
-            /*var manager = BITHockeyManager.SharedHockeyManager;
+            var manager = BITHockeyManager.SharedHockeyManager;
             manager.Configure(IdManager.HockeyAppId);
             manager.StartManager();
-            manager.Authenticator.AuthenticateInstallation();*/
+            manager.Authenticator.AuthenticateInstallation();
             RunGame();
         }
     }
