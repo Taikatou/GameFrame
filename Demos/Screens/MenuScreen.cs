@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameFrame;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
 using Microsoft.Xna.Framework;
@@ -9,23 +8,25 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended.BitmapFonts;
+using MonoGame.Extended.Screens;
 
 namespace Demos.Screens
 {
-    public abstract class MenuScreen : GameFrameScreen
+    public abstract class MenuScreen : Screen
     {
         private readonly IServiceProvider _serviceProvider;
         private SpriteBatch _spriteBatch;
         public List<MenuItem> MenuItems { get; }
         protected BitmapFont Font { get; private set; }
         protected ContentManager Content { get; private set; }
+        private ClickController clickController;
 
         protected MenuScreen(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             MenuItems = new List<MenuItem>();
 
-            var clickController = new ClickController();
+            clickController = new ClickController();
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 CheckClick(mouseState.Position);
@@ -35,9 +36,7 @@ namespace Demos.Screens
             {
                 CheckClick(gesture.Position.ToPoint());
             };
-            clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            UpdateList.Add(clickController);
-        }
+            clickController.TouchScreenControl.AddSmartGesture(moveGesture);        }
 
         protected void AddMenuItem(string text, Action action)
         {
@@ -98,6 +97,7 @@ namespace Demos.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            clickController.Update(gameTime);
             var mouseState = Mouse.GetState();
             foreach (var menuItem in MenuItems)
             {

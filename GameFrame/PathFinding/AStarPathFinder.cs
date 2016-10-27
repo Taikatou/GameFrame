@@ -8,11 +8,11 @@ namespace GameFrame.PathFinding
     {
         public Dictionary<Point, Node> MapNodes;
         public HashSet<Point> ClosedNodes;
+        public SearchParameters SearchParameters;
         private readonly Node _endNode;
         private readonly int _max;
-        public readonly SearchParameters SearchParameters;
         private readonly IPossibleMovements _possibleMovements;
-
+         
         //node has to be walkable
         private Node GetNode(Point fromPoint, Point point)
         {
