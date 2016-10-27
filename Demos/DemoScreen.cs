@@ -47,7 +47,7 @@ namespace Demos
                 CheckHit(gesture.Position.ToPoint());
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            UpdateList.Add(clickController);
+            ///UpdateList.Add(clickController);
         }
 
         public void CheckHit(Point point)
