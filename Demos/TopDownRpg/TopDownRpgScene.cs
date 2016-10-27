@@ -8,11 +8,11 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : GameFrameScreen
+    public class TopDownRpgScene : DemoScreen
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly ViewportAdapter _viewPort;
-        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;

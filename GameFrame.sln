@@ -19,12 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.Droid", "Demos.Droid\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.iOS", "Demos.iOS\Demos.iOS.csproj", "{92C3BB58-E56E-4FA0-AD15-83A1DF2EEBD9}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Demos.MobileShared", "Demos.MobileShared\Demos.MobileShared.shproj", "{BD301E69-45FE-4B36-AA9E-E2F9CF06E7D4}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Demos.MobileShared\Demos.MobileShared.projitems*{92c3bb58-e56e-4fa0-ad15-83a1df2eebd9}*SharedItemsImports = 4
-		Demos.MobileShared\Demos.MobileShared.projitems*{bd301e69-45fe-4b36-aa9e-e2f9cf06e7d4}*SharedItemsImports = 13
 		Demos.MobileShared\Demos.MobileShared.projitems*{edf56dfb-9b3c-4acc-95cd-5c363cd4da30}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -389,6 +386,5 @@ Global
 		{53D6F8B6-0164-41C3-A1AD-BDD267E99F10} = {6DC370DA-5966-4B2D-B82F-F451AE18B450}
 		{EDF56DFB-9B3C-4ACC-95CD-5C363CD4DA30} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
 		{92C3BB58-E56E-4FA0-AD15-83A1DF2EEBD9} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
-		{BD301E69-45FE-4B36-AA9E-E2F9CF06E7D4} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
 	EndGlobalSection
 EndGlobal
