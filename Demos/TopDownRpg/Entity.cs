@@ -1,4 +1,5 @@
-﻿using Demos.TopDownRpg.SpeedState;
+﻿using System.Diagnostics;
+using Demos.TopDownRpg.SpeedState;
 using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 
@@ -13,7 +14,6 @@ namespace Demos.TopDownRpg
         {
             SpeedContext = new SpeedContext(new SpeedNormal());
             Position = position;
-            MovingDirection = new Vector2();
         }
     }
 }

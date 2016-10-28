@@ -25,56 +25,56 @@ namespace Demos.TopDownRpg.GameModes
     public class OpenWorldGameMode : IGameMode
     {
         public TiledMap Map;
+        private Vector2 _tileSize;
         private readonly ContentManager _content;
         public readonly Camera2D Camera;
         public AbstractCollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private readonly IPossibleMovements _possibleMovements;
+        public Entity PlayerEntity;
 
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
+        private ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName)
         {
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
             Camera = new Camera2D(viewPort) { Zoom = 2.0f };
-            Map = _content.Load<TiledMap>("TopDownRpg/level01");
-            var entity = new Entity(new Vector2(5, 5));
-            var tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
+            Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
+            PlayerEntity = playerEntity;
+            _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             var moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
-            var entityRenderer = new EntityRenderer(_content, expiringSpatialHash,
-                                                    entity, tileSize.ToPoint());
-            var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, expiringSpatialHash);
-            var entityController = new EntityController(entity, moverManager);
+            _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
+            AddEntity(PlayerEntity);
+            var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
+            var entityController = new EntityController(PlayerEntity, moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
-            collisionSystem.AddCollisionSystem(new TiledAbstractCollisionSystem(_possibleMovements, Map));
-            collisionSystem.AddCollisionSystem(expiringSpatialHash);
+            collisionSystem.AddCollisionSystem(new TiledCollisionSystem(_possibleMovements, Map, "Collision-Layer"));
+            collisionSystem.AddCollisionSystem(_expiringSpatialHash);
             CollisionSystem = collisionSystem;
 
-            AddClickController(entity, tileSize.ToPoint(), moverManager);
-            spatialHashMover.Add(entity);
-            PathRenderer = new PathRenderer(moverManager, entity, texture, endTexture, tileSize.ToPoint());
-            UpdateList.Add(expiringSpatialHash);
-            UpdateList.Add(new CameraTracker(Camera, entityRenderer));
+            AddClickController(PlayerEntity, _tileSize.ToPoint(), moverManager);
+            spatialHashMover.Add(PlayerEntity);
+            PathRenderer = new PathRenderer(moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
+            UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(moverManager);
-            RenderList.Add(entityRenderer);
+        }
 
-            var npc = new Entity(new Vector2(5, 4));
-            spatialHashMover.Add(npc);
-            var npcRenderer = new EntityRenderer(_content, expiringSpatialHash,
-                                                 npc,
-                                                 tileSize.ToPoint());
-            RenderList.Add(npcRenderer);
-            UpdateList.Add(new DelayTracker(npc, entity));
+        public void AddEntity(Entity entity)
+        {
+            var entityRenderer = new EntityRenderer(_content, _expiringSpatialHash,
+                                                    PlayerEntity, _tileSize.ToPoint());
+            UpdateList.Add(new CameraTracker(Camera, entityRenderer));
+            RenderList.Add(entityRenderer);
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)

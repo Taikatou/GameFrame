@@ -12,8 +12,7 @@ namespace GameFrame.PathFinding
         private readonly Node _endNode;
         private readonly int _max;
         private readonly IPossibleMovements _possibleMovements;
-         
-        //node has to be walkable
+
         private Node GetNode(Point fromPoint, Point point)
         {
             Node toReturn = null;

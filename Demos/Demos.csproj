@@ -52,6 +52,7 @@
     <Compile Include="TopDownRpg\EntityController.cs" />
     <Compile Include="TopDownRpg\EntityRendererFactory.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
+    <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />

@@ -34,15 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\StringToVector.cs" />
     <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\AbstractSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\Tiled\TiledAbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
     <Compile Include="CollisionTest\BBCollision.cs" />
     <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="CollisionTest\IObserver.cs" />

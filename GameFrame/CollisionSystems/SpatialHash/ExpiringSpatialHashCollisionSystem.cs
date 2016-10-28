@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFrame.Common;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
@@ -40,7 +41,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             _spatialHash.AddNode(position, node);
         }
 
-        public bool MoveNode(Point startPosition, Point endPosition, float timer)
+        public bool MoveNode(Point startPosition, Point endPosition, EventHandler onCompleteEvent, float timer)
         {
             var moving = MovingEntities.ContainsKey(startPosition);
             var collision = CheckMovementCollision(startPosition, endPosition);
@@ -60,6 +61,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 MovingEntities[startPosition] = new ExpiringKey(timer);
                 ToRemove.Add(startPosition);
                 MovingEntities[endPosition] = new ExpiringKey(timer);
+                MovingEntities[endPosition].OnCompleteEvent += onCompleteEvent;
             }
             return validMove;
         }
@@ -89,6 +91,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
                     RemoveNode(position);
                     ToRemove.Remove(key);
                 }
+                MovingEntities[key].InvokeCompleteEvent();
                 MovingEntities.Remove(key);
             }
         }
