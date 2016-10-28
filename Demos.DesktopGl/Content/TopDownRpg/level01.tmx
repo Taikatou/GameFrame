@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="17">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
   <image source="tileset.png" width="448" height="640"/>
   <terraintypes>
@@ -103,4 +103,12 @@
    eJztme0JgzAQhiPt/w6ibekUDuIgQh2joN3DQTKICzRHCYaXJEbMh4E8cOjpQR6jF5A0FWNNoriLeIh4OtTNjLHX9ViEZmar5xammuK5ssfTRI6e3wtjbxHD5Z/T+ShiUvJBuY/1mIf0RC/M0Uu9j3lITxnECONijvWYh/IMRY6eLmt56nV+C9XTBn5fur7Zk0t4Ak9bf5v6fQnsube/Tf1+q9w8U1Nn4tlm4tll4um6LsVg0vS5JIanbXxXzjSfNmJ7us4t1pX59EvxtKP7TlOvSz4onn4pnn4pnn45myeHkMyQp4YrRw7XF0O97rlSQY70z4mYnis0HI4Scqw1nmeDHFsPnqHnnRw7xVM3luldxIQc+wzee79zv2lrv+rofpdpD+wj4gdyDp77
   </data>
  </layer>
+ <layer name="Grass-Layer" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJACAMBMH0X2xq8O9DFAJyMAP73yoAAAAATvr3wKYfS3j0Ofvo807KJwD5FgPXSIU=
+  </data>
+ </layer>
+ <objectgroup name="Teleport-Layer">
+  <object id="15" name="level01" type="5, 5" x="32" y="32" width="16" height="16"/>
+ </objectgroup>
 </map>

@@ -4,7 +4,7 @@ using MonoGame.Extended.Maps.Tiled;
 
 namespace GameFrame.CollisionSystems.Tiled
 {
-    public class TiledAbstractCollisionSystem : AbstractCollisionSystem
+    public class TiledCollisionSystem : AbstractCollisionSystem
     {
         public TiledTileLayer TileCollisionLayer;
 
@@ -14,7 +14,7 @@ namespace GameFrame.CollisionSystems.Tiled
             return !(tile == null || tile.Id == 0);
         }
 
-        public TiledAbstractCollisionSystem(IPossibleMovements possibleMovements, TiledMap map, string collisionLayerName="Collision-Layer") : base(possibleMovements)
+        public TiledCollisionSystem(IPossibleMovements possibleMovements, TiledMap map, string collisionLayerName) : base(possibleMovements)
         {
             TileCollisionLayer = map.GetLayer<TiledTileLayer>(collisionLayerName);
         }
