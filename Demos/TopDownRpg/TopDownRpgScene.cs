@@ -26,7 +26,7 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            var possibleMovements = new EightWayPossibleMovement(new CrowDistance());
+            var possibleMovements = new FourWayPossibleMovement();
             var openWorldGameMode = new OpenWorldGameMode(_viewPort, possibleMovements, PlayerEntity, levelName);
             var map = openWorldGameMode.Map;
             var grassCollisionSystem = new TiledCollisionSystem(possibleMovements, map, "Grass-Layer");
@@ -49,7 +49,8 @@ namespace Demos.TopDownRpg
                     var teleporter = teleporters.GetObjectAt(point);
                     var position = StringToVector.ConvertString(teleporter.Type);
                     PlayerEntity.Position = position;
-                    GameModeStack.Pop();
+                    var oldWorld = GameModeStack.Pop();
+                    oldWorld.Dispose();
                     LoadOpenWorld(teleporter.Name);
                 }
             };
