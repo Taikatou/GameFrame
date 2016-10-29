@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -32,13 +33,15 @@ namespace Demos.TopDownRpg.GameModes
         public AbstractPathRenderer PathRenderer;
         private readonly IPossibleMovements _possibleMovements;
         public Entity PlayerEntity;
+        public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
 
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
-        private ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
+        private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName)
         {
+            EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
             UpdateList = new List<IUpdate>();
@@ -52,7 +55,7 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             AddEntity(PlayerEntity);
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
-            var entityController = new EntityController(PlayerEntity, moverManager);
+            var entityController = new EntityController(PlayerEntity, _possibleMovements, moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -67,14 +70,28 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(entityController);
             UpdateList.Add(spatialHashMover);
             UpdateList.Add(moverManager);
+            UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
+            LoadEntities();
+        }
+
+        public void LoadEntities()
+        {
+            var entityObjects = Map.GetObjectGroup("Entity-Layer");
+            foreach (var entityObject in entityObjects.Objects)
+            {
+                var position = entityObject.Position/_tileSize;
+                var entity = new Entity(position);
+                AddEntity(entity);
+            }
         }
 
         public void AddEntity(Entity entity)
         {
             var entityRenderer = new EntityRenderer(_content, _expiringSpatialHash,
-                                                    PlayerEntity, _tileSize.ToPoint());
-            UpdateList.Add(new CameraTracker(Camera, entityRenderer));
+                                                    entity, _tileSize.ToPoint());
+            _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);
+            EntityRenderersDict[entity] = entityRenderer;
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
