@@ -97,14 +97,16 @@ namespace Demos.TopDownRpg
             }
         }
 
-        public void MoveBy(Vector2 moveTo, Vector2 moveFrom)
+        public void MoveBy(Vector2 moveBy, Vector2 moveFrom)
         {
-            var requeustedMovement = MovingDirection + moveTo;
-            var allowedMovements = _possibleMovements.GetAdjacentLocations(MovingDirection.ToPoint());
-            var enumerable = allowedMovements as Point[] ?? allowedMovements.ToArray();
+            var requeustedMovement = MovingDirection + moveBy;
+            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
             var endPoint = (moveFrom + requeustedMovement).ToPoint();
-            var contains = enumerable.Contains(endPoint);
-            MovingDirection = contains ? requeustedMovement : moveTo;
+            var possible = allowedMovements.Contains(endPoint);
+            if (possible)
+            {
+                MovingDirection = requeustedMovement;
+            }
         }
 
         public CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
@@ -124,6 +126,7 @@ namespace Demos.TopDownRpg
             smartButton.OnButtonHeldDown += (sender, args) =>
             {
                 ToMove.Moving = PlayerMove;
+                MoveBy(moveBy, entityMover.Position);
             };
             smartButton.OnButtonReleased += (sender, args) =>
             {
