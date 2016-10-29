@@ -100,10 +100,9 @@ namespace Demos.TopDownRpg
         public void MoveBy(Vector2 moveTo, Vector2 moveFrom)
         {
             var requeustedMovement = MovingDirection + moveTo;
-            var allowedMovements = _possibleMovements.GetAdjacentLocations(MovingDirection.ToPoint());
-            var enumerable = allowedMovements as Point[] ?? allowedMovements.ToArray();
+            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
             var endPoint = (moveFrom + requeustedMovement).ToPoint();
-            var contains = enumerable.Contains(endPoint);
+            var contains = allowedMovements.Contains(endPoint);
             MovingDirection = contains ? requeustedMovement : moveTo;
         }
 
