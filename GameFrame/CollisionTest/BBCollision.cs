@@ -75,7 +75,6 @@ namespace GameFrame.CollisionTest
             topWall = new BBObject(gameBackground, Vector2.Zero);
             bottomWall = new BBObject(gameBackground, new Vector2(0, Window.ClientBounds.Height));
 
-
             if (object1.BoundingBox.Intersects(topWall.BoundingBox))
             {
                 NotifyObservers();
@@ -86,12 +85,12 @@ namespace GameFrame.CollisionTest
                 NotifyObservers();
             }
 
-            if (object1.Position.X < -object1.BoundingBox.Width)
+            if (object1.Position.X < object1.BoundingBox.Width)
             {
                 NotifyObservers();
             }
 
-            if (object1.Position.X > object1.BoundingBox.Width)
+            if (object1.Position.X > Window.ClientBounds.Width)
             {
                 NotifyObservers();
             }
