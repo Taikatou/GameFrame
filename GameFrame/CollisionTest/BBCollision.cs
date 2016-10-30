@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
 
 namespace GameFrame.CollisionTest
 {
@@ -78,14 +72,20 @@ namespace GameFrame.CollisionTest
 
         private void CheckWallCollision()
         {
+            topWall = new BBObject(gameBackground, Vector2.Zero);
+            bottomWall = new BBObject(gameBackground, new Vector2(0, Window.ClientBounds.Height));
+
+
             if (object1.BoundingBox.Intersects(topWall.BoundingBox))
             {
                 NotifyObservers();
             }
+
             if (object1.BoundingBox.Intersects(bottomWall.BoundingBox))
             {
                 NotifyObservers();
             }
+
             if (object1.Position.X < -object1.BoundingBox.Width)
             {
                 NotifyObservers();
