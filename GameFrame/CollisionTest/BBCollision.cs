@@ -73,14 +73,16 @@ namespace GameFrame.CollisionTest
             {
                 NotifyObservers();
             }
-            if (object1.BoundingBox.Intersects(leftWall.BoundingBox))
+            if (object1.Position.X < -object1.BoundingBox.Width)
             {
                 NotifyObservers();
             }
-            if (object1.BoundingBox.Intersects(rightWall.BoundingBox))
+
+            if (object1.Position.X > object1.BoundingBox.Width)
             {
                 NotifyObservers();
             }
         }
     }
 }
+
