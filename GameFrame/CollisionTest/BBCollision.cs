@@ -16,6 +16,7 @@ namespace GameFrame.CollisionTest
         private List<IObserver> observers;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D gameBackground;
         BBObject object1;
         BBObject object2;
         BBObject topWall;
@@ -45,6 +46,18 @@ namespace GameFrame.CollisionTest
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        public BBCollision(BBObject object1, Texture2D gameBackground)
+        {
+            this.object1 = object1;
+            this.gameBackground = gameBackground;
+        }
+
+        public BBCollision(BBObject object1, BBObject object2)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
         }
 
         protected override void Update(GameTime gametime)
@@ -85,4 +98,3 @@ namespace GameFrame.CollisionTest
         }
     }
 }
-
