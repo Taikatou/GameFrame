@@ -9,14 +9,11 @@ namespace GameFrame.CollisionTest
     {
         private List<IObserver> observers;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         Texture2D gameBackground;
         BBObject object1;
         BBObject object2;
         BBObject topWall;
         BBObject bottomWall;
-        BBObject leftWall;
-        BBObject rightWall;
 
         public void RegisterObserver(IObserver observer)
         {
