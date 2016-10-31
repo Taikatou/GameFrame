@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 
-namespace Demos.TopDownRpg
+namespace Demos.TopDownRpg.Factory
 {
     public class EntityController : IUpdate
     {
@@ -29,7 +29,7 @@ namespace Demos.TopDownRpg
             set { ToMove.MovingDirection = value; }
         }
 
-        public EntityController(Entity entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        private EntityController(Entity entity, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
             var controllerSettings = StaticServiceLocator.Instance.GetService<IControllerSettings>();
             _possibleMovements = possibleMovements;
@@ -84,7 +84,7 @@ namespace Demos.TopDownRpg
             _smartController.AddButton(smartButton);
         }
 
-        public void Release(Vector2 releaseBy)
+        private void Release(Vector2 releaseBy)
         {
             var tolerance = 0.1f;
             if (Math.Abs(MovingDirection.X - releaseBy.X) < tolerance)
@@ -97,7 +97,7 @@ namespace Demos.TopDownRpg
             }
         }
 
-        public void MoveBy(Vector2 moveBy, Vector2 moveFrom)
+        private void MoveBy(Vector2 moveBy, Vector2 moveFrom)
         {
             var requeustedMovement = MovingDirection + moveBy;
             var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
@@ -109,7 +109,7 @@ namespace Demos.TopDownRpg
             }
         }
 
-        public CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
             var smartButton = new CompositeSmartButton();
             foreach (var button in buttons)
@@ -143,6 +143,12 @@ namespace Demos.TopDownRpg
         public void Update(GameTime gameTime)
         {
             _smartController.Update(gameTime);
+        }
+
+        public static EntityController CreateEntityController(Entity entity, IPossibleMovements possibleMovements,
+            MoverManager moverManager)
+        {
+            return new EntityController(entity, possibleMovements, moverManager);
         }
     }
 }
