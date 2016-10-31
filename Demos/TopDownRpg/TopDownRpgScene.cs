@@ -26,7 +26,7 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            var possibleMovements = new FourWayPossibleMovement();
+            var possibleMovements = new EightWayPossibleMovement(new CrowDistance());
             var openWorldGameMode = new OpenWorldGameMode(_viewPort, possibleMovements, PlayerEntity, levelName);
             var map = openWorldGameMode.Map;
             var grassCollisionSystem = new TiledCollisionSystem(possibleMovements, map, "Grass-Layer");
@@ -41,20 +41,18 @@ namespace Demos.TopDownRpg
                 var grassProbability = random.Next(BattleProbability);
                 if (grassCollision && grassProbability == 0)
                 {
-                    GameModeStack.Push(new BattleGameMode());
+                    GameModes.Push(new BattleGameMode());
                 }
 
                 if (teleporters.CheckCollision(point))
                 {
                     var teleporter = teleporters.GetObjectAt(point);
-                    var position = StringToVector.ConvertString(teleporter.Type);
-                    PlayerEntity.Position = position;
-                    var oldWorld = GameModeStack.Pop();
-                    oldWorld.Dispose();
+                    PlayerEntity.Position = StringToVector.ConvertString(teleporter.Type);
+                    GameModeStack.Unload();
                     LoadOpenWorld(teleporter.Name);
                 }
             };
-            GameModeStack.Push(openWorldGameMode);
+            GameModes.Push(openWorldGameMode);
         }
 
         public override void LoadContent()
@@ -68,7 +66,7 @@ namespace Demos.TopDownRpg
         {
             if (IsVisible)
             {
-                GameModeStack.Peek().Draw(_spriteBatch);
+                CurrentGameMode.Draw(_spriteBatch);
             }
         }
     }

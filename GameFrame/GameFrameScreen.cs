@@ -6,10 +6,12 @@ namespace GameFrame
 {
     public abstract class GameFrameScreen : Screen
     {
-        public Stack<IGameMode> GameModeStack;
+        public GameModeStack GameModeStack;
+        public IGameMode CurrentGameMode => GameModeStack.CurrentGameMode;
+        public Stack<IGameMode> GameModes => GameModeStack.GameModes;
         protected GameFrameScreen()
         {
-            GameModeStack = new Stack<IGameMode>();
+            GameModeStack = new GameModeStack();
         }
 
         public override void Update(GameTime gameTime)
@@ -17,7 +19,7 @@ namespace GameFrame
             base.Update(gameTime);
             if (IsVisible)
             {
-                GameModeStack.Peek().Update(gameTime);
+                CurrentGameMode.Update(gameTime);
             }
         }
     }
