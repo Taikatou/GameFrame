@@ -2,6 +2,7 @@
 using GameFrame.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Tests.Common
 {
@@ -15,16 +16,6 @@ namespace GameFrame.Tests.Common
             IFocusAble focusAble = null;
             var tracker = new CameraTracker(Camera2D, focusAble);
             Assert.IsNotNull(tracker);
-        }
-
-        [TestMethod]
-        public void TestCameraUpdate()
-        {
-            Camera2D Camera2D = null;
-            IFocusAble focusAble = null;
-            var tracker = new CameraTracker(Camera2D, focusAble);
-            tracker.Update(null);
-            Assert.IsNull(tracker);
         }
     }
 }

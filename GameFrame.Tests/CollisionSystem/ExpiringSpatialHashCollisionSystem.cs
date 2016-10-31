@@ -34,7 +34,7 @@ namespace GameFrame.Tests.CollisionSystem
             expiringSpatialHash.MoveNode(startPoint, endPoint, 0);
             expiringSpatialHash.Update(new GameTime {ElapsedGameTime = new TimeSpan(0,0,0,1)});
             Assert.IsFalse(expiringSpatialHash.CheckCollision(startPoint));
-            Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
+            Assert.IsFalse(expiringSpatialHash.CheckCollision(endPoint));
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace GameFrame.MediaAdapter
 {
     public class AudioAdapter : IAudioPlayer
     {
-        public AudioPlayer AudioPlayer
-        {get; set; }
-
+        public AudioPlayer AudioPlayer { get; set; }
         public SongPlayer SongPlayer { get; set; }
 
         public void Play(string audioType, string fileName)
@@ -19,21 +18,28 @@ namespace GameFrame.MediaAdapter
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
                 AudioPlayer = new AudioPlayer();
-                AudioPlayer.Play("wav",fileName);
+                AudioPlayer.PlayAudio("wav",fileName);
             }
         }
 
         public void Pause()
         {
             SongPlayer?.Pause();
-            AudioPlayer?.Pause();
+            AudioPlayer?.PauseAudio();
         }
 
        
         public void Resume()
         {
             SongPlayer?.Resume();
-            AudioPlayer?.Resume();
+            AudioPlayer?.ResumeAudio();
+        }
+
+        public void Dispose()
+        {
+            Debug.WriteLine("AudioAdapter::Dispose()");
+            SongPlayer?.Dispose();
+            AudioPlayer?.Dispose();
         }
     }
 }
