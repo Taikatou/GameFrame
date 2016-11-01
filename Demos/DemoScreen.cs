@@ -22,7 +22,6 @@ namespace Demos
         public readonly SpriteBatch SpriteBatch;
         private BackButton _backButton;
 
-
         public DemoScreen(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
             SpriteBatch = spriteBatch;
@@ -30,13 +29,14 @@ namespace Demos
             Camera = new Camera2D(viewPort) { Zoom = 2.0f };
         }
 
+        private ClickController clickController;
+
         public override void LoadContent()
         {
             base.LoadContent();
             _backButton = new BackButton(Content);
 
-
-            var clickController = new ClickController();
+            clickController = new ClickController();
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 CheckHit(mouseState.Position);
@@ -47,7 +47,12 @@ namespace Demos
                 CheckHit(gesture.Position.ToPoint());
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            ///UpdateList.Add(clickController);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            clickController.Update(gameTime);
         }
 
         public void CheckHit(Point point)

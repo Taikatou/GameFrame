@@ -52,7 +52,5 @@ namespace Demos.TopDownRpg
         {
             spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
         }
-
-        
     }
 }
