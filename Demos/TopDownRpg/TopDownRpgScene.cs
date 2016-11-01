@@ -15,6 +15,7 @@ namespace Demos.TopDownRpg
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly ViewportAdapter _viewPort;
+        private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
@@ -26,13 +27,13 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            var possibleMovements = new FourWayPossibleMovement();
-            var openWorldGameMode = new OpenWorldGameMode(_viewPort, possibleMovements, PlayerEntity, levelName);
+            _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
+            var openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName);
             var map = openWorldGameMode.Map;
-            var grassCollisionSystem = new TiledCollisionSystem(possibleMovements, map, "Grass-Layer");
+            var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
             var player = openWorldGameMode.PlayerEntity;
             var tileSize = new Point(map.TileWidth, map.TileHeight);
-            var teleporters = new TiledObjectCollisionSystem(possibleMovements, map, tileSize, "Teleport-Layer");
+            var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
             openWorldGameMode.PlayerEntity.OnMoveCompleteEvent += (sender, args) =>
             {
                 var random = new Random();
@@ -41,20 +42,18 @@ namespace Demos.TopDownRpg
                 var grassProbability = random.Next(BattleProbability);
                 if (grassCollision && grassProbability == 0)
                 {
-                    GameModeStack.Push(new BattleGameMode());
+                    GameModes.Push(new BattleGameMode());
                 }
 
                 if (teleporters.CheckCollision(point))
                 {
                     var teleporter = teleporters.GetObjectAt(point);
-                    var position = StringToVector.ConvertString(teleporter.Type);
-                    PlayerEntity.Position = position;
-                    var oldWorld = GameModeStack.Pop();
-                    oldWorld.Dispose();
+                    PlayerEntity.Position = StringToVector.ConvertString(teleporter.Type);
+                    GameModeStack.Unload();
                     LoadOpenWorld(teleporter.Name);
                 }
             };
-            GameModeStack.Push(openWorldGameMode);
+            GameModes.Push(openWorldGameMode);
         }
 
         public override void LoadContent()
@@ -68,7 +67,7 @@ namespace Demos.TopDownRpg
         {
             if (IsVisible)
             {
-                GameModeStack.Peek().Draw(_spriteBatch);
+                CurrentGameMode.Draw(_spriteBatch);
             }
         }
     }

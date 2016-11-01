@@ -68,25 +68,17 @@ namespace Demos.TopDownRpg
             CreateCompositeButton(rightButtons, entity, new Vector2(1, 0), moverManager);
 
             var runningButton = new List<IButtonAble> {new KeyButton(Keys.B), new GamePadButton(Buttons.B)};
-            var smartButton = new CompositeSmartButton();
-            foreach (var button in runningButton)
+            var smartButton = new CompositeSmartButton(runningButton)
             {
-                smartButton.AddButton(button);
-            }
-            smartButton.OnButtonJustPressed = (sender, args) =>
-            {
-                entity.SpeedContext.SetSpeed(new SpeedRunning());
-            };
-            smartButton.OnButtonReleased = (sender, args) =>
-            {
-                entity.SpeedContext.SetSpeed(new SpeedNormal());
+                OnButtonJustPressed = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedRunning()); },
+                OnButtonReleased = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedNormal()); }
             };
             _smartController.AddButton(smartButton);
         }
 
         public void Release(Vector2 releaseBy)
         {
-            var tolerance = 0.1f;
+            const float tolerance = 0.1f;
             if (Math.Abs(MovingDirection.X - releaseBy.X) < tolerance)
             {
                 MovingDirection = new Vector2(0, MovingDirection.Y);
@@ -111,11 +103,7 @@ namespace Demos.TopDownRpg
 
         public CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
-            var smartButton = new CompositeSmartButton();
-            foreach (var button in buttons)
-            {
-                smartButton.AddButton(button);
-            }
+            var smartButton = new CompositeSmartButton(buttons);
             smartButton.OnButtonJustPressed += (sender, args) =>
             {
                 ButtonsDown++;
