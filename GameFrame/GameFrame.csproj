@@ -40,6 +40,7 @@
     <Compile Include="Common\StringToVector.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\EntityController.cs" />
+    <Compile Include="Controllers\IControllerSettings.cs" />
     <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
     <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
