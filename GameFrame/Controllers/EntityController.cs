@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demos.TopDownRpg.SpeedState;
-using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 
-namespace Demos.TopDownRpg.Factory
+namespace GameFrame.Controllers
 {
     public class EntityController : IUpdate
     {
@@ -29,11 +26,10 @@ namespace Demos.TopDownRpg.Factory
             set { ToMove.MovingDirection = value; }
         }
 
-        private EntityController(Entity entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public EntityController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
-            var controllerSettings = StaticServiceLocator.Instance.GetService<IControllerSettings>();
             _possibleMovements = possibleMovements;
-            ToMove = entity;
+            ToMove = baseMovable;
             _smartController = new SmartController();
             var upButtons = new List<IButtonAble>
             {
@@ -41,7 +37,7 @@ namespace Demos.TopDownRpg.Factory
                 new KeyButton(Keys.Up),
                 new DirectionGamePadButton(Buttons.DPadUp)
             };
-            CreateCompositeButton(upButtons, entity, new Vector2(0, -1), moverManager);
+            CreateCompositeButton(upButtons, baseMovable, new Vector2(0, -1), moverManager);
 
             var downButtons = new List<IButtonAble>
             {
@@ -49,7 +45,7 @@ namespace Demos.TopDownRpg.Factory
                 new KeyButton(Keys.Down),
                 new DirectionGamePadButton(Buttons.DPadDown)
             };
-            CreateCompositeButton(downButtons, entity, new Vector2(0, 1), moverManager);
+            CreateCompositeButton(downButtons, baseMovable, new Vector2(0, 1), moverManager);
 
             var leftButtons = new List<IButtonAble>
             {
@@ -57,7 +53,7 @@ namespace Demos.TopDownRpg.Factory
                 new KeyButton(Keys.Left),
                 new DirectionGamePadButton(Buttons.DPadLeft)
             };
-            CreateCompositeButton(leftButtons, entity, new Vector2(-1, 0), moverManager);
+            CreateCompositeButton(leftButtons, baseMovable, new Vector2(-1, 0), moverManager);
 
             var rightButtons = new List<IButtonAble>
             {
@@ -65,23 +61,7 @@ namespace Demos.TopDownRpg.Factory
                 new KeyButton(Keys.Right),
                 new DirectionGamePadButton(Buttons.DPadRight)
             };
-            CreateCompositeButton(rightButtons, entity, new Vector2(1, 0), moverManager);
-
-            var runningButton = new List<IButtonAble> {new KeyButton(Keys.B), new GamePadButton(Buttons.B)};
-            var smartButton = new CompositeSmartButton();
-            foreach (var button in runningButton)
-            {
-                smartButton.AddButton(button);
-            }
-            smartButton.OnButtonJustPressed = (sender, args) =>
-            {
-                entity.SpeedContext.SetSpeed(new SpeedRunning());
-            };
-            smartButton.OnButtonReleased = (sender, args) =>
-            {
-                entity.SpeedContext.SetSpeed(new SpeedNormal());
-            };
-            _smartController.AddButton(smartButton);
+            CreateCompositeButton(rightButtons, baseMovable, new Vector2(1, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)
@@ -143,12 +123,6 @@ namespace Demos.TopDownRpg.Factory
         public void Update(GameTime gameTime)
         {
             _smartController.Update(gameTime);
-        }
-
-        public static EntityController CreateEntityController(Entity entity, IPossibleMovements possibleMovements,
-            MoverManager moverManager)
-        {
-            return new EntityController(entity, possibleMovements, moverManager);
         }
     }
 }

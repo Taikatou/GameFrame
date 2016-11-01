@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Demos.TopDownRpg.Factory
+namespace Demos.TopDownRpg
 {
     public class EntityRenderer : IFocusAble, IRenderable
     {
@@ -38,7 +38,7 @@ namespace Demos.TopDownRpg.Factory
             set { Entity.Position = value; }
         }
 
-        private EntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
+        public EntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
         {
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;
@@ -53,10 +53,6 @@ namespace Demos.TopDownRpg.Factory
             spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
         }
 
-        public static EntityRenderer CreateEntityRenderer(ContentManager content,
-            ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
-        {
-            return new EntityRenderer(content, spaitalHash, entity, tileSize);
-        }
+        
     }
 }
