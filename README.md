@@ -16,13 +16,20 @@ State
 
 Service Locator
 
+Factory
+
 ###In progress
 Observer
 
 Prototype
 
-Factory
-
 ###Todo
 Interceptor
 
+
+####Small things
+Get Service locato running
+
+Get Adapter Running
+
+Maybe some test cases
