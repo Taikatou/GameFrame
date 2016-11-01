@@ -121,7 +121,7 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PluginsHelp\SettingsReadme.txt" />
+    <None Include="PluginsHelp\SettingsReadme.txt" />
   </ItemGroup>
   <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

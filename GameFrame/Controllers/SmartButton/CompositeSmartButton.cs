@@ -18,6 +18,15 @@ namespace GameFrame.Controllers.SmartButton
             _buttons = new List<IButtonAble>();
         }
 
+        public CompositeSmartButton(List<IButtonAble> buttons)
+        {
+            _buttons = new List<IButtonAble>();
+            foreach (var button in buttons)
+            {
+                _buttons.Add(button);
+            }
+        }
+
         public void AddButton(IButtonAble button)
         {
             _buttons.Add(button);

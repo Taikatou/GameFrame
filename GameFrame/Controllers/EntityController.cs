@@ -61,12 +61,11 @@ namespace GameFrame.Controllers
                 new KeyButton(Keys.Right),
                 new DirectionGamePadButton(Buttons.DPadRight)
             };
-            CreateCompositeButton(rightButtons, baseMovable, new Vector2(1, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)
         {
-            var tolerance = 0.1f;
+            const float tolerance = 0.1f;
             if (Math.Abs(MovingDirection.X - releaseBy.X) < tolerance)
             {
                 MovingDirection = new Vector2(0, MovingDirection.Y);
@@ -91,11 +90,7 @@ namespace GameFrame.Controllers
 
         private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
-            var smartButton = new CompositeSmartButton();
-            foreach (var button in buttons)
-            {
-                smartButton.AddButton(button);
-            }
+            var smartButton = new CompositeSmartButton(buttons);
             smartButton.OnButtonJustPressed += (sender, args) =>
             {
                 ButtonsDown++;
