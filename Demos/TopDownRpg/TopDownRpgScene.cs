@@ -20,7 +20,7 @@ namespace Demos.TopDownRpg
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
-        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
@@ -74,6 +74,7 @@ namespace Demos.TopDownRpg
             {
                 CurrentGameMode.Draw(_spriteBatch);
             }
+            base.Draw(gameTime);
         }
     }
 }

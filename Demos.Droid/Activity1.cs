@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Demos.Common;
 using Demos.MobileShared;
+using GameFrame.Controllers;
 using GameFrame.ServiceLocator;
 using HockeyApp.Android;
 using HockeyApp.Android.Metrics;
