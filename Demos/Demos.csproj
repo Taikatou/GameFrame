@@ -50,9 +50,8 @@
     <Compile Include="Screens\VideoOptionsScreen.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
-    <Compile Include="TopDownRpg\Factory\ControllerFactory.cs" />
+    <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
     <Compile Include="TopDownRpg\Factory\RendererFactory.cs" />
-    <Compile Include="TopDownRpg\Factory\SinglePlayerControllerFactory.cs" />
     <Compile Include="TopDownRpg\Factory\TwoDEntityRenderer.cs" />
     <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />

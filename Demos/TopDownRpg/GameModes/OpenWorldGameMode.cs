@@ -7,6 +7,7 @@ using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
+using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.Movers;
@@ -35,8 +36,8 @@ namespace Demos.TopDownRpg.GameModes
         private readonly IPossibleMovements _possibleMovements;
         public Entity PlayerEntity;
         public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
-        private RendererFactory _rendererFactory;
-        private ControllerFactory _controllerFactory;
+        private readonly RendererFactory _rendererFactory;
+        private readonly ControllerFactory _controllerFactory;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
