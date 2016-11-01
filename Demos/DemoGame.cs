@@ -1,4 +1,5 @@
-﻿using Demos.Screens;
+﻿using Demos.Puzzle;
+using Demos.Screens;
 using Demos.TopDownRpg;
 using GameFrame;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,7 @@ namespace Demos
             _screenComponent.Register(new VideoOptionsScreen(Services));
             _screenComponent.Register(new KeyboardOptionsScreen(Services));
             _screenComponent.Register(new MouseOptionsScreen(Services));
+            _screenComponent.Register(new PuzzleScreen());
         }
 
         protected override void LoadContent()

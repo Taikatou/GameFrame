@@ -13,7 +13,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : GameFrameScreen
+    public class TopDownRpgScene : DemoScreen
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly ViewportAdapter _viewPort;
