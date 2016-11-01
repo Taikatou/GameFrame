@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
 
 namespace GameFrame.CollisionTest
 {
@@ -15,13 +9,11 @@ namespace GameFrame.CollisionTest
     {
         private List<IObserver> observers;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        Texture2D gameBackground;
         BBObject object1;
         BBObject object2;
         BBObject topWall;
         BBObject bottomWall;
-        BBObject leftWall;
-        BBObject rightWall;
 
         public void RegisterObserver(IObserver observer)
         {
@@ -47,6 +39,18 @@ namespace GameFrame.CollisionTest
             Content.RootDirectory = "Content";
         }
 
+        public BBCollision(BBObject object1, Texture2D gameBackground)
+        {
+            this.object1 = object1;
+            this.gameBackground = gameBackground;
+        }
+
+        public BBCollision(BBObject object1, BBObject object2)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
+        }
+
         protected override void Update(GameTime gametime)
         {
             CheckWallCollision();
@@ -65,19 +69,25 @@ namespace GameFrame.CollisionTest
 
         private void CheckWallCollision()
         {
+            topWall = new BBObject(gameBackground, Vector2.Zero);
+            bottomWall = new BBObject(gameBackground, new Vector2(0, Window.ClientBounds.Height));
+
             if (object1.BoundingBox.Intersects(topWall.BoundingBox))
             {
                 NotifyObservers();
             }
+
             if (object1.BoundingBox.Intersects(bottomWall.BoundingBox))
             {
                 NotifyObservers();
             }
-            if (object1.BoundingBox.Intersects(leftWall.BoundingBox))
+
+            if (object1.Position.X < object1.BoundingBox.Width)
             {
                 NotifyObservers();
             }
-            if (object1.BoundingBox.Intersects(rightWall.BoundingBox))
+
+            if (object1.Position.X > Window.ClientBounds.Width)
             {
                 NotifyObservers();
             }

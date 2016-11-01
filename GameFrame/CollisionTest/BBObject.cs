@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +9,7 @@ namespace GameFrame.CollisionTest
         Texture2D texture;
         public Vector2 Position;
         public Vector2 Velocity;
-
+    
 
         public Rectangle BoundingBox
         {
