@@ -61,6 +61,7 @@ namespace GameFrame.Controllers
                 new KeyButton(Keys.Right),
                 new DirectionGamePadButton(Buttons.DPadRight)
             };
+            CreateCompositeButton(rightButtons, baseMovable, new Vector2(1, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)
@@ -113,6 +114,11 @@ namespace GameFrame.Controllers
             _smartController.AddButton(smartButton);
 
             return smartButton;
+        }
+
+        public void AddButton(AbstractSmartButton button)
+        {
+            _smartController.AddButton(button);
         }
 
         public void Update(GameTime gameTime)
