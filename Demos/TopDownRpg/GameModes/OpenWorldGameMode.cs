@@ -10,6 +10,7 @@ using GameFrame.Content;
 using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
+using GameFrame.MediaAdapter;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
@@ -41,9 +42,11 @@ namespace Demos.TopDownRpg.GameModes
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
+        private IAudioPlayer _audioAdapter;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
+            PlayMusic();
             _rendererFactory = renderFactory;
             _controllerFactory = controllerFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
@@ -77,6 +80,12 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
+        }
+
+        public void PlayMusic()
+        {
+            _audioAdapter = new AudioAdapter();
+            _audioAdapter.Play("wav", "TopDownRPG/BirabutoKingdom");
         }
 
         public void LoadEntities()

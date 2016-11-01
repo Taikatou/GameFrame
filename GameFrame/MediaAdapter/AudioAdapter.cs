@@ -14,7 +14,7 @@ namespace GameFrame.MediaAdapter
             if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
             {
                 SongPlayer = new SongPlayer();
-                SongPlayer.Play(fileName);
+                SongPlayer.PlayAudio(fileName);
             }
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
@@ -25,14 +25,14 @@ namespace GameFrame.MediaAdapter
 
         public void Pause()
         {
-            SongPlayer?.Pause();
+            SongPlayer?.PauseAudio();
             AudioPlayer?.Pause();
         }
 
        
         public void Resume()
         {
-            SongPlayer?.Resume();
+            SongPlayer?.ResumeAudio();
             AudioPlayer?.Resume();
         }
     }
