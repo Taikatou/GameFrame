@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Demos.TopDownRpg.Factory;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -34,13 +35,16 @@ namespace Demos.TopDownRpg.GameModes
         private readonly IPossibleMovements _possibleMovements;
         public Entity PlayerEntity;
         public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
-
+        private RendererFactory _rendererFactory;
+        private ControllerFactory _controllerFactory;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
+            _rendererFactory = renderFactory;
+            _controllerFactory = controllerFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
@@ -55,7 +59,7 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             AddEntity(PlayerEntity);
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
-            var entityController = new EntityController(PlayerEntity, _possibleMovements, moverManager);
+            var entityController = _controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -87,7 +91,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public void AddEntity(Entity entity)
         {
-            var entityRenderer = new EntityRenderer(_content, _expiringSpatialHash,
+            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash,
                                                     entity, _tileSize.ToPoint());
             _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);

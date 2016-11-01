@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Demos.TopDownRpg.SpeedState;
+﻿using Demos.TopDownRpg.SpeedState;
 using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 

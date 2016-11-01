@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demos.TopDownRpg.SpeedState;
-using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 
-namespace Demos.TopDownRpg
+namespace GameFrame.Controllers
 {
     public class EntityController : IUpdate
     {
@@ -29,11 +26,10 @@ namespace Demos.TopDownRpg
             set { ToMove.MovingDirection = value; }
         }
 
-        public EntityController(Entity entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public EntityController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
-            var controllerSettings = StaticServiceLocator.Instance.GetService<IControllerSettings>();
             _possibleMovements = possibleMovements;
-            ToMove = entity;
+            ToMove = baseMovable;
             _smartController = new SmartController();
             var upButtons = new List<IButtonAble>
             {
@@ -41,7 +37,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Up),
                 new DirectionGamePadButton(Buttons.DPadUp)
             };
-            CreateCompositeButton(upButtons, entity, new Vector2(0, -1), moverManager);
+            CreateCompositeButton(upButtons, baseMovable, new Vector2(0, -1), moverManager);
 
             var downButtons = new List<IButtonAble>
             {
@@ -49,7 +45,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Down),
                 new DirectionGamePadButton(Buttons.DPadDown)
             };
-            CreateCompositeButton(downButtons, entity, new Vector2(0, 1), moverManager);
+            CreateCompositeButton(downButtons, baseMovable, new Vector2(0, 1), moverManager);
 
             var leftButtons = new List<IButtonAble>
             {
@@ -57,7 +53,7 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Left),
                 new DirectionGamePadButton(Buttons.DPadLeft)
             };
-            CreateCompositeButton(leftButtons, entity, new Vector2(-1, 0), moverManager);
+            CreateCompositeButton(leftButtons, baseMovable, new Vector2(-1, 0), moverManager);
 
             var rightButtons = new List<IButtonAble>
             {
@@ -65,18 +61,9 @@ namespace Demos.TopDownRpg
                 new KeyButton(Keys.Right),
                 new DirectionGamePadButton(Buttons.DPadRight)
             };
-            CreateCompositeButton(rightButtons, entity, new Vector2(1, 0), moverManager);
-
-            var runningButton = new List<IButtonAble> {new KeyButton(Keys.B), new GamePadButton(Buttons.B)};
-            var smartButton = new CompositeSmartButton(runningButton)
-            {
-                OnButtonJustPressed = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedRunning()); },
-                OnButtonReleased = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedNormal()); }
-            };
-            _smartController.AddButton(smartButton);
         }
 
-        public void Release(Vector2 releaseBy)
+        private void Release(Vector2 releaseBy)
         {
             const float tolerance = 0.1f;
             if (Math.Abs(MovingDirection.X - releaseBy.X) < tolerance)
@@ -89,7 +76,7 @@ namespace Demos.TopDownRpg
             }
         }
 
-        public void MoveBy(Vector2 moveBy, Vector2 moveFrom)
+        private void MoveBy(Vector2 moveBy, Vector2 moveFrom)
         {
             var requeustedMovement = MovingDirection + moveBy;
             var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
@@ -101,7 +88,7 @@ namespace Demos.TopDownRpg
             }
         }
 
-        public CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
             var smartButton = new CompositeSmartButton(buttons);
             smartButton.OnButtonJustPressed += (sender, args) =>

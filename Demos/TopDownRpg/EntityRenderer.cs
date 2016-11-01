@@ -43,7 +43,7 @@ namespace Demos.TopDownRpg
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;
             _tileSize = tileSize;
-            Offset = new Vector2(_tileSize.X/2, _tileSize.Y/2);
+            Offset = new Vector2(_tileSize.X / 2, _tileSize.Y / 2);
             _spaitalHash = spaitalHash;
             FrameRectangle = new Rectangle(new Point(), _tileSize);
         }
@@ -52,5 +52,7 @@ namespace Demos.TopDownRpg
         {
             spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
         }
+
+        
     }
 }

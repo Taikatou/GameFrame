@@ -38,6 +38,7 @@
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\StringToVector.cs" />
+    <Compile Include="Controllers\EntityController.cs" />
     <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />

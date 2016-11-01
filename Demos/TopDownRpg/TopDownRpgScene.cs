@@ -1,4 +1,5 @@
 ﻿using System;
+using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
 using GameFrame;
 using GameFrame.CollisionSystems.Tiled;
@@ -27,8 +28,11 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            var openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName);
+            ControllerFactory controllerFactory = new SinglePlayerControllerFactory();
+            RendererFactory rendererFactory = new TwoDEntityRenderer();
+
+            var possibleMovements = new FourWayPossibleMovement();
+            var openWorldGameMode = new OpenWorldGameMode(_viewPort, possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
             var map = openWorldGameMode.Map;
             var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
             var player = openWorldGameMode.PlayerEntity;
