@@ -52,9 +52,11 @@
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\VideoOptionsScreen.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
-    <Compile Include="TopDownRpg\EntityController.cs" />
-    <Compile Include="TopDownRpg\EntityRendererFactory.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
+    <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
+    <Compile Include="TopDownRpg\Factory\RendererFactory.cs" />
+    <Compile Include="TopDownRpg\Factory\TwoDEntityRenderer.cs" />
+    <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />

@@ -1,4 +1,6 @@
-﻿namespace Demos.DesktopGl
+﻿using GameFrame.Controllers;
+
+namespace Demos.DesktopGl
 {
     public class ControllerSettings : IControllerSettings
     {

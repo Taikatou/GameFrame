@@ -19,15 +19,15 @@ namespace Demos.Screens
         public List<MenuItem> MenuItems { get; }
         protected BitmapFont Font { get; private set; }
         protected ContentManager Content { get; private set; }
-        private ClickController clickController;
+        private readonly ClickController _clickController;
 
         protected MenuScreen(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             MenuItems = new List<MenuItem>();
 
-            clickController = new ClickController();
-            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            _clickController = new ClickController();
+            _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 CheckClick(mouseState.Position);
             };
@@ -36,7 +36,8 @@ namespace Demos.Screens
             {
                 CheckClick(gesture.Position.ToPoint());
             };
-            clickController.TouchScreenControl.AddSmartGesture(moveGesture);        }
+            _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
+        }
 
         protected void AddMenuItem(string text, Action action)
         {
@@ -97,7 +98,7 @@ namespace Demos.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            clickController.Update(gameTime);
+            _clickController.Update(gameTime);
             var mouseState = Mouse.GetState();
             foreach (var menuItem in MenuItems)
             {

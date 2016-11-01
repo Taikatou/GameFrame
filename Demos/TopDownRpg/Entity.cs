@@ -13,7 +13,6 @@ namespace Demos.TopDownRpg
         {
             SpeedContext = new SpeedContext(new SpeedNormal());
             Position = position;
-            MovingDirection = new Vector2();
         }
     }
 }

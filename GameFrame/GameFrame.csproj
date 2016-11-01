@@ -34,15 +34,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\StringToVector.cs" />
+    <Compile Include="Controllers\ControllerFactory.cs" />
+    <Compile Include="Controllers\EntityController.cs" />
+    <Compile Include="Controllers\IControllerSettings.cs" />
+    <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
     <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\AbstractSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\Tiled\TiledAbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
     <Compile Include="CollisionTest\BBCollision.cs" />
     <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="CollisionTest\IObserver.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="GameModeStack.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
@@ -90,6 +97,7 @@
     <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
+    <Compile Include="PathFinding\PossibleMovements\PossibleMovementWrapper.cs" />
     <Compile Include="PathFinding\SearchParameters.cs" />
     <Compile Include="Paths\Cyclical\CyclicalCounter.cs" />
     <Compile Include="Paths\Cyclical\CyclicalPath.cs" />

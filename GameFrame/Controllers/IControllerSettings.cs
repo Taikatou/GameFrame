@@ -1,4 +1,4 @@
-﻿namespace Demos
+﻿namespace GameFrame.Controllers
 {
     public interface IControllerSettings
     {

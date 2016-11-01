@@ -35,7 +35,7 @@ namespace GameFrame.Movers
                 var distance = (float)Distance.GetDistance(character.Position, position);
                 var timer = distance/character.Speed;
                 timer *= 1000; //milliseconds in second
-                if (_spatialHashLayer.MoveNode(startPoint, endPoint, timer))
+                if (_spatialHashLayer.MoveNode(startPoint, endPoint, character.OnMoveCompleteEvent, timer))
                 {
                     character.Position = position;
                     return true;
