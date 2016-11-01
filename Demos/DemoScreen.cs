@@ -8,26 +8,30 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
-using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using System.Diagnostics;
 
 namespace Demos
 {
     public class DemoScreen : GameFrameScreen
     {
         public readonly ContentManager Content;
-        public readonly Camera2D Camera;
+        private readonly Camera2D _camera;
         public readonly SpriteBatch SpriteBatch;
         private BackButton _backButton;
-
+        private ClickController _clickController;
 
         public DemoScreen(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
             SpriteBatch = spriteBatch;
             Content = ContentManagerFactory.RequestContentManager();
-            Camera = new Camera2D(viewPort) { Zoom = 2.0f };
+            _camera = new Camera2D(viewPort) { Zoom = 1.0f };
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            _clickController.Update(gameTime);
         }
 
         public override void LoadContent()
@@ -35,9 +39,8 @@ namespace Demos
             base.LoadContent();
             _backButton = new BackButton(Content);
 
-
-            var clickController = new ClickController();
-            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            _clickController = new ClickController();
+            _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 CheckHit(mouseState.Position);
             };
@@ -46,13 +49,11 @@ namespace Demos
             {
                 CheckHit(gesture.Position.ToPoint());
             };
-            clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            ///UpdateList.Add(clickController);
+            _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
         }
 
         public void CheckHit(Point point)
         {
-            Debug.WriteLine("" + point);
             if (_backButton.Hit(point))
             {
                 Action action = Show<MainMenuScreen>;
@@ -62,7 +63,8 @@ namespace Demos
 
         public override void Draw(GameTime gameTime)
         {
-            SpriteBatch.Begin();
+            var transformMatrix = _camera.GetViewMatrix();
+            SpriteBatch.Begin(transformMatrix: transformMatrix);
             _backButton.Draw(SpriteBatch);
             SpriteBatch.End();
         }
