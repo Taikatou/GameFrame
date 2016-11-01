@@ -9,7 +9,7 @@ namespace GameFrame.CollisionTest
         Texture2D texture;
         public Vector2 Position;
         public Vector2 Velocity;
-
+    
 
         public Rectangle BoundingBox
         {
