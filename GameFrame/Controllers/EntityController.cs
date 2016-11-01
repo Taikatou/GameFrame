@@ -14,6 +14,7 @@ namespace GameFrame.Controllers
 {
     public class EntityController : IUpdate
     {
+        public enum Directions { Left, Right, Up, Down}
         private readonly SmartController _smartController;
         public int ButtonsDown;
         public bool PlayerMove => ButtonsDown != 0;
@@ -26,42 +27,15 @@ namespace GameFrame.Controllers
             set { ToMove.MovingDirection = value; }
         }
 
-        public EntityController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public EntityController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
             _smartController = new SmartController();
-            var upButtons = new List<IButtonAble>
-            {
-                new KeyButton(Keys.W),
-                new KeyButton(Keys.Up),
-                new DirectionGamePadButton(Buttons.DPadUp)
-            };
-            CreateCompositeButton(upButtons, baseMovable, new Vector2(0, -1), moverManager);
-
-            var downButtons = new List<IButtonAble>
-            {
-                new KeyButton(Keys.S),
-                new KeyButton(Keys.Down),
-                new DirectionGamePadButton(Buttons.DPadDown)
-            };
-            CreateCompositeButton(downButtons, baseMovable, new Vector2(0, 1), moverManager);
-
-            var leftButtons = new List<IButtonAble>
-            {
-                new KeyButton(Keys.A),
-                new KeyButton(Keys.Left),
-                new DirectionGamePadButton(Buttons.DPadLeft)
-            };
-            CreateCompositeButton(leftButtons, baseMovable, new Vector2(-1, 0), moverManager);
-
-            var rightButtons = new List<IButtonAble>
-            {
-                new KeyButton(Keys.D),
-                new KeyButton(Keys.Right),
-                new DirectionGamePadButton(Buttons.DPadRight)
-            };
-            CreateCompositeButton(rightButtons, baseMovable, new Vector2(1, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -1), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, 1), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-1, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Right], baseMovable, new Vector2(1, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)

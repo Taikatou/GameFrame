@@ -32,8 +32,8 @@ namespace Demos.TopDownRpg
             ControllerFactory controllerFactory = new EntityControllerFactory();
             RendererFactory rendererFactory = new TwoDEntityRenderer();
 
-            var possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            var openWorldGameMode = new OpenWorldGameMode(_viewPort, possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
+            _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
+            var openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
             var map = openWorldGameMode.Map;
             var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
             var player = openWorldGameMode.PlayerEntity;
