@@ -8,7 +8,7 @@ namespace Demos.TopDownRpg
     {
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.GetSpeed(2);
-        //william state pattern
+
         public Entity(Vector2 position)
         {
             SpeedContext = new SpeedContext(new SpeedNormal());
