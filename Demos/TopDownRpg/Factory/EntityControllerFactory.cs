@@ -21,8 +21,8 @@ namespace Demos.TopDownRpg.Factory
             {
                 var smartButton = new CompositeSmartButton(runningButton)
                 {
-                    OnButtonJustPressed = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedRunning()); },
-                    OnButtonReleased = (sender, args) => { entity.SpeedContext.SetSpeed(new SpeedNormal()); }
+                    OnButtonJustPressed = (sender, args) => { entity.SpeedContext.SpeedState = new SpeedRunning(); },
+                    OnButtonReleased = (sender, args) => { entity.SpeedContext.SpeedState = new SpeedNormal(); }
                 };
                 controller.AddButton(smartButton);
             }
