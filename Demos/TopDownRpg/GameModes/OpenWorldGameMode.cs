@@ -138,7 +138,8 @@ namespace Demos.TopDownRpg.GameModes
         {
             endPoint /= tileSize;
             var moveTo = endPoint;
-            var collision = CollisionSystem.CheckCollision(moveTo);
+            var collision = _expiringSpatialHash.CheckCollision(moveTo);
+            var valid = true;
             if (collision)
             {
                 var heuristic = new CrowDistance();
@@ -162,7 +163,14 @@ namespace Demos.TopDownRpg.GameModes
                     return;
                 }
             }
-            MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+            else
+            {
+                valid = !CollisionSystem.CheckCollision(moveTo);
+            }
+            if (valid)
+            {
+                MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+            }
         }
 
         public void Interact(Point interactTarget)
