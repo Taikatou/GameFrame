@@ -10,13 +10,10 @@ using GameFrame.Content;
 using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
-<<<<<<< HEAD
 using GameFrame.MediaAdapter;
-=======
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
->>>>>>> master
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.Heuristics;
@@ -95,8 +92,9 @@ namespace Demos.TopDownRpg.GameModes
             _audioAdapter.Play("wav", "TopDownRPG/BirabutoKingdom");
             _audioAdapter.Pause();
             _audioAdapter.Resume();
-        
-	public void AddInteractionController(BaseMovableController controller)
+        }
+
+        public void AddInteractionController(BaseMovableController controller)
         {
             var runningButton = new List<IButtonAble> { new KeyButton(Keys.E), new GamePadButton(Buttons.A) };
             var smartButton = new CompositeSmartButton(runningButton)
