@@ -9,18 +9,11 @@ namespace Demos.TopDownRpg.SpeedState
         public float TerainSpeed => Terrain?.Modifier ?? 1.0f;
         public IStateModifier<float> SpeedState { get; set; }
         public float StateSpeed => SpeedState?.Modifier ?? 1.0f;
+        public float Speed => _baseSpeed * StateSpeed * TerainSpeed;
 
         public SpeedContext(float baseSpeed)
         {
             _baseSpeed = baseSpeed;
-        }
-
-        public float Speed
-        {
-            get
-            {
-                return _baseSpeed * StateSpeed * TerainSpeed;
-            }
         }
     }
 }
