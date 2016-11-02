@@ -7,11 +7,11 @@ namespace Demos.TopDownRpg
     public class Entity : BaseMovable
     {
         public SpeedContext SpeedContext;
-        public override float Speed => SpeedContext.GetSpeed(2);
+        public override float Speed => SpeedContext.Speed;
 
         public Entity(Vector2 position)
         {
-            SpeedContext = new SpeedContext(new SpeedNormal());
+            SpeedContext = new SpeedContext(4);
             Position = position;
         }
 
