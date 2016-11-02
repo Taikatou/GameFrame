@@ -17,15 +17,22 @@ namespace GameFrame.MediaAdapter
         private SoundEffectInstance _instance;
 
 
-        public void Play(string audioType, string fileName)
+        public virtual void Play(string audioType, string fileName)
         {
             if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                System.Diagnostics.Debug.WriteLine("AudioPlayer::play(): " + fileName);
-                _content = ContentManagerFactory.RequestContentManager();
-                _effect = _content.Load<SoundEffect>(fileName);
-                _instance = _effect.CreateInstance();
-                _instance.Play();
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("AudioPlayer::play(): " + fileName);
+                    _content = ContentManagerFactory.RequestContentManager();
+                    _effect = _content.Load<SoundEffect>(fileName);
+                    _instance = _effect.CreateInstance();
+                    _instance.Play();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
             }
             else
             {
@@ -33,13 +40,13 @@ namespace GameFrame.MediaAdapter
             }
         }
 
-        public void Pause()
+        public virtual void Pause()
         {
             _instance?.Pause();
             Debug.WriteLine("AudioPLayer::pause()");
         }
 
-        public void Resume()
+        public virtual void Resume()
         {
             Debug.WriteLine("AudioPLayer::resume()");
         }

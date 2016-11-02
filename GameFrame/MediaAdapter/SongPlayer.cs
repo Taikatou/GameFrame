@@ -1,11 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework.Media;
 using GameFrame.Content;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameFrame.MediaAdapter
 {
-    public class SongPlayer : IAdvancedAudioPlayer{ 
+    public class SongPlayer : IAdvancedAudioPlayer
+    {
 
         private Song _song { get; set; }
 
@@ -18,11 +20,19 @@ namespace GameFrame.MediaAdapter
 
         public void PlayAudio(string fileName)
         {
-            _song = Content.Load<Song>(fileName);
-            System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
-            MediaPlayer.Play(_song);
-            MediaPlayer.Volume = 100;
-            MediaPlayer.IsRepeating = true;
+            try
+            {
+                _song = Content.Load<Song>(fileName);
+                System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
+                MediaPlayer.Play(_song);
+                MediaPlayer.Volume = 100;
+                MediaPlayer.IsRepeating = true;
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+            
         }
 
         public void PauseAudio()

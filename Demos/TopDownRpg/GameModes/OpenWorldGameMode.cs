@@ -86,6 +86,8 @@ namespace Demos.TopDownRpg.GameModes
         {
             _audioAdapter = new AudioAdapter();
             _audioAdapter.Play("wav", "TopDownRPG/BirabutoKingdom");
+            _audioAdapter.Pause();
+            _audioAdapter.Resume();
         }
 
         public void LoadEntities()
