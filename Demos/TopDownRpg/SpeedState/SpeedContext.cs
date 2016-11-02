@@ -19,9 +19,7 @@ namespace Demos.TopDownRpg.SpeedState
         {
             get
             {
-                var speed = StateSpeed;
-                var terainSpeed = TerainSpeed;
-                return _baseSpeed * speed * terainSpeed;
+                return _baseSpeed * StateSpeed * TerainSpeed;
             }
         }
     }
