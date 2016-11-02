@@ -73,12 +73,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameFrame\GameFrame.csproj">
-      <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
-      <Name>GameFrame</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

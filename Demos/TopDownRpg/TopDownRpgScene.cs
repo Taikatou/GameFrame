@@ -1,7 +1,7 @@
 ﻿using System;
 using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
-using GameFrame;
+using Demos.TopDownRpg.SpeedState;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Controllers;
@@ -13,14 +13,14 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
-    public class TopDownRpgScene : GameFrameScreen
+    public class TopDownRpgScene : DemoScreen
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly ViewportAdapter _viewPort;
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
-        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
@@ -45,9 +45,17 @@ namespace Demos.TopDownRpg
                 var point = player.Position.ToPoint();
                 var grassCollision = grassCollisionSystem.CheckCollision(point);
                 var grassProbability = random.Next(BattleProbability);
-                if (grassCollision && grassProbability == 0)
+                if (grassCollision)
                 {
-                    GameModes.Push(new BattleGameMode());
+                    player.SpeedContext.Terrain = new SpeedGrass();
+                    if (grassProbability == 0)
+                    {
+                        GameModes.Push(new BattleGameMode());
+                    }
+                }
+                else if(player.SpeedContext.Terrain != null)
+                {
+                    player.SpeedContext.Terrain = null;
                 }
 
                 if (teleporters.CheckCollision(point))
@@ -74,6 +82,7 @@ namespace Demos.TopDownRpg
             {
                 CurrentGameMode.Draw(_spriteBatch);
             }
+            base.Draw(gameTime);
         }
     }
 }

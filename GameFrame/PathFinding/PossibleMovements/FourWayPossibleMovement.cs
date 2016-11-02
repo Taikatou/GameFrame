@@ -13,6 +13,11 @@ namespace GameFrame.PathFinding.PossibleMovements
             Heuristic = new ManhattanDistance();
         }
 
+        public FourWayPossibleMovement(IHeuristic heuristic)
+        {
+            Heuristic = heuristic;
+        }
+
         public static IEnumerable<Point> FourWayAdjacentLocations(Point fromLocation)
         {
             return new[]

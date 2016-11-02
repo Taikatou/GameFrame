@@ -3,6 +3,7 @@ using HockeyApp.iOS;
 using UIKit;
 using Demos.Common;
 using Demos.MobileShared;
+using GameFrame.Controllers;
 using GameFrame.ServiceLocator;
 
 namespace Demos.iOS
