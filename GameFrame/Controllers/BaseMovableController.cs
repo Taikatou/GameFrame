@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
@@ -12,7 +13,7 @@ using MonoGame.Extended;
 
 namespace GameFrame.Controllers
 {
-    public class EntityController : IUpdate
+    public class BaseMovableController : IUpdate
     {
         public enum Directions { Left, Right, Up, Down}
         private readonly SmartController _smartController;
@@ -27,7 +28,7 @@ namespace GameFrame.Controllers
             set { ToMove.MovingDirection = value; }
         }
 
-        public EntityController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
+        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;

@@ -10,36 +10,54 @@ namespace GameFrame.Controllers
 {
     public class SinglePlayerControllerFactory : ControllerFactory
     {
-        public override EntityController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public IControllerSettings ControllerSettings;
+        public SinglePlayerControllerFactory()
         {
-            var controlllerSettings = StaticServiceLocator.GetService<IControllerSettings>();
-            var directions = new Dictionary<EntityController.Directions, List<IButtonAble>>
+            ControllerSettings = StaticServiceLocator.GetService<IControllerSettings>();
+        }
+
+        public void AddKeyBoardButton(List<IButtonAble> buttonList, Keys key)
+        {
+            if (ControllerSettings.KeyBoardMouseEnabled)
             {
-                [EntityController.Directions.Down] = new List<IButtonAble>(),
-                [EntityController.Directions.Up] = new List<IButtonAble>(),
-                [EntityController.Directions.Left] = new List<IButtonAble>(),
-                [EntityController.Directions.Left] = new List<IButtonAble>(),
-                [EntityController.Directions.Right] = new List<IButtonAble>()
+                buttonList.Add(new KeyButton(key));
+            }
+        }
+        public void AddGamePadButton(List<IButtonAble> buttonList, Buttons button)
+        {
+            if (ControllerSettings.KeyBoardMouseEnabled)
+            {
+                buttonList.Add(new GamePadButton(button));
+            }
+        }
+        public override BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        {
+            var directions = new Dictionary<BaseMovableController.Directions, List<IButtonAble>>
+            {
+                [BaseMovableController.Directions.Down] = new List<IButtonAble>(),
+                [BaseMovableController.Directions.Up] = new List<IButtonAble>(),
+                [BaseMovableController.Directions.Left] = new List<IButtonAble>(),
+                [BaseMovableController.Directions.Right] = new List<IButtonAble>()
             };
-            if (controlllerSettings.GamePadEnabled)
+            if (ControllerSettings.GamePadEnabled)
             {
-                directions[EntityController.Directions.Down].Add(new DirectionGamePadButton(Buttons.DPadUp));
-                directions[EntityController.Directions.Left].Add(new DirectionGamePadButton(Buttons.DPadUp));
-                directions[EntityController.Directions.Up].Add(new DirectionGamePadButton(Buttons.DPadUp));
-                directions[EntityController.Directions.Right].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Down].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Left].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Up].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Right].Add(new DirectionGamePadButton(Buttons.DPadUp));
             }
-            if (controlllerSettings.KeyBoardMouseEnabled)
+            if (ControllerSettings.KeyBoardMouseEnabled)
             {
-                directions[EntityController.Directions.Down].Add(new KeyButton(Keys.W));
-                directions[EntityController.Directions.Down].Add(new KeyButton(Keys.Up));
-                directions[EntityController.Directions.Left].Add(new KeyButton(Keys.L));
-                directions[EntityController.Directions.Left].Add(new KeyButton(Keys.Left));
-                directions[EntityController.Directions.Up].Add(new KeyButton(Keys.Up));
-                directions[EntityController.Directions.Up].Add(new KeyButton(Keys.W));
-                directions[EntityController.Directions.Right].Add(new KeyButton(Keys.D));
-                directions[EntityController.Directions.Right].Add(new KeyButton(Keys.Right));
+                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.S));
+                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.Down));
+                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.L));
+                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.Left));
+                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.Up));
+                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.W));
+                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.D));
+                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.Right));
             }
-            return new EntityController(entity, possibleMovements, moverManager, directions);
+            return new BaseMovableController(entity, possibleMovements, moverManager, directions);
         }
     }
 }

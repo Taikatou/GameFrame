@@ -5,6 +5,6 @@ namespace GameFrame.Controllers
 {
     public abstract class ControllerFactory
     {
-        public abstract EntityController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager);
+        public abstract BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager);
     }
 }

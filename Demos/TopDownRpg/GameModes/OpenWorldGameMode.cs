@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using Demos.TopDownRpg.Factory;
+using Demos.TopDownRpg.SpeedState;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -10,6 +10,9 @@ using GameFrame.Content;
 using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
+using GameFrame.Controllers.GamePad;
+using GameFrame.Controllers.KeyBoard;
+using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
@@ -18,6 +21,7 @@ using GameFrame.Renderers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
@@ -37,7 +41,6 @@ namespace Demos.TopDownRpg.GameModes
         public Entity PlayerEntity;
         public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
         private readonly RendererFactory _rendererFactory;
-        private readonly ControllerFactory _controllerFactory;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
@@ -45,7 +48,6 @@ namespace Demos.TopDownRpg.GameModes
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
             _rendererFactory = renderFactory;
-            _controllerFactory = controllerFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
@@ -60,7 +62,8 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             AddEntity(PlayerEntity);
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
-            var entityController = _controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
+            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
+            AddInteractionController(entityController);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -77,6 +80,21 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
+        }
+
+        public void AddInteractionController(BaseMovableController controller)
+        {
+            var runningButton = new List<IButtonAble> { new KeyButton(Keys.E), new GamePadButton(Buttons.A) };
+            var smartButton = new CompositeSmartButton(runningButton)
+            {
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    var position = PlayerEntity.Position + PlayerEntity.FacingDirection;
+                    var interactWith = _expiringSpatialHash.ValueAt(position.ToPoint());
+                    interactWith?.Interact();
+                }
+            };
+            controller.AddButton(smartButton);
         }
 
         public void LoadEntities()
