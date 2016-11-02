@@ -75,6 +75,7 @@
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeStack.cs" />
+    <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="MediaAdapter\IAudioPlayer.cs" />
     <Compile Include="MediaAdapter\AudioAdapter.cs" />
     <Compile Include="MediaAdapter\SongPlayer.cs" />
+    <Compile Include="Movers\ExpiringSpatialHashMovementComplete.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
     <Compile Include="Movers\ISpeed.cs" />

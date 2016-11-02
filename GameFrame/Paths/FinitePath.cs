@@ -8,13 +8,7 @@ namespace GameFrame.Paths
     {
         public override Point NextPosition => PathPoints[0];
 
-        public override bool ToMove
-        {
-            get
-            {
-                return PathPoints.Count > 0;
-            }
-        }
+        public override bool ToMove => PathPoints.Count > 0;
 
         public FinitePath(List<Point> pathPoints)
         {

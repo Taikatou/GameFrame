@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Demos.TopDownRpg.Factory;
-using Demos.TopDownRpg.SpeedState;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -15,6 +15,7 @@ using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
+using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
@@ -89,9 +90,8 @@ namespace Demos.TopDownRpg.GameModes
             {
                 OnButtonJustPressed = (sender, args) =>
                 {
-                    var position = PlayerEntity.Position + PlayerEntity.FacingDirection;
-                    var interactWith = _expiringSpatialHash.ValueAt(position.ToPoint());
-                    interactWith?.Interact();
+                    var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
+                    Interact(interactTarget);
                 }
             };
             controller.AddButton(smartButton);
@@ -110,8 +110,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public void AddEntity(Entity entity)
         {
-            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash,
-                                                    entity, _tileSize.ToPoint());
+            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash, entity, _tileSize.ToPoint());
             _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);
             EntityRenderersDict[entity] = entityRenderer;
@@ -123,25 +122,70 @@ namespace Demos.TopDownRpg.GameModes
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
                 var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
-                MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
             };
             var moveGesture = new SmartGesture(GestureType.Tap);
             moveGesture.GestureEvent += gesture =>
             {
                 var endPoint = Camera.ScreenToWorld(gesture.Position);
-                MovePlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(clickController);
         }
 
-        public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
+        public void BeginMovingPlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
             endPoint /= tileSize;
+            var moveTo = endPoint;
+            var collision = CollisionSystem.CheckCollision(moveTo);
+            if (collision)
+            {
+                var heuristic = new CrowDistance();
+                var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
+                var minCost = double.MaxValue;
+                foreach (var position in alternatuvePositions)
+                {
+                    if (!CollisionSystem.CheckCollision(position))
+                    {
+                        var startPosition = entity.Position.ToPoint();
+                        var cost = heuristic.GetTraversalCost(startPosition, position);
+                        if (cost < minCost)
+                        {
+                            minCost = cost;
+                            moveTo = position;
+                        }
+                    }
+                }
+                if (moveTo == endPoint)
+                {
+                    return;
+                }
+            }
+            MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+        }
+
+        public void Interact(Point interactTarget)
+        {
+            var validInteraction = FourWayPossibleMovement.FourWayAdjacentLocations(PlayerEntity.Position.ToPoint()).Contains(interactTarget);
+            if (validInteraction)
+            {
+                PlayerEntity.FacingDirection = interactTarget.ToVector2() - PlayerEntity.Position;
+                var interactWith = _expiringSpatialHash.ValueAt(interactTarget);
+                interactWith?.Interact();
+            }
+        }
+
+        public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact, Point interactWith)
+        {
             var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
-            var pathMover = new PathMover(entity, new FinitePath(path));
+            var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity));
             pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
+            if (interact)
+            {
+                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith);
+            }
             moverManager.AddMover(pathMover);
         }
 

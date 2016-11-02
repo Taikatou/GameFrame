@@ -98,7 +98,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
 
         public override bool CheckCollision(Point startPosition)
         {
-            var found = _spatialHash.CheckCollision(startPosition);
+            var found = _spatialHash.CheckCollision(startPosition) || MovingEntities.ContainsKey(startPosition);
             return found;
         }
 
