@@ -14,5 +14,10 @@ namespace Demos.TopDownRpg
             SpeedContext = new SpeedContext(new SpeedNormal());
             Position = position;
         }
+
+        public virtual void Interact()
+        {
+            
+        }
     }
 }
