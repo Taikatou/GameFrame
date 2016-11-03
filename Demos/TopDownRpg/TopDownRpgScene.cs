@@ -39,7 +39,7 @@ namespace Demos.TopDownRpg
             var player = openWorldGameMode.PlayerEntity;
             var tileSize = new Point(map.TileWidth, map.TileHeight);
             var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-            openWorldGameMode.PlayerEntity.OnMoveCompleteEvent += (sender, args) =>
+            openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
             {
                 var random = new Random();
                 var point = player.Position.ToPoint();
