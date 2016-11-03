@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
 {
-    public class Entity : BaseMovable
+    public class Entity : AbstractMovable
     {
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.Speed;

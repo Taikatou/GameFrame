@@ -30,7 +30,7 @@ namespace GameFrame.Controllers
                 buttonList.Add(new GamePadButton(button));
             }
         }
-        public override BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public override BaseMovableController CreateEntityController(AbstractMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
             var directions = new Dictionary<BaseMovableController.Directions, List<IButtonAble>>
             {

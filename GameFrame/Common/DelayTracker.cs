@@ -9,9 +9,9 @@ namespace GameFrame.Common
     {
         private Vector2 _cachedPosition;
         private Vector2 _endPosition;
-        private readonly BaseMovable _follower;
-        private readonly BaseMovable _following;
-        public DelayTracker(BaseMovable follower, BaseMovable following)
+        private readonly AbstractMovable _follower;
+        private readonly AbstractMovable _following;
+        public DelayTracker(AbstractMovable follower, AbstractMovable following)
         {
             _follower = follower;
             _following = following;
