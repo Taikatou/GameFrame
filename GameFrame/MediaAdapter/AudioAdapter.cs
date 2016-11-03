@@ -3,36 +3,34 @@ using System.Diagnostics;
 
 namespace GameFrame.MediaAdapter
 {
-    public class AudioAdapter : IAudioPlayer
+    public class AudioAdapter : AudioPlayer
     {
-        public AudioPlayer AudioPlayer { get; set; }
         public SongPlayer SongPlayer { get; set; }
 
-        public void Play(string audioType, string fileName)
+        public override void Play(string audioType, string fileName)
         {
             if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
             {
                 SongPlayer = new SongPlayer();
-                SongPlayer.Play(fileName);
+                SongPlayer.PlayAudio(fileName);
             }
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                AudioPlayer = new AudioPlayer();
-                AudioPlayer.PlayAudio("wav",fileName);
+                base.Play("wav",fileName);
             }
         }
 
-        public void Pause()
+        public override void Pause()
         {
-            SongPlayer?.Pause();
-            AudioPlayer?.PauseAudio();
+            SongPlayer?.PauseAudio();
+            base.Pause();
         }
 
        
-        public void Resume()
+        public override void Resume()
         {
-            SongPlayer?.Resume();
-            AudioPlayer?.ResumeAudio();
+            SongPlayer?.ResumeAudio();
+            base.Resume();
         }
 
         public void Dispose()

@@ -21,11 +21,18 @@ namespace GameFrame.MediaAdapter
         {
             if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                System.Diagnostics.Debug.WriteLine("AudioPlayer::play(): " + fileName);
-                _content = ContentManagerFactory.RequestContentManager();
-                _effect = _content.Load<SoundEffect>(fileName);
-                _instance = _effect.CreateInstance();
-                _instance.Play();
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("AudioPlayer::play(): " + fileName);
+                    _content = ContentManagerFactory.RequestContentManager();
+                    _effect = _content.Load<SoundEffect>(fileName);
+                    _instance = _effect.CreateInstance();
+                    _instance.Play();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
             }
             else
             {
