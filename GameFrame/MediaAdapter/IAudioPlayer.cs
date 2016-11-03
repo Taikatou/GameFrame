@@ -11,5 +11,6 @@ namespace GameFrame.MediaAdapter
         void Play(string audioType, string fileName);
         void Pause();
         void Resume();
+        void Dispose();
     }
 }

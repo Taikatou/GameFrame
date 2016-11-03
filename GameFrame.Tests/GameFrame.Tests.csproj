@@ -70,10 +70,66 @@
     <Compile Include="CollisionSystem\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
     <Compile Include="Common\CommonTest.cs" />
+    <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameFrame\GameFrame.csproj">
+      <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
+      <Name>GameFrame</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\bin\DesktopGL\montserrat-32.xnb" />
+    <None Include="Content\bin\DesktopGL\montserrat-32_0.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\BirabutoKingdom.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\BluePathEnd.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\Character.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\Fonts\montserrat-32.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\Fonts\montserrat-32_0.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\level01.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\level02.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\Path.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\PathEnd.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\piano.ogg" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\piano.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.xnb" />
+    <None Include="Content\bin\DesktopGL\TopDownRpg\tileset.xnb" />
+    <None Include="Content\Content.mgcb" />
+    <None Include="Content\montserrat-32.fnt" />
+    <None Include="Content\obj\DesktopGL\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\montserrat-32.mgcontent" />
+    <None Include="Content\obj\DesktopGL\montserrat-32_0.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\BirabutoKingdom.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\BluePathEnd.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\Character.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\Fonts\montserrat-32.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\Fonts\montserrat-32_0.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\level01.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\level02.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\Path.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\PathEnd.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\piano.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.mgcontent" />
+    <None Include="Content\obj\DesktopGL\TopDownRpg\tileset.mgcontent" />
+    <None Include="Content\TopDownRpg\Fonts\montserrat-32.fnt" />
+    <None Include="Content\TopDownRpg\level01.tmx" />
+    <None Include="Content\TopDownRpg\level02.tmx" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\BirabutoKingdom.wav" />
+    <Content Include="Content\montserrat-32_0.png" />
+    <Content Include="Content\piano.mp3" />
+    <Content Include="Content\TopDownRpg\BirabutoKingdom.wav" />
+    <Content Include="Content\TopDownRpg\BluePathEnd.png" />
+    <Content Include="Content\TopDownRpg\Character.png" />
+    <Content Include="Content\TopDownRpg\Fonts\montserrat-32_0.png" />
+    <Content Include="Content\TopDownRpg\Path.png" />
+    <Content Include="Content\TopDownRpg\PathEnd.png" />
+    <Content Include="Content\TopDownRpg\piano.mp3" />
+    <Content Include="Content\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.png" />
+    <Content Include="Content\TopDownRpg\tileset.png" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
