@@ -10,7 +10,7 @@ namespace Demos.TopDownRpg.Factory
 {
     public class EntityControllerFactory : SinglePlayerControllerFactory
     {
-        public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public override BaseMovableController CreateEntityController(AbstractMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
             var controller = base.CreateEntityController(moveable, possibleMovements, moverManager);
             var runningButton = new List<IButtonAble>();
