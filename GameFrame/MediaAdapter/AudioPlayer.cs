@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameFrame.MediaAdapter
 {
-    public class AudioPlayer : IAudioPlayer
+    public class AudioPlayer : IAdvancedAudioPlayer
     {
         ContentManager _content;
         private SoundEffect _effect;
         private SoundEffectInstance _instance;
 
 
-        public virtual void Play(string audioType, string fileName)
+        public void PlayAudio(string audioType, string fileName)
         {
             if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
@@ -40,15 +40,21 @@ namespace GameFrame.MediaAdapter
             }
         }
 
-        public virtual void Pause()
+        public void PauseAudio()
         {
             _instance?.Pause();
-            Debug.WriteLine("AudioPLayer::pause()");
+            Debug.WriteLine("AudioPLayer::PauseAudio()");
         }
 
-        public virtual void Resume()
+        public void ResumeAudio()
         {
-            Debug.WriteLine("AudioPLayer::resume()");
+            Debug.WriteLine("AudioPLayer::ResumeAudio()");
+        }
+
+        public void Dispose()
+        {
+            Debug.WriteLine("AudioPLayer::Dispose()");
+            _content.Unload();
         }
     }
 }

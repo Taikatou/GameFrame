@@ -1,6 +1,7 @@
 ﻿using GameFrame.Common;
 using MonoGame.Extended;
 using NUnit.Framework;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Tests.Common
 {

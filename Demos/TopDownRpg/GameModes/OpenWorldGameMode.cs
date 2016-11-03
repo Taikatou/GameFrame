@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Demos.TopDownRpg.Factory;
 using GameFrame;
@@ -154,24 +155,32 @@ namespace Demos.TopDownRpg.GameModes
             if (collision)
             {
                 var heuristic = new CrowDistance();
-                var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
-                var minCost = double.MaxValue;
-                foreach (var position in alternatuvePositions)
+                var startPosition = entity.Position.ToPoint();
+                if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                 {
-                    if (!CollisionSystem.CheckCollision(position))
+                    Interact(endPoint);
+                    valid = false;
+                }
+                else
+                {
+                    var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
+                    var minCost = double.MaxValue;
+                    foreach (var position in alternatuvePositions)
                     {
-                        var startPosition = entity.Position.ToPoint();
-                        var cost = heuristic.GetTraversalCost(startPosition, position);
-                        if (cost < minCost)
+                        if (!CollisionSystem.CheckCollision(position))
                         {
-                            minCost = cost;
-                            moveTo = position;
+                            var cost = heuristic.GetTraversalCost(startPosition, position);
+                            if (cost < minCost)
+                            {
+                                minCost = cost;
+                                moveTo = position;
+                            }
                         }
                     }
-                }
-                if (moveTo == endPoint)
-                {
-                    return;
+                    if (moveTo == endPoint)
+                    {
+                        valid = false;
+                    }
                 }
             }
             else

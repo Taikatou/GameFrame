@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace GameFrame.MediaAdapter
 {
@@ -30,6 +31,13 @@ namespace GameFrame.MediaAdapter
         {
             SongPlayer?.ResumeAudio();
             base.Resume();
+        }
+
+        public void Dispose()
+        {
+            Debug.WriteLine("AudioAdapter::Dispose()");
+            SongPlayer?.Dispose();
+            AudioPlayer?.Dispose();
         }
     }
 }
