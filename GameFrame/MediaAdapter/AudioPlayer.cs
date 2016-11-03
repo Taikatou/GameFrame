@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameFrame.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameFrame.MediaAdapter
 {
-    public class AudioPlayer : IAdvancedAudioPlayer
+    public class AudioPlayer : IAudioPlayer
     {
         ContentManager _content;
         private SoundEffect _effect;
         private SoundEffectInstance _instance;
 
 
-        public void PlayAudio(string audioType, string fileName)
+        public virtual void Play(string audioType, string fileName)
         {
             if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
@@ -40,18 +36,20 @@ namespace GameFrame.MediaAdapter
             }
         }
 
-        public void PauseAudio()
+        public virtual void Pause()
         {
+            if (_instance == null) return;
             _instance?.Pause();
-            Debug.WriteLine("AudioPLayer::PauseAudio()");
+            Debug.WriteLine("AudioPLayer::Pause()");
         }
 
-        public void ResumeAudio()
+        public virtual void Resume()
         {
-            Debug.WriteLine("AudioPLayer::ResumeAudio()");
+            if (_instance == null) return;
+            Debug.WriteLine("AudioPLayer::Resume()");
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Debug.WriteLine("AudioPLayer::Dispose()");
             _content.Unload();

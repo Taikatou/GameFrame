@@ -33,11 +33,10 @@ namespace GameFrame.MediaAdapter
             base.Resume();
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             Debug.WriteLine("AudioAdapter::Dispose()");
             SongPlayer?.Dispose();
-            AudioPlayer?.Dispose();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GameFrame.Movers
 {
-    public class ExpiringSpatialHashMovementComplete <T> : ICompleteAble where T : AbstractMovable
+    public class ExpiringSpatialHashMovementComplete <T> : ICompleteAble where T : BaseMovable
     {
         private readonly ExpiringSpatialHashCollisionSystem<T> _expiringSpatialHash;
         private readonly T _moving;

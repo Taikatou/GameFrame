@@ -8,7 +8,7 @@ using MonoGame.Extended;
 
 namespace GameFrame.CollisionSystems.SpatialHash
 {
-    public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : AbstractMovable
+    public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : BaseMovable
     {
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
         public readonly Dictionary<Point, ExpiringKey> MovingEntities;

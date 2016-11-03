@@ -8,9 +8,9 @@ namespace GameFrame.Renderers
     public abstract class AbstractPathRenderer
     {
         public MoverManager Mover;
-        public AbstractMovable Moving;
+        public BaseMovable Moving;
 
-        public AbstractPathRenderer(MoverManager mover, AbstractMovable moving)
+        protected AbstractPathRenderer(MoverManager mover, BaseMovable moving)
         {
             Mover = mover;
             Moving = moving;

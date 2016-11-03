@@ -8,7 +8,7 @@ using MonoGame.Extended;
 
 namespace GameFrame.Movers
 {
-    public class SpatialHashMoverManager<T> : IMoverManager<T>, IUpdate where T : AbstractMovable
+    public class SpatialHashMoverManager<T> : IMoverManager<T>, IUpdate where T : BaseMovable
     {
         private readonly AbstractCollisionSystem _abstractCollisionSystem;
         private readonly ExpiringSpatialHashCollisionSystem<T> _spatialHashLayer;
