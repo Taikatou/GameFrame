@@ -1,11 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework.Media;
 using GameFrame.Content;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameFrame.MediaAdapter
 {
-    public class SongPlayer { 
+    public class SongPlayer : IAdvancedAudioPlayer
+    {
 
         private Song _song { get; set; }
 
@@ -16,23 +18,31 @@ namespace GameFrame.MediaAdapter
             Content = ContentManagerFactory.RequestContentManager();
         }
 
-        public void Play(string fileName)
+        public void PlayAudio(string fileName)
         {
-            _song = Content.Load<Song>(fileName);
-            System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
-            MediaPlayer.Play(_song);
-            MediaPlayer.Volume = 100;
-            MediaPlayer.IsRepeating = true;
+            try
+            {
+                _song = Content.Load<Song>(fileName);
+                System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
+                MediaPlayer.Play(_song);
+                MediaPlayer.Volume = 100;
+                MediaPlayer.IsRepeating = true;
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+            
         }
 
-        public void Pause()
+        public void PauseAudio()
         {
             MediaPlayer.Pause();
             Debug.WriteLine("SongPlayer::Pause()");
 
         }
 
-        public void Resume()
+        public void ResumeAudio()
         {
             MediaPlayer.Resume();
             Debug.WriteLine("SongPlayer::Resume()");
