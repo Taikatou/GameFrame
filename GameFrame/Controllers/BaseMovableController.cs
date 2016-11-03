@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using GameFrame.Controllers.GamePad;
-using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 
 namespace GameFrame.Controllers
@@ -19,7 +15,7 @@ namespace GameFrame.Controllers
         private readonly SmartController _smartController;
         public int ButtonsDown;
         public bool PlayerMove => ButtonsDown != 0;
-        public AbstractMovable ToMove;
+        public BaseMovable ToMove;
         private readonly IPossibleMovements _possibleMovements;
 
         public Vector2 MovingDirection
@@ -28,7 +24,7 @@ namespace GameFrame.Controllers
             set { ToMove.MovingDirection = value; }
         }
 
-        public BaseMovableController(AbstractMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
+        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
@@ -64,7 +60,7 @@ namespace GameFrame.Controllers
             }
         }
 
-        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, AbstractMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
             var smartButton = new CompositeSmartButton(buttons);
             smartButton.OnButtonJustPressed += (sender, args) =>

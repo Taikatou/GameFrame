@@ -85,7 +85,7 @@
     <Compile Include="MediaAdapter\SongPlayer.cs" />
     <Compile Include="Movers\ExpiringSpatialHashMovementComplete.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
-    <Compile Include="Movers\AbstractMovable.cs" />
+    <Compile Include="Movers\BaseMovable.cs" />
     <Compile Include="Movers\ISpeed.cs" />
     <Compile Include="Movers\MoverManager.cs" />
     <Compile Include="Movers\PathMover.cs" />
