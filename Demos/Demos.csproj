@@ -64,6 +64,9 @@
     <Compile Include="TopDownRpg\TopDownRpgScene.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ink-engine-pcl">
+      <HintPath>..\Dependencies\ink-engine-pcl.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
