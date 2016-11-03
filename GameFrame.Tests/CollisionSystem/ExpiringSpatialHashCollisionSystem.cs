@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Movers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GameFrame.PathFinding.Heuristics;
+using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
+using NUnit.Framework;
 
 namespace GameFrame.Tests.CollisionSystem
 {
-    [TestClass]
+    [TestFixture]
     public class ExpiringSpatialHashCollisionSystem
     {
-        [TestMethod]
+        [Test]
         public void TestMovement()
         {
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>();
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>(new EightWayPossibleMovement(new CrowDistance()));
             var startPoint = new Point(3, 4);
             var endPoint = new Point(3, 5);
             var toMove = new BaseMovable { Position = startPoint.ToVector2() };
@@ -23,10 +24,10 @@ namespace GameFrame.Tests.CollisionSystem
             Assert.IsTrue(expiringSpatialHash.CheckCollision(endPoint));
         }
 
-        [TestMethod]
+        [Test]
         public void TestUpdate()
         {
-            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>();
+            var expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<BaseMovable>(new EightWayPossibleMovement(new CrowDistance()));
             var startPoint = new Point(3, 4);
             var endPoint = new Point(3, 5);
             var toMove = new BaseMovable {Position = startPoint.ToVector2()};

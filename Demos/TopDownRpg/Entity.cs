@@ -1,20 +1,23 @@
 ﻿using Demos.TopDownRpg.SpeedState;
 using GameFrame.Movers;
-using GameFrame.State;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
 {
-    public class Entity : BaseMovable
+    public class Entity : AbstractMovable
     {
         public SpeedContext SpeedContext;
-        public override float Speed => SpeedContext.GetSpeed(200);
-        //william state pattern
+        public override float Speed => SpeedContext.Speed;
+
         public Entity(Vector2 position)
         {
-            SpeedContext = new SpeedContext(new SpeedNormal());
+            SpeedContext = new SpeedContext(4);
             Position = position;
-            MovingDirection = new Vector2();
+        }
+
+        public virtual void Interact()
+        {
+            
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Demos.TopDownRpg
             get
             {
                 var value = Entity.Position * _tileSize.ToVector2();
-                var position = Entity.Position.ToPoint();
-                if (_spaitalHash.Moving(position))
+                var startPoint = Entity.Position.ToPoint();
+                if (_spaitalHash.Moving(startPoint))
                 {
-                    var movedBy = Entity.FacingDirection * _spaitalHash.Progress(position);
+                    var movedBy = Entity.FacingDirection * _spaitalHash.Progress(startPoint);
                     var directionOffset = movedBy * _tileSize.ToVector2();
                     value -= directionOffset;
                 }
@@ -43,7 +43,7 @@ namespace Demos.TopDownRpg
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;
             _tileSize = tileSize;
-            Offset = new Vector2(_tileSize.X/2, _tileSize.Y/2);
+            Offset = new Vector2(_tileSize.X / 2, _tileSize.Y / 2);
             _spaitalHash = spaitalHash;
             FrameRectangle = new Rectangle(new Point(), _tileSize);
         }
@@ -52,5 +52,7 @@ namespace Demos.TopDownRpg
         {
             spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
         }
+
+        
     }
 }

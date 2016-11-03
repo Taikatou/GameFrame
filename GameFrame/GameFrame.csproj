@@ -34,11 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
+    <Compile Include="Common\DelayTracker.cs" />
+    <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\StringToVector.cs" />
+    <Compile Include="Controllers\ControllerFactory.cs" />
+    <Compile Include="Controllers\BaseMovableController.cs" />
+    <Compile Include="Controllers\IControllerSettings.cs" />
+    <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
     <Compile Include="GameFrameScreen.cs" />
-    <Compile Include="CollisionSystems\CompositeCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\ICollisionSystem.cs" />
+    <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
-    <Compile Include="CollisionSystems\SpatialHash\ISpatialCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\AbstractSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
     <Compile Include="CollisionTest\BBCollision.cs" />
@@ -53,7 +61,6 @@
     <Compile Include="Controllers\ButtonMethods.cs" />
     <Compile Include="Controllers\Click\ClickController.cs" />
     <Compile Include="Controllers\Click\MouseClick\MouseControl.cs" />
-    <Compile Include="Controllers\Click\TouchScreen\ITouchScreenControl.cs" />
     <Compile Include="Controllers\Click\TouchScreen\SmartGesture.cs" />
     <Compile Include="Controllers\Click\TouchScreen\TouchScreenControl.cs" />
     <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
@@ -67,19 +74,24 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="GameModeStack.cs" />
+    <Compile Include="ICompleteAble.cs" />
+    <Compile Include="IGameMode.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
     <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
     <Compile Include="MediaAdapter\IAudioPlayer.cs" />
     <Compile Include="MediaAdapter\AudioAdapter.cs" />
     <Compile Include="MediaAdapter\SongPlayer.cs" />
+    <Compile Include="Movers\ExpiringSpatialHashMovementComplete.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
-    <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\AbstractMovable.cs" />
     <Compile Include="Movers\ISpeed.cs" />
     <Compile Include="Movers\MoverManager.cs" />
     <Compile Include="Movers\PathMover.cs" />
     <Compile Include="Movers\SpatialHashMoverManager.cs" />
     <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\CrowDistance.cs" />
     <Compile Include="PathFinding\Heuristics\DiagonalDistance.cs" />
     <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
     <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />
@@ -87,6 +99,7 @@
     <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
+    <Compile Include="PathFinding\PossibleMovements\PossibleMovementWrapper.cs" />
     <Compile Include="PathFinding\SearchParameters.cs" />
     <Compile Include="Paths\Cyclical\CyclicalCounter.cs" />
     <Compile Include="Paths\Cyclical\CyclicalPath.cs" />
@@ -98,6 +111,9 @@
     <Compile Include="Renderers\AbstractPathRenderer.cs" />
     <Compile Include="Renderers\EndPointPathRenderer.cs" />
     <Compile Include="Renderers\PathRenderer.cs" />
+    <Compile Include="ServiceLocator\IServiceLocator.cs" />
+    <Compile Include="ServiceLocator\ServiceLocator.cs" />
+    <Compile Include="ServiceLocator\StaticServiceLocator.cs" />
     <Compile Include="State\IStateEvent.cs" />
     <Compile Include="State\IStateModifier.cs" />
   </ItemGroup>
@@ -109,7 +125,9 @@
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GUI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

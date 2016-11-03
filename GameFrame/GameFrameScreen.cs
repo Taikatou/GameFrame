@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 
 namespace GameFrame
 {
     public abstract class GameFrameScreen : Screen
     {
-        public List<IUpdate> UpdateList;
-        public List<IRenderable> RenderList;
-
+        public GameModeStack GameModeStack;
+        public IGameMode CurrentGameMode => GameModeStack.CurrentGameMode;
+        public Stack<IGameMode> GameModes => GameModeStack.GameModes;
         protected GameFrameScreen()
         {
-            UpdateList = new List<IUpdate>();
-            RenderList = new List<IRenderable>();
+            GameModeStack = new GameModeStack();
         }
 
         public override void Update(GameTime gameTime)
@@ -21,10 +19,7 @@ namespace GameFrame
             base.Update(gameTime);
             if (IsVisible)
             {
-                foreach (var element in UpdateList)
-                {
-                    element.Update(gameTime);
-                }
+                CurrentGameMode.Update(gameTime);
             }
         }
     }

@@ -1,18 +1,15 @@
 ﻿using System;
+using GameFrame.Controllers;
+using GameFrame.ServiceLocator;
 
 namespace Demos.DesktopGl
 {
-    /// <summary>
-    /// The main class.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
+            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             using (var game = new DemoGame())
                 game.Run();
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace GameFrame.Common
 {
@@ -7,8 +8,13 @@ namespace GameFrame.Common
         public bool Complete => TimeLeft <= 0;
         public float TimeLeft { get; internal set; }
         public float TotalTime { get; }
+        public EventHandler OnCompleteEvent { get; set; }
+        public float Progress => Complete ? 0.0f : TimeLeft / TotalTime;
 
-        public float Progress => Complete ? 0.0f : (float)TimeLeft / TotalTime;
+        public void InvokeCompleteEvent()
+        {
+            OnCompleteEvent?.Invoke(this, null);
+        }
 
         public ExpiringKey(float time)
         {

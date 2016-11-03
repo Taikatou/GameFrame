@@ -15,8 +15,8 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin TopDownRpg/Fonts/montserrat-32.fnt
-/importer:
-/processor:
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
 /build:TopDownRpg/Fonts/montserrat-32.fnt
 
 #begin TopDownRpg/Fonts/montserrat-32_0.png
@@ -62,13 +62,13 @@
 /build:TopDownRpg/Character.png
 
 #begin TopDownRpg/level01.tmx
-/importer:
-/processor:
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
 /build:TopDownRpg/level01.tmx
 
 #begin TopDownRpg/level02.tmx
-/importer:
-/processor:
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
 /build:TopDownRpg/level02.tmx
 
 #begin TopDownRpg/Path.png
@@ -124,4 +124,33 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/tileset.png
+
+#begin montserrat-32.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:montserrat-32.fnt
+
+#begin montserrat-32_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:montserrat-32_0.png
+
+#begin DemoScreen/BackButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DemoScreen/BackButton.png
 

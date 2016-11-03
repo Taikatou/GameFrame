@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using MonoGame.Extended;
+﻿using MonoGame.Extended;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.Common

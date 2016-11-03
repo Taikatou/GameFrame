@@ -5,7 +5,7 @@ using MonoGame.Extended;
 
 namespace GameFrame.Controllers.Click
 {
-    public class ClickController : IUpdate, ITouchScreenControl
+    public class ClickController : IUpdate
     {
         public MouseControl MouseControl;
         public TouchScreenControl TouchScreenControl;
