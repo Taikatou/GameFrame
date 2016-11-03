@@ -51,7 +51,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
-            PlayMusic();
+            //PlayMusic();
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -154,7 +154,7 @@ namespace Demos.TopDownRpg.GameModes
             var valid = true;
             if (collision)
             {
-                var heuristic = new CrowDistance();
+                var heuristic = _possibleMovements.Heuristic;
                 var startPosition = entity.Position.ToPoint();
                 if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                 {
