@@ -42,8 +42,11 @@ namespace GameFrame.Movers
             }
             else if(MovementComplete.Complete)
             {
-                ToMove.Moving = false;
-                OnCompleteEvent?.Invoke(this, null);
+                ToMove.OnMoveCompleteEvent += (sender, args) =>
+                {
+                    ToMove.Moving = false;
+                    OnCompleteEvent?.Invoke(this, null);
+                };
             }
         }
     }
