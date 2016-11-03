@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameFrame.Common;
+using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
 namespace GameFrame.CollisionSystems.SpatialHash
 {
-    public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate
+    public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : AbstractMovable
     {
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
         public readonly Dictionary<Point, ExpiringKey> MovingEntities;
@@ -93,6 +94,8 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 }
                 MovingEntities[key].InvokeCompleteEvent();
                 MovingEntities.Remove(key);
+                var entity = ValueAt(position);
+                entity?.InvokeOnMoveCompleteEvent();
             }
         }
 
