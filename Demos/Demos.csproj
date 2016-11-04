@@ -50,22 +50,6 @@
     <Compile Include="Screens\MouseOptionsScreen.cs" />
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\VideoOptionsScreen.cs" />
-    <Compile Include="Space Invaders\Direction.cs" />
-    <Compile Include="Space Invaders\Form1.cs" />
-    <Compile Include="Space Invaders\Form1.Designer.cs" />
-    <Compile Include="Space Invaders\Form11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form1.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Space Invaders\Game.cs" />
-    <Compile Include="Space Invaders\Invader.cs" />
-    <Compile Include="Space Invaders\PlayerShip.cs" />
-    <Compile Include="Space Invaders\Program.cs" />
-    <Compile Include="Space Invaders\ShipType.cs" />
-    <Compile Include="Space Invaders\Shot.cs" />
-    <Compile Include="Space Invaders\Star.cs" />
-    <Compile Include="Space Invaders\Stars.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
@@ -95,37 +79,6 @@
       <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
       <Name>GameFrame</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Space Invaders\Form1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Form11.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Space Invaders\Resources\bug1.png" />
-    <Content Include="Space Invaders\Resources\bug2.png" />
-    <Content Include="Space Invaders\Resources\bug3.png" />
-    <Content Include="Space Invaders\Resources\bug4.png" />
-    <Content Include="Space Invaders\Resources\flyingsaucer1.png" />
-    <Content Include="Space Invaders\Resources\flyingsaucer2.png" />
-    <Content Include="Space Invaders\Resources\flyingsaucer3.png" />
-    <Content Include="Space Invaders\Resources\flyingsaucer4.png" />
-    <Content Include="Space Invaders\Resources\player.png" />
-    <Content Include="Space Invaders\Resources\satellite1.png" />
-    <Content Include="Space Invaders\Resources\satellite2.png" />
-    <Content Include="Space Invaders\Resources\satellite3.png" />
-    <Content Include="Space Invaders\Resources\satellite4.png" />
-    <Content Include="Space Invaders\Resources\spaceship1.png" />
-    <Content Include="Space Invaders\Resources\spaceship2.png" />
-    <Content Include="Space Invaders\Resources\spaceship3.png" />
-    <Content Include="Space Invaders\Resources\spaceship4.png" />
-    <Content Include="Space Invaders\Resources\star1.png" />
-    <Content Include="Space Invaders\Resources\star2.png" />
-    <Content Include="Space Invaders\Resources\star3.png" />
-    <Content Include="Space Invaders\Resources\star4.png" />
-    <Content Include="Space Invaders\SpaceInvaders.csproj" />
-    <Content Include="Space Invaders\SpaceInvaders.csproj.user" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
