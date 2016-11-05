@@ -26,7 +26,7 @@ namespace Demos.Droid
         {
             base.OnCreate(bundle);
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
+            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad(Assets));
             CrashManager.Register(this, IdManager.HockeyAppId);
             MetricsManager.Register(Application, IdManager.HockeyAppId);
             var g = new DemoGame();
