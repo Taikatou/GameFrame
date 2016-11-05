@@ -12,6 +12,7 @@ namespace GameFrame.PathFinding
         private readonly Node _endNode;
         private readonly int _max;
         private readonly IPossibleMovements _possibleMovements;
+        public Point MovementCircle;
 
         private Node GetNode(Point fromPoint, Point point)
         {
@@ -32,8 +33,9 @@ namespace GameFrame.PathFinding
             return toReturn;
         }
 
-        public AStarPathFinder(SearchParameters searchParameters, IPossibleMovements possibleMovements)
+        public AStarPathFinder(SearchParameters searchParameters, IPossibleMovements possibleMovements, Point movementCircle)
         {
+            MovementCircle = movementCircle;
             _possibleMovements = possibleMovements;
             var width = searchParameters.Space.Width;
             var height = searchParameters.Space.Height;
@@ -98,7 +100,7 @@ namespace GameFrame.PathFinding
 
         private void GetNodesToAnalysis(Node fromNode, ICollection<Node> queue)
         {
-            var nextLocations = _possibleMovements.GetAdjacentLocations(fromNode.Location);
+            var nextLocations = _possibleMovements.GetAdjacentLocations(fromNode.Location, MovementCircle);
 
             foreach (var location in nextLocations)
             {

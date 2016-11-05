@@ -13,16 +13,16 @@ namespace GameFrame.PathFinding.PossibleMovements
             Heuristic = heuristic;
         }
 
-        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
+        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation, Point movementCircle)
         {
-            var originalLocations = FourWayPossibleMovement.FourWayAdjacentLocations(fromLocation);
+            var originalLocations = FourWayPossibleMovement.FourWayAdjacentLocations(fromLocation, movementCircle);
             var adjacentLocations = new List<Point>(originalLocations)
             {
                 //diagonally
-                new Point(fromLocation.X-1, fromLocation.Y-1),
-                new Point(fromLocation.X+1, fromLocation.Y-1),
-                new Point(fromLocation.X+1, fromLocation.Y+1),
-                new Point(fromLocation.X-1, fromLocation.Y+1)
+                new Point(fromLocation.X-movementCircle.X, fromLocation.Y-movementCircle.Y),
+                new Point(fromLocation.X+movementCircle.X, fromLocation.Y-movementCircle.Y),
+                new Point(fromLocation.X+movementCircle.X, fromLocation.Y+movementCircle.Y),
+                new Point(fromLocation.X-movementCircle.X, fromLocation.Y+movementCircle.Y)
             };
             return adjacentLocations;
         }

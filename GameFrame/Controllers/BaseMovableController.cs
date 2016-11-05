@@ -17,7 +17,7 @@ namespace GameFrame.Controllers
         public bool PlayerMove => ButtonsDown != 0;
         public BaseMovable ToMove;
         private readonly IPossibleMovements _possibleMovements;
-
+        public Vector2 MovementCircle;
         public Vector2 MovingDirection
         {
             get { return ToMove.MovingDirection; }
@@ -26,6 +26,7 @@ namespace GameFrame.Controllers
 
         public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons, Vector2 movementCircle)
         {
+            MovementCircle = movementCircle;
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
             _smartController = new SmartController();
@@ -51,7 +52,7 @@ namespace GameFrame.Controllers
         private void MoveBy(Vector2 moveBy, Vector2 moveFrom)
         {
             var requeustedMovement = MovingDirection + moveBy;
-            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
+            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint(), MovementCircle.ToPoint());
             var endPoint = (moveFrom + requeustedMovement).ToPoint();
             var possible = allowedMovements.Contains(endPoint);
             if (possible)
