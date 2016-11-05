@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="BackButton.cs" />
     <Compile Include="Common\IdManager.cs" />
+    <Compile Include="Common\ScreenSize.cs" />
     <Compile Include="DemoGame.cs" />
     <Compile Include="DemoScreen.cs" />
     <Compile Include="Platformer\Entity.cs" />

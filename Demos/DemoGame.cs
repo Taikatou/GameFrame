@@ -1,4 +1,5 @@
-﻿using Demos.Pong;
+﻿using Demos.Common;
+using Demos.Pong;
 using Demos.Puzzle;
 using Demos.Screens;
 using Demos.TopDownRpg;
@@ -36,7 +37,7 @@ namespace Demos
         {
             base.LoadContent();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             var demoScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
             var pongScene = new PongScreen(viewportAdapter, _spriteBatch);
             pongScene.LoadContent();
