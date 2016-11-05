@@ -1,4 +1,5 @@
-﻿using Demos.Pong;
+﻿using Demos.Common;
+using Demos.Pong;
 using Demos.Puzzle;
 using Demos.Screens;
 using Demos.TopDownRpg;
@@ -14,7 +15,6 @@ namespace Demos
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private ViewportAdapter viewportAdapter;
         private readonly ScreenComponent _screenComponent;
 
         public DemoGame()
@@ -32,14 +32,13 @@ namespace Demos
             _screenComponent.Register(new KeyboardOptionsScreen(Services));
             _screenComponent.Register(new MouseOptionsScreen(Services));
             _screenComponent.Register(new PuzzleScreen());
-            //_screenComponent.Register(new PongScreen());
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             var demoScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
             var pongScene = new PongScreen(viewportAdapter, _spriteBatch);
             pongScene.LoadContent();

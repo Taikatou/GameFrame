@@ -1,59 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
+﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace GameFrame.CollisionTest
 {
-    public class BBCollision : Game
+    public class BBCollision : IUpdate
     {
-        GraphicsDeviceManager graphics;
         private string _collisionType;
         private readonly BBObject _object1;
         private readonly BBObject _object2;
         private readonly BBObject _object3;
         private Vector2 _velocity;
         readonly BBCollisionSubject _collisionSubject = new BBCollisionSubject();
+
+        public int Height { get; set; }
+        public int Width { get; set; }
         
 
         public BBCollision()
         {
-            BBCollisionObserver observer1 = new BBCollisionObserver(_collisionSubject);
+            var observer1 = new BBCollisionObserver(_collisionSubject);
             _collisionSubject.RegisterObserver(observer1);
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
             _collisionType = "";
         }
 
         public BBCollision(BBObject object1, BBObject object2)
         {
-            BBCollisionObserver observer1 = new BBCollisionObserver(_collisionSubject);
+            var observer1 = new BBCollisionObserver(_collisionSubject);
             _collisionSubject.RegisterObserver(observer1);
-            this._object1 = object1;
-            this._object2 = object2;
+            _object1 = object1;
+            _object2 = object2;
         }
 
-        public BBCollision(BBObject object1, BBObject object2, BBObject object3)
+        public BBCollision(BBObject object1, BBObject object2, BBObject object3, int width, int height)
         {
-            BBCollisionObserver observer1 = new BBCollisionObserver(_collisionSubject);
+            Height = height;
+            Width = width;
+            var observer1 = new BBCollisionObserver(_collisionSubject);
             _collisionSubject.RegisterObserver(observer1);
-            this._object1 = object1;
-            this._object2 = object2;
-            this._object3 = object3;
+            _object1 = object1;
+            _object2 = object2;
+            _object3 = object3;
         }
 
-        protected override void Update(GameTime gametime)
+        public void Update(GameTime gametime)
         {
             CheckOnePlayerCollision();
             CheckTwoPlayerCollision();
             CheckWallCollision();
-            base.Update(gametime);
         }
 
         public void SetVelocity(Vector2 vel)
         {
-            this._velocity = vel;
+            _velocity = vel;
         }
 
         public BBCollisionSubject GetBbCollisionSubject()
@@ -111,7 +109,7 @@ namespace GameFrame.CollisionTest
                 _collisionSubject.SetVelocity(_velocity);
             }
 
-            else if (_object1.Position.Y > Window.ClientBounds.Height - _object1.BoundingBox.Height)
+            else if (_object1.Position.Y > Height - _object1.BoundingBox.Height)
             {
                 _collisionType = "Bottom";
                 _velocity.Y *= -1;
@@ -127,7 +125,7 @@ namespace GameFrame.CollisionTest
                 _collisionSubject.SetVelocity(_velocity);
             }
 
-            else if (_object1.Position.X + _object1.BoundingBox.Width > 800)
+            else if (_object1.Position.X + _object1.BoundingBox.Width > Width)
             {
                 _collisionType = "Right";
                 _velocity.X = _velocity.X * -1;
