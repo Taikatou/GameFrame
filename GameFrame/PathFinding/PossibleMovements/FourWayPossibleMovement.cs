@@ -18,20 +18,20 @@ namespace GameFrame.PathFinding.PossibleMovements
             Heuristic = heuristic;
         }
 
-        public static IEnumerable<Point> FourWayAdjacentLocations(Point fromLocation)
+        public static IEnumerable<Point> FourWayAdjacentLocations(Point fromLocation, Point movementCircle)
         {
             return new[]
             {
-                new Point(fromLocation.X-1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y+1),
-                new Point(fromLocation.X+1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y-1)
+                new Point(fromLocation.X-movementCircle.X, fromLocation.Y  ),
+                new Point(fromLocation.X,   fromLocation.Y+movementCircle.Y),
+                new Point(fromLocation.X+movementCircle.X, fromLocation.Y  ),
+                new Point(fromLocation.X,   fromLocation.Y-movementCircle.Y)
             };
         }
 
-        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
+        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation, Point movementCircle)
         {
-            return FourWayAdjacentLocations(fromLocation);
+            return FourWayAdjacentLocations(fromLocation, movementCircle);
         }
 
         public IEnumerable<Point> PositionsToCheck(Point startPoint, Point endPoint)

@@ -11,7 +11,7 @@ namespace Demos.TopDownRpg
 
         public Entity(Vector2 position)
         {
-            SpeedContext = new SpeedContext(4);
+            SpeedContext = new SpeedContext(4 * 16);
             Position = position;
         }
 

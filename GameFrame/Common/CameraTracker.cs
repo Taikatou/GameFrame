@@ -17,11 +17,11 @@ namespace GameFrame.Common
 
         public void Update(GameTime gameTime)
         {
-            if (_cachedPosition != _following.ScreenPosition)
+            if (_cachedPosition != _following.Position)
             {
-                var focusOn = _following.ScreenPosition + _following.Offset;
+                var focusOn = _following.Position + _following.Offset;
                 _follower.LookAt(focusOn);
-                _cachedPosition = _following.ScreenPosition;
+                _cachedPosition = _following.Position;
             }
         }
     }

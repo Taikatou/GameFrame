@@ -6,6 +6,6 @@ namespace Demos.TopDownRpg.Factory
 {
     public abstract class RendererFactory
     {
-        public abstract EntityRenderer CreateEntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> expiringSpatialHashCollisionSystem, Entity entity, Point spaitalHash);
+        public abstract EntityRenderer CreateEntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize);
     }
 }

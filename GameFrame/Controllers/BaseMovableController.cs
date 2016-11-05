@@ -17,22 +17,23 @@ namespace GameFrame.Controllers
         public bool PlayerMove => ButtonsDown != 0;
         public BaseMovable ToMove;
         private readonly IPossibleMovements _possibleMovements;
-
+        public Vector2 MovementCircle;
         public Vector2 MovingDirection
         {
             get { return ToMove.MovingDirection; }
             set { ToMove.MovingDirection = value; }
         }
 
-        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
+        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons, Vector2 movementCircle)
         {
+            MovementCircle = movementCircle;
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
             _smartController = new SmartController();
-            CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -1), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, 1), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-1, 0), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Right], baseMovable, new Vector2(1, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -movementCircle.Y), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, movementCircle.Y), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-movementCircle.X, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Right], baseMovable, new Vector2(movementCircle.X, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)
@@ -51,7 +52,7 @@ namespace GameFrame.Controllers
         private void MoveBy(Vector2 moveBy, Vector2 moveFrom)
         {
             var requeustedMovement = MovingDirection + moveBy;
-            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint());
+            var allowedMovements = _possibleMovements.GetAdjacentLocations(moveFrom.ToPoint(), MovementCircle.ToPoint());
             var endPoint = (moveFrom + requeustedMovement).ToPoint();
             var possible = allowedMovements.Contains(endPoint);
             if (possible)
@@ -60,31 +61,30 @@ namespace GameFrame.Controllers
             }
         }
 
-        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
-            var smartButton = new CompositeSmartButton(buttons);
-            smartButton.OnButtonJustPressed += (sender, args) =>
+            _smartController.AddButton(new CompositeSmartButton(buttons)
             {
-                ButtonsDown++;
-                ToMove.Moving = PlayerMove;
-                moverManager.RemoveMover(entityMover);
-                MoveBy(moveBy, entityMover.Position);
-            };
-            smartButton.OnButtonHeldDown += (sender, args) =>
-            {
-                ToMove.Moving = PlayerMove;
-                MoveBy(moveBy, entityMover.Position);
-            };
-            smartButton.OnButtonReleased += (sender, args) =>
-            {
-                ButtonsDown--;
-                ToMove.Moving = PlayerMove;
-                moverManager.RemoveMover(entityMover);
-                Release(moveBy);
-            };
-            _smartController.AddButton(smartButton);
-
-            return smartButton;
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    ButtonsDown++;
+                    ToMove.Moving = PlayerMove;
+                    moverManager.RemoveMover(entityMover);
+                    MoveBy(moveBy, entityMover.Position);
+                },
+                OnButtonHeldDown = (sender, args) =>
+                {
+                    ToMove.Moving = PlayerMove;
+                    MoveBy(moveBy, entityMover.Position);
+                },
+                OnButtonReleased = (sender, args) =>
+                {
+                    ButtonsDown--;
+                    ToMove.Moving = PlayerMove;
+                    moverManager.RemoveMover(entityMover);
+                    Release(moveBy);
+                }
+            });
         }
 
         public void AddButton(AbstractSmartButton button)

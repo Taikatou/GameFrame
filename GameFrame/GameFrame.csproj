@@ -43,6 +43,7 @@
     <Compile Include="CollisionTest\CollisionType.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\RoundingDictionary.cs" />
     <Compile Include="Common\StringToVector.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\BaseMovableController.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="CollisionTest\IObserver.cs" />
     <Compile Include="CollisionTest\ISubject.cs" />
-    <Compile Include="Common\ExpiringKey.cs" />
+    <Compile Include="Common\MovingMovable.cs" />
     <Compile Include="Common\CameraTracker.cs" />
     <Compile Include="Common\IFocusAble.cs" />
     <Compile Include="Common\FollowTracker.cs" />

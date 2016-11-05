@@ -14,9 +14,9 @@ namespace GameFrame.PathFinding.PossibleMovements
             PossibleMovements = possibleMovements;
         }
 
-        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
+        public IEnumerable<Point> GetAdjacentLocations(Point fromLocation, Point movementCircle)
         {
-            return PossibleMovements.GetAdjacentLocations(fromLocation);
+            return PossibleMovements.GetAdjacentLocations(fromLocation, movementCircle);
         }
 
         public IEnumerable<Point> PositionsToCheck(Point startPoint, Point endPoint)

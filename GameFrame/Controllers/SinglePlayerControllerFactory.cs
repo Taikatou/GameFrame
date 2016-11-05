@@ -4,6 +4,7 @@ using GameFrame.Controllers.KeyBoard;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.ServiceLocator;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameFrame.Controllers
@@ -30,7 +31,7 @@ namespace GameFrame.Controllers
                 buttonList.Add(new GamePadButton(button));
             }
         }
-        public override BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public override BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager, Vector2 movementCircle)
         {
             var directions = new Dictionary<BaseMovableController.Directions, List<IButtonAble>>
             {
@@ -57,7 +58,7 @@ namespace GameFrame.Controllers
                 directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.D));
                 directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.Right));
             }
-            return new BaseMovableController(entity, possibleMovements, moverManager, directions);
+            return new BaseMovableController(entity, possibleMovements, moverManager, directions, movementCircle);
         }
     }
 }

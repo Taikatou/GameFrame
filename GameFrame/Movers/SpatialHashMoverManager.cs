@@ -37,11 +37,8 @@ namespace GameFrame.Movers
                 var timer = distance/character.Speed;
                 timer *= 1000; //milliseconds in second
                 var moveEvent = character.OnMoveEvent + character.OnMoveCompleteEvent;
-                if (_spatialHashLayer.MoveNode(startPoint, endPoint, moveEvent, timer))
-                {
-                    character.Position = position;
-                    return true;
-                }
+                var successful = _spatialHashLayer.MoveNode(startPoint, endPoint, moveEvent, timer);
+                return successful;
             }
             return false;
         }
