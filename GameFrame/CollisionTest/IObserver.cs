@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace GameFrame.CollisionTest
 {
     public interface IObserver
     {
-        void Update();
+        void Update(Vector2 vel, string type);
     }
 }

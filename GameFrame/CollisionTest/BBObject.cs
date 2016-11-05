@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GameFrame.CollisionTest
 {
@@ -15,7 +16,11 @@ namespace GameFrame.CollisionTest
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+                return new Rectangle(
+                    (int)Position.X,
+                    (int)Position.Y, 
+                    texture.Width, 
+                    texture.Height);
             }
         }
 
@@ -35,6 +40,12 @@ namespace GameFrame.CollisionTest
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);
+        }
+
+        public BBObject Clone()
+        {
+            Debug.WriteLine("Cloning BBObject");
+            return (BBObject)this.MemberwiseClone();
         }
     }
 }
