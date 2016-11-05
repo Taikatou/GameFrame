@@ -99,9 +99,6 @@
     <AndroidResource Include="Resources\Values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +121,7 @@
     <None Include="PluginsHelp\SettingsReadme.txt" />
   </ItemGroup>
   <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
+  <Import Project="..\Demos.Content\Demos.Content.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

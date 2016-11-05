@@ -15,12 +15,14 @@ using GameFrame.MediaAdapter;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
+using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
-using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
+using GameFrame.ServiceLocator;
+using GameFrame.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -85,6 +87,8 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
+
+            var storyText = StoryImporter.ReadStory("Scripts/hello.ink.json");
         }
 
         public void PlayMusic()

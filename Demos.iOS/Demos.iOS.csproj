@@ -133,7 +133,6 @@
   <ItemGroup>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
-    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +159,7 @@
     <Content Include="PluginsHelp\SettingsReadme.txt" />
   </ItemGroup>
   <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
+  <Import Project="..\Demos.Content\Demos.Content.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
 </Project>

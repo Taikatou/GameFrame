@@ -3,13 +3,14 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>e4dc2861-65f1-460e-bcf9-b91d32bf6423</SharedGUID>
+    <SharedGUID>46c869c6-b730-45f1-bc44-d0f4ecbd082d</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Demos.MobileShared</Import_RootNamespace>
+    <Import_RootNamespace>Demos.Content</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ControllerSettings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SaveAndLoad.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\hello.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
