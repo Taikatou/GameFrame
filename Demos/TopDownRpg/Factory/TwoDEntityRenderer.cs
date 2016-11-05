@@ -6,9 +6,9 @@ namespace Demos.TopDownRpg.Factory
 {
     public class TwoDEntityRenderer : RendererFactory
     {
-        public override EntityRenderer CreateEntityRenderer(ContentManager content, Entity entity, Point tileSize)
+        public override EntityRenderer CreateEntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
         {
-            return new EntityRenderer(content, entity, tileSize);
+            return new EntityRenderer(content, spaitalHash, entity, tileSize);
         }
     }
 }

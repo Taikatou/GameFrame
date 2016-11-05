@@ -120,7 +120,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public void AddEntity(Entity entity)
         {
-            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, entity, _tileSize.ToPoint());
+            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash, entity, _tileSize.ToPoint());
             _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);
             EntityRenderersDict[entity] = entityRenderer;

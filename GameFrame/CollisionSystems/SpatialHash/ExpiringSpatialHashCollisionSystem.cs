@@ -32,6 +32,16 @@ namespace GameFrame.CollisionSystems.SpatialHash
             _spatialHash.AddNode(position, node);
         }
 
+        public float Progress(Point position)
+        {
+            var progress = 0.0f;
+            if (Moving(position))
+            {
+                progress = OccupiedTiles[position].Progress;
+            }
+            return progress;
+        }
+
         public bool MoveNode(Point startPosition, Point endPosition, EventHandler onCompleteEvent, float timer)
         {
             var moving = OccupiedTiles.ContainsKey(startPosition);
