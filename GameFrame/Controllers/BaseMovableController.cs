@@ -24,15 +24,15 @@ namespace GameFrame.Controllers
             set { ToMove.MovingDirection = value; }
         }
 
-        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
+        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons, Vector2 movementCircle)
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
             _smartController = new SmartController();
-            CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -1), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, 1), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-1, 0), moverManager);
-            CreateCompositeButton(directionButtons[Directions.Right], baseMovable, new Vector2(1, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -movementCircle.Y), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, movementCircle.Y), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-movementCircle.X, 0), moverManager);
+            CreateCompositeButton(directionButtons[Directions.Right], baseMovable, new Vector2(movementCircle.X, 0), moverManager);
         }
 
         private void Release(Vector2 releaseBy)

@@ -65,7 +65,7 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             AddEntity(PlayerEntity);
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
-            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
+            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager, _tileSize);
             AddInteractionController(entityController);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");

@@ -4,15 +4,16 @@ using GameFrame.Controllers;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Demos.TopDownRpg.Factory
 {
     public class EntityControllerFactory : SinglePlayerControllerFactory
     {
-        public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager, Vector2 movementCircle)
         {
-            var controller = base.CreateEntityController(moveable, possibleMovements, moverManager);
+            var controller = base.CreateEntityController(moveable, possibleMovements, moverManager, movementCircle);
             var runningButton = new List<IButtonAble>();
             AddKeyBoardButton(runningButton, Keys.B);
             AddGamePadButton(runningButton, Buttons.B);
