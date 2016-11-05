@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
+    <Compile Include="CollisionTest\BBCollisionObserver.cs" />
+    <Compile Include="CollisionTest\BBCollisionSubject.cs" />
+    <Compile Include="CollisionTest\BBObjectPrototype.cs" />
+    <Compile Include="CollisionTest\CollisionType.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\StringToVector.cs" />

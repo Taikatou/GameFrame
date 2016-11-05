@@ -2,6 +2,7 @@
 using Demos.TopDownRpg;
 using Microsoft.Xna.Framework;
 using Demos.Puzzle;
+using Demos.Pong;
 
 namespace Demos.Screens
 {
@@ -21,6 +22,7 @@ namespace Demos.Screens
 
             AddMenuItem("New Game", Show<TopDownRpgScene>);
             AddMenuItem("Puzzle Game", Show<PuzzleScreen>);
+            AddMenuItem("Pong", Show<PongScreen>);
             AddMenuItem("Load Game", Show<LoadGameScreen>);
             AddMenuItem("Options", Show<OptionsScreen>);
             AddMenuItem("Exit", _game.Exit);
