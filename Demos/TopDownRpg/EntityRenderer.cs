@@ -1,5 +1,4 @@
 ﻿using GameFrame;
-using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,7 +19,7 @@ namespace Demos.TopDownRpg
             set { Entity.Position = value; }
         }
 
-        public EntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
+        public EntityRenderer(ContentManager content, Entity entity, Point tileSize)
         {
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;

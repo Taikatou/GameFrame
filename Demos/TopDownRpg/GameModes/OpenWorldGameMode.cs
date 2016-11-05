@@ -50,7 +50,6 @@ namespace Demos.TopDownRpg.GameModes
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
-            //PlayMusic();
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -113,15 +112,14 @@ namespace Demos.TopDownRpg.GameModes
             var entityObjects = Map.GetObjectGroup("Entity-Layer");
             foreach (var entityObject in entityObjects.Objects)
             {
-                var position = entityObject.Position/_tileSize;
-                var entity = new Entity(position);
+                var entity = new Entity(entityObject.Position);
                 AddEntity(entity);
             }
         }
 
         public void AddEntity(Entity entity)
         {
-            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash, entity, _tileSize.ToPoint());
+            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, entity, _tileSize.ToPoint());
             _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);
             EntityRenderersDict[entity] = entityRenderer;
