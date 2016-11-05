@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GameFrame.Movers;
+﻿using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 

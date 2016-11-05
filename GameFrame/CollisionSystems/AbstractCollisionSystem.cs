@@ -7,7 +7,7 @@ namespace GameFrame.CollisionSystems
     {
         public IPossibleMovements PossibleMovements;
 
-        public AbstractCollisionSystem(IPossibleMovements possibleMovements)
+        protected AbstractCollisionSystem(IPossibleMovements possibleMovements)
         {
             PossibleMovements = possibleMovements;
         }

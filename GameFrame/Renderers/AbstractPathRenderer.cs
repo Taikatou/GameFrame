@@ -10,7 +10,7 @@ namespace GameFrame.Renderers
         public MoverManager Mover;
         public BaseMovable Moving;
 
-        public AbstractPathRenderer(MoverManager mover, BaseMovable moving)
+        protected AbstractPathRenderer(MoverManager mover, BaseMovable moving)
         {
             Mover = mover;
             Moving = moving;
