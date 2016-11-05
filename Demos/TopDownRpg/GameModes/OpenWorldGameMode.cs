@@ -60,6 +60,7 @@ namespace Demos.TopDownRpg.GameModes
             Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
             PlayerEntity = playerEntity;
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
+            PlayerEntity.Position *= _tileSize;
             var moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);

@@ -72,8 +72,7 @@ namespace Demos.TopDownRpg
         public override void LoadContent()
         {
             base.LoadContent();
-            var position = 5*16;
-            PlayerEntity = new Entity(new Vector2(position, position));
+            PlayerEntity = new Entity(new Vector2(5, 5));
             LoadOpenWorld("level01");
         }
 

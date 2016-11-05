@@ -59,7 +59,7 @@
     <Compile Include="CollisionTest\BBObject.cs" />
     <Compile Include="CollisionTest\IObserver.cs" />
     <Compile Include="CollisionTest\ISubject.cs" />
-    <Compile Include="Common\ExpiringKey.cs" />
+    <Compile Include="Common\MovingMovable.cs" />
     <Compile Include="Common\CameraTracker.cs" />
     <Compile Include="Common\IFocusAble.cs" />
     <Compile Include="Common\FollowTracker.cs" />

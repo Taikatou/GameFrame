@@ -11,14 +11,14 @@ namespace GameFrame.CollisionSystems.SpatialHash
     public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : BaseMovable
     {
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
-        public readonly Dictionary<Point, ExpiringKey> OccupiedTiles;
-        public readonly Dictionary<ExpiringKey, BaseMovable> MovingEntities;
+        public readonly Dictionary<Point, MovingMovable> OccupiedTiles;
+        public readonly Dictionary<MovingMovable, BaseMovable> MovingEntities;
 
         public ExpiringSpatialHashCollisionSystem(IPossibleMovements possibleMovements) : base(possibleMovements)
         {
             _spatialHash = new SpatialHashCollisionSystem<T>(possibleMovements);
-            OccupiedTiles = new Dictionary<Point, ExpiringKey>();
-            MovingEntities = new Dictionary<ExpiringKey, BaseMovable>();
+            OccupiedTiles = new Dictionary<Point, MovingMovable>();
+            MovingEntities = new Dictionary<MovingMovable, BaseMovable>();
         }
 
         public bool Moving(Point position)
@@ -42,13 +42,14 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 var node = ValueAt(startPosition);
                 RemoveNode(startPosition);
                 AddNode(endPosition, node);
-                var movingEntity = new ExpiringKey(timer) { OnCompleteEvent = onCompleteEvent };
+                var movingEntity = new MovingMovable(node, timer) { OnCompleteEvent = onCompleteEvent };
                 foreach (var position in PossibleMovements.PositionsToCheck(startPosition, endPosition))
                 {
                     OccupiedTiles[position] = movingEntity;
                 }
                 OccupiedTiles[startPosition] = movingEntity;
                 MovingEntities[movingEntity] = node;
+                node.Position = endPosition.ToVector2();
             }
             return validMove;
         }
@@ -64,7 +65,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             {
                 moving.Key.Update(gameTime);
             }
-            var keysToRemove = new Dictionary<Point, ExpiringKey>();
+            var keysToRemove = new Dictionary<Point, MovingMovable>();
             foreach (var item in OccupiedTiles)
             {
                 var expiringKey = item.Value;
