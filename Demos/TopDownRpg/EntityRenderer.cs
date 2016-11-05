@@ -16,7 +16,7 @@ namespace Demos.TopDownRpg
         public Rectangle FrameRectangle;
         public Vector2 Offset { get; }
 
-        public Vector2 ScreenPosition
+        public Vector2 Position
         {
             get
             {
@@ -30,11 +30,6 @@ namespace Demos.TopDownRpg
                 }
                 return value;
             }
-        }
-
-        public Vector2 Position
-        {
-            get { return Entity.Position; }
             set { Entity.Position = value; }
         }
 
@@ -50,7 +45,7 @@ namespace Demos.TopDownRpg
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
+            spriteBatch.Draw(_entityTexture, Position, FrameRectangle, Color.White);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace GameFrame.PathFinding.PossibleMovements
 
         public IEnumerable<Point> PositionsToCheck(Point startPoint, Point endPoint)
         {
-            List<Point> positionsToCheck = new List<Point> { endPoint };
+            var positionsToCheck = new List<Point> { endPoint };
             if (startPoint.X != endPoint.X && startPoint.Y != endPoint.Y)
             {
                 positionsToCheck.Add(new Point(startPoint.X, endPoint.Y));

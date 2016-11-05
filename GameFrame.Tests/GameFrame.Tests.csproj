@@ -76,7 +76,6 @@
     <Compile Include="CollisionSystem\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
     <Compile Include="Common\CommonTest.cs" />
-    <Compile Include="InkTests.cs" />
     <Compile Include="Ink\StoryImporter.cs" />
     <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
     <Compile Include="Paths\PathTest.cs" />
@@ -126,6 +125,9 @@
     <None Include="Content\TopDownRpg\level01.tmx" />
     <None Include="Content\TopDownRpg\level02.tmx" />
     <None Include="packages.config" />
+    <Content Include="Scripts\hello.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\BirabutoKingdom.wav" />
