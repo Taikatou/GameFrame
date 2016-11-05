@@ -10,27 +10,9 @@ namespace Demos.TopDownRpg
     public class EntityRenderer : IFocusAble, IRenderable
     {
         private readonly Texture2D _entityTexture;
-        private Point _tileSize;
         public readonly Entity Entity;
-        private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
         public Rectangle FrameRectangle;
         public Vector2 Offset { get; }
-
-        public Vector2 ScreenPosition
-        {
-            get
-            {
-                var value = Entity.Position * _tileSize.ToVector2();
-                var startPoint = Entity.Position.ToPoint();
-                if (_spaitalHash.Moving(startPoint))
-                {
-                    var movedBy = Entity.FacingDirection * _spaitalHash.Progress(startPoint);
-                    var directionOffset = movedBy * _tileSize.ToVector2();
-                    value -= directionOffset;
-                }
-                return value;
-            }
-        }
 
         public Vector2 Position
         {
@@ -42,17 +24,13 @@ namespace Demos.TopDownRpg
         {
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;
-            _tileSize = tileSize;
-            Offset = new Vector2(_tileSize.X / 2, _tileSize.Y / 2);
-            _spaitalHash = spaitalHash;
-            FrameRectangle = new Rectangle(new Point(), _tileSize);
+            Offset = tileSize.ToVector2() / 2;
+            FrameRectangle = new Rectangle(new Point(), tileSize);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
-        }
-
-        
+            spriteBatch.Draw(_entityTexture, Position, FrameRectangle, Color.White);
+        }   
     }
 }
