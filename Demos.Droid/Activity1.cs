@@ -6,6 +6,7 @@ using Demos.Common;
 using Demos.MobileShared;
 using GameFrame.Controllers;
 using GameFrame.ServiceLocator;
+using GameFrame.Services;
 using HockeyApp.Android;
 using HockeyApp.Android.Metrics;
 
@@ -25,6 +26,7 @@ namespace Demos.Droid
         {
             base.OnCreate(bundle);
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
+            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
             CrashManager.Register(this, IdManager.HockeyAppId);
             MetricsManager.Register(Application, IdManager.HockeyAppId);
             var g = new DemoGame();

@@ -24,9 +24,9 @@ namespace GameFrame.ServiceLocator
             }
         }
 
-        public void AddService<T1>(T1 service)
+        public void AddService<T>(T service)
         {
-            _services[typeof(T1)] = service;
+            _services[typeof(T)] = service;
         }
     }
 }

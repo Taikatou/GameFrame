@@ -31,7 +31,6 @@ namespace Demos
             _screenComponent.Register(new VideoOptionsScreen(Services));
             _screenComponent.Register(new KeyboardOptionsScreen(Services));
             _screenComponent.Register(new MouseOptionsScreen(Services));
-            _screenComponent.Register(new PuzzleScreen());
         }
 
         protected override void LoadContent()

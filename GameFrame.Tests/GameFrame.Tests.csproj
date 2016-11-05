@@ -77,9 +77,11 @@
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
     <Compile Include="Common\CommonTest.cs" />
     <Compile Include="InkTests.cs" />
+    <Compile Include="Ink\StoryImporter.cs" />
     <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
     <Compile Include="Paths\PathTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveAndLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameFrame\GameFrame.csproj">

@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ControllerSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SaveAndLoad.cs" />
   </ItemGroup>
 </Project>

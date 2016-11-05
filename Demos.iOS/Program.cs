@@ -5,6 +5,7 @@ using Demos.Common;
 using Demos.MobileShared;
 using GameFrame.Controllers;
 using GameFrame.ServiceLocator;
+using GameFrame.Services;
 
 namespace Demos.iOS
 {
@@ -16,6 +17,7 @@ namespace Demos.iOS
         internal static void RunGame()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
+            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
             _game = new DemoGame();
             _game.Run();
         }
