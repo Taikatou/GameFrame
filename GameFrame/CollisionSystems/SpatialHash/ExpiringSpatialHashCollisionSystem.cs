@@ -11,13 +11,13 @@ namespace GameFrame.CollisionSystems.SpatialHash
     public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : BaseMovable
     {
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
-        public readonly Dictionary<Point, MovingMovable> OccupiedTiles;
+        public readonly RoundingDictionary<MovingMovable> OccupiedTiles;
         public readonly Dictionary<MovingMovable, BaseMovable> MovingEntities;
 
         public ExpiringSpatialHashCollisionSystem(IPossibleMovements possibleMovements) : base(possibleMovements)
         {
             _spatialHash = new SpatialHashCollisionSystem<T>(possibleMovements);
-            OccupiedTiles = new Dictionary<Point, MovingMovable>();
+            OccupiedTiles = new RoundingDictionary<MovingMovable>(new Point(16, 16));
             MovingEntities = new Dictionary<MovingMovable, BaseMovable>();
         }
 
@@ -59,7 +59,6 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 }
                 OccupiedTiles[startPosition] = movingEntity;
                 MovingEntities[movingEntity] = node;
-                node.Position = endPosition.ToVector2();
             }
             return validMove;
         }
@@ -76,7 +75,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
                 moving.Key.Update(gameTime);
             }
             var keysToRemove = new Dictionary<Point, MovingMovable>();
-            foreach (var item in OccupiedTiles)
+            foreach (var item in OccupiedTiles.Dictionary)
             {
                 var expiringKey = item.Value;
                 if (expiringKey.Complete)

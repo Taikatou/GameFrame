@@ -6,12 +6,12 @@ namespace GameFrame.Common
 {
     public class MovingMovable : ICompleteAble
     {
-        public bool Complete => TimeLeft <= 0;
-        public float TimeLeft { get; internal set; }
+        public bool Complete => Time <= 0;
+        public float Time { get; internal set; }
         public float TotalTime { get; }
         public EventHandler OnCompleteEvent { get; set; }
-        public float Progress => Complete ? 0.0f : TimeLeft / TotalTime;
-        private BaseMovable _moving;
+        public float Progress => Complete ? 100.0f : Time / TotalTime;
+        private readonly BaseMovable _moving;
         private Vector2 _firstPosition;
 
         public void InvokeCompleteEvent()
@@ -23,7 +23,7 @@ namespace GameFrame.Common
         {
             _moving = moving;
             _firstPosition = new Vector2(_moving.Position.X, _moving.Position.Y);
-            TimeLeft = time;
+            Time = 0;
             TotalTime = time;
         }
 
@@ -31,7 +31,8 @@ namespace GameFrame.Common
         {
             if (!Complete)
             {
-                TimeLeft -= time.ElapsedGameTime.Milliseconds;
+                Time += time.ElapsedGameTime.Milliseconds;
+                _moving.Position = _firstPosition + _moving.MovingDirection*Progress;
             }
         }
     }

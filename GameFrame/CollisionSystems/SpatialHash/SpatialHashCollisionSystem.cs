@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using GameFrame.Common;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 
@@ -6,11 +6,11 @@ namespace GameFrame.CollisionSystems.SpatialHash
 {
     public class SpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>
     {
-        public readonly Dictionary<Point, T> SpatialHash;
+        public readonly RoundingDictionary<T> SpatialHash;
 
         public SpatialHashCollisionSystem(IPossibleMovements possibleMovements) : base(possibleMovements)
         {
-            SpatialHash = new Dictionary<Point, T>();
+            SpatialHash = new RoundingDictionary<T>(new Point(16, 16));
         }
 
         public override void AddNode(Point position, T node)

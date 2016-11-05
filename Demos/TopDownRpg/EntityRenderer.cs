@@ -22,12 +22,12 @@ namespace Demos.TopDownRpg
             get
             {
                 var value = Entity.Position;
-                var startPoint = Entity.Position.ToPoint();
+                /*var startPoint = Entity.Position.ToPoint();
                 if (_spaitalHash.Moving(startPoint))
                 {
                     var movedBy = Entity.MovingDirection * _spaitalHash.Progress(startPoint);
                     value = Entity.Position - movedBy;
-                }
+                }*/
                 return value;
             }
             set { Entity.Position = value; }
