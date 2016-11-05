@@ -77,11 +77,15 @@
     <Compile Include="Activity1.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveAndLoad.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Scripts\hello.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
+    <AndroidAsset Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
@@ -124,7 +128,6 @@
     <None Include="PluginsHelp\SettingsReadme.txt" />
   </ItemGroup>
   <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
-  <Import Project="..\Demos.Content\Demos.Content.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

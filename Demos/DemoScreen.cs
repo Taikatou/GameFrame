@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using System.Diagnostics;
 
 namespace Demos
 {
@@ -43,19 +42,20 @@ namespace Demos
             _clickController = new ClickController();
             _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
-                CheckHit(mouseState.Position);
+                CheckHit(mouseState.Position.ToVector2());
             };
             var moveGesture = new SmartGesture(GestureType.Tap);
             moveGesture.GestureEvent += gesture =>
             {
-                CheckHit(gesture.Position.ToPoint());
+                CheckHit(gesture.Position);
             };
             _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
         }
 
-        public void CheckHit(Point point)
+        public void CheckHit(Vector2 point)
         {
-            if (_backButton.Hit(point))
+            point = _camera.ScreenToWorld(point);
+            if (_backButton.Hit(point.ToPoint()))
             {
                 Action action = Show<MainMenuScreen>;
                 action.Invoke();

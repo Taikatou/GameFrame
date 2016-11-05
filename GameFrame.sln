@@ -23,16 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrame.ContentPipeline",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrame.Tests", "GameFrame.Tests\GameFrame.Tests.csproj", "{53D6F8B6-0164-41C3-A1AD-BDD267E99F10}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Demos.Content", "Demos.Content\Demos.Content.shproj", "{46C869C6-B730-45F1-BC44-D0F4ECBD082D}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Demos.Content\Demos.Content.projitems*{46c869c6-b730-45f1-bc44-d0f4ecbd082d}*SharedItemsImports = 13
-		Demos.Content\Demos.Content.projitems*{92c3bb58-e56e-4fa0-ad15-83a1df2eebd9}*SharedItemsImports = 4
 		Demos.MobileShared\Demos.MobileShared.projitems*{92c3bb58-e56e-4fa0-ad15-83a1df2eebd9}*SharedItemsImports = 4
-		Demos.Content\Demos.Content.projitems*{cdaf3542-c333-4ddd-a50f-b339f6acc208}*SharedItemsImports = 4
 		Demos.MobileShared\Demos.MobileShared.projitems*{e4dc2861-65f1-460e-bcf9-b91d32bf6423}*SharedItemsImports = 13
-		Demos.Content\Demos.Content.projitems*{edf56dfb-9b3c-4acc-95cd-5c363cd4da30}*SharedItemsImports = 4
 		Demos.MobileShared\Demos.MobileShared.projitems*{edf56dfb-9b3c-4acc-95cd-5c363cd4da30}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -462,6 +456,5 @@ Global
 		{92C3BB58-E56E-4FA0-AD15-83A1DF2EEBD9} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
 		{E4DC2861-65F1-460E-BCF9-B91D32BF6423} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
 		{53D6F8B6-0164-41C3-A1AD-BDD267E99F10} = {6DC370DA-5966-4B2D-B82F-F451AE18B450}
-		{46C869C6-B730-45F1-BC44-D0F4ECBD082D} = {ABC52BB5-5C92-4F8E-8A0A-172F0407CEDE}
 	EndGlobalSection
 EndGlobal

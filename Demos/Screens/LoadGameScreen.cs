@@ -1,10 +1,12 @@
 ﻿using System;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.Screens
 {
     public class LoadGameScreen : MenuScreen
     {
-        public LoadGameScreen(IServiceProvider serviceProvider) : base(serviceProvider)
+        public LoadGameScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider)
+            : base(viewPort, serviceProvider)
         {
         }
 
