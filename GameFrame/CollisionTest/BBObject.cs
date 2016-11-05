@@ -1,51 +1,32 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace GameFrame.CollisionTest
 {
     public class BBObject
     {
-        Texture2D texture;
+        public Texture2D Texture;
         public Vector2 Position;
         public Vector2 Velocity;
 
-
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle(
-                    (int)Position.X,
-                    (int)Position.Y, 
-                    texture.Width, 
-                    texture.Height);
-            }
-        }
+        public Rectangle BoundingBox => new Rectangle((int)Position.X,(int)Position.Y,Texture.Width,Texture.Height);
 
         public BBObject(Texture2D texture, Vector2 position)
         {
-            this.texture = texture;
-            this.Position = position;
+            this.Texture = texture;
+            Position = position;
         }
 
         public BBObject(Texture2D texture, Vector2 position, Vector2 velocity)
         {
-            this.texture = texture;
-            this.Position = position;
-            this.Velocity = velocity;
+            this.Texture = texture;
+            Position = position;
+            Velocity = velocity;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
-        }
-
-        public BBObject Clone()
-        {
-            Debug.WriteLine("Cloning BBObject");
-            return (BBObject)this.MemberwiseClone();
+            spriteBatch.Draw(Texture, Position, Color.White);
         }
     }
 }
