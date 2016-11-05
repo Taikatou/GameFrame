@@ -9,15 +9,14 @@ using MonoGame.Extended;
 using GameFrame.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
-using System.Xml.Serialization;
-// ReSharper disable PossibleLossOfFraction
+using Demos.Common;
 
 namespace Demos.Pong
 {
     public class PongGame : IGameMode
     {
-        private string type;
-        KeyboardState _keyboardState;
+        private string _type;
+        private KeyboardState _keyboardState;
         public BBObject PlayerOne;
         public BBObject PlayerTwo;
         public BBObject Ball;
@@ -25,11 +24,11 @@ namespace Demos.Pong
         private readonly BBCollisionSubject _collisionSubject;
         private readonly Texture2D _paddleTexture;
         private readonly Texture2D _ballTexture;
-        private readonly ContentManager _content;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
+        private ContentManager _content;
 
-        public PongGame(ViewportAdapter viewPort, ContentManager _content)
+        public PongGame(ViewportAdapter viewPort)
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
@@ -52,7 +51,7 @@ namespace Demos.Pong
             Ball = new BBObject(_ballTexture, position, new Vector2(2.0f, 2.0f));
 
            
-            _playerCollision = new BBCollision(Ball, PlayerOne, PlayerTwo);
+            _playerCollision = new BBCollision(Ball, PlayerOne, PlayerTwo, ScreenSize.Width, ScreenSize.Height);
         
             _collisionSubject = _playerCollision.GetBbCollisionSubject();
 
@@ -104,15 +103,15 @@ namespace Demos.Pong
 
             _playerCollision.CheckTwoPlayerCollision();
             Ball.Velocity = _collisionSubject.GetVelocity();
-            type = _collisionSubject.GetCollisionType();
+            _type = _collisionSubject.GetCollisionType();
 
-            if (type.Contains("Right"))
+            if (_type.Contains("Right"))
             {
                 Debug.WriteLine("Player 1 Scored");
                 SetInStartPostion();
                 _collisionSubject.SetCollisionType("");
             }
-            else if (type.Contains("Left"))
+            else if (_type.Contains("Left"))
             {
                 Debug.WriteLine("Player 2 Scored");
                 SetInStartPostion();
