@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using System.Diagnostics;
 
 namespace Demos
 {
@@ -43,7 +42,6 @@ namespace Demos
             _clickController = new ClickController();
             _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
-                Debug.WriteLine("" + mouseState.Position);
                 CheckHit(mouseState.Position);
             };
             var moveGesture = new SmartGesture(GestureType.Tap);

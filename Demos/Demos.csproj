@@ -39,8 +39,6 @@
     <Compile Include="DemoGame.cs" />
     <Compile Include="DemoScreen.cs" />
     <Compile Include="Platformer\Entity.cs" />
-    <Compile Include="Pong\PongGame.cs" />
-    <Compile Include="Pong\PongScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puzzle\PuzzleScreen.cs" />
     <Compile Include="Screens\AudioOptionsScreen.cs" />
