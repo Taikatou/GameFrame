@@ -14,7 +14,6 @@ namespace Demos
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private ViewportAdapter viewportAdapter;
         private readonly ScreenComponent _screenComponent;
 
         public DemoGame()
@@ -31,8 +30,6 @@ namespace Demos
             _screenComponent.Register(new VideoOptionsScreen(Services));
             _screenComponent.Register(new KeyboardOptionsScreen(Services));
             _screenComponent.Register(new MouseOptionsScreen(Services));
-            _screenComponent.Register(new PuzzleScreen());
-            //_screenComponent.Register(new PongScreen());
         }
 
         protected override void LoadContent()
