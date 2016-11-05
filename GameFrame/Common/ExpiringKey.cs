@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameFrame.Common
 {
-    public class ExpiringKey
+    public class ExpiringKey : ICompleteAble
     {
         public bool Complete => TimeLeft <= 0;
         public float TimeLeft { get; internal set; }
