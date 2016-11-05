@@ -14,7 +14,7 @@ namespace GameFrame.CollisionSystems.Tiled
             _spatialHash = new SpatialHashCollisionSystem<TiledObject>(possibleMovements);
             foreach(var teleporter in teleporters.Objects)
             {
-                var point = teleporter.Position.ToPoint() / tileSize;
+                var point = teleporter.Position.ToPoint();
                 _spatialHash.AddNode(point, teleporter);
             }
         }
