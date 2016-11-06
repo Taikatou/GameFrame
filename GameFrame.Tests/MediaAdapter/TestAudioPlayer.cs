@@ -4,8 +4,6 @@ using GameFrame.MediaAdapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Screens;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Tests.MediaAdapter
@@ -13,13 +11,10 @@ namespace GameFrame.Tests.MediaAdapter
     [TestClass]
     public class TestAudioPlayer : GameFrameGame
     {
-        private  GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private readonly ScreenComponent _screenComponent;
 
         public TestAudioPlayer()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             base.LoadContent();

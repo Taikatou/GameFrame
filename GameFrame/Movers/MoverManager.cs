@@ -6,11 +6,11 @@ namespace GameFrame.Movers
 {
     public class MoverManager : IUpdate
     {
-        public Dictionary<AbstractMovable, PathMover> Movers;
+        public Dictionary<BaseMovable, PathMover> Movers;
 
         public MoverManager()
         {
-            Movers = new Dictionary<AbstractMovable, PathMover>();
+            Movers = new Dictionary<BaseMovable, PathMover>();
         }
 
         public void AddMover(PathMover mover)
@@ -18,7 +18,7 @@ namespace GameFrame.Movers
             Movers[mover.ToMove] = mover;
         }
 
-        public void RemoveMover(AbstractMovable baseMover)
+        public void RemoveMover(BaseMovable baseMover)
         {
             if (Movers.ContainsKey(baseMover))
             {
@@ -29,7 +29,7 @@ namespace GameFrame.Movers
 
         public void Update(GameTime gameTime)
         {
-            var toRemoveList = new List<AbstractMovable>();
+            var toRemoveList = new List<BaseMovable>();
             foreach (var mover in Movers)
             {
                 mover.Value.Update(gameTime);
@@ -44,7 +44,7 @@ namespace GameFrame.Movers
             }
         }
 
-        public List<Point> PathPoints(AbstractMovable mover)
+        public List<Point> PathPoints(BaseMovable mover)
         {
             if (Movers.ContainsKey(mover))
             {

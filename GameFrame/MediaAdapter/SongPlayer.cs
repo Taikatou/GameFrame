@@ -9,7 +9,7 @@ namespace GameFrame.MediaAdapter
     public class SongPlayer : IAdvancedAudioPlayer
     {
 
-        private Song _song { get; set; }
+        private Song _song;
 
         public ContentManager Content { get; }
 
@@ -23,7 +23,7 @@ namespace GameFrame.MediaAdapter
             try
             {
                 _song = Content.Load<Song>(fileName);
-                System.Diagnostics.Debug.WriteLine("SongPlayer::play(): " + fileName);
+                System.Diagnostics.Debug.WriteLine("SongPlayer::PlayAudio(): " + fileName);
                 MediaPlayer.Play(_song);
                 MediaPlayer.Volume = 100;
                 MediaPlayer.IsRepeating = true;
@@ -38,14 +38,14 @@ namespace GameFrame.MediaAdapter
         public void PauseAudio()
         {
             MediaPlayer.Pause();
-            Debug.WriteLine("SongPlayer::Pause()");
+            Debug.WriteLine("SongPlayer::PauseAudio()");
 
         }
 
         public void ResumeAudio()
         {
             MediaPlayer.Resume();
-            Debug.WriteLine("SongPlayer::Resume()");
+            Debug.WriteLine("SongPlayer::ResumeAudio()");
 
         }
 

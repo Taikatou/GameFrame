@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Common;
@@ -7,7 +8,7 @@ using MonoGame.Extended;
 
 namespace GameFrame.Movers
 {
-    public class SpatialHashMoverManager<T> : IMoverManager<T>, IUpdate where T : AbstractMovable
+    public class SpatialHashMoverManager<T> : IMoverManager<T>, IUpdate where T : BaseMovable
     {
         private readonly AbstractCollisionSystem _abstractCollisionSystem;
         private readonly ExpiringSpatialHashCollisionSystem<T> _spatialHashLayer;
@@ -35,7 +36,8 @@ namespace GameFrame.Movers
                 var distance = (float)Distance.GetDistance(character.Position, position);
                 var timer = distance/character.Speed;
                 timer *= 1000; //milliseconds in second
-                if (_spatialHashLayer.MoveNode(startPoint, endPoint, character.OnMoveCompleteEvent, timer))
+                var moveEvent = character.OnMoveEvent + character.OnMoveCompleteEvent;
+                if (_spatialHashLayer.MoveNode(startPoint, endPoint, moveEvent, timer))
                 {
                     character.Position = position;
                     return true;

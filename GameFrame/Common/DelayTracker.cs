@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GameFrame.Movers;
+﻿using GameFrame.Movers;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -9,9 +8,9 @@ namespace GameFrame.Common
     {
         private Vector2 _cachedPosition;
         private Vector2 _endPosition;
-        private readonly AbstractMovable _follower;
-        private readonly AbstractMovable _following;
-        public DelayTracker(AbstractMovable follower, AbstractMovable following)
+        private readonly BaseMovable _follower;
+        private readonly BaseMovable _following;
+        public DelayTracker(BaseMovable follower, BaseMovable following)
         {
             _follower = follower;
             _following = following;

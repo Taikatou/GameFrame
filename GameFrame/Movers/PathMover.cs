@@ -8,7 +8,7 @@ namespace GameFrame.Movers
     public class PathMover : IUpdate
     {
         public readonly AbstractPath Path;
-        public AbstractMovable ToMove;
+        public BaseMovable ToMove;
         public Point NextPosition;
         public bool Complete => !Path.ToMove;
         public EventHandler OnCompleteEvent { get; set; }
@@ -20,7 +20,7 @@ namespace GameFrame.Movers
             OnCancelEvent?.Invoke(this, null);
         }
 
-        public PathMover(AbstractMovable toMove, AbstractPath path, ICompleteAble movementComplete)
+        public PathMover(BaseMovable toMove, AbstractPath path, ICompleteAble movementComplete)
         {
             MovementComplete = movementComplete;
             ToMove = toMove;
@@ -42,8 +42,11 @@ namespace GameFrame.Movers
             }
             else if(MovementComplete.Complete)
             {
-                ToMove.Moving = false;
-                OnCompleteEvent?.Invoke(this, null);
+                ToMove.OnMoveCompleteEvent += (sender, args) =>
+                {
+                    ToMove.Moving = false;
+                    OnCompleteEvent?.Invoke(this, null);
+                };
             }
         }
     }

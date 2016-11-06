@@ -9,7 +9,7 @@ namespace GameFrame.Renderers
     {
         private readonly Point _pointSize;
         private readonly Texture2D _endTexture;
-        public EndPointPathRenderer(MoverManager mover, AbstractMovable moving, Texture2D endTexture, Point pointSize) : base(mover, moving)
+        public EndPointPathRenderer(MoverManager mover, BaseMovable moving, Texture2D endTexture, Point pointSize) : base(mover, moving)
         {
             _pointSize = pointSize;
             _endTexture = endTexture;
