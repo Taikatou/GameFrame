@@ -15,7 +15,7 @@ namespace Demos.DesktopGl
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
 
             ITextToSpeech speech = new TextToSpeechImplementation();
-            speech.Speak("Welcome to GameFrame");
+            speech.Speak("Conor is worst programmer hahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahahhahahahahahahahahahahahahahaha");
 
             using (var game = new DemoGame())
                 game.Run();

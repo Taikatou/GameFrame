@@ -1,6 +1,4 @@
-﻿using System;
-using System.Speech.Synthesis;
-using System.Windows.Controls;
+﻿using System.Speech.Synthesis;
 using GameFrame.TextToSpeech;
 
 namespace Demos.DesktopGl
@@ -9,14 +7,13 @@ namespace Demos.DesktopGl
     {
         public void Speak(string text)
         {
-            using (var synth = new SpeechSynthesizer())
-            {
-                // Configure the audio output. 
-                synth.SetOutputToDefaultAudioDevice();
+            var synth = new SpeechSynthesizer();
 
-                // Speak a string synchronously.
-                synth.Speak(text);
-            }
+            // Configure the audio output. 
+            synth.SetOutputToDefaultAudioDevice();
+
+            // Speak a string asynchronously.
+            synth.SpeakAsync(text);
         }
     }
 }
