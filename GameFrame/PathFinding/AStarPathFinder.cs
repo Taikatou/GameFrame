@@ -108,7 +108,7 @@ namespace GameFrame.PathFinding
                 {
                     node = GetNode(fromNode.Location, location);
                 }
-                if (node != null)
+                if (node != null && !(node == _endNode && !ValidMovement(fromNode.Location, node.Location)))
                 {
                     // Already-open nodes are only added to the list if their G-value is lower going via this route.
                     if (node.ParentNode == null)

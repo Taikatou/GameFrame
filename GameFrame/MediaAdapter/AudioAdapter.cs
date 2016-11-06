@@ -1,39 +1,42 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace GameFrame.MediaAdapter
 {
-    public class AudioAdapter : IAudioPlayer
+    public class AudioAdapter : AudioPlayer
     {
-        public AudioPlayer AudioPlayer
-        {get; set; }
-
         public SongPlayer SongPlayer { get; set; }
 
-        public void Play(string audioType, string fileName)
+        public override void Play(string audioType, string fileName)
         {
             if (audioType.Equals("mp3", StringComparison.OrdinalIgnoreCase))
             {
                 SongPlayer = new SongPlayer();
-                SongPlayer.Play(fileName);
+                SongPlayer.PlayAudio(fileName);
             }
             else if (audioType.Equals("wav", StringComparison.OrdinalIgnoreCase))
             {
-                AudioPlayer = new AudioPlayer();
-                AudioPlayer.Play("wav",fileName);
+                base.Play("wav",fileName);
             }
         }
 
-        public void Pause()
+        public override void Pause()
         {
-            SongPlayer?.Pause();
-            AudioPlayer?.Pause();
+            SongPlayer?.PauseAudio();
+            base.Pause();
         }
 
        
-        public void Resume()
+        public override void Resume()
         {
-            SongPlayer?.Resume();
-            AudioPlayer?.Resume();
+            SongPlayer?.ResumeAudio();
+            base.Resume();
+        }
+
+        public override void Dispose()
+        {
+            Debug.WriteLine("AudioAdapter::Dispose()");
+            SongPlayer?.Dispose();
         }
     }
 }

@@ -43,7 +43,7 @@
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\StringToVector.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
-    <Compile Include="Controllers\EntityController.cs" />
+    <Compile Include="Controllers\BaseMovableController.cs" />
     <Compile Include="Controllers\IControllerSettings.cs" />
     <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
     <Compile Include="GameFrameScreen.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeStack.cs" />
+    <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="MediaAdapter\IAudioPlayer.cs" />
     <Compile Include="MediaAdapter\AudioAdapter.cs" />
     <Compile Include="MediaAdapter\SongPlayer.cs" />
+    <Compile Include="Movers\ExpiringSpatialHashMovementComplete.cs" />
     <Compile Include="Movers\IMoverManager.cs" />
     <Compile Include="Movers\BaseMovable.cs" />
     <Compile Include="Movers\ISpeed.cs" />
@@ -120,6 +122,9 @@
     <Compile Include="State\IStateModifier.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ink-engine-pcl">
+      <HintPath>..\Dependencies\ink-engine-pcl.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
@@ -127,7 +132,9 @@
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GUI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

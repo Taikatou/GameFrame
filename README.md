@@ -18,6 +18,8 @@ Service Locator
 
 Factory
 
+Decorator
+
 ###In progress
 Observer
 

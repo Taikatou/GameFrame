@@ -1,7 +1,7 @@
 ﻿using System;
 using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
-using GameFrame;
+using Demos.TopDownRpg.SpeedState;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Controllers;
@@ -39,15 +39,23 @@ namespace Demos.TopDownRpg
             var player = openWorldGameMode.PlayerEntity;
             var tileSize = new Point(map.TileWidth, map.TileHeight);
             var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-            openWorldGameMode.PlayerEntity.OnMoveCompleteEvent += (sender, args) =>
+            openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
             {
                 var random = new Random();
                 var point = player.Position.ToPoint();
                 var grassCollision = grassCollisionSystem.CheckCollision(point);
                 var grassProbability = random.Next(BattleProbability);
-                if (grassCollision && grassProbability == 0)
+                if (grassCollision)
                 {
-                    GameModes.Push(new BattleGameMode());
+                    player.SpeedContext.Terrain = new SpeedGrass();
+                    if (grassProbability == 0)
+                    {
+                        GameModes.Push(new BattleGameMode());
+                    }
+                }
+                else if(player.SpeedContext.Terrain != null)
+                {
+                    player.SpeedContext.Terrain = null;
                 }
 
                 if (teleporters.CheckCollision(point))

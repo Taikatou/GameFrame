@@ -9,21 +9,25 @@ namespace GameFrame.Movers
     {
         public readonly AbstractPath Path;
         public BaseMovable ToMove;
+        public Point NextPosition;
         public bool Complete => !Path.ToMove;
-        public EventHandler OnCompleteEvent;
-        public EventHandler OnCancelEvent;
+        public EventHandler OnCompleteEvent { get; set; }
+        public EventHandler OnCancelEvent { get; set; }
+        public ICompleteAble MovementComplete;
 
         public void Cancel()
         {
             OnCancelEvent?.Invoke(this, null);
         }
 
-        public PathMover(BaseMovable toMove, AbstractPath path) 
+        public PathMover(BaseMovable toMove, AbstractPath path, ICompleteAble movementComplete)
         {
+            MovementComplete = movementComplete;
             ToMove = toMove;
             Path = path;
             ToMove.Moving = true;
             ToMove.MovingDirection = new Vector2();
+            NextPosition = new Point();
         }
 
         public void Update(GameTime gameTime)
@@ -33,12 +37,16 @@ namespace GameFrame.Movers
             if (Path.ToMove)
             {
                 var direction = Path.NextPosition - ToMove.Position.ToPoint();
+                NextPosition = Path.NextPosition;
                 ToMove.MovingDirection = direction.ToVector2();
             }
-            else if(ToMove.Moving)
+            else if(MovementComplete.Complete)
             {
-                ToMove.Moving = false;
-                OnCompleteEvent?.Invoke(this, null);
+                ToMove.OnMoveCompleteEvent += (sender, args) =>
+                {
+                    ToMove.Moving = false;
+                    OnCompleteEvent?.Invoke(this, null);
+                };
             }
         }
     }
