@@ -73,11 +73,24 @@
     <Compile Include="CollisionSystem\ExpiringSpatialHashCollisionSystem.cs" />
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
     <Compile Include="Common\CommonTest.cs" />
+    <Compile Include="Controller\ControllerTest.cs" />
     <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
     <Compile Include="Paths\PathTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Demos.DesktopGl\Demos.DesktopGl.csproj">
+      <Project>{cdaf3542-c333-4ddd-a50f-b339f6acc208}</Project>
+      <Name>Demos.DesktopGl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demos\Demos.csproj">
+      <Project>{a0778009-be06-4dd2-8f41-8e9f665f385f}</Project>
+      <Name>Demos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameFrame.ContentPipeline\GameFrame.ContentPipeline.csproj">
+      <Project>{62b3b29a-65d1-4140-af65-939b52887db6}</Project>
+      <Name>GameFrame.ContentPipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameFrame\GameFrame.csproj">
       <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
       <Name>GameFrame</Name>
