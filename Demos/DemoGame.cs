@@ -1,4 +1,6 @@
-﻿using Demos.Pong;
+﻿using System.Collections.Generic;
+using Demos.Common;
+using Demos.Pong;
 using Demos.Puzzle;
 using Demos.Screens;
 using Demos.TopDownRpg;
@@ -14,7 +16,6 @@ namespace Demos
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private ViewportAdapter viewportAdapter;
         private readonly ScreenComponent _screenComponent;
 
         public DemoGame()
@@ -23,29 +24,30 @@ namespace Demos
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             Components.Add(_screenComponent = new ScreenComponent(this));
-
-            _screenComponent.Register(new MainMenuScreen(Services, this));
-            _screenComponent.Register(new LoadGameScreen(Services));
-            _screenComponent.Register(new OptionsScreen(Services));
-            _screenComponent.Register(new AudioOptionsScreen(Services));
-            _screenComponent.Register(new VideoOptionsScreen(Services));
-            _screenComponent.Register(new KeyboardOptionsScreen(Services));
-            _screenComponent.Register(new MouseOptionsScreen(Services));
-            _screenComponent.Register(new PuzzleScreen());
-            //_screenComponent.Register(new PongScreen());
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
-            var demoScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
-            var pongScene = new PongScreen(viewportAdapter, _spriteBatch);
-            pongScene.LoadContent();
-            demoScene.LoadContent();
-            _screenComponent.Register(demoScene);
-            _screenComponent.Register(pongScene);
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
+            var screens = new List<Screen>
+            {
+                new MainMenuScreen(viewportAdapter, Services, this),
+                new LoadGameScreen(viewportAdapter, Services),
+                new OptionsScreen(viewportAdapter, Services),
+                new AudioOptionsScreen(viewportAdapter, Services),
+                new VideoOptionsScreen(viewportAdapter, Services),
+                new KeyboardOptionsScreen(viewportAdapter, Services),
+                new MouseOptionsScreen(viewportAdapter, Services),
+                new TopDownRpgScene(viewportAdapter, _spriteBatch),
+                new PongScreen(viewportAdapter, _spriteBatch)
+            };
+            foreach (var screen in screens)
+            {
+                screen.LoadContent();
+                _screenComponent.Register(screen);
+            }
         }
 
         protected override void Draw(GameTime gameTime)

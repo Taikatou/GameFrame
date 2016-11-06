@@ -16,7 +16,7 @@ namespace Demos.TopDownRpg
         public Rectangle FrameRectangle;
         public Vector2 Offset { get; }
 
-        public Vector2 ScreenPosition
+        public Vector2 Position
         {
             get
             {
@@ -30,11 +30,6 @@ namespace Demos.TopDownRpg
                 }
                 return value;
             }
-        }
-
-        public Vector2 Position
-        {
-            get { return Entity.Position; }
             set { Entity.Position = value; }
         }
 
@@ -43,16 +38,14 @@ namespace Demos.TopDownRpg
             _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
             Entity = entity;
             _tileSize = tileSize;
-            Offset = new Vector2(_tileSize.X / 2, _tileSize.Y / 2);
+            Offset = _tileSize.ToVector2();
             _spaitalHash = spaitalHash;
             FrameRectangle = new Rectangle(new Point(), _tileSize);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_entityTexture, ScreenPosition, FrameRectangle, Color.White);
+            spriteBatch.Draw(_entityTexture, Position, FrameRectangle, Color.White);
         }
-
-        
     }
 }
