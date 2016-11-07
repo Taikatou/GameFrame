@@ -22,9 +22,7 @@ Abstract Factory ???
 
 Observer = Andrew
 
-###In progress
-
-Prototype
+Prototype = Cathal
 
 ###Todo
 Interceptor
