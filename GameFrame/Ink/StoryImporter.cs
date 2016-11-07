@@ -9,7 +9,7 @@ namespace GameFrame.Ink
         public static Story ReadStory(string textFile)
         {
             var textReader = StaticServiceLocator.GetService<ISaveAndLoad>();
-            var storyText = textReader.LoadText(textFile);
+            var storyText = textReader.LoadText($"Scripts/{textFile}.json");
             return new Story(storyText);
         }
     }

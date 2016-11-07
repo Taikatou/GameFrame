@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Demos.TopDownRpg.SpeedState;
+using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
@@ -13,7 +14,7 @@ namespace Demos.TopDownRpg
         [JsonProperty("name")]
         public string Name;
 
-        [JsonProperty("sprite_sheet")]
+        [JsonProperty("sprite-sheet")]
         public string SpriteSheet;
 
         [JsonProperty("script")]
@@ -32,7 +33,10 @@ namespace Demos.TopDownRpg
 
         public virtual void Interact()
         {
-            
+            if (!string.IsNullOrEmpty(Script))
+            {
+                var story = StoryImporter.ReadStory(Script);
+            }
         }
 
         public static Entity Import(string fileName)
