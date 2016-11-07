@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrame.ContentPipeline",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrame.Tests", "GameFrame.Tests\GameFrame.Tests.csproj", "{53D6F8B6-0164-41C3-A1AD-BDD267E99F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceInvaders", "Lab 3 - Invaders\SpaceInvaders.csproj", "{908DD367-E004-45CF-A91B-04AE44B65C15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceInvaders", "SpaceInvaders\SpaceInvaders.csproj", "{908DD367-E004-45CF-A91B-04AE44B65C15}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
