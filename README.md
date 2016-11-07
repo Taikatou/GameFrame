@@ -18,16 +18,19 @@ Service Locator = William
 
 Factory = William
 
-Abstract Factory ???
-
 Observer = Andrew
 
 Prototype = Cathal
 
 Decorator = Conor
 
+Interceptor = Conor
+
 ###Todo
-Interceptor
+
+Documentaion
+
+Unit testing
 
 
 ####Other features
