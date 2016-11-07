@@ -281,7 +281,6 @@ namespace SpaceInvaders
                     currentInvaderXSpace += invaderXSpacing;
                     var newInvaderPoint =
                         new Point(currentInvaderXSpace, currentInvaderYSpace);
-                    // Need to add more varied invader score values
                     var newInvader =
                         new Invader(currentInvaderType, newInvaderPoint, 10);
                     invaders.Add(newInvader);
