@@ -33,8 +33,16 @@ namespace GameFrame.Tests.Paths
         [TestMethod]
         public void PathTypesTest()
         {
+            var p1 = new Point(9,5);
+            var p2 = new Point(10,4);
+
             var eightWayPossibleMovement = new EightWayPossibleMovement(new CrowDistance());
+            eightWayPossibleMovement.GetAdjacentLocations(p2);
+            eightWayPossibleMovement.PositionsToCheck(p1, p2);
+
             PossibleMovementWrapper wrapper = new PossibleMovementWrapper(eightWayPossibleMovement);
+            wrapper.PositionsToCheck(p1, p2);
+            wrapper.GetAdjacentLocations(p1);
             Assert.AreEqual(wrapper.Heuristic,eightWayPossibleMovement.Heuristic);
 
             eightWayPossibleMovement = new EightWayPossibleMovement(new DiagonalDistance());
@@ -47,7 +55,12 @@ namespace GameFrame.Tests.Paths
 
 
             var fourWayPossibleMovement = new FourWayPossibleMovement(new CrowDistance());
+            fourWayPossibleMovement.PositionsToCheck(p1, p2);
+            fourWayPossibleMovement.GetAdjacentLocations(p2);
+
             wrapper = new PossibleMovementWrapper(fourWayPossibleMovement);
+            wrapper.PositionsToCheck(p1, p2);
+            wrapper.GetAdjacentLocations(p1);
             Assert.AreEqual(wrapper.Heuristic, fourWayPossibleMovement.Heuristic);
 
             fourWayPossibleMovement = new FourWayPossibleMovement(new DiagonalDistance());

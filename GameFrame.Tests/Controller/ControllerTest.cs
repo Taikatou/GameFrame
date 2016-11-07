@@ -23,7 +23,6 @@ namespace GameFrame.Tests.Controller
         public void SinglePLayerControllerFactoryTest()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            Instance = new ServiceLocator.ServiceLocator();
             var settings = new ControllerSettings();
             Instance.AddService<IControllerSettings>(settings);
             Instance.GetService<IControllerSettings>();
@@ -35,9 +34,19 @@ namespace GameFrame.Tests.Controller
             controller.AddGamePadButton(new List<IButtonAble>(), buttons);
             controller.AddKeyBoardButton(new List<IButtonAble>(), Keys.A);
 
+            var button = new KeyButton(Keys.A) {Button = Buttons.A};
+            var button2 = button.Button;
+
+
             var smart = new SmartController();
             smart.AddButton(new BaseSmartButton(new KeyButton(Keys.A)));
             smart.Update(new GameTime());
+        }
+
+        [TestMethod]
+        public void ControllersClickTest()
+        {
+           
         }
     }
 }
