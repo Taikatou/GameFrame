@@ -8,8 +8,8 @@
     <ProjectGuid>{908DD367-E004-45CF-A91B-04AE44B65C15}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lab_3___Invaders</RootNamespace>
-    <AssemblyName>Lab 3 - Invaders</AssemblyName>
+    <RootNamespace>SpaceInvaders</RootNamespace>
+    <AssemblyName>SpaceInvaders</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
