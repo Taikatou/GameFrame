@@ -24,6 +24,8 @@ Observer = Andrew
 
 Prototype = Cathal
 
+Decorator = Conor
+
 ###Todo
 Interceptor
 
