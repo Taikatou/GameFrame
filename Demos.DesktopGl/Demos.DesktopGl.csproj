@@ -112,6 +112,9 @@
     <Content Include="Content\TopDownRpg\PathEnd.png" />
     <Content Include="Content\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.png" />
     <Content Include="Content\TopDownRpg\tileset.png" />
+    <None Include="Entities\test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -127,6 +130,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Content\Content.mgcb" />
     <None Include="Content\TopDownRpg\Fonts\montserrat-32.fnt" />
     <None Include="Content\TopDownRpg\level01.tmx" />

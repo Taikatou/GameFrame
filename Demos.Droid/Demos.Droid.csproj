@@ -83,6 +83,7 @@
     <AndroidAsset Include="Assets\Scripts\hello.ink.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidAsset Include="Assets\AboutAssets.txt" />
