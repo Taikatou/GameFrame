@@ -6,6 +6,6 @@ namespace GameFrame.CollisionTest
 {
     public interface IObserver
     {
-        void Update(Vector2 vel, string type);
+        void Update(string type);
     }
 }
