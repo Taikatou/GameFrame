@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using GameFrame.CollisionTest;
 
 namespace SpaceInvaders
 {
@@ -14,9 +15,12 @@ namespace SpaceInvaders
         private Rectangle formArea;
         private int framesSkipped = 6;
 
+        private List<BBObject> EnemyShotsPlayer;
+        private List<BBObject> PlayerShotsEnemies;
+
         private Direction invaderDirection;
         private readonly List<Invader> invaders; 
-        private readonly List<Shot> invaderShots;
+        private List<Shot> invaderShots;
         private int livesLeft = 5;
         private readonly PointF livesLocation;
 
@@ -91,7 +95,7 @@ namespace SpaceInvaders
 
         public void FireShot()
         {
-            if (playerShots.Count < 2)
+            if (playerShots.Count < 4)
             {
                 Shot newShot = new Shot(
                     new Point(playerShip.Location.X + playerShip.image.Width/2
@@ -229,18 +233,19 @@ namespace SpaceInvaders
             List<Shot> deadPlayerShots = new List<Shot>();
             List<Shot> deadInvaderShots = new List<Shot>();
 
-            foreach (Shot shot in invaderShots)
+            foreach (Shot shot in invaderShots.Reverse<Shot>())
                 if (playerShip.Area.Contains(shot.Location))
                 {
-                    deadInvaderShots.Add(shot);
+                    deadPlayerShots.Add(shot);
                     livesLeft--;
+                    invaderShots.Clear();
+                    playerShots.Clear();
                     playerShip.Alive = false;
                     if (livesLeft == 0)
                         GameOver(this, null);
-                    // worth checking for gameOver state here too?
                 }
 
-            foreach (Shot shot in playerShots)
+            foreach (Shot shot in playerShots.Reverse<Shot>())
             {
                 var deadInvaders = new List<Invader>();
                 foreach (var invader in invaders)
@@ -250,6 +255,7 @@ namespace SpaceInvaders
                         deadInvaderShots.Add(shot);
                         // Score multiplier based on wave
                         score = score + 1*wave;
+                        playerShots.Remove(shot);
                     }
                 foreach (var invader in deadInvaders)
                     invaders.Remove(invader);
