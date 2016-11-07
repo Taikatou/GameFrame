@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{645B4968-1B54-41A3-A490-CB10C10CDC83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameFrame</RootNamespace>
+    <AssemblyName>GameFrame</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
+    <Compile Include="CollisionTest\BBCollisionObserver.cs" />
+    <Compile Include="CollisionTest\BBCollisionSubject.cs" />
+    <Compile Include="CollisionTest\BBObjectPrototype.cs" />
+    <Compile Include="CollisionTest\CollisionType.cs" />
+    <Compile Include="Common\DelayTracker.cs" />
+    <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\StringToVector.cs" />
+    <Compile Include="Controllers\ControllerFactory.cs" />
+    <Compile Include="Controllers\BaseMovableController.cs" />
+    <Compile Include="Controllers\IControllerSettings.cs" />
+    <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
+    <Compile Include="GameFrameScreen.cs" />
+    <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\AbstractCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\ExpiringSpatialHashCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\AbstractSpatialHashCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\SpatialHash\SpatialHashCollisionSystem.cs" />
+    <Compile Include="CollisionSystems\Tiled\TiledCollisionSystem.cs" />
+    <Compile Include="CollisionTest\BBCollision.cs" />
+    <Compile Include="CollisionTest\BBObject.cs" />
+    <Compile Include="CollisionTest\IObserver.cs" />
+    <Compile Include="CollisionTest\ISubject.cs" />
+    <Compile Include="Common\ExpiringKey.cs" />
+    <Compile Include="Common\CameraTracker.cs" />
+    <Compile Include="Common\IFocusAble.cs" />
+    <Compile Include="Common\FollowTracker.cs" />
+    <Compile Include="Content\ContentManagerFactory.cs" />
+    <Compile Include="Controllers\ButtonMethods.cs" />
+    <Compile Include="Controllers\Click\ClickController.cs" />
+    <Compile Include="Controllers\Click\MouseClick\MouseControl.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\SmartGesture.cs" />
+    <Compile Include="Controllers\Click\TouchScreen\TouchScreenControl.cs" />
+    <Compile Include="Controllers\GamePad\AbstractGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\DirectionGamePadButton.cs" />
+    <Compile Include="Controllers\GamePad\GamePadButton.cs" />
+    <Compile Include="Controllers\KeyBoard\KeyButton.cs" />
+    <Compile Include="Controllers\IButtonAble.cs" />
+    <Compile Include="Controllers\GamePad\JoyStick.cs" />
+    <Compile Include="Controllers\SmartButton\AbstractSmartButton.cs" />
+    <Compile Include="Controllers\SmartButton\BaseSmartButton.cs" />
+    <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
+    <Compile Include="Controllers\SmartController.cs" />
+    <Compile Include="GameFrameGame.cs" />
+    <Compile Include="GameModeStack.cs" />
+    <Compile Include="ICompleteAble.cs" />
+    <Compile Include="IGameMode.cs" />
+    <Compile Include="Ink\StoryImporter.cs" />
+    <Compile Include="IPrototype.cs" />
+    <Compile Include="IRenderable.cs" />
+    <Compile Include="MediaAdapter\AudioPlayer.cs" />
+    <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
+    <Compile Include="MediaAdapter\IAudioPlayer.cs" />
+    <Compile Include="MediaAdapter\AudioAdapter.cs" />
+    <Compile Include="MediaAdapter\SongPlayer.cs" />
+    <Compile Include="Movers\ExpiringSpatialHashMovementComplete.cs" />
+    <Compile Include="Movers\IMoverManager.cs" />
+    <Compile Include="Movers\BaseMovable.cs" />
+    <Compile Include="Movers\ISpeed.cs" />
+    <Compile Include="Movers\MoverManager.cs" />
+    <Compile Include="Movers\PathMover.cs" />
+    <Compile Include="Movers\SpatialHashMoverManager.cs" />
+    <Compile Include="PathFinding\AStarPathFinder.cs" />
+    <Compile Include="PathFinding\Heuristics\CrowDistance.cs" />
+    <Compile Include="PathFinding\Heuristics\DiagonalDistance.cs" />
+    <Compile Include="PathFinding\Heuristics\IHeuristic.cs" />
+    <Compile Include="PathFinding\Heuristics\ManhattanDistance.cs" />
+    <Compile Include="PathFinding\Node.cs" />
+    <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
+    <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
+    <Compile Include="PathFinding\PossibleMovements\PossibleMovementWrapper.cs" />
+    <Compile Include="PathFinding\SearchParameters.cs" />
+    <Compile Include="Paths\Cyclical\CyclicalCounter.cs" />
+    <Compile Include="Paths\Cyclical\CyclicalPath.cs" />
+    <Compile Include="Paths\Reversing\ReversingCounter.cs" />
+    <Compile Include="Paths\Reversing\ReversingPath.cs" />
+    <Compile Include="Paths\FinitePath.cs" />
+    <Compile Include="Paths\AbstractPath.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\AbstractPathRenderer.cs" />
+    <Compile Include="Renderers\EndPointPathRenderer.cs" />
+    <Compile Include="Renderers\PathRenderer.cs" />
+    <Compile Include="ServiceLocator\IServiceLocator.cs" />
+    <Compile Include="ServiceLocator\ServiceLocator.cs" />
+    <Compile Include="ServiceLocator\StaticServiceLocator.cs" />
+    <Compile Include="Services\ISaveAndLoad.cs" />
+    <Compile Include="State\IStateEvent.cs" />
+    <Compile Include="State\IStateModifier.cs" />
+    <Compile Include="TextToSpeech\ITextToSpeech.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ink-engine-pcl">
+      <HintPath>..\Dependencies\ink-engine-pcl.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Neo.Lua, Version=5.3.0.0, Culture=neutral, PublicKeyToken=fdb0cd4fe8a6e3b2, processorArchitecture=MSIL">
+      <HintPath>..\packages\NeoLua.1.2.8\lib\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\Neo.Lua.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
