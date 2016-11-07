@@ -15,7 +15,7 @@ namespace SpaceInvaders
         private int framesSkipped = 6;
 
         private Direction invaderDirection;
-        private readonly List<Invader> invaders;
+        private readonly List<Invader> invaders; 
         private readonly List<Shot> invaderShots;
         private int livesLeft = 5;
         private readonly PointF livesLocation;

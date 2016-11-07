@@ -10,7 +10,6 @@ namespace GameFrame.CollisionTest
 {
     public class BBCollisionObserver : IObserver
     {
-        private Vector2 vel;
         private string collisionType;
         private static int observerIDTracker = 0;
         private int _observerId;
@@ -24,16 +23,15 @@ namespace GameFrame.CollisionTest
         }
 
 
-        public void Update(Vector2 velocity, string type)
+        public void Update(string type)
         {
-            this.vel = velocity;
             this.collisionType = type;
             PrintData();
         }
 
         public void PrintData()
         {
-            Debug.WriteLine("Velocity : " + vel + "  Collision Type : " + collisionType);
+            Debug.WriteLine("Collision Type : " + collisionType);
         }
     }
 }
