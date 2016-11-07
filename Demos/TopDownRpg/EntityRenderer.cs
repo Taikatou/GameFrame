@@ -35,7 +35,7 @@ namespace Demos.TopDownRpg
 
         public EntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
         {
-            _entityTexture = content.Load<Texture2D>("TopDownRpg/Character");
+            _entityTexture = content.Load<Texture2D>($"TopDownRpg/{entity.SpriteSheet}");
             Entity = entity;
             _tileSize = tileSize;
             Offset = _tileSize.ToVector2();

@@ -1,5 +1,5 @@
 ﻿{
   "name": "Test",
   "sprite-sheet": "Character",
-  "script":  ""  
+  "script":  "hello.ink"  
 }
