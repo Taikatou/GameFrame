@@ -6,32 +6,32 @@ Install Visual Studio or MonoDevelop
 Install Monogame 3.5
 
 ### Completed design patterns;
-Adapter
+Adapter = William
 
-Bridge
+Bridge = Conor + Andrew
 
-Command
+Command = Conor
 
-State
+State = William + Conor
 
-Service Locator
+Service Locator = William
 
-Factory
+Factory = William
 
-Decorator
+Abstract Factory ???
 
-###In progress
-Observer
+Observer = Andrew
 
-Prototype
+Prototype = Cathal
 
 ###Todo
 Interceptor
 
 
-####Small things
-Get Service locato running
+####Other features
 
-Get Adapter Running
+Delegation = Command
 
-Maybe some test cases
+Testing = William
+
+Distribution = Conor

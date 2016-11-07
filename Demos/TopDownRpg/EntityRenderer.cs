@@ -20,7 +20,7 @@ namespace Demos.TopDownRpg
         {
             get
             {
-                var value = Entity.Position * _tileSize.ToVector2();
+                var value = (Entity.Position.ToPoint() * _tileSize).ToVector2();
                 var startPoint = Entity.Position.ToPoint();
                 if (_spaitalHash.Moving(startPoint))
                 {
