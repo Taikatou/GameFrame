@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using Lab_3___Invaders.Properties;
+using SpaceInvaders.Properties;
 
 namespace SpaceInvaders
 {
