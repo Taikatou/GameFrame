@@ -84,6 +84,7 @@
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="Ink\StoryImporter.cs" />
+    <Compile Include="IPrototype.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
     <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />

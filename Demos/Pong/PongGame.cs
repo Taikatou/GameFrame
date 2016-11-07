@@ -43,7 +43,7 @@ namespace Demos.Pong
             PlayerOne = new BBObject(_paddleTexture, position);
 
             position = new Vector2((800 - _paddleTexture.Width),(350 - _paddleTexture.Height) / 2);
-            PlayerTwo = PlayerOne.Clone();
+            PlayerTwo = PlayerOne.Clone() as BBObject;
             PlayerTwo.Position = position;
 
            
