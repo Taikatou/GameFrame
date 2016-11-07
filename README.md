@@ -12,7 +12,7 @@ Bridge = Conor + Andrew
 
 Command = Conor
 
-State = William + Conor
+State = William
 
 Service Locator = William
 
@@ -40,3 +40,5 @@ Delegation = Command
 Testing = William
 
 Distribution = Conor
+
+Continuos Int
