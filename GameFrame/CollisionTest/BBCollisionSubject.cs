@@ -34,14 +34,8 @@ namespace GameFrame.CollisionTest
         {
             foreach (IObserver ob in observers)
             {
-                ob.Update(vel, collisionType);
+                ob.Update(collisionType);
             }
-        }
-
-        public void SetVelocity(Vector2 velocity)
-        {
-            this.vel = velocity;
-            NotifyObservers();
         }
 
         public void SetCollisionType(string type)
@@ -50,10 +44,6 @@ namespace GameFrame.CollisionTest
             NotifyObservers();
         }
 
-        public Vector2 GetVelocity()
-        {
-            return vel;
-        }
 
         public string GetCollisionType()
         {
