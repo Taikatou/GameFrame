@@ -5,11 +5,12 @@ namespace GameFrame.Ink
 {
     public class StoryContext : IContext
     {
-        public string Text;
+        public string Text => _story.currentText;
+        private Story _story;
 
         public StoryContext(Story story)
         {
-            Text = story.currentText;
+            _story = story;
         }
     }
 }
