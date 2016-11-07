@@ -1,4 +1,5 @@
-﻿using GameFrame;
+﻿using System;
+using GameFrame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,22 +10,23 @@ namespace Demos
     {
 
         private readonly Texture2D _buttonTexture;
-        public Rectangle FrameRectangle;
+
+        public Rectangle Area { get; set; }
 
         public BackButton(ContentManager content)
         {
             _buttonTexture = content.Load<Texture2D>("DemoScreen/BackButton");
-            FrameRectangle= new Rectangle(15, 15, 45, 45);
+            Area = new Rectangle(15, 15, 45, 45);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_buttonTexture, FrameRectangle, Color.White);
+            spriteBatch.Draw(_buttonTexture, Area, Color.White);
         }
 
         public bool Hit(Point point)
         {
-            return FrameRectangle.Contains(point);
+            return Area.Contains(point);
         }
     }
 }

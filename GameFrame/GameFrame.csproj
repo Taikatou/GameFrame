@@ -83,7 +83,12 @@
     <Compile Include="GameModeStack.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
+    <Compile Include="Ink\StoryContext.cs" />
     <Compile Include="Ink\StoryImporter.cs" />
+    <Compile Include="Ink\StoryDispatcher.cs" />
+    <Compile Include="Interceptor\Context.cs" />
+    <Compile Include="Interceptor\Dispatcher.cs" />
+    <Compile Include="Interceptor\IInterceptor.cs" />
     <Compile Include="IPrototype.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
