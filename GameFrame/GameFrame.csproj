@@ -124,6 +124,7 @@
     <Compile Include="Services\ISaveAndLoad.cs" />
     <Compile Include="State\IStateEvent.cs" />
     <Compile Include="State\IStateModifier.cs" />
+    <Compile Include="TextToSpeech\ITextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ink-engine-pcl">
