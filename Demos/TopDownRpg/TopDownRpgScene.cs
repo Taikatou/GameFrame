@@ -5,6 +5,8 @@ using Demos.TopDownRpg.SpeedState;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Controllers;
+using GameFrame.Ink;
+using GameFrame.Interceptor;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
@@ -20,6 +22,7 @@ namespace Demos.TopDownRpg
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
+        private OpenWorldGameMode _openWorldGameMode;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
@@ -33,13 +36,13 @@ namespace Demos.TopDownRpg
             RendererFactory rendererFactory = new TwoDEntityRenderer();
 
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            var openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
-            var map = openWorldGameMode.Map;
+            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
+            var map = _openWorldGameMode.Map;
             var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
-            var player = openWorldGameMode.PlayerEntity;
+            var player = _openWorldGameMode.PlayerEntity;
             var tileSize = new Point(map.TileWidth, map.TileHeight);
             var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-            openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+            _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
             {
                 var random = new Random();
                 var point = player.Position.ToPoint();
@@ -66,7 +69,7 @@ namespace Demos.TopDownRpg
                     LoadOpenWorld(teleporter.Name);
                 }
             };
-            GameModes.Push(openWorldGameMode);
+            GameModes.Push(_openWorldGameMode);
         }
 
         public override void LoadContent()
@@ -83,6 +86,11 @@ namespace Demos.TopDownRpg
                 CurrentGameMode.Draw(_spriteBatch);
             }
             base.Draw(gameTime);
+        }
+
+        public void AddStoryInterceptor(IInterceptor<StoryContext> interceptor)
+        {
+            _openWorldGameMode.StoryDispatcher.AddInterceptor(interceptor);
         }
     }
 }

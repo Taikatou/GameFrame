@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Demos.TopDownRpg.Factory;
 using GameFrame;
@@ -15,6 +16,7 @@ using GameFrame.MediaAdapter;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
+using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
@@ -47,10 +49,12 @@ namespace Demos.TopDownRpg.GameModes
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private IAudioPlayer _audioAdapter;
+        public readonly StoryDispatcher StoryDispatcher;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
             //PlayMusic();
+            StoryDispatcher = new StoryDispatcher();
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -220,7 +224,11 @@ namespace Demos.TopDownRpg.GameModes
             {
                 PlayerEntity.FacingDirection = interactTarget.ToVector2() - PlayerEntity.Position;
                 var interactWith = _expiringSpatialHash.ValueAt(interactTarget);
-                interactWith?.Interact();
+                if (interactWith != null)
+                {
+                    var story = interactWith.Interact();
+                    StoryDispatcher.AddStory(story);
+                }
             }
         }
 
@@ -244,7 +252,10 @@ namespace Demos.TopDownRpg.GameModes
             Map.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {
-                toRender.Draw(spriteBatch);
+                if (Camera.Contains(toRender.Area) != ContainmentType.Disjoint)
+                {
+                    toRender.Draw(spriteBatch);
+                }
             }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();

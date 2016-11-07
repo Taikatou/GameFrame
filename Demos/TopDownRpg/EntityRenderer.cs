@@ -13,6 +13,7 @@ namespace Demos.TopDownRpg
         private Point _tileSize;
         public readonly Entity Entity;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
+        public Rectangle Area => new Rectangle(Position.ToPoint(), _tileSize);
         public Rectangle FrameRectangle;
         public Vector2 Offset { get; }
 
@@ -40,7 +41,7 @@ namespace Demos.TopDownRpg
             _tileSize = tileSize;
             Offset = _tileSize.ToVector2();
             _spaitalHash = spaitalHash;
-            FrameRectangle = new Rectangle(new Point(), _tileSize);
+            FrameRectangle = new Rectangle(new Point(), tileSize);
         }
 
         public void Draw(SpriteBatch spriteBatch)

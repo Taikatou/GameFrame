@@ -4,6 +4,7 @@ using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
+using Ink.Runtime;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -31,12 +32,14 @@ namespace Demos.TopDownRpg
             SpeedContext = new SpeedContext(4);
         }
 
-        public virtual void Interact()
+        public virtual Story Interact()
         {
+            Story story = null;
             if (!string.IsNullOrEmpty(Script))
             {
-                var story = StoryImporter.ReadStory(Script);
+                story = StoryImporter.ReadStory(Script);
             }
+            return story;
         }
 
         public static Entity Import(string fileName)
