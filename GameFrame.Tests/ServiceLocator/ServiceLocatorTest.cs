@@ -1,8 +1,10 @@
 ﻿using System;
 using Demos.DesktopGl;
 using GameFrame.Controllers;
+using GameFrame.Controllers.KeyBoard;
 using GameFrame.ServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameFrame.Tests.ServiceLocator
 {
@@ -12,9 +14,9 @@ namespace GameFrame.Tests.ServiceLocator
         [TestMethod]
         public void AddAndGetServiceTest()
         {
-            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            var settings = StaticServiceLocator.GetService<IControllerSettings>();
-            Assert.IsInstanceOfType(settings,typeof(IControllerSettings));
+            StaticServiceLocator.AddService<IButtonAble>(new KeyButton(Keys.A));
+            var settings = StaticServiceLocator.GetService<IButtonAble>();
+            Assert.IsInstanceOfType(settings,typeof(IButtonAble));
         }
 
         [TestMethod]
@@ -22,7 +24,7 @@ namespace GameFrame.Tests.ServiceLocator
         public void AddAndGetBadServiceTest()
         {
             var settings = StaticServiceLocator.GetService<IControllerSettings>();
-            //Assert.IsNotInstanceOfType(settings, typeof(IControllerSettings));
+            Assert.IsNotInstanceOfType(settings, typeof(IControllerSettings));
         }
     }
 }

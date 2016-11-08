@@ -23,8 +23,6 @@ namespace GameFrame.Tests.Controller
         public void SinglePLayerControllerFactoryTest()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            Instance.AddService<IControllerSettings>(new ControllerSettings());
-            Instance.GetService<IControllerSettings>();
 
             var controller = new SinglePlayerControllerFactory();
             controller.CreateEntityController(new BaseMovable(), new EightWayPossibleMovement(new CrowDistance()),
