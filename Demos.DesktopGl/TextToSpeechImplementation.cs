@@ -11,7 +11,7 @@ namespace Demos.DesktopGl
 
             // Configure the audio output. 
             synth.SetOutputToDefaultAudioDevice();
-            synth.Rate = 3;
+            synth.Rate = 0;
             synth.SelectVoiceByHints(VoiceGender.Male);
             // Speak a string asynchronously.
             synth.SpeakAsync(text);

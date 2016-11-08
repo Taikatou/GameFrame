@@ -151,9 +151,21 @@ namespace Demos.Droid
 			global::SQLite.Net.Platform.XamarinAndroidCipher.Resource.String.ApplicationName = global::Demos.Droid.Resource.String.ApplicationName;
 			global::SQLite.Net.Platform.XamarinAndroidCipher.Resource.String.Hello = global::Demos.Droid.Resource.String.Hello;
 			global::SQLite.Net.Platform.XamarinAndroidCipher.Resource.String.library_name = global::Demos.Droid.Resource.String.library_name;
+			global::Xamarin.Platforms.Android.Resource.Attribute.layoutManager = global::Demos.Droid.Resource.Attribute.layoutManager;
+			global::Xamarin.Platforms.Android.Resource.Attribute.reverseLayout = global::Demos.Droid.Resource.Attribute.reverseLayout;
+			global::Xamarin.Platforms.Android.Resource.Attribute.spanCount = global::Demos.Droid.Resource.Attribute.spanCount;
+			global::Xamarin.Platforms.Android.Resource.Attribute.stackFromEnd = global::Demos.Droid.Resource.Attribute.stackFromEnd;
+			global::Xamarin.Platforms.Android.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::Demos.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
+			global::Xamarin.Platforms.Android.Resource.Id.item_touch_helper_previous_elevation = global::Demos.Droid.Resource.Id.item_touch_helper_previous_elevation;
 			global::Xamarin.Platforms.Android.Resource.String.ApplicationName = global::Demos.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Platforms.Android.Resource.String.Hello = global::Demos.Droid.Resource.String.Hello;
 			global::Xamarin.Platforms.Android.Resource.String.library_name = global::Demos.Droid.Resource.String.library_name;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView = global::Demos.Droid.Resource.Styleable.RecyclerView;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView_android_orientation = global::Demos.Droid.Resource.Styleable.RecyclerView_android_orientation;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView_layoutManager = global::Demos.Droid.Resource.Styleable.RecyclerView_layoutManager;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView_reverseLayout = global::Demos.Droid.Resource.Styleable.RecyclerView_reverseLayout;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView_spanCount = global::Demos.Droid.Resource.Styleable.RecyclerView_spanCount;
+			global::Xamarin.Platforms.Android.Resource.Styleable.RecyclerView_stackFromEnd = global::Demos.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
 		}
 		
 		public partial class Attribute
