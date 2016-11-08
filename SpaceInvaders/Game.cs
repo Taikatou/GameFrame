@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using GameFrame;
 using GameFrame.CollisionTest;
 
 namespace SpaceInvaders
@@ -282,13 +283,18 @@ namespace SpaceInvaders
                 var currentInvaderType = (ShipType) x;
                 currentInvaderYSpace += InvaderYSpacing;
                 var currentInvaderXSpace = 0;
-                for (var y = 0; y < 5; y++)
+                currentInvaderXSpace += InvaderXSpacing;
+                var FirstInvaderPoint =
+                    new Point(currentInvaderXSpace, currentInvaderYSpace);
+                var FirstInvader =
+                        new Invader(currentInvaderType, FirstInvaderPoint, 10);
+                _invaders.Add(FirstInvader);
+                for (var y = 0; y < 4; y++)
                 {
                     currentInvaderXSpace += InvaderXSpacing;
-                    var newInvaderPoint =
-                        new Point(currentInvaderXSpace, currentInvaderYSpace);
-                    var newInvader =
-                        new Invader(currentInvaderType, newInvaderPoint, 10);
+                    var newInvaderPoint =  new Point(currentInvaderXSpace, currentInvaderYSpace);
+                     var newInvader = FirstInvader.Clone() as Invader;
+                     newInvader.Location = newInvaderPoint;
                     _invaders.Add(newInvader);
                 }
             }

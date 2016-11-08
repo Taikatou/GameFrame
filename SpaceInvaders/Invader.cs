@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using GameFrame;
 using SpaceInvaders.Properties;
 
 namespace SpaceInvaders
 {
-    internal class Invader
+    internal class Invader : IPrototype
     {
         private const int HorizontalInterval = 10;
         private const int VerticalInterval = 30;
@@ -23,7 +24,7 @@ namespace SpaceInvaders
             _image = _imageArray[0];
         }
 
-        public Point Location { get; private set; }
+        public Point Location { get; set; }
 
         public ShipType InvaderType { get; }
 
@@ -106,6 +107,11 @@ namespace SpaceInvaders
                     _imageArray[3] = Resources.star4;
                     break;
             }
+        }
+
+        public IPrototype Clone()
+        {
+            return (Invader)MemberwiseClone();
         }
     }
 }
