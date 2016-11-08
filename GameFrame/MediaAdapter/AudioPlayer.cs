@@ -52,7 +52,7 @@ namespace GameFrame.MediaAdapter
         public virtual void Dispose()
         {
             Debug.WriteLine("AudioPLayer::Dispose()");
-            _content.Unload();
+            _content?.Unload();
         }
     }
 }

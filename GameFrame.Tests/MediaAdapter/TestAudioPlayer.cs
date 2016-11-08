@@ -39,5 +39,35 @@ namespace GameFrame.Tests.MediaAdapter
             player.Pause();
             player.Dispose();
         }
+
+        [TestMethod]
+        public void PlayBadWav()
+        {
+            IAudioPlayer player = new AudioAdapter();
+            player.Play("wav", "BirabutoKing");
+            player.Resume();
+            player.Pause();
+            player.Dispose();
+        }
+
+        [TestMethod]
+        public void PlayBadMp3()
+        {
+            IAudioPlayer player = new AudioAdapter();
+            player.Play("mp3", "pianoooo");
+            player.Resume();
+            player.Pause();
+            player.Dispose();
+        }
+
+        [TestMethod]
+        public void ForceAudioPlayer()
+        {
+            IAudioPlayer player = new AudioPlayer();
+            player.Play("mp3", "piano");
+            player.Resume();
+            player.Pause();
+            player.Dispose();
+        }
     }
 }
