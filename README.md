@@ -24,6 +24,8 @@ Prototype = Andrew
 
 Decorator = Cathal
 
+Null Object = Cathal
+
 Interceptor = Conor
 
 ###Todo
