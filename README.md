@@ -22,10 +22,6 @@ Observer = Andrew
 
 Prototype = Andrew
 
-Decorator = Cathal
-
-Null Object = Cathal
-
 Interceptor = Conor
 
 Composite = Conor
@@ -36,6 +32,10 @@ Documentaion
 
 Unit testing
 
+### In progress
+Decorator = Cathal
+
+Null Object = Cathal
 
 ####Other features
 
