@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using GameFrame.GUI;
 
 namespace Demos
 {
@@ -18,7 +19,7 @@ namespace Demos
         public readonly ContentManager Content;
         private readonly Camera2D _camera;
         public readonly SpriteBatch SpriteBatch;
-        private BackButton _backButton;
+        private ImageButton _backButton;
         private ClickController _clickController;
 
         public DemoScreen(ViewportAdapter viewPort, SpriteBatch spriteBatch)
@@ -37,7 +38,9 @@ namespace Demos
         public override void LoadContent()
         {
             base.LoadContent();
-            _backButton = new BackButton(Content);
+            var buttonTexture = Content.Load<Texture2D>("DemoScreen/BackButton");
+            var buttonSize = new Rectangle(15, 15, 45, 45);
+            _backButton = new ImageButton(buttonTexture, buttonSize);
 
             _clickController = new ClickController();
             _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
