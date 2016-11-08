@@ -28,6 +28,8 @@ Null Object = Cathal
 
 Interceptor = Conor
 
+Composite = Conor
+
 ###Todo
 
 Documentaion
