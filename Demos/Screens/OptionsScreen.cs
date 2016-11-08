@@ -1,11 +1,12 @@
 ﻿using System;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.Screens
 {
     public class OptionsScreen : MenuScreen
     {
-        public OptionsScreen(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+        public OptionsScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider)
+            : base(viewPort, serviceProvider)
         {
         }
 

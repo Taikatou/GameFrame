@@ -17,7 +17,6 @@ using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
-using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
@@ -51,7 +50,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
-            PlayMusic();
+            //PlayMusic();
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -115,7 +114,28 @@ namespace Demos.TopDownRpg.GameModes
             foreach (var entityObject in entityObjects.Objects)
             {
                 var position = entityObject.Position/_tileSize;
-                var entity = new Entity(position);
+                var entity = Entity.Import(entityObject.Name);
+                entity.Position = position;
+                var facingDirection = new Vector2();
+                switch (entityObject.Type)
+                {
+                    case "L":
+                        facingDirection.X = -1;
+                        break;
+                    case "R":
+                        facingDirection.X = 1;
+                        break;
+                    case "U":
+                        facingDirection.Y = -1;
+                        break;
+                    case "D":
+                        facingDirection.Y = 1;
+                        break;
+                    default:
+                        facingDirection = new Vector2(1, 1);
+                        break;
+                }
+                entity.FacingDirection = facingDirection;
                 AddEntity(entity);
             }
         }
@@ -154,7 +174,7 @@ namespace Demos.TopDownRpg.GameModes
             var valid = true;
             if (collision)
             {
-                var heuristic = new CrowDistance();
+                var heuristic = _possibleMovements.Heuristic;
                 var startPosition = entity.Position.ToPoint();
                 if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                 {

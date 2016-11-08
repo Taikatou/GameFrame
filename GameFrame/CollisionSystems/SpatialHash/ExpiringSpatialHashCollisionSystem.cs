@@ -11,19 +11,19 @@ namespace GameFrame.CollisionSystems.SpatialHash
     public class ExpiringSpatialHashCollisionSystem<T> : AbstractSpatialHashCollisionSystem<T>, IUpdate where T : BaseMovable
     {
         private readonly SpatialHashCollisionSystem<T> _spatialHash;
-        public readonly Dictionary<Point, ExpiringKey> MovingEntities;
-        public readonly HashSet<Point> ToRemove;
+        public readonly Dictionary<Point, ExpiringKey> OccupiedTiles;
+        public readonly Dictionary<ExpiringKey, BaseMovable> MovingEntities;
 
         public ExpiringSpatialHashCollisionSystem(IPossibleMovements possibleMovements) : base(possibleMovements)
         {
             _spatialHash = new SpatialHashCollisionSystem<T>(possibleMovements);
-            MovingEntities = new Dictionary<Point, ExpiringKey>();
-            ToRemove = new HashSet<Point>();
+            OccupiedTiles = new Dictionary<Point, ExpiringKey>();
+            MovingEntities = new Dictionary<ExpiringKey, BaseMovable>();
         }
 
         public bool Moving(Point position)
         {
-            var moving = MovingEntities.ContainsKey(position);
+            var moving = OccupiedTiles.ContainsKey(position);
             return moving;
         }
 
@@ -32,7 +32,7 @@ namespace GameFrame.CollisionSystems.SpatialHash
             var progress = 0.0f;
             if (Moving(position))
             {
-                progress = MovingEntities[position].Progress;
+                progress = OccupiedTiles[position].Progress;
             }
             return progress;
         }
@@ -44,25 +44,21 @@ namespace GameFrame.CollisionSystems.SpatialHash
 
         public bool MoveNode(Point startPosition, Point endPosition, EventHandler onCompleteEvent, float timer)
         {
-            var moving = MovingEntities.ContainsKey(startPosition);
+            var moving = OccupiedTiles.ContainsKey(startPosition);
             var collision = CheckMovementCollision(startPosition, endPosition);
             var validMove = !moving && !collision;
             if (validMove)
             {
                 var node = ValueAt(startPosition);
+                RemoveNode(startPosition);
                 AddNode(endPosition, node);
+                var movingEntity = new ExpiringKey(timer) { OnCompleteEvent = onCompleteEvent };
                 foreach (var position in PossibleMovements.PositionsToCheck(startPosition, endPosition))
                 {
-                    if (position != endPosition)
-                    {
-                        MovingEntities[position] = new ExpiringKey(timer);
-                        ToRemove.Add(position);
-                    }
+                    OccupiedTiles[position] = movingEntity;
                 }
-                MovingEntities[startPosition] = new ExpiringKey(timer);
-                ToRemove.Add(startPosition);
-                MovingEntities[endPosition] = new ExpiringKey(timer);
-                MovingEntities[endPosition].OnCompleteEvent += onCompleteEvent;
+                OccupiedTiles[startPosition] = movingEntity;
+                MovingEntities[movingEntity] = node;
             }
             return validMove;
         }
@@ -74,34 +70,35 @@ namespace GameFrame.CollisionSystems.SpatialHash
 
         public void Update(GameTime gameTime)
         {
+            foreach (var moving in MovingEntities)
+            {
+                moving.Key.Update(gameTime);
+            }
+            var completeKeys = new HashSet<ExpiringKey>();
             var keysToRemove = new List<Point>();
-            foreach (var item in MovingEntities)
+            foreach (var item in OccupiedTiles)
             {
                 var expiringKey = item.Value;
-                expiringKey.Update(gameTime);
                 if (expiringKey.Complete)
                 {
+                    if (!completeKeys.Contains(item.Value))
+                    {
+                        item.Value.InvokeCompleteEvent();
+                        MovingEntities[item.Value].InvokeOnMoveCompleteEvent();
+                        completeKeys.Add(item.Value);
+                    }
                     keysToRemove.Add(item.Key);
                 }
             }
             foreach (var key in keysToRemove)
             {
-                var position = key;
-                if (ToRemove.Contains(key))
-                {
-                    RemoveNode(position);
-                    ToRemove.Remove(key);
-                }
-                MovingEntities[key].InvokeCompleteEvent();
-                MovingEntities.Remove(key);
-                var entity = ValueAt(position);
-                entity?.InvokeOnMoveCompleteEvent();
+                OccupiedTiles.Remove(key);
             }
         }
 
         public override bool CheckCollision(Point startPosition)
         {
-            var found = _spatialHash.CheckCollision(startPosition) || MovingEntities.ContainsKey(startPosition);
+            var found = _spatialHash.CheckCollision(startPosition) || OccupiedTiles.ContainsKey(startPosition);
             return found;
         }
 

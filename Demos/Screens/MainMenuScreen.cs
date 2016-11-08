@@ -2,6 +2,8 @@
 using Demos.TopDownRpg;
 using Microsoft.Xna.Framework;
 using Demos.Puzzle;
+using Demos.Pong;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.Screens
 {
@@ -9,8 +11,8 @@ namespace Demos.Screens
     {
         private readonly Game _game;
 
-        public MainMenuScreen(IServiceProvider serviceProvider, Game game)
-            : base(serviceProvider)
+        public MainMenuScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider, Game game)
+            : base(viewPort, serviceProvider)
         {
             _game = game;
         }
@@ -21,6 +23,7 @@ namespace Demos.Screens
 
             AddMenuItem("New Game", Show<TopDownRpgScene>);
             AddMenuItem("Puzzle Game", Show<PuzzleScreen>);
+            AddMenuItem("Pong", Show<PongScreen>);
             AddMenuItem("Load Game", Show<LoadGameScreen>);
             AddMenuItem("Options", Show<OptionsScreen>);
             AddMenuItem("Exit", _game.Exit);

@@ -26,6 +26,5 @@ namespace Demos.Screens
         {
             spriteBatch.DrawString(Font, Text, Position, Color);
         }
-
     }
 }

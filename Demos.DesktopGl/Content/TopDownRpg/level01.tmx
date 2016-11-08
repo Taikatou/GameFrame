@@ -112,6 +112,6 @@
   <object id="15" name="level01" type="5, 5" x="32" y="32" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
-  <object id="29" name="Entity" x="160" y="288" width="16" height="16"/>
+  <object id="29" name="Entity" type="L" x="160" y="288" width="16" height="16"/>
  </objectgroup>
 </map>

@@ -8,6 +8,10 @@ using GameFrame.Paths;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Entities;
+﻿using System.Collections.Generic;
+using GameFrame.Paths;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+>>>>>>> master
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
@@ -20,6 +24,7 @@ namespace GameFrame.Tests.Paths
         [TestMethod]
         public void PathsFinderTestCrowDistance()
         {
+
             var entity = new BaseMovable();
             var endPoint = new Point();
             
@@ -98,6 +103,9 @@ namespace GameFrame.Tests.Paths
             fourWayPossibleMovement = new FourWayPossibleMovement(new ManhattanDistance());
             wrapper = new PossibleMovementWrapper(fourWayPossibleMovement);
             Assert.AreEqual(wrapper.Heuristic, fourWayPossibleMovement.Heuristic);
+
+
+
         }
     }
 }

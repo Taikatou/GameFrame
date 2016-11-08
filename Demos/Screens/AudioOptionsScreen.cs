@@ -1,11 +1,12 @@
 ﻿using System;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.Screens
 {
     public class AudioOptionsScreen : MenuScreen
     {
-        public AudioOptionsScreen(IServiceProvider serviceProvider) 
-            : base(serviceProvider)
+        public AudioOptionsScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider) 
+            : base(viewPort, serviceProvider)
         {
         }
 

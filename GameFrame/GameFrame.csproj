@@ -15,6 +15,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
+    <Compile Include="CollisionTest\BBCollisionObserver.cs" />
+    <Compile Include="CollisionTest\BBCollisionSubject.cs" />
+    <Compile Include="CollisionTest\BBObjectPrototype.cs" />
+    <Compile Include="CollisionTest\CollisionType.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\StringToVector.cs" />
@@ -77,6 +83,7 @@
     <Compile Include="GameModeStack.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
+    <Compile Include="Ink\StoryImporter.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="MediaAdapter\AudioPlayer.cs" />
     <Compile Include="MediaAdapter\IAdvancedMediaPlayer.cs" />
@@ -114,19 +121,31 @@
     <Compile Include="ServiceLocator\IServiceLocator.cs" />
     <Compile Include="ServiceLocator\ServiceLocator.cs" />
     <Compile Include="ServiceLocator\StaticServiceLocator.cs" />
+    <Compile Include="Services\ISaveAndLoad.cs" />
     <Compile Include="State\IStateEvent.cs" />
     <Compile Include="State\IStateModifier.cs" />
+    <Compile Include="TextToSpeech\ITextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ink-engine-pcl">
+      <HintPath>..\Dependencies\ink-engine-pcl.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Neo.Lua, Version=5.3.0.0, Culture=neutral, PublicKeyToken=fdb0cd4fe8a6e3b2, processorArchitecture=MSIL">
+      <HintPath>..\packages\NeoLua.1.2.8\lib\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\Neo.Lua.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GUI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,12 @@
 using System;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.Screens
 {
     public class KeyboardOptionsScreen : MenuScreen
     {
-        public KeyboardOptionsScreen(IServiceProvider serviceProvider) 
-            : base(serviceProvider)
+        public KeyboardOptionsScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider)
+            : base(viewPort, serviceProvider)
         {
         }
         
