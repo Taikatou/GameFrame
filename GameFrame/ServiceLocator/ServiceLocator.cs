@@ -28,5 +28,10 @@ namespace GameFrame.ServiceLocator
         {
             _services[typeof(T)] = service;
         }
+
+        public bool ContainsService<T>()
+        {
+            return _services.ContainsKey(typeof(T));
+        }
     }
 }

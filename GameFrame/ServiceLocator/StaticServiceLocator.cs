@@ -21,6 +21,16 @@
             _serviceLocator.AddService(service);
         }
 
+        bool IServiceLocator.ContainsService<T>()
+        {
+            return _serviceLocator.ContainsService<T>();
+        }
+
+        public static bool ContainsService<T>()
+        {
+            return Instance.ContainsService<T>();
+        }
+
         T IServiceLocator.GetService<T>()
         {
             return _serviceLocator.GetService<T>();
