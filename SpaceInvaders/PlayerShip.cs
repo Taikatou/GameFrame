@@ -6,40 +6,40 @@ namespace SpaceInvaders
 {
     internal class PlayerShip
     {
-        private const int horizontalInterval = 10;
+        private const int HorizontalInterval = 10;
 
-        private bool alive;
+        private bool _alive;
 
-        private Rectangle boundaries;
+        private Rectangle _boundaries;
 
-        private float deadShipHeight;
+        private float _deadShipHeight;
 
-        private DateTime deathWait;
-        public Bitmap image = Resources.player;
+        private DateTime _deathWait;
+        public readonly Bitmap Image = Resources.player;
 
         public PlayerShip(Rectangle boundaries, Point location)
         {
-            this.boundaries = boundaries;
+            this._boundaries = boundaries;
             Location = location;
             Alive = true;
-            deadShipHeight = 1.0F;
+            _deadShipHeight = 1.0F;
         }
 
         public Point Location { get; private set; }
 
         public Rectangle Area
         {
-            get { return new Rectangle(Location, image.Size); }
+            get { return new Rectangle(Location, Image.Size); }
         }
 
         public bool Alive
         {
-            get { return alive; }
+            get { return _alive; }
             set
             {
-                alive = value;
+                _alive = value;
                 if (!value)
-                    deathWait = DateTime.Now;
+                    _deathWait = DateTime.Now;
             }
         }
 
@@ -48,14 +48,14 @@ namespace SpaceInvaders
             if (Alive)
                 if (direction == Direction.Left)
                 {
-                    var newLocation = new Point(Location.X - horizontalInterval, Location.Y);
-                    if ((newLocation.X < boundaries.Width - 100) && (newLocation.X > 50))
+                    var newLocation = new Point(Location.X - HorizontalInterval, Location.Y);
+                    if ((newLocation.X < _boundaries.Width - 100) && (newLocation.X > 50))
                         Location = newLocation;
                 }
                 else if (direction == Direction.Right)
                 {
-                    var newLocation = new Point(Location.X + horizontalInterval, Location.Y);
-                    if ((newLocation.X < boundaries.Width - 100) && (newLocation.X > 50))
+                    var newLocation = new Point(Location.X + HorizontalInterval, Location.Y);
+                    if ((newLocation.X < _boundaries.Width - 100) && (newLocation.X > 50))
                         Location = newLocation;
                 }
         }
@@ -64,30 +64,30 @@ namespace SpaceInvaders
         {
             if (!Alive)
             {
-                if (DateTime.Now - deathWait > TimeSpan.FromSeconds(1.5))
+                if (DateTime.Now - _deathWait > TimeSpan.FromSeconds(1.5))
                 {
-                    deadShipHeight = 0.0F;
+                    _deadShipHeight = 0.0F;
                     Alive = true;
                 }
-                else if (DateTime.Now - deathWait > TimeSpan.FromSeconds(1))
+                else if (DateTime.Now - _deathWait > TimeSpan.FromSeconds(1))
                 {
-                    deadShipHeight = 0.25F;
+                    _deadShipHeight = 0.25F;
                 }
-                else if (DateTime.Now - deathWait > TimeSpan.FromSeconds(0.5))
+                else if (DateTime.Now - _deathWait > TimeSpan.FromSeconds(0.5))
                 {
-                    deadShipHeight = 0.75F;
+                    _deadShipHeight = 0.75F;
                 }
-                else if (DateTime.Now - deathWait > TimeSpan.FromSeconds(0))
+                else if (DateTime.Now - _deathWait > TimeSpan.FromSeconds(0))
                 {
-                    deadShipHeight = 0.9F;
+                    _deadShipHeight = 0.9F;
                 }
 
-                graphics.DrawImage(image, Location.X, Location.Y,
-                    image.Width, image.Height*deadShipHeight);
+                graphics.DrawImage(Image, Location.X, Location.Y,
+                    Image.Width, Image.Height*_deadShipHeight);
             }
             else
             {
-                graphics.DrawImage(image, Location);
+                graphics.DrawImage(Image, Location);
             }
         }
     }

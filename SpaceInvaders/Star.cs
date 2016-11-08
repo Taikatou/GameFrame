@@ -4,13 +4,13 @@ namespace SpaceInvaders
 {
     internal struct Star
     {
-        public Point point;
-        public Brush brush;
+        public Point Point;
+        public readonly Brush Brush;
 
         public Star(Point point, Brush brush)
         {
-            this.point = point;
-            this.brush = brush;
+            this.Point = point;
+            this.Brush = brush;
         }
     }
 }

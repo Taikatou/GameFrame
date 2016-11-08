@@ -4,19 +4,19 @@ namespace SpaceInvaders
 {
     internal class Shot
     {
-        private const int moveInterval = 15;
-        private const int width = 3;
-        private const int height = 10;
-        private Rectangle boundaries;
+        private const int MoveInterval = 15;
+        private const int Width = 3;
+        private const int Height = 10;
+        private Rectangle _boundaries;
 
-        private readonly Direction direction;
+        private readonly Direction _direction;
 
         public Shot(Point location, Direction direction,
             Rectangle boundaries)
         {
             Location = location;
-            this.direction = direction;
-            this.boundaries = boundaries;
+            this._direction = direction;
+            this._boundaries = boundaries;
         }
 
         public Point Location { get; private set; }
@@ -24,17 +24,17 @@ namespace SpaceInvaders
         public void Draw(Graphics graphics)
         {
             graphics.FillRectangle(Brushes.Red,
-                Location.X, Location.Y, width, height);
+                Location.X, Location.Y, Width, Height);
         }
 
         public bool Move()
         {
             Point newLocation;
-            if (direction == Direction.Down)
-                newLocation = new Point(Location.X, Location.Y + moveInterval);
+            if (_direction == Direction.Down)
+                newLocation = new Point(Location.X, Location.Y + MoveInterval);
             else //if (direction == Direction.Up)
-                newLocation = new Point(Location.X, Location.Y - moveInterval);
-            if ((newLocation.Y < boundaries.Height) && (newLocation.Y > 0))
+                newLocation = new Point(Location.X, Location.Y - MoveInterval);
+            if ((newLocation.Y < _boundaries.Height) && (newLocation.Y > 0))
             {
                 Location = newLocation;
                 return true;

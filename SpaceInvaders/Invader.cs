@@ -7,11 +7,11 @@ namespace SpaceInvaders
 {
     internal class Invader
     {
-        private const int horizontalInterval = 10;
-        private const int verticalInterval = 30;
+        private const int HorizontalInterval = 10;
+        private const int VerticalInterval = 30;
 
-        private Bitmap image;
-        private Bitmap[] imageArray;
+        private Bitmap _image;
+        private Bitmap[] _imageArray;
 
         public Invader(ShipType invaderType, Point location, int score)
         {
@@ -19,8 +19,8 @@ namespace SpaceInvaders
             Location = location;
             Score = score;
 
-            createInvaderBitmapArray();
-            image = imageArray[0];
+            CreateInvaderBitmapArray();
+            _image = _imageArray[0];
         }
 
         public Point Location { get; private set; }
@@ -29,10 +29,10 @@ namespace SpaceInvaders
 
         public Rectangle Area
         {
-            get { return new Rectangle(Location, imageArray[0].Size); }
+            get { return new Rectangle(Location, _imageArray[0].Size); }
         }
 
-        public int Score { get; private set; }
+        private int Score { get; set; }
 
         public void Move(Direction direction)
         {
@@ -40,13 +40,13 @@ namespace SpaceInvaders
             {
                 case Direction.Right:
                     // Location is a struct, so new one created to keep it immutable
-                    Location = new Point(Location.X + horizontalInterval, Location.Y);
+                    Location = new Point(Location.X + HorizontalInterval, Location.Y);
                     break;
                 case Direction.Left:
-                    Location = new Point(Location.X - horizontalInterval, Location.Y);
+                    Location = new Point(Location.X - HorizontalInterval, Location.Y);
                     break;
                 case Direction.Down:
-                    Location = new Point(Location.X, Location.Y + verticalInterval);
+                    Location = new Point(Location.X, Location.Y + VerticalInterval);
                     break;
             }
         }
@@ -54,10 +54,10 @@ namespace SpaceInvaders
         public Graphics Draw(Graphics graphics, int animationCell)
         {
             var invaderGraphics = graphics;
-            image = imageArray[animationCell];
+            _image = _imageArray[animationCell];
             try
             {
-                graphics.DrawImage(image, Location);
+                graphics.DrawImage(_image, Location);
             }
             catch (Exception ex)
             {
@@ -70,40 +70,40 @@ namespace SpaceInvaders
             return invaderGraphics;
         }
 
-        private void createInvaderBitmapArray()
+        private void CreateInvaderBitmapArray()
         {
-            imageArray = new Bitmap[4];
+            _imageArray = new Bitmap[4];
             switch (InvaderType)
             {
                 case ShipType.Bug:
-                    imageArray[0] = Resources.bug1;
-                    imageArray[1] = Resources.bug2;
-                    imageArray[2] = Resources.bug3;
-                    imageArray[3] = Resources.bug4;
+                    _imageArray[0] = Resources.bug1;
+                    _imageArray[1] = Resources.bug2;
+                    _imageArray[2] = Resources.bug3;
+                    _imageArray[3] = Resources.bug4;
                     break;
                 case ShipType.Satellite:
-                    imageArray[0] = Resources.satellite1;
-                    imageArray[1] = Resources.satellite2;
-                    imageArray[2] = Resources.satellite3;
-                    imageArray[3] = Resources.satellite4;
+                    _imageArray[0] = Resources.satellite1;
+                    _imageArray[1] = Resources.satellite2;
+                    _imageArray[2] = Resources.satellite3;
+                    _imageArray[3] = Resources.satellite4;
                     break;
                 case ShipType.Saucer:
-                    imageArray[0] = Resources.flyingsaucer1;
-                    imageArray[1] = Resources.flyingsaucer2;
-                    imageArray[2] = Resources.flyingsaucer3;
-                    imageArray[3] = Resources.flyingsaucer4;
+                    _imageArray[0] = Resources.flyingsaucer1;
+                    _imageArray[1] = Resources.flyingsaucer2;
+                    _imageArray[2] = Resources.flyingsaucer3;
+                    _imageArray[3] = Resources.flyingsaucer4;
                     break;
                 case ShipType.Spaceship:
-                    imageArray[0] = Resources.spaceship1;
-                    imageArray[1] = Resources.spaceship2;
-                    imageArray[2] = Resources.spaceship3;
-                    imageArray[3] = Resources.spaceship4;
+                    _imageArray[0] = Resources.spaceship1;
+                    _imageArray[1] = Resources.spaceship2;
+                    _imageArray[2] = Resources.spaceship3;
+                    _imageArray[3] = Resources.spaceship4;
                     break;
                 case ShipType.Star:
-                    imageArray[0] = Resources.star1;
-                    imageArray[1] = Resources.star2;
-                    imageArray[2] = Resources.star3;
-                    imageArray[3] = Resources.star4;
+                    _imageArray[0] = Resources.star1;
+                    _imageArray[1] = Resources.star2;
+                    _imageArray[2] = Resources.star3;
+                    _imageArray[3] = Resources.star4;
                     break;
             }
         }
