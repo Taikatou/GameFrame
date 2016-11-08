@@ -7,6 +7,7 @@ namespace SpaceInvaders
     internal class PlayerShip
     {
         private const int HorizontalInterval = 10;
+        public readonly Bitmap Image = Resources.player;
 
         private bool _alive;
 
@@ -15,11 +16,10 @@ namespace SpaceInvaders
         private float _deadShipHeight;
 
         private DateTime _deathWait;
-        public readonly Bitmap Image = Resources.player;
 
         public PlayerShip(Rectangle boundaries, Point location)
         {
-            this._boundaries = boundaries;
+            _boundaries = boundaries;
             Location = location;
             Alive = true;
             _deadShipHeight = 1.0F;

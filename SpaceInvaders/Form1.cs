@@ -7,14 +7,13 @@ namespace SpaceInvaders
 {
     public partial class Form1 : Form
     {
-        public int Frame;
+        private readonly List<Keys> _keysPressed = new List<Keys>();
+        private readonly Random _random = new Random();
         // The form keeps a reference to a single Game object
         private Game _game;
 
         private bool _gameOver;
-
-        private readonly List<Keys> _keysPressed = new List<Keys>();
-        private readonly Random _random = new Random();
+        public int Frame;
 
         public Form1()
         {

@@ -10,18 +10,7 @@ namespace SpaceInvaders
     {
         private const int InvaderXSpacing = 60;
         private const int InvaderYSpacing = 60;
-        private int _currentGameFrame = 1;
-
-        private Rectangle _formArea;
-        private int _framesSkipped = 6;
-
-        private List<BBObject> _enemyShotsPlayer;
-        private List<BBObject> _playerShotsEnemies;
-
-        private Direction _invaderDirection;
-        private readonly List<Invader> _invaders; 
-        private List<Shot> _invaderShots;
-        private int _livesLeft = 5;
+        private readonly List<Invader> _invaders;
         private readonly PointF _livesLocation;
 
         private readonly Font _messageFont = new Font(FontFamily.GenericMonospace, 50, FontStyle.Bold);
@@ -30,18 +19,29 @@ namespace SpaceInvaders
         private readonly List<Shot> _playerShots;
         private readonly Random _random;
 
-        private int _score;
-
         private readonly PointF _scoreLocation;
         private readonly Stars _stars;
         private readonly Font _statsFont = new Font(FontFamily.GenericMonospace, 15);
-        private int _wave;
         private readonly PointF _waveLocation;
+        private int _currentGameFrame = 1;
+
+        private List<BBObject> _enemyShotsPlayer;
+
+        private Rectangle _formArea;
+        private int _framesSkipped = 6;
+
+        private Direction _invaderDirection;
+        private readonly List<Shot> _invaderShots;
+        private int _livesLeft = 5;
+        private List<BBObject> _playerShotsEnemies;
+
+        private int _score;
+        private int _wave;
 
         public Game(Random random, Rectangle formArea)
         {
-            this._formArea = formArea;
-            this._random = random;
+            _formArea = formArea;
+            _random = random;
             _stars = new Stars(random, formArea);
             _scoreLocation = new PointF(formArea.Left + 5.0F, formArea.Top + 5.0F);
             _livesLocation = new PointF(formArea.Right - 120.0F, formArea.Top + 5.0F);
@@ -65,9 +65,9 @@ namespace SpaceInvaders
             foreach (var invader in _invaders)
                 invader.Draw(graphics, frame);
             _playerShip.Draw(graphics);
-            foreach (Shot shot in _playerShots)
+            foreach (var shot in _playerShots)
                 shot.Draw(graphics);
-            foreach (Shot shot in _invaderShots)
+            foreach (var shot in _invaderShots)
                 shot.Draw(graphics);
 
             graphics.DrawString("Score: " + _score,
@@ -77,7 +77,7 @@ namespace SpaceInvaders
             graphics.DrawString("Wave: " + _wave,
                 _statsFont, Brushes.Yellow, _waveLocation);
             if (gameOver)
-                graphics.DrawString("GAME OVER", _messageFont, Brushes.Red,_formArea.Width/4, _formArea.Height/3);
+                graphics.DrawString("GAME OVER", _messageFont, Brushes.Red, _formArea.Width/4, _formArea.Height/3);
         }
 
         // Twinkle (animates stars) is called from the form animation timer
@@ -96,7 +96,7 @@ namespace SpaceInvaders
         {
             if (_playerShots.Count < 4)
             {
-                Shot newShot = new Shot(
+                var newShot = new Shot(
                     new Point(_playerShip.Location.X + _playerShip.Image.Width/2
                         , _playerShip.Location.Y),
                     Direction.Up, _formArea);
@@ -109,18 +109,18 @@ namespace SpaceInvaders
             if (_playerShip.Alive)
             {
                 // Check to see if any shots are off screen, to be removed
-                List<Shot> deadPlayerShots = new List<Shot>();
-                foreach (Shot shot in _playerShots)
+                var deadPlayerShots = new List<Shot>();
+                foreach (var shot in _playerShots)
                     if (!shot.Move())
                         deadPlayerShots.Add(shot);
-                foreach (Shot shot in deadPlayerShots)
+                foreach (var shot in deadPlayerShots)
                     _playerShots.Remove(shot);
 
-                List<Shot> deadInvaderShots = new List<Shot>();
-                foreach (Shot shot in _invaderShots)
+                var deadInvaderShots = new List<Shot>();
+                foreach (var shot in _invaderShots)
                     if (!shot.Move())
                         deadInvaderShots.Add(shot);
-                foreach (Shot shot in deadInvaderShots)
+                foreach (var shot in deadInvaderShots)
                     _invaderShots.Remove(shot);
 
                 MoveInvaders();
@@ -220,7 +220,7 @@ namespace SpaceInvaders
             (shooter.Location.X + shooter.Area.Width/2,
                 shooter.Location.Y + shooter.Area.Height);
 
-            Shot newShot = new Shot(newShotLocation, Direction.Down,
+            var newShot = new Shot(newShotLocation, Direction.Down,
                 _formArea);
             _invaderShots.Add(newShot);
         }
@@ -230,10 +230,10 @@ namespace SpaceInvaders
         {
             // Created seperate lists of dead shots since items can't be
             // removed from a list while enumerating through it
-            List<Shot> deadPlayerShots = new List<Shot>();
-            List<Shot> deadInvaderShots = new List<Shot>();
+            var deadPlayerShots = new List<Shot>();
+            var deadInvaderShots = new List<Shot>();
 
-            foreach (Shot shot in _invaderShots.Reverse<Shot>())
+            foreach (var shot in _invaderShots.Reverse<Shot>())
                 if (_playerShip.Area.Contains(shot.Location))
                 {
                     deadPlayerShots.Add(shot);
@@ -245,7 +245,7 @@ namespace SpaceInvaders
                         GameOver?.Invoke(this, null);
                 }
 
-            foreach (Shot shot in _playerShots.Reverse<Shot>())
+            foreach (var shot in _playerShots.Reverse<Shot>())
             {
                 var deadInvaders = new List<Invader>();
                 foreach (var invader in _invaders)
@@ -260,9 +260,9 @@ namespace SpaceInvaders
                 foreach (var invader in deadInvaders)
                     _invaders.Remove(invader);
             }
-            foreach (Shot shot in deadPlayerShots)
+            foreach (var shot in deadPlayerShots)
                 _playerShots.Remove(shot);
-            foreach (Shot shot in deadInvaderShots)
+            foreach (var shot in deadInvaderShots)
                 _invaderShots.Remove(shot);
         }
 

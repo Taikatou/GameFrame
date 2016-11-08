@@ -9,8 +9,8 @@ namespace SpaceInvaders
 
         public Star(Point point, Brush brush)
         {
-            this.Point = point;
-            this.Brush = brush;
+            Point = point;
+            Brush = brush;
         }
     }
 }
