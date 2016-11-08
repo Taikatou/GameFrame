@@ -17,11 +17,13 @@ using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Ink;
+using GameFrame.Interceptor;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -55,6 +57,14 @@ namespace Demos.TopDownRpg.GameModes
         {
             //PlayMusic();
             StoryDispatcher = new StoryDispatcher();
+            if (StaticServiceLocator.ContainsService<List<IInterceptor<StoryContext>>>())
+            {
+                var interceptors = StaticServiceLocator.GetService<List<IInterceptor<StoryContext>>>();
+                foreach (var interceptor in interceptors)
+                {
+                    StoryDispatcher.AddInterceptor(interceptor);
+                }
+            }
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;

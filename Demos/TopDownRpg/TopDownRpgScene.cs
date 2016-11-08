@@ -87,10 +87,5 @@ namespace Demos.TopDownRpg
             }
             base.Draw(gameTime);
         }
-
-        public void AddStoryInterceptor(IInterceptor<StoryContext> interceptor)
-        {
-            _openWorldGameMode.StoryDispatcher.AddInterceptor(interceptor);
-        }
     }
 }

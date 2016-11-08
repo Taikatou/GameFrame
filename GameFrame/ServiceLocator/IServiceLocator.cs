@@ -4,5 +4,6 @@
     {
         T GetService<T>();
         void AddService<T>(T service);
+        bool ContainsService<T>();
     }
 }
