@@ -25,14 +25,17 @@ namespace GameFrame.Tests.Common
         [ExpectedException(typeof(System.Exception))]
         public void TestCameraUpdate()
         {
-            Camera2D Camera2D = null;
-            IFocusAble focusAble = null;
-            var tracker = new CameraTracker(Camera2D, focusAble);
-            var time = new GameTime(TimeSpan.MaxValue, TimeSpan.Zero);
-            tracker.Update(time);
+            //Camera2D Camera2D = null;
+            //IFocusAble focusAble = null;
+            //var tracker = new CameraTracker(Camera2D, focusAble);
+            //var time = new GameTime(TimeSpan.MaxValue, TimeSpan.Zero);
+            //tracker.Update(time);
         }
 
         [Test]
-        public void StringToVe
+        public void StringToVectorTest()
+        {
+
+        }
     }
 }

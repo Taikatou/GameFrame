@@ -23,8 +23,7 @@ namespace GameFrame.Tests.Controller
         public void SinglePLayerControllerFactoryTest()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            var settings = new ControllerSettings();
-            Instance.AddService<IControllerSettings>(settings);
+            Instance.AddService<IControllerSettings>(new ControllerSettings());
             Instance.GetService<IControllerSettings>();
 
             var controller = new SinglePlayerControllerFactory();
