@@ -6,12 +6,12 @@ namespace SpaceInvaders
 {
     internal class Stars
     {
-        private Rectangle _formArea;
         private readonly List<Star> _stars;
+        private Rectangle _formArea;
 
         public Stars(Random random, Rectangle formArea)
         {
-            this._formArea = formArea;
+            _formArea = formArea;
             _stars = new List<Star>();
             for (var i = 1; i < 300; i++)
                 AddStar(random);

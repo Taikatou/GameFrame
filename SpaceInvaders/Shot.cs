@@ -7,16 +7,16 @@ namespace SpaceInvaders
         private const int MoveInterval = 15;
         private const int Width = 3;
         private const int Height = 10;
-        private Rectangle _boundaries;
 
         private readonly Direction _direction;
+        private Rectangle _boundaries;
 
         public Shot(Point location, Direction direction,
             Rectangle boundaries)
         {
             Location = location;
-            this._direction = direction;
-            this._boundaries = boundaries;
+            _direction = direction;
+            _boundaries = boundaries;
         }
 
         public Point Location { get; private set; }
