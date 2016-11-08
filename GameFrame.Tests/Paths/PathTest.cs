@@ -18,7 +18,7 @@ namespace GameFrame.Tests.Paths
     {
 
         [TestMethod]
-        public void PathsFinderTest()
+        public void PathsFinderTestCrowDistance()
         {
             var entity = new BaseMovable();
             var endPoint = new Point();
@@ -27,6 +27,34 @@ namespace GameFrame.Tests.Paths
             var tileSize = new Point();
             var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, collisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, new EightWayPossibleMovement(new CrowDistance()));
+            Assert.AreNotSame(path.ClosedNodes, path.MapNodes);
+        }
+
+
+        [TestMethod]
+        public void PathsFinderTestDiagonalDistance()
+        {
+            var entity = new BaseMovable();
+            var endPoint = new Point();
+
+            var collisionSystem = new CompositeAbstractCollisionSystem(new EightWayPossibleMovement(new DiagonalDistance()));
+            var tileSize = new Point();
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, collisionSystem, new Rectangle(new Point(), tileSize));
+            var path = new AStarPathFinder(searchParams, new EightWayPossibleMovement(new DiagonalDistance()));
+            Assert.AreNotSame(path.ClosedNodes, path.MapNodes);
+        }
+
+
+        [TestMethod]
+        public void PathsFinderTestManhattanDistance()
+        {
+            var entity = new BaseMovable();
+            var endPoint = new Point();
+
+            var collisionSystem = new CompositeAbstractCollisionSystem(new EightWayPossibleMovement(new ManhattanDistance()));
+            var tileSize = new Point();
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, collisionSystem, new Rectangle(new Point(), tileSize));
+            var path = new AStarPathFinder(searchParams, new EightWayPossibleMovement(new ManhattanDistance()));
             Assert.AreNotSame(path.ClosedNodes, path.MapNodes);
         }
 
