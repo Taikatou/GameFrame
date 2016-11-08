@@ -8,207 +8,207 @@ namespace SpaceInvaders
 {
     internal class Game
     {
-        private const int invaderXSpacing = 60;
-        private const int invaderYSpacing = 60;
-        private int currentGameFrame = 1;
+        private const int InvaderXSpacing = 60;
+        private const int InvaderYSpacing = 60;
+        private int _currentGameFrame = 1;
 
-        private Rectangle formArea;
-        private int framesSkipped = 6;
+        private Rectangle _formArea;
+        private int _framesSkipped = 6;
 
-        private List<BBObject> EnemyShotsPlayer;
-        private List<BBObject> PlayerShotsEnemies;
+        private List<BBObject> _enemyShotsPlayer;
+        private List<BBObject> _playerShotsEnemies;
 
-        private Direction invaderDirection;
-        private readonly List<Invader> invaders; 
-        private List<Shot> invaderShots;
-        private int livesLeft = 5;
-        private readonly PointF livesLocation;
+        private Direction _invaderDirection;
+        private readonly List<Invader> _invaders; 
+        private List<Shot> _invaderShots;
+        private int _livesLeft = 5;
+        private readonly PointF _livesLocation;
 
-        private readonly Font messageFont = new Font(FontFamily.GenericMonospace, 50, FontStyle.Bold);
+        private readonly Font _messageFont = new Font(FontFamily.GenericMonospace, 50, FontStyle.Bold);
 
-        private readonly PlayerShip playerShip;
-        private readonly List<Shot> playerShots;
-        private readonly Random random;
+        private readonly PlayerShip _playerShip;
+        private readonly List<Shot> _playerShots;
+        private readonly Random _random;
 
-        private int score;
+        private int _score;
 
-        private readonly PointF scoreLocation;
-        private readonly Stars stars;
-        private readonly Font statsFont = new Font(FontFamily.GenericMonospace, 15);
-        private int wave;
-        private readonly PointF waveLocation;
+        private readonly PointF _scoreLocation;
+        private readonly Stars _stars;
+        private readonly Font _statsFont = new Font(FontFamily.GenericMonospace, 15);
+        private int _wave;
+        private readonly PointF _waveLocation;
 
         public Game(Random random, Rectangle formArea)
         {
-            this.formArea = formArea;
-            this.random = random;
-            stars = new Stars(random, formArea);
-            scoreLocation = new PointF(formArea.Left + 5.0F, formArea.Top + 5.0F);
-            livesLocation = new PointF(formArea.Right - 120.0F, formArea.Top + 5.0F);
-            waveLocation = new PointF(formArea.Left + 5.0F, formArea.Top + 25.0F);
-            playerShip = new PlayerShip(formArea,
+            this._formArea = formArea;
+            this._random = random;
+            _stars = new Stars(random, formArea);
+            _scoreLocation = new PointF(formArea.Left + 5.0F, formArea.Top + 5.0F);
+            _livesLocation = new PointF(formArea.Right - 120.0F, formArea.Top + 5.0F);
+            _waveLocation = new PointF(formArea.Left + 5.0F, formArea.Top + 25.0F);
+            _playerShip = new PlayerShip(formArea,
                 new Point(formArea.Width/2, formArea.Height - 50));
-            playerShots = new List<Shot>();
-            invaderShots = new List<Shot>();
-            invaders = new List<Invader>();
+            _playerShots = new List<Shot>();
+            _invaderShots = new List<Shot>();
+            _invaders = new List<Invader>();
 
 
-            nextWave();
+            NextWave();
         }
 
         // Draw is fired with each paint event of the main form
         public void Draw(Graphics graphics, int frame, bool gameOver)
         {
-            graphics.FillRectangle(Brushes.Black, formArea);
+            graphics.FillRectangle(Brushes.Black, _formArea);
 
-            stars.Draw(graphics);
-            foreach (var invader in invaders)
+            _stars.Draw(graphics);
+            foreach (var invader in _invaders)
                 invader.Draw(graphics, frame);
-            playerShip.Draw(graphics);
-            foreach (Shot shot in playerShots)
+            _playerShip.Draw(graphics);
+            foreach (Shot shot in _playerShots)
                 shot.Draw(graphics);
-            foreach (Shot shot in invaderShots)
+            foreach (Shot shot in _invaderShots)
                 shot.Draw(graphics);
 
-            graphics.DrawString("Score: " + score,
-                statsFont, Brushes.Yellow, scoreLocation);
-            graphics.DrawString("Lives: " + livesLeft,
-                statsFont, Brushes.Yellow, livesLocation);
-            graphics.DrawString("Wave: " + wave,
-                statsFont, Brushes.Yellow, waveLocation);
+            graphics.DrawString("Score: " + _score,
+                _statsFont, Brushes.Yellow, _scoreLocation);
+            graphics.DrawString("Lives: " + _livesLeft,
+                _statsFont, Brushes.Yellow, _livesLocation);
+            graphics.DrawString("Wave: " + _wave,
+                _statsFont, Brushes.Yellow, _waveLocation);
             if (gameOver)
-                graphics.DrawString("GAME OVER", messageFont, Brushes.Red,
-                    formArea.Width/4, formArea.Height/3);
+                graphics.DrawString("GAME OVER", _messageFont, Brushes.Red,_formArea.Width/4, _formArea.Height/3);
         }
 
         // Twinkle (animates stars) is called from the form animation timer
         public void Twinkle()
         {
-            stars.Twinkle(random);
+            _stars.Twinkle(_random);
         }
 
         public void MovePlayer(Direction direction, bool gameOver)
         {
             if (!gameOver)
-                playerShip.Move(direction);
+                _playerShip.Move(direction);
         }
 
         public void FireShot()
         {
-            if (playerShots.Count < 4)
+            if (_playerShots.Count < 4)
             {
                 Shot newShot = new Shot(
-                    new Point(playerShip.Location.X + playerShip.image.Width/2
-                        , playerShip.Location.Y),
-                    Direction.Up, formArea);
-                playerShots.Add(newShot);
+                    new Point(_playerShip.Location.X + _playerShip.Image.Width/2
+                        , _playerShip.Location.Y),
+                    Direction.Up, _formArea);
+                _playerShots.Add(newShot);
             }
         }
 
         public void Go()
         {
-            if (playerShip.Alive)
+            if (_playerShip.Alive)
             {
                 // Check to see if any shots are off screen, to be removed
                 List<Shot> deadPlayerShots = new List<Shot>();
-                foreach (Shot shot in playerShots)
+                foreach (Shot shot in _playerShots)
                     if (!shot.Move())
                         deadPlayerShots.Add(shot);
                 foreach (Shot shot in deadPlayerShots)
-                    playerShots.Remove(shot);
+                    _playerShots.Remove(shot);
 
                 List<Shot> deadInvaderShots = new List<Shot>();
-                foreach (Shot shot in invaderShots)
+                foreach (Shot shot in _invaderShots)
                     if (!shot.Move())
                         deadInvaderShots.Add(shot);
                 foreach (Shot shot in deadInvaderShots)
-                    invaderShots.Remove(shot);
+                    _invaderShots.Remove(shot);
 
-                moveInvaders();
-                returnFire();
-                checkForCollisions();
-                if (invaders.Count < 1)
-                    nextWave();
+                MoveInvaders();
+                ReturnFire();
+                CheckForCollisions();
+                if (_invaders.Count < 1)
+                    NextWave();
             }
         }
 
-        private void moveInvaders()
+        private void MoveInvaders()
         {
             // if the frame is skipped invaders do not move
-            if (currentGameFrame > framesSkipped)
+            if (_currentGameFrame > _framesSkipped)
             {
                 // Check to see if invaders are at edge of screen, 
                 // if so change direction
-                if (invaderDirection == Direction.Right)
+                if (_invaderDirection == Direction.Right)
                 {
                     var edgeInvaders =
-                        from invader in invaders
-                        where invader.Location.X > formArea.Width - 100
+                        from invader in _invaders
+                        where invader.Location.X > _formArea.Width - 100
                         select invader;
-                    if (edgeInvaders.Count() > 0)
+                    if (edgeInvaders.Any())
                     {
-                        invaderDirection = Direction.Left;
-                        foreach (var invader in invaders)
+                        _invaderDirection = Direction.Left;
+                        foreach (var invader in _invaders)
                             invader.Move(Direction.Down);
                     }
                     else
                     {
-                        foreach (var invader in invaders)
+                        foreach (var invader in _invaders)
                             invader.Move(Direction.Right);
                     }
                 }
 
-                if (invaderDirection == Direction.Left)
+                if (_invaderDirection == Direction.Left)
                 {
                     var edgeInvaders =
-                        from invader in invaders
+                        from invader in _invaders
                         where invader.Location.X < 100
                         select invader;
-                    if (edgeInvaders.Count() > 0)
+                    if (edgeInvaders.Any())
                     {
-                        invaderDirection = Direction.Right;
-                        foreach (var invader in invaders)
+                        _invaderDirection = Direction.Right;
+                        foreach (var invader in _invaders)
                             invader.Move(Direction.Down);
                     }
                     else
                     {
-                        foreach (var invader in invaders)
+                        foreach (var invader in _invaders)
                             invader.Move(Direction.Left);
                     }
                 }
 
                 // Check to see if invaders have made it to the bottom
                 var endInvaders =
-                    from invader in invaders
-                    where invader.Location.Y > playerShip.Location.Y
+                    from invader in _invaders
+                    where invader.Location.Y > _playerShip.Location.Y
                     select invader;
-                if (endInvaders.Count() > 0)
-                    GameOver(this, null);
+                if (endInvaders.Any())
+                    GameOver?.Invoke(this, null);
 
-                foreach (var invader in invaders)
-                    invader.Move(invaderDirection);
+                foreach (var invader in _invaders)
+                    invader.Move(_invaderDirection);
             }
-            currentGameFrame++;
-            if (currentGameFrame > 6)
-                currentGameFrame = 1;
+            _currentGameFrame++;
+            if (_currentGameFrame > 6)
+                _currentGameFrame = 1;
         }
 
-        private void returnFire()
+        private void ReturnFire()
         {
             //// invaders check their location and fire at the player
-            if (invaderShots.Count == wave)
+            if (_invaderShots.Count == _wave)
                 return;
-            if (random.Next(10) < 10 - wave)
+            if (_random.Next(10) < 10 - _wave)
                 return;
 
             var invaderColumns =
-                from invader in invaders
+                from invader in _invaders
                 group invader by invader.Location.X
                 into columns
                 select columns;
 
-            var randomColumnNumber = random.Next(invaderColumns.Count());
-            var randomColumn = invaderColumns.ElementAt(randomColumnNumber);
+            var enumerable = invaderColumns as IGrouping<int, Invader>[] ?? invaderColumns.ToArray();
+            var randomColumnNumber = _random.Next(enumerable.Count());
+            var randomColumn = enumerable.ElementAt(randomColumnNumber);
 
             var invaderRow =
                 from invader in randomColumn
@@ -221,75 +221,75 @@ namespace SpaceInvaders
                 shooter.Location.Y + shooter.Area.Height);
 
             Shot newShot = new Shot(newShotLocation, Direction.Down,
-                formArea);
-            invaderShots.Add(newShot);
+                _formArea);
+            _invaderShots.Add(newShot);
         }
 
 
-        private void checkForCollisions()
+        private void CheckForCollisions()
         {
             // Created seperate lists of dead shots since items can't be
             // removed from a list while enumerating through it
             List<Shot> deadPlayerShots = new List<Shot>();
             List<Shot> deadInvaderShots = new List<Shot>();
 
-            foreach (Shot shot in invaderShots.Reverse<Shot>())
-                if (playerShip.Area.Contains(shot.Location))
+            foreach (Shot shot in _invaderShots.Reverse<Shot>())
+                if (_playerShip.Area.Contains(shot.Location))
                 {
                     deadPlayerShots.Add(shot);
-                    livesLeft--;
-                    invaderShots.Clear();
-                    playerShots.Clear();
-                    playerShip.Alive = false;
-                    if (livesLeft == 0)
-                        GameOver(this, null);
+                    _livesLeft--;
+                    _invaderShots.Clear();
+                    _playerShots.Clear();
+                    _playerShip.Alive = false;
+                    if (_livesLeft == 0)
+                        GameOver?.Invoke(this, null);
                 }
 
-            foreach (Shot shot in playerShots.Reverse<Shot>())
+            foreach (Shot shot in _playerShots.Reverse<Shot>())
             {
                 var deadInvaders = new List<Invader>();
-                foreach (var invader in invaders)
+                foreach (var invader in _invaders)
                     if (invader.Area.Contains(shot.Location))
                     {
                         deadInvaders.Add(invader);
                         deadInvaderShots.Add(shot);
                         // Score multiplier based on wave
-                        score = score + 1*wave;
-                        playerShots.Remove(shot);
+                        _score = _score + 1*_wave;
+                        _playerShots.Remove(shot);
                     }
                 foreach (var invader in deadInvaders)
-                    invaders.Remove(invader);
+                    _invaders.Remove(invader);
             }
             foreach (Shot shot in deadPlayerShots)
-                playerShots.Remove(shot);
+                _playerShots.Remove(shot);
             foreach (Shot shot in deadInvaderShots)
-                invaderShots.Remove(shot);
+                _invaderShots.Remove(shot);
         }
 
-        private void nextWave()
+        private void NextWave()
         {
-            wave++;
-            invaderDirection = Direction.Right;
+            _wave++;
+            _invaderDirection = Direction.Right;
             // if the wave is under 7, set frames skipped to 6 - current wave number
-            if (wave < 7)
-                framesSkipped = 6 - wave;
+            if (_wave < 7)
+                _framesSkipped = 6 - _wave;
             else
-                framesSkipped = 0;
+                _framesSkipped = 0;
 
             var currentInvaderYSpace = 0;
             for (var x = 0; x < 5; x++)
             {
                 var currentInvaderType = (ShipType) x;
-                currentInvaderYSpace += invaderYSpacing;
+                currentInvaderYSpace += InvaderYSpacing;
                 var currentInvaderXSpace = 0;
                 for (var y = 0; y < 5; y++)
                 {
-                    currentInvaderXSpace += invaderXSpacing;
+                    currentInvaderXSpace += InvaderXSpacing;
                     var newInvaderPoint =
                         new Point(currentInvaderXSpace, currentInvaderYSpace);
                     var newInvader =
                         new Invader(currentInvaderType, newInvaderPoint, 10);
-                    invaders.Add(newInvader);
+                    _invaders.Add(newInvader);
                 }
             }
         }
