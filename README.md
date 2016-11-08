@@ -8,7 +8,7 @@ Install Monogame 3.5
 ### Completed design patterns;
 Adapter = William
 
-Bridge = Conor + Andrew
+Bridge = Conor
 
 Command = Conor
 
@@ -20,9 +20,9 @@ Factory = William
 
 Observer = Andrew
 
-Prototype = Cathal
+Prototype = Andrew
 
-Decorator = Conor
+Decorator = Cathal
 
 Interceptor = Conor
 
@@ -41,4 +41,4 @@ Testing = William
 
 Distribution = Conor
 
-Continuos Int
+Continuos Integration = Conor
