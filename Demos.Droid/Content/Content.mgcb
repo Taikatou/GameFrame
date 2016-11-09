@@ -172,3 +172,13 @@
 /processorParam:TextureFormat=Color
 /build:Pong/paddle.png
 
+#begin TopDownRpg/level03.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level03.tmx
+
+#begin TopDownRpg/level04.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level04.tmx
+
