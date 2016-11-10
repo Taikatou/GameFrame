@@ -37,6 +37,8 @@ Unit testing
 ### In progress
 Decorator = Cathal
 
+Memento = Andrew
+
 ####Other features
 
 Delegation = Command
