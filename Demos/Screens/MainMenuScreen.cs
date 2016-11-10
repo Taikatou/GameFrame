@@ -1,7 +1,6 @@
 ﻿using System;
 using Demos.TopDownRpg;
 using Microsoft.Xna.Framework;
-using Demos.Puzzle;
 using Demos.Pong;
 using MonoGame.Extended.ViewportAdapters;
 
