@@ -46,6 +46,10 @@
     <Compile Include="Common\StringToVector.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\BaseMovableController.cs" />
+    <Compile Include="Controllers\GamePad\AlternativeJoystickDecorator.cs" />
+    <Compile Include="Controllers\GamePad\ConcreteJoyStickDecorator.cs" />
+    <Compile Include="Controllers\GamePad\JoyStickComponent.cs" />
+    <Compile Include="Controllers\GamePad\JoystickDecorator.cs" />
     <Compile Include="Controllers\IControllerSettings.cs" />
     <Compile Include="Controllers\NullButton\NullButton.cs" />
     <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
