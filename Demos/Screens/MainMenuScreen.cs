@@ -22,7 +22,6 @@ namespace Demos.Screens
             base.LoadContent();
 
             AddMenuItem("New Game", Show<TopDownRpgScene>);
-            AddMenuItem("Puzzle Game", Show<PuzzleScreen>);
             AddMenuItem("Pong", Show<PongScreen>);
             AddMenuItem("Load Game", Show<LoadGameScreen>);
             AddMenuItem("Options", Show<OptionsScreen>);
