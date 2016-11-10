@@ -21,17 +21,6 @@ namespace GameFrame.PathFinding.PossibleMovements
             Debug.WriteLine("Null Pattern reached");
         }
 
-        public static IEnumerable<Point> FourWayAdjacentLocations(Point fromLocation)
-        {
-            return new[]
-            {
-                new Point(fromLocation.X-1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y+1),
-                new Point(fromLocation.X+1, fromLocation.Y  ),
-                new Point(fromLocation.X,   fromLocation.Y-1)
-            };
-        }
-
         public IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
         {
             return new[]
