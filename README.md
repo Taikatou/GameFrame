@@ -26,6 +26,8 @@ Interceptor = Conor
 
 Composite = Conor
 
+Null Object = Cathal
+
 ###Todo
 
 Documentaion
@@ -34,8 +36,6 @@ Unit testing
 
 ### In progress
 Decorator = Cathal
-
-Null Object = Cathal
 
 ####Other features
 
