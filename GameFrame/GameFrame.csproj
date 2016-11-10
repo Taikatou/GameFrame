@@ -47,6 +47,7 @@
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\BaseMovableController.cs" />
     <Compile Include="Controllers\IControllerSettings.cs" />
+    <Compile Include="Controllers\NullButton\NullButton.cs" />
     <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />
     <Compile Include="GameFrameScreen.cs" />
     <Compile Include="CollisionSystems\CompositeAbstractCollisionSystem.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeStack.cs" />
-    <Compile Include="GUI\ImageButton.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="Ink\StoryContext.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="PathFinding\PossibleMovements\EightWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\FourWayPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\IPossibleMovements.cs" />
+    <Compile Include="PathFinding\PossibleMovements\NullPossibleMovement.cs" />
     <Compile Include="PathFinding\PossibleMovements\PossibleMovementWrapper.cs" />
     <Compile Include="PathFinding\SearchParameters.cs" />
     <Compile Include="Paths\Cyclical\CyclicalCounter.cs" />
@@ -148,7 +149,9 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GUI\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
