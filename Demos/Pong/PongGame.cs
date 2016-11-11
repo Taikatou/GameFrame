@@ -80,11 +80,11 @@ namespace Demos.Pong
 
         private void SetInStartPostion()
         {
-            Ball.Position = originator.GetSavedBBObject();
+            Ball.Position = originator.GetSavedPosition();
             originator.GetStateFromMemento(caretaker.GetMemento(0));
-            PlayerOne.Position = originator.GetSavedBBObject();
+            PlayerOne.Position = originator.GetSavedPosition();
             originator.GetStateFromMemento(caretaker.GetMemento(1));
-            PlayerTwo.Position = originator.GetSavedBBObject();
+            PlayerTwo.Position = originator.GetSavedPosition();
         }
 
         public void Draw(SpriteBatch spriteBatch)

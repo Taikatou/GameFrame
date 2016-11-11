@@ -18,7 +18,7 @@ namespace GameFrame.CollisionTest
             _position = objCurrent;
         }
 
-        public Vector2 GetSavedBBObject()
+        public Vector2 GetSavedPosition()
         {
             return _position;
         }
