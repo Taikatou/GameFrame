@@ -14,6 +14,8 @@ Command = Conor
 
 State = William
 
+Memento = Andrew
+
 Service Locator = William
 
 Factory = William
@@ -36,8 +38,6 @@ Unit testing
 
 ### In progress
 Decorator = Cathal
-
-Memento = Andrew
 
 ####Other features
 
