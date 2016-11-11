@@ -16,7 +16,7 @@ namespace GameFrame.GUI
         private MouseState _previousState;
         private MouseState _mouseState;
 
-        public ImageButton(Texture2D image, Rectangle size, Buttons button=(Buttons)0)
+        public ImageButton(Texture2D image, Rectangle size, Buttons button = (Buttons)0)
         {
             _buttonTexture = image;
             Area = size;

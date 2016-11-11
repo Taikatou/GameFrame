@@ -21,6 +21,8 @@ namespace Demos.Pong
         public BBObject PlayerOne;
         public BBObject PlayerTwo;
         public BBObject Ball;
+        private Originator originator;
+        private Caretaker caretaker;
         private readonly BBCollision _playerCollision;
         private readonly BBCollisionSubject _collisionSubject;
         private readonly Texture2D _paddleTexture;
@@ -34,6 +36,8 @@ namespace Demos.Pong
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
+            caretaker = new Caretaker();
+            originator = new Originator();
             _content = ContentManagerFactory.RequestContentManager();
 
             _ballTexture = _content.Load<Texture2D>("Pong/ball");
@@ -41,16 +45,23 @@ namespace Demos.Pong
 
 
             Vector2 position;
-            position = new Vector2(0, (350));
+            position = new Vector2(0, 150);
             PlayerOne = new BBObject(_paddleTexture, position);
 
-            position = new Vector2((800 - _paddleTexture.Width), (350 - _paddleTexture.Height) / 2);
+            position = new Vector2((800 - _paddleTexture.Width), 150);
             PlayerTwo = PlayerOne.Clone() as BBObject;
             PlayerTwo.Position = position;
 
 
             position = new Vector2(PlayerOne.BoundingBox.Right + 1, (350 - _ballTexture.Height) / 2);
             Ball = new BBObject(_ballTexture, position, new Vector2(2.0f, 2.0f));
+
+            originator.SetObject(PlayerOne.Position);
+            caretaker.AddMemento(originator.CreateMemento());
+            originator.SetObject(PlayerTwo.Position);
+            caretaker.AddMemento(originator.CreateMemento());
+            originator.SetObject(Ball.Position);
+            caretaker.AddMemento(originator.CreateMemento());
 
             _objList = new List<BBObject>();
             _objList.Add(Ball);
@@ -69,10 +80,11 @@ namespace Demos.Pong
 
         private void SetInStartPostion()
         {
-            PlayerOne.Position.Y = (350 - PlayerOne.BoundingBox.Height) / 2;
-            PlayerTwo.Position.Y = (350 - PlayerTwo.BoundingBox.Height) / 2;
-            Ball.Position.X = PlayerOne.BoundingBox.Right + 1;
-            Ball.Position.Y = (350 - Ball.BoundingBox.Height) / 2;
+            Ball.Position = originator.GetSavedBBObject();
+            originator.GetStateFromMemento(caretaker.GetMemento(0));
+            PlayerOne.Position = originator.GetSavedBBObject();
+            originator.GetStateFromMemento(caretaker.GetMemento(1));
+            PlayerTwo.Position = originator.GetSavedBBObject();
         }
 
         public void Draw(SpriteBatch spriteBatch)

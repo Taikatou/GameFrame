@@ -36,6 +36,11 @@ namespace GameFrame.CollisionTest
             Velocity = velocity;
         }
 
+        public Vector2 GetPosition()
+        {
+            return Position;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, Position, Color.White);
