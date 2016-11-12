@@ -8,11 +8,8 @@ namespace GameFrame.PathFinding
         private Node _parentNode;
         private readonly IHeuristic _heuristic;
         public Point Location { get; }
-
         public double G { get; private set; }
-
         public double H { get; }
-
         public double F => G + H;
 
         public Node ParentNode
@@ -24,6 +21,12 @@ namespace GameFrame.PathFinding
                 _parentNode = value;
                 G = _parentNode.G + _heuristic.GetTraversalCost(Location, _parentNode.Location);
             }
+        }
+
+        public double GetTraversalCost(Node from)
+        {
+            var h = _heuristic.GetTraversalCost(Location, from.Location);
+            return h + from.G;
         }
 
         public Node(Point point, Point endLocation, IHeuristic heuristic, int max)

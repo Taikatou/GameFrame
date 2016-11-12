@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using GameFrame.Paths;
@@ -34,13 +35,14 @@ namespace GameFrame.Movers
         {
             var position = ToMove.Position.ToPoint();
             Path.Update(position);
-            if (Path.ToMove)
+            if (Path.ToMove && ToMove.Position.ToPoint() != Path.NextPosition)
             {
                 var direction = Path.NextPosition - ToMove.Position.ToPoint();
                 NextPosition = Path.NextPosition;
+                ToMove.Moving = true;
                 ToMove.MovingDirection = direction.ToVector2();
             }
-            else if(MovementComplete.Complete)
+            else if (MovementComplete.Complete)
             {
                 ToMove.OnMoveCompleteEvent += (sender, args) =>
                 {

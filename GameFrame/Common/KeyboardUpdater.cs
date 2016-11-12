@@ -14,9 +14,14 @@ namespace GameFrame.Common
             KeyBoardState = Keyboard.GetState();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             KeyBoardState = Keyboard.GetState();
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            Update();
         }
     }
 }

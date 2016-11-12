@@ -7,19 +7,17 @@ namespace GameFrame.Controllers.KeyBoard
     {
         public bool Active { get; set; }
         public bool PreviouslyActive { get; set; }
-
         public readonly Keys Key;
-        private readonly KeyboardUpdater _keyboardUpdater;
-
+        public KeyboardUpdater KeyboardUpdater;
         public KeyButton(Keys key, KeyboardUpdater keyboardUpdater)
         {
             Key = key;
-            _keyboardUpdater = keyboardUpdater;
+            KeyboardUpdater = keyboardUpdater;
         }
-        public void Update()
+        public virtual void Update()
         {
             PreviouslyActive = Active;
-            Active = _keyboardUpdater.KeyBoardState.IsKeyDown(Key);
+            Active = KeyboardUpdater.KeyBoardState.IsKeyDown(Key);
         }
     }
 }

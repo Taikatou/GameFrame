@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameFrame.Movers;
+using GameFrame.Paths;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
@@ -18,13 +19,13 @@ namespace GameFrame.Renderers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var points = Mover.PathPoints(Moving);
-            if (points != null)
+            var path = Mover.GetPath(Moving);
+            if (path != null && path.ToMove)
             {
-                Draw(spriteBatch, points);
+                Draw(spriteBatch, path.PathPoints);
             }
         }
 
-        public abstract void Draw(SpriteBatch spriteBatch, List<Point> points);
+        public abstract void Draw(SpriteBatch spriteBatch, List<Point> path);
     }
 }

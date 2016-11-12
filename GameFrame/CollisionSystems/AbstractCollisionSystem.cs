@@ -1,4 +1,5 @@
-﻿using GameFrame.PathFinding.PossibleMovements;
+﻿using System.Linq;
+using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.CollisionSystems
@@ -14,13 +15,8 @@ namespace GameFrame.CollisionSystems
 
         public bool CheckMovementCollision(Point startPoint, Point endPoint)
         {
-            var found = false;
-            var postiionsToCheck = PossibleMovements.PositionsToCheck(startPoint, endPoint);
-            foreach(var position in postiionsToCheck)
-            {
-                found = found || CheckCollision(position);
-            }
-            return found;
+            var positionsToCheck = PossibleMovements.PositionsToCheck(startPoint, endPoint);
+            return positionsToCheck.Any(CheckCollision);
         }
 
         public abstract bool CheckCollision(Point startPoint);
