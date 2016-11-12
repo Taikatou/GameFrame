@@ -3,18 +3,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameFrame.Controllers.GamePad
 {
-    public class JoyStick
+    public class JoyStick : JoyStickComponent
     {
-        public float ThumbstickTolerance = 0.35f;
-        private readonly bool _leftStick;
-        public Buttons Button;
+        public float ThumbstickTolerance { get; set; }
+        public bool _leftStick { get; set; }
+        public Buttons Button { get; set; }
 
         public JoyStick(bool leftStick = true)
         {
             _leftStick = leftStick;
         }
 
-        public void Update(GamePadState state)
+        
+        public override void Update(GamePadState state)
         {
             var direction = _leftStick ? state.ThumbSticks.Left : state.ThumbSticks.Right;
             var absX = Math.Abs(direction.X);

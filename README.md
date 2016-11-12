@@ -14,6 +14,8 @@ Command = Conor
 
 State = William
 
+Memento = Andrew
+
 Service Locator = William
 
 Factory = William
@@ -22,11 +24,11 @@ Observer = Andrew
 
 Prototype = Andrew
 
-Decorator = Cathal
+Interceptor = Conor
+
+Composite = Conor
 
 Null Object = Cathal
-
-Interceptor = Conor
 
 ###Todo
 
@@ -34,6 +36,8 @@ Documentaion
 
 Unit testing
 
+### In progress
+Decorator = Cathal
 
 ####Other features
 
