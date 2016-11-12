@@ -159,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="Content\TopDownRpg\Fonts\montserrat-32.fnt" />
     <None Include="Content\TopDownRpg\level01.tmx" />
     <None Include="Content\TopDownRpg\level02.tmx" />

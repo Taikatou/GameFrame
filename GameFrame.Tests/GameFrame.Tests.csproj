@@ -82,8 +82,6 @@
     <Compile Include="ServiceLocator\ServiceLocatorTest.cs" />
     <Compile Include="Ink\StoryImporter.cs" />
     <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
-    <Compile Include="Paths\PathTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveAndLoad.cs" />
     <Compile Include="SpaceInvaders\GameUnitTest.cs" />
   </ItemGroup>

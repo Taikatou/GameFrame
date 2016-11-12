@@ -11,7 +11,6 @@ using MonoGame.Extended.Entities;
 ﻿using System.Collections.Generic;
 using GameFrame.Paths;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
->>>>>>> master
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 

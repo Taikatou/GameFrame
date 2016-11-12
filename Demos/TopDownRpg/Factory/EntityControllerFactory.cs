@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Demos.TopDownRpg.SpeedState;
+using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
@@ -10,11 +11,16 @@ namespace Demos.TopDownRpg.Factory
 {
     public class EntityControllerFactory : SinglePlayerControllerFactory
     {
+        public EntityControllerFactory(KeyboardUpdater keyboardUpdater) : base(keyboardUpdater)
+        {
+        }
+
         public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
         {
             var controller = base.CreateEntityController(moveable, possibleMovements, moverManager);
             var runningButton = new List<IButtonAble>();
-            AddKeyBoardButton(runningButton, Keys.B);
+            AddKeyBoardButton(runningButton, Keys.LeftShift);
+            AddKeyBoardButton(runningButton, Keys.RightShift);
             AddGamePadButton(runningButton, Buttons.B);
             var entity = moveable as Entity;
             if (entity != null)
