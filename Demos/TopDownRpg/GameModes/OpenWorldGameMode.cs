@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Demos.TopDownRpg.Factory;
 using GameFrame;
@@ -81,7 +80,7 @@ namespace Demos.TopDownRpg.GameModes
             AddEntity(PlayerEntity);
             var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
-            AddInteractionController(entityController);
+            AddInteractionController(entityController, controllerFactory);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -108,9 +107,9 @@ namespace Demos.TopDownRpg.GameModes
             _audioAdapter.Resume();
         }
 
-        public void AddInteractionController(BaseMovableController controller)
+        public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory)
         {
-            var runningButton = new List<IButtonAble> { new KeyButton(Keys.E), new GamePadButton(Buttons.A) };
+            var runningButton = new List<IButtonAble> { new KeyButton(Keys.E, controllerFactory.KeyboardUpdater), new GamePadButton(Buttons.A) };
             var smartButton = new CompositeSmartButton(runningButton)
             {
                 OnButtonJustPressed = (sender, args) =>

@@ -60,29 +60,31 @@ namespace GameFrame.Controllers
             }
         }
 
-        private void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private void CreateCompositeButton(IEnumerable<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
-            var smartButton = new CompositeSmartButton(buttons);
-            smartButton.OnButtonJustPressed += (sender, args) =>
+            var smartButton = new CompositeSmartButton(buttons)
             {
-                ButtonsDown++;
-                ToMove.Moving = PlayerMove;
-                moverManager.RemoveMover(entityMover);
-                MoveBy(moveBy, entityMover.Position);
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    ButtonsDown++;
+                    ToMove.Moving = PlayerMove;
+                    moverManager.RemoveMover(entityMover);
+                    MoveBy(moveBy, entityMover.Position);
+                },
+                OnButtonHeldDown = (sender, args) =>
+                {
+                    ToMove.Moving = PlayerMove;
+                    MoveBy(moveBy, entityMover.Position);
+                },
+                OnButtonReleased = (sender, args) =>
+                {
+                    ButtonsDown--;
+                    ToMove.Moving = PlayerMove;
+                    moverManager.RemoveMover(entityMover);
+                    Release(moveBy);
+                }
             };
-            smartButton.OnButtonHeldDown += (sender, args) =>
-            {
-                ToMove.Moving = PlayerMove;
-                MoveBy(moveBy, entityMover.Position);
-            };
-            smartButton.OnButtonReleased += (sender, args) =>
-            {
-                ButtonsDown--;
-                ToMove.Moving = PlayerMove;
-                moverManager.RemoveMover(entityMover);
-                Release(moveBy);
-            };
-            _smartController.AddButton(smartButton);
+            AddButton(smartButton);
         }
 
         public void AddButton(AbstractSmartButton button)

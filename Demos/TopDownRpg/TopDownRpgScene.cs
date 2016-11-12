@@ -22,17 +22,25 @@ namespace Demos.TopDownRpg
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
         private OpenWorldGameMode _openWorldGameMode;
+        public KeyboardUpdater KeyBoardUpdater;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
             BattleProbability = 12;
+            KeyBoardUpdater = new KeyboardUpdater();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            KeyBoardUpdater.Update(gameTime);
         }
 
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new TwoDEntityRenderer(), new EntityControllerFactory());
+            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new TwoDEntityRenderer(), new EntityControllerFactory(KeyBoardUpdater));
             var map = _openWorldGameMode.Map;
             var player = _openWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
