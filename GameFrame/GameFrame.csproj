@@ -40,7 +40,10 @@
     <Compile Include="CollisionTest\BBCollisionObserver.cs" />
     <Compile Include="CollisionTest\BBCollisionSubject.cs" />
     <Compile Include="CollisionTest\BBObjectPrototype.cs" />
+    <Compile Include="CollisionTest\Caretaker.cs" />
     <Compile Include="CollisionTest\CollisionType.cs" />
+    <Compile Include="CollisionTest\Memento.cs" />
+    <Compile Include="CollisionTest\Originator.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\StringToVector.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeStack.cs" />
+    <Compile Include="GUI\ImageButton.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="Ink\StoryContext.cs" />
@@ -153,9 +157,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
