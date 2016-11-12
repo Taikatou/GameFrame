@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Demos.TopDownRpg.SpeedState;
+﻿using Demos.TopDownRpg.SpeedState;
 using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.ServiceLocator;
@@ -24,12 +23,23 @@ namespace Demos.TopDownRpg
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.Speed;
 
+        [JsonConstructor]
         public Entity(string name, string spriteSheet, string script)
         {
             Name = name;
             SpriteSheet = spriteSheet;
             Script = script;
             SpeedContext = new SpeedContext(4);
+        }
+
+        public Entity(Entity baseEntity, Vector2 position)
+        {
+            Name = baseEntity.Name;
+            SpriteSheet = baseEntity.SpriteSheet;
+            Script = baseEntity.Script;
+            SpeedContext = new SpeedContext(4);
+            FacingDirection = baseEntity.FacingDirection;
+            Position = position;
         }
 
         public virtual Story Interact()

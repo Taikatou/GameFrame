@@ -6,7 +6,6 @@ namespace GameFrame.Controllers
     {
         bool Active { get; }
         bool PreviouslyActive { get; }
-        Buttons Button { get; }
         void Update();
     }
 }

@@ -21,23 +21,23 @@ namespace Demos.Pong
         public BBObject PlayerOne;
         public BBObject PlayerTwo;
         public BBObject Ball;
-        private Originator originator;
-        private Caretaker caretaker;
+        private readonly Originator _originator;
+        private readonly Caretaker _caretaker;
         private readonly BBCollision _playerCollision;
         private readonly BBCollisionSubject _collisionSubject;
         private readonly Texture2D _paddleTexture;
         private readonly Texture2D _ballTexture;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
-        private ContentManager _content;
-        private List<BBObject> _objList;
+        private readonly ContentManager _content;
+        private readonly List<BBObject> _objList;
 
         public PongGame(ViewportAdapter viewPort)
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
-            caretaker = new Caretaker();
-            originator = new Originator();
+            _caretaker = new Caretaker();
+            _originator = new Originator();
             _content = ContentManagerFactory.RequestContentManager();
 
             _ballTexture = _content.Load<Texture2D>("Pong/ball");
@@ -56,12 +56,12 @@ namespace Demos.Pong
             position = new Vector2(PlayerOne.BoundingBox.Right + 1, (350 - _ballTexture.Height) / 2);
             Ball = new BBObject(_ballTexture, position, new Vector2(2.0f, 2.0f));
 
-            originator.SetObject(PlayerOne.Position);
-            caretaker.AddMemento(originator.CreateMemento());
-            originator.SetObject(PlayerTwo.Position);
-            caretaker.AddMemento(originator.CreateMemento());
-            originator.SetObject(Ball.Position);
-            caretaker.AddMemento(originator.CreateMemento());
+            _originator.SetObject(PlayerOne.Position);
+            _caretaker.AddMemento(_originator.CreateMemento());
+            _originator.SetObject(PlayerTwo.Position);
+            _caretaker.AddMemento(_originator.CreateMemento());
+            _originator.SetObject(Ball.Position);
+            _caretaker.AddMemento(_originator.CreateMemento());
 
             _objList = new List<BBObject>();
             _objList.Add(Ball);
@@ -80,11 +80,11 @@ namespace Demos.Pong
 
         private void SetInStartPostion()
         {
-            Ball.Position = originator.GetSavedPosition();
-            originator.GetStateFromMemento(caretaker.GetMemento(0));
-            PlayerOne.Position = originator.GetSavedPosition();
-            originator.GetStateFromMemento(caretaker.GetMemento(1));
-            PlayerTwo.Position = originator.GetSavedPosition();
+            Ball.Position = _originator.GetSavedPosition();
+            _originator.GetStateFromMemento(_caretaker.GetMemento(0));
+            PlayerOne.Position = _originator.GetSavedPosition();
+            _originator.GetStateFromMemento(_caretaker.GetMemento(1));
+            PlayerTwo.Position = _originator.GetSavedPosition();
         }
 
         public void Draw(SpriteBatch spriteBatch)

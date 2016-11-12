@@ -125,32 +125,16 @@ namespace Demos.TopDownRpg.GameModes
         public void LoadEntities()
         {
             var entityObjects = Map.GetObjectGroup("Entity-Layer");
-            foreach (var entityObject in entityObjects.Objects)
+            if (entityObjects != null)
             {
-                var position = entityObject.Position/_tileSize;
-                var entity = Entity.Import(entityObject.Name);
-                entity.Position = position;
-                var facingDirection = new Vector2();
-                switch (entityObject.Type)
+                foreach (var entityObject in entityObjects.Objects)
                 {
-                    case "L":
-                        facingDirection.X = -1;
-                        break;
-                    case "R":
-                        facingDirection.X = 1;
-                        break;
-                    case "U":
-                        facingDirection.Y = -1;
-                        break;
-                    case "D":
-                        facingDirection.Y = 1;
-                        break;
-                    default:
-                        facingDirection = new Vector2(1, 1);
-                        break;
+                    var position = entityObject.Position / _tileSize;
+                    var entity = Entity.Import(entityObject.Name);
+                    entity.Position = position;
+                    entity.FacingDirection = StringToVector.ConvertString(entityObject.Type);
+                    AddEntity(entity);
                 }
-                entity.FacingDirection = facingDirection;
-                AddEntity(entity);
             }
         }
 

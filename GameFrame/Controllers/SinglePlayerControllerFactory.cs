@@ -41,10 +41,10 @@ namespace GameFrame.Controllers
             };
             if (ControllerSettings.GamePadEnabled)
             {
-                directions[BaseMovableController.Directions.Down].Add(new DirectionGamePadButton(Buttons.DPadUp));
-                directions[BaseMovableController.Directions.Left].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Down].Add(new DirectionGamePadButton(Buttons.DPadDown));
+                directions[BaseMovableController.Directions.Left].Add(new DirectionGamePadButton(Buttons.DPadLeft));
                 directions[BaseMovableController.Directions.Up].Add(new DirectionGamePadButton(Buttons.DPadUp));
-                directions[BaseMovableController.Directions.Right].Add(new DirectionGamePadButton(Buttons.DPadUp));
+                directions[BaseMovableController.Directions.Right].Add(new DirectionGamePadButton(Buttons.DPadRight));
             }
             if (ControllerSettings.KeyBoardMouseEnabled)
             {

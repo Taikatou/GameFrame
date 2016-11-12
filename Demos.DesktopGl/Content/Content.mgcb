@@ -178,3 +178,7 @@
 /processorParam:TextureFormat=Color
 /build:Pong/paddle.png
 
+#begin TopDownRpg/house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/house.tmx

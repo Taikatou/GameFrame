@@ -77,7 +77,6 @@
     <Compile Include="CollisionSystem\SpatialHashCollisionSystemTest.cs" />
     <Compile Include="Common\CommonTest.cs" />
     <Compile Include="Controller\ControllerTest.cs" />
-    <Compile Include="MediaAdapter\TestAudioPlayer.cs" />
     <Compile Include="Paths\PathTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocator\ServiceLocatorTest.cs" />

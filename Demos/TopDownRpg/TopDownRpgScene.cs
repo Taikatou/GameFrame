@@ -5,12 +5,11 @@ using Demos.TopDownRpg.SpeedState;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Controllers;
-using GameFrame.Ink;
-using GameFrame.Interceptor;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
@@ -32,43 +31,52 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            ControllerFactory controllerFactory = new EntityControllerFactory();
-            RendererFactory rendererFactory = new TwoDEntityRenderer();
-
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , rendererFactory, controllerFactory);
+            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new TwoDEntityRenderer(), new EntityControllerFactory());
             var map = _openWorldGameMode.Map;
-            var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
             var player = _openWorldGameMode.PlayerEntity;
-            var tileSize = new Point(map.TileWidth, map.TileHeight);
-            var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-            _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+            var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
+            if (grassLayer != null)
             {
-                var random = new Random();
-                var point = player.Position.ToPoint();
-                var grassCollision = grassCollisionSystem.CheckCollision(point);
-                var grassProbability = random.Next(BattleProbability);
-                if (grassCollision)
+                var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
+                _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
                 {
-                    player.SpeedContext.Terrain = new SpeedGrass();
-                    if (grassProbability == 0)
+                    var random = new Random();
+                    var point = player.Position.ToPoint();
+                    var grassCollision = grassCollisionSystem.CheckCollision(point);
+                    var grassProbability = random.Next(BattleProbability);
+                    if (grassCollision)
                     {
-                        GameModes.Push(new BattleGameMode());
+                        player.SpeedContext.Terrain = new SpeedGrass();
+                        if (grassProbability == 0)
+                        {
+                            GameModes.Push(new BattleGameMode());
+                        }
                     }
-                }
-                else if(player.SpeedContext.Terrain != null)
+                    else if (player.SpeedContext.Terrain != null)
+                    {
+                        player.SpeedContext.Terrain = null;
+                    }
+                };
+            }
+            var teleportlayer = map.GetObjectGroup("Teleport-Layer");
+            if (teleportlayer != null)
+            {
+                var tileSize = new Point(map.TileWidth, map.TileHeight);
+                var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
+                _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
                 {
-                    player.SpeedContext.Terrain = null;
-                }
-
-                if (teleporters.CheckCollision(point))
-                {
-                    var teleporter = teleporters.GetObjectAt(point);
-                    PlayerEntity.Position = StringToVector.ConvertString(teleporter.Type);
-                    GameModeStack.Unload();
-                    LoadOpenWorld(teleporter.Name);
-                }
-            };
+                    var point = player.Position.ToPoint();
+                    if (teleporters.CheckCollision(point))
+                    {
+                        var teleporter = teleporters.GetObjectAt(point);
+                        var position = StringToVector.ConvertString(teleporter.Type);
+                        PlayerEntity = new Entity(PlayerEntity, position);
+                        GameModeStack.Unload();
+                        LoadOpenWorld(teleporter.Name);
+                    }
+                };
+            }
             GameModes.Push(_openWorldGameMode);
         }
 

@@ -6,8 +6,6 @@ namespace GameFrame.Controllers.KeyBoard
     {
         public bool Active { get; set; }
 
-        public Buttons Button { get; set; }
-
         public bool PreviouslyActive { get; set; }
 
         public readonly Keys Key;

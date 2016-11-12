@@ -18,7 +18,6 @@ namespace GameFrame.Controllers.GamePad
         public override void Update(GamePadState state)
         {
             var direction = _leftStick ? state.ThumbSticks.Left : state.ThumbSticks.Right;
-
             var absX = Math.Abs(direction.X);
             var absY = Math.Abs(direction.Y);
             if (absX > absY)

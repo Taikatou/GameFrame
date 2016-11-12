@@ -6,7 +6,7 @@ namespace GameFrame.Ink
     public class StoryContext : IContext
     {
         public string Text => _story.currentText;
-        private Story _story;
+        private readonly Story _story;
 
         public StoryContext(Story story)
         {
