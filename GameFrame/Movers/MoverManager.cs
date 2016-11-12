@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameFrame.Paths;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -44,11 +45,11 @@ namespace GameFrame.Movers
             }
         }
 
-        public List<Point> PathPoints(BaseMovable mover)
+        public AbstractPath GetPath(BaseMovable mover)
         {
             if (Movers.ContainsKey(mover))
             {
-                return Movers[mover].Path.PathPoints;
+                return Movers[mover].Path;
             }
             else
             {

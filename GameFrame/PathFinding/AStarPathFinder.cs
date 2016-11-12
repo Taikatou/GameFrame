@@ -26,7 +26,8 @@ namespace GameFrame.PathFinding
             }
             else if (ValidMovement(fromPoint, point))
             {
-                MapNodes[point] = new Node(point, SearchParameters.EndLocation, _possibleMovements.Heuristic, _max);
+                var endPoint = SearchParameters.EndLocation;
+                MapNodes[point] = new Node(point, endPoint, _possibleMovements.Heuristic, _max);
                 toReturn = MapNodes[point];
             }
             return toReturn;
@@ -103,27 +104,25 @@ namespace GameFrame.PathFinding
             foreach (var location in nextLocations)
             {
                 var nodeClosed = ClosedNodes.Contains(location);
-                Node node = null;
                 if (!nodeClosed)
                 {
-                    node = GetNode(fromNode.Location, location);
-                }
-                if (node != null && !(node == _endNode && !ValidMovement(fromNode.Location, node.Location)))
-                {
-                    // Already-open nodes are only added to the list if their G-value is lower going via this route.
-                    if (node.ParentNode == null)
+                    var node = GetNode(fromNode.Location, location);
+                    if (node != null && ValidMovement(fromNode.Location, node.Location))
                     {
-                        node.ParentNode = fromNode;
-                        queue.Add(node);
-                    }
-                    else
-                    {
-                        var traversalCost = _possibleMovements.Heuristic.GetTraversalCost(node.Location, fromNode.Location);
-                        var gTemp = fromNode.G + traversalCost;
-                        if (gTemp < node.G)
+                        // Already-open nodes are only added to the list if their G-value is lower going via this route.
+                        if (node.ParentNode == null)
                         {
                             node.ParentNode = fromNode;
                             queue.Add(node);
+                        }
+                        else
+                        {
+                            var gTemp = node.GetTraversalCost(fromNode);
+                            if (gTemp < node.G)
+                            {
+                                node.ParentNode = fromNode;
+                                queue.Add(node);
+                            }
                         }
                     }
                 }
@@ -132,13 +131,15 @@ namespace GameFrame.PathFinding
 
         public bool ValidPosition(Point position)
         {
-            var collision = SearchParameters.AbstractCollisionSystem.CheckCollision(position); 
+            var collisionSystem = SearchParameters.AbstractCollisionSystem;
+            var collision = collisionSystem.CheckCollision(position); 
             return !collision;
         }
 
         public bool ValidMovement(Point startPosition, Point endPosition)
         {
-            var collision = SearchParameters.AbstractCollisionSystem.CheckMovementCollision(startPosition, endPosition);
+            var collisionSystem = SearchParameters.AbstractCollisionSystem;
+            var collision = collisionSystem.CheckMovementCollision(startPosition, endPosition);
             return !collision;
         }
     }
