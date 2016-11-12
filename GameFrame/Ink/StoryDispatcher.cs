@@ -7,7 +7,7 @@ namespace GameFrame.Ink
     {
         public void AddStory(Story story)
         {
-            while (story.canContinue)
+            //while (story.canContinue)
             {
                 story.Continue();
                 var storyStripped = new StoryContext(story);

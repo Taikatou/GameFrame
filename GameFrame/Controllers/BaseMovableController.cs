@@ -60,7 +60,7 @@ namespace GameFrame.Controllers
             }
         }
 
-        private CompositeSmartButton CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
+        private void CreateCompositeButton(List<IButtonAble> buttons, BaseMovable entityMover, Vector2 moveBy, MoverManager moverManager)
         {
             var smartButton = new CompositeSmartButton(buttons);
             smartButton.OnButtonJustPressed += (sender, args) =>
@@ -83,8 +83,6 @@ namespace GameFrame.Controllers
                 Release(moveBy);
             };
             _smartController.AddButton(smartButton);
-
-            return smartButton;
         }
 
         public void AddButton(AbstractSmartButton button)
