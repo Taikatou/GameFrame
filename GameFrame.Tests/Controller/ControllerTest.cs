@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Demos.DesktopGl;
+using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
@@ -23,20 +24,19 @@ namespace GameFrame.Tests.Controller
         public void SinglePLayerControllerFactoryTest()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-
-            var controller = new SinglePlayerControllerFactory();
+            var keyBoardUpdator = new KeyboardUpdater();
+            var controller = new SinglePlayerControllerFactory(keyBoardUpdator);
             controller.CreateEntityController(new BaseMovable(), new EightWayPossibleMovement(new CrowDistance()),
                 new MoverManager());
             const Buttons buttons = Buttons.A;
             controller.AddGamePadButton(new List<IButtonAble>(), buttons);
             controller.AddKeyBoardButton(new List<IButtonAble>(), Keys.A);
 
-            var button = new KeyButton(Keys.A) {Button = Buttons.A};
-            var button2 = button.Button;
+            var button = new KeyButton(Keys.A, keyBoardUpdator);
 
 
             var smart = new SmartController();
-            smart.AddButton(new BaseSmartButton(new KeyButton(Keys.A)));
+            smart.AddButton(new BaseSmartButton(button));
             smart.Update(new GameTime());
         }
 

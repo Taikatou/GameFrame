@@ -1,5 +1,6 @@
 ﻿using System;
 using Demos.DesktopGl;
+using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.ServiceLocator;
@@ -14,7 +15,8 @@ namespace GameFrame.Tests.ServiceLocator
         [TestMethod]
         public void AddAndGetServiceTest()
         {
-            StaticServiceLocator.AddService<IButtonAble>(new KeyButton(Keys.A));
+            var keyBoardUpdator = new KeyboardUpdater();
+            StaticServiceLocator.AddService<IButtonAble>(new KeyButton(Keys.A, keyBoardUpdator));
             var settings = StaticServiceLocator.GetService<IButtonAble>();
             Assert.IsInstanceOfType(settings,typeof(IButtonAble));
         }
