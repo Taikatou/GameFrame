@@ -4,14 +4,8 @@ using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
-using GameFrame.Paths;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended.Entities;
-﻿using System.Collections.Generic;
-using GameFrame.Paths;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
 namespace GameFrame.Tests.Paths
