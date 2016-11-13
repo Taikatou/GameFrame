@@ -6,7 +6,7 @@ using GameFrame.Paths;
 
 namespace GameFrame.Movers
 {
-    public class PathMover : IUpdate
+    public class PathMover : IUpdate, ICompleteAble
     {
         public readonly AbstractPath Path;
         public BaseMovable ToMove;

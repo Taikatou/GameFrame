@@ -5,9 +5,9 @@ using GameFrame.TextToSpeech;
 
 namespace Demos.DesktopGl
 {
-    public class TextToSpeechStoryInterceptor : IInterceptor<StoryContext>
+    public class TextToSpeechStoryInterceptor : StoryInterceptor
     {
-        public void Execute(StoryContext context)
+        public override void Execute(StoryContext context)
         {
             var textToSpeech = StaticServiceLocator.GetService<ITextToSpeech>();
             textToSpeech.Speak(context.Text);

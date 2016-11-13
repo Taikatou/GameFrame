@@ -56,9 +56,9 @@ namespace Demos.TopDownRpg.GameModes
         {
             //PlayMusic();
             StoryDispatcher = new StoryDispatcher();
-            if (StaticServiceLocator.ContainsService<List<IInterceptor<StoryContext>>>())
+            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
             {
-                var interceptors = StaticServiceLocator.GetService<List<IInterceptor<StoryContext>>>();
+                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
                 foreach (var interceptor in interceptors)
                 {
                     StoryDispatcher.AddInterceptor(interceptor);

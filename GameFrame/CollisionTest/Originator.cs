@@ -1,5 +1,4 @@
-﻿
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace GameFrame.CollisionTest
@@ -26,10 +25,10 @@ namespace GameFrame.CollisionTest
             return new Memento(_position);
         }
 
-        public void GetStateFromMemento(Memento Memento)
+        public void GetStateFromMemento(Memento memento)
         {
             Debug.WriteLine("Org, State after restoring from memento: "+ _position);
-            _position = Memento.GetSavedPosition();
+            _position = memento.GetSavedPosition();
         }
 
 
