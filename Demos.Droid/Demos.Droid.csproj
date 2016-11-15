@@ -74,6 +74,8 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveAndLoad.cs" />
+    <Compile Include="TextToSpeechImplementation.cs" />
+    <Compile Include="TextToSpeechStoryInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

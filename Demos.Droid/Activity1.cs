@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Demos.MobileShared;
 using GameFrame.Controllers;
+using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
+using GameFrame.TextToSpeech;
 
 namespace Demos.Droid
 {
@@ -24,6 +27,8 @@ namespace Demos.Droid
             base.OnCreate(bundle);
             StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad(Assets));
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
+            StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
+            StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor() });
             var g = new DemoGame();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
