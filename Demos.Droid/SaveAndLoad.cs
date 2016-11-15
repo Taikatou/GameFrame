@@ -7,7 +7,7 @@ namespace Demos.Droid
 {
     public class SaveAndLoad : ISaveAndLoad
     {
-        private AssetManager _assets;
+        private readonly AssetManager _assets;
 
         public SaveAndLoad(AssetManager assets)
         {

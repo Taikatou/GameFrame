@@ -16,13 +16,11 @@ using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Ink;
-using GameFrame.Interceptor;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,20 +48,10 @@ namespace Demos.TopDownRpg.GameModes
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private IAudioPlayer _audioAdapter;
-        public readonly StoryDispatcher StoryDispatcher;
-
+        private readonly StoryDialogBox _entityDialogBox;
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
             //PlayMusic();
-            StoryDispatcher = new StoryDispatcher();
-            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
-            {
-                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
-                foreach (var interceptor in interceptors)
-                {
-                    StoryDispatcher.AddInterceptor(interceptor);
-                }
-            }
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -97,6 +85,9 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
+            var dialogFont = _content.Load<SpriteFont>("dialog");
+            _entityDialogBox = new StoryDialogBox(dialogFont, playerEntity);
+            UpdateList.Add(_entityDialogBox);
         }
 
         public void PlayMusic()
@@ -220,7 +211,7 @@ namespace Demos.TopDownRpg.GameModes
                 if (interactWith != null)
                 {
                     var story = interactWith.Interact();
-                    StoryDispatcher.AddStory(story);
+                    _entityDialogBox.AddDialogBox(story);
                 }
             }
         }
@@ -252,6 +243,7 @@ namespace Demos.TopDownRpg.GameModes
             }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();
+            _entityDialogBox.Draw(spriteBatch);
         }
 
         public void Update(GameTime gameTime)

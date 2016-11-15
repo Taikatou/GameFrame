@@ -4,7 +4,6 @@ using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
-using GameFrame.Controllers;
 using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;

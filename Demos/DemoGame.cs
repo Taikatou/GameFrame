@@ -4,8 +4,7 @@ using Demos.Pong;
 using Demos.Screens;
 using Demos.TopDownRpg;
 using GameFrame;
-using GameFrame.Ink;
-using GameFrame.Interceptor;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
@@ -31,6 +30,7 @@ namespace Demos
         protected override void LoadContent()
         {
             base.LoadContent();
+            StaticServiceLocator.AddService(GraphicsDevice);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             _rpgScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);

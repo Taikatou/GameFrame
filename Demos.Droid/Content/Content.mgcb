@@ -14,11 +14,22 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Ghost-in-the-house.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Ghost-in-the-house.mp3
+#begin montserrat-32.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:montserrat-32.fnt
+
+#begin montserrat-32_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:montserrat-32_0.png
 
 #begin TopDownRpg/Fonts/montserrat-32.fnt
 /importer:BitmapFontImporter
@@ -36,6 +47,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/Fonts/montserrat-32_0.png
+
+#begin TopDownRpg/BirabutoKingdom.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:TopDownRpg/BirabutoKingdom.wav
 
 #begin TopDownRpg/BluePathEnd.png
 /importer:TextureImporter
@@ -61,6 +78,11 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/Character.png
 
+#begin TopDownRpg/house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/house.tmx
+
 #begin TopDownRpg/level01.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -70,6 +92,16 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TopDownRpg/level02.tmx
+
+#begin TopDownRpg/level03.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level03.tmx
+
+#begin TopDownRpg/level04.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/level04.tmx
 
 #begin TopDownRpg/Path.png
 /importer:TextureImporter
@@ -95,6 +127,12 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/PathEnd.png
 
+#begin TopDownRpg/piano.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:TopDownRpg/piano.mp3
+
 #begin TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -118,23 +156,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/tileset.png
-
-#begin montserrat-32.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:montserrat-32.fnt
-
-#begin montserrat-32_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:montserrat-32_0.png
 
 #begin DemoScreen/BackButton.png
 /importer:TextureImporter
@@ -172,13 +193,15 @@
 /processorParam:TextureFormat=Color
 /build:Pong/paddle.png
 
-#begin TopDownRpg/level03.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/level03.tmx
+#begin dialog.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:dialog.spritefont
 
-#begin TopDownRpg/level04.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/level04.tmx
+#begin mono.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:mono.spritefont
 

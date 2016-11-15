@@ -182,3 +182,16 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TopDownRpg/house.tmx
+
+#begin dialog.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:dialog.spritefont
+
+#begin mono.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:mono.spritefont
+
