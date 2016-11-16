@@ -16,7 +16,7 @@ namespace GameFrame.Ink
         Option,
         Closed
     }
-
+    public delegate void StoryDialogBoxEvent(Story story, string text);
     public class StoryDialogBox : IUpdate
     {
         public StoryState StoryState;
@@ -25,7 +25,8 @@ namespace GameFrame.Ink
         private Vector2 _cachedPosition;
         private readonly Camera2D _camera;
         private readonly SpriteFont _font;
-        public Story ActiveStory;
+        private Story _activeStory;
+        public StoryDialogBoxEvent DialogBoxEvent;
 
         public StoryDialogBox(SpriteFont font, BaseMovable player)
         {
@@ -74,8 +75,8 @@ namespace GameFrame.Ink
         public void ChooseOption(OptionTextBox option)
         {
             _textBoxes.Clear();
-            ActiveStory.ChooseChoiceIndex(option.OptionIndex);
-            if (ActiveStory.canContinue)
+            _activeStory.ChooseChoiceIndex(option.OptionIndex);
+            if (_activeStory.canContinue)
             {
                 LoadDialogBox();
             }
@@ -88,10 +89,10 @@ namespace GameFrame.Ink
         public void LoadOptions()
         {
             _textBoxes.Clear();
-            if (ActiveStory.currentChoices.Count > 0)
+            if (_activeStory.currentChoices.Count > 0)
             {
                 var optionBoxes = new List<OptionTextBox>();
-                var choices = ActiveStory.currentChoices;
+                var choices = _activeStory.currentChoices;
                 for (var i = 0; i < choices.Count; i++)
                 {
                     var option = new OptionTextBox(_font, i, choices[i]);
@@ -135,8 +136,9 @@ namespace GameFrame.Ink
 
         public void LoadDialogBox()
         {
-            var text = ActiveStory.ContinueMaximally();
-            var dialogBox = new DialogBox(_font, ActiveStory, text);
+            var text = _activeStory.ContinueMaximally();
+            var dialogBox = new DialogBox(_font, text);
+            dialogBox.DialogBoxEvent += s => DialogBoxEvent?.Invoke(_activeStory, s);
             dialogBox.Show();
             _textBoxes.Clear();
             _textBoxes.Add(dialogBox);
@@ -146,7 +148,7 @@ namespace GameFrame.Ink
 
         public void AddDialogBox(Story story)
         {
-            ActiveStory = story;
+            _activeStory = story;
             LoadDialogBox();
         }
     }

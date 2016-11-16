@@ -1,41 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using GameFrame.GUI;
-using GameFrame.Ink;
 using GameFrame.ServiceLocator;
-using Ink.Runtime;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameFrame.Renderers
 {
+    public delegate void DialogBoxEvent(string text);
     public class DialogBox : TextBox
     {
         private int _interval;
         public override string TextToShow => Pages[CurrentPage];
 
         public Stopwatch Stopwatch;
-        public readonly StoryDispatcher StoryDispatcher;
-        private Story _story;
-
-        public DialogBox(SpriteFont font, Story story, string text) : base(font)
+        public DialogBoxEvent DialogBoxEvent;
+        public DialogBox(SpriteFont font, string text) : base(font)
         {
-            _story = story;
             Text = text;
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
             var centerScreen = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
             var posX = centerScreen.X - (Size.X / 2f);
             var posY = graphicsDevice.Viewport.Height - Size.Y - 30;
             Position = new Vector2(posX, posY);
-            if (StaticServiceLocator.ContainsService<StoryDispatcher>())
-            {
-                StoryDispatcher = StaticServiceLocator.GetService<StoryDispatcher>();
-            }
-            else
-            {
-                StoryDispatcher = new StoryDispatcher();
-            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -68,7 +55,7 @@ namespace GameFrame.Renderers
                 {
                     CurrentPage++;
                     Stopwatch.Restart();
-                    StoryDispatcher.AddStory(null, TextToShow);
+                    DialogBoxEvent?.Invoke(TextToShow);
                 }
             }
         }
@@ -78,7 +65,7 @@ namespace GameFrame.Renderers
             base.Show();
             // use stopwatch to manage blinking indicator
             Stopwatch = new Stopwatch();
-            StoryDispatcher.AddStory(null, TextToShow);
+            DialogBoxEvent?.Invoke(TextToShow);
             Stopwatch.Start();
         }
 

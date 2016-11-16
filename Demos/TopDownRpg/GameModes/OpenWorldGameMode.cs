@@ -95,7 +95,7 @@ namespace Demos.TopDownRpg.GameModes
                 {
                     storyDispatcher.AddInterceptor(interceptor);
                 }
-                StaticServiceLocator.AddService(storyDispatcher);
+                _entityDialogBox.DialogBoxEvent += (story, text) => storyDispatcher.AddStory(story, text);
             }
         }
 
