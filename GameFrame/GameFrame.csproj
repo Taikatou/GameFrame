@@ -91,6 +91,9 @@
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeStack.cs" />
     <Compile Include="GUI\ImageButton.cs" />
+    <Compile Include="GUI\OptionTextBox.cs" />
+    <Compile Include="GUI\OptionTextBoxFactory.cs" />
+    <Compile Include="GUI\TextBox.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
     <Compile Include="Ink\StoryDialogBox.cs" />

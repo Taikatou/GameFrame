@@ -10,5 +10,17 @@ namespace GameFrame.Ink
             var storyStripped = new StoryContext(story);
             Execute(storyStripped);
         }
+
+        public void AddStory(Story story, string storyText)
+        {
+            var storyStripped = new StoryContext(story, storyText);
+            Execute(storyStripped);
+        }
+
+        public void StoryText(Story story, string text)
+        {
+            var storyStripped = new StoryContext(story, text);
+            Execute(storyStripped);
+        }
     }
 }

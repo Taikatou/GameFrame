@@ -11,7 +11,6 @@ using GameFrame.Content;
 using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
-using GameFrame.MediaAdapter;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
@@ -47,11 +46,9 @@ namespace Demos.TopDownRpg.GameModes
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
-        private IAudioPlayer _audioAdapter;
         private readonly StoryDialogBox _entityDialogBox;
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
-            //PlayMusic();
             _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -88,14 +85,6 @@ namespace Demos.TopDownRpg.GameModes
             var dialogFont = _content.Load<SpriteFont>("dialog");
             _entityDialogBox = new StoryDialogBox(dialogFont, playerEntity);
             UpdateList.Add(_entityDialogBox);
-        }
-
-        public void PlayMusic()
-        {
-            _audioAdapter = new AudioAdapter();
-            _audioAdapter.Play("wav", "TopDownRPG/BirabutoKingdom");
-            _audioAdapter.Pause();
-            _audioAdapter.Resume();
         }
 
         public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory)
@@ -141,14 +130,20 @@ namespace Demos.TopDownRpg.GameModes
             var clickController = new ClickController();
             clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
             {
-                var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
-                BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                if (!_entityDialogBox.Interact(mouseState.Position))
+                {
+                    var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
+                    BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                }
             };
             var moveGesture = new SmartGesture(GestureType.Tap);
             moveGesture.GestureEvent += gesture =>
             {
-                var endPoint = Camera.ScreenToWorld(gesture.Position);
-                BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                if (!_entityDialogBox.Interact(gesture.Position.ToPoint()))
+                {
+                    var endPoint = Camera.ScreenToWorld(gesture.Position);
+                    BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                }
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(clickController);

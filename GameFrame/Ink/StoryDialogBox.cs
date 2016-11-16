@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameFrame.GUI;
 using GameFrame.Movers;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
@@ -9,66 +10,144 @@ using MonoGame.Extended;
 
 namespace GameFrame.Ink
 {
+    public enum StoryState
+    {
+        Dialog,
+        Option,
+        Closed
+    }
+
     public class StoryDialogBox : IUpdate
     {
-        private readonly DialogBox _dialogBox;
+        public StoryState StoryState;
+        private readonly List<TextBox> _textBoxes;
         private readonly BaseMovable _player;
         private Vector2 _cachedPosition;
-        public readonly StoryDispatcher StoryDispatcher;
         private readonly Camera2D _camera;
+        private readonly SpriteFont _font;
+        public Story ActiveStory;
 
         public StoryDialogBox(SpriteFont font, BaseMovable player)
         {
-            _dialogBox = new DialogBox(font);
-            _dialogBox.Initialize();
-            _dialogBox.Hide();
+            _font = font;
+            _textBoxes = new List<TextBox>();
             _player = player;
-            StoryDispatcher = new StoryDispatcher();
-            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
-            {
-                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
-                foreach (var interceptor in interceptors)
-                {
-                    StoryDispatcher.AddInterceptor(interceptor);
-                }
-            }
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
             _camera = new Camera2D(graphicsDevice) { Zoom = 1.0f };
+            StoryState = StoryState.Closed;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (_dialogBox.Active)
+            if (StoryState != StoryState.Closed)
             {
                 if (_cachedPosition != _player.Position)
                 {
-                    _dialogBox.Hide();
+                    _textBoxes.Clear();
                 }
-                else
+                else if (_textBoxes.Count > 0)
                 {
-                    _dialogBox.Update(gameTime);
+                    switch (StoryState)
+                    {
+                        case StoryState.Dialog:
+                            if (!_textBoxes[0].Active)
+                            {
+                                LoadOptions();
+                            }
+                            break;
+                        case StoryState.Option:
+                            foreach (var option in _textBoxes)
+                            {
+                                var optionBox = option as OptionTextBox;
+                                if (optionBox != null && !optionBox.Active)
+                                {
+                                    ChooseOption(optionBox);
+                                    break;
+                                }
+                            }
+                            break;
+                    }
                 }
             }
+        }
+
+        public void ChooseOption(OptionTextBox option)
+        {
+            _textBoxes.Clear();
+            ActiveStory.ChooseChoiceIndex(option.OptionIndex);
+            if (ActiveStory.canContinue)
+            {
+                LoadDialogBox();
+            }
+            else
+            {
+                StoryState = StoryState.Closed;
+            }
+        }
+
+        public void LoadOptions()
+        {
+            _textBoxes.Clear();
+            if (ActiveStory.currentChoices.Count > 0)
+            {
+                var optionBoxes = new List<OptionTextBox>();
+                var choices = ActiveStory.currentChoices;
+                for (var i = 0; i < choices.Count; i++)
+                {
+                    var option = new OptionTextBox(_font, i, choices[i]);
+                    optionBoxes.Add(option);
+                    option.Show();
+                }
+                OptionTextBoxFactory.LineTextBoxes(optionBoxes);
+                foreach (var option in optionBoxes)
+                {
+                    _textBoxes.Add(option);
+                }
+            }
+            StoryState = StoryState.Option;
+        }
+
+        public bool Interact(Point p)
+        {
+            foreach (var textBox in _textBoxes)
+            {
+                var hit = textBox.TextRectangle.Contains(p);
+                var valid = hit && textBox.Active;
+                if (valid)
+                {
+                    textBox.Interact();
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (_dialogBox.Active)
+            var transformMatrix = _camera.GetViewMatrix();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
+            foreach (var textBox in _textBoxes)
             {
-                var transformMatrix = _camera.GetViewMatrix();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
-                _dialogBox.Draw(spriteBatch);
-                spriteBatch.End();
+                textBox.Draw(spriteBatch);   
             }
+            spriteBatch.End();
+        }
+
+        public void LoadDialogBox()
+        {
+            var text = ActiveStory.ContinueMaximally();
+            var dialogBox = new DialogBox(_font, ActiveStory, text);
+            dialogBox.Show();
+            _textBoxes.Clear();
+            _textBoxes.Add(dialogBox);
+            _cachedPosition = _player.Position;
+            StoryState = StoryState.Dialog;
         }
 
         public void AddDialogBox(Story story)
         {
-            var text = story.ContinueMaximally();
-            _dialogBox.Text = text;
-            _dialogBox.Show();
-            _cachedPosition = _player.Position;
-            StoryDispatcher.AddStory(story);
+            ActiveStory = story;
+            LoadDialogBox();
         }
     }
 }
