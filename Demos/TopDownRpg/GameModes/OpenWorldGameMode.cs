@@ -20,6 +20,7 @@ using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -85,6 +86,17 @@ namespace Demos.TopDownRpg.GameModes
             var dialogFont = _content.Load<SpriteFont>("dialog");
             _entityDialogBox = new StoryDialogBox(dialogFont, playerEntity);
             UpdateList.Add(_entityDialogBox);
+
+            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
+            {
+                var storyDispatcher = new StoryDispatcher();
+                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
+                foreach (var interceptor in interceptors)
+                {
+                    storyDispatcher.AddInterceptor(interceptor);
+                }
+                StaticServiceLocator.AddService(storyDispatcher);
+            }
         }
 
         public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory)

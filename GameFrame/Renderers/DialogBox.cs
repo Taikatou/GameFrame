@@ -28,14 +28,13 @@ namespace GameFrame.Renderers
             var posX = centerScreen.X - (Size.X / 2f);
             var posY = graphicsDevice.Viewport.Height - Size.Y - 30;
             Position = new Vector2(posX, posY);
-            StoryDispatcher = new StoryDispatcher();
-            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
+            if (StaticServiceLocator.ContainsService<StoryDispatcher>())
             {
-                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
-                foreach (var interceptor in interceptors)
-                {
-                    StoryDispatcher.AddInterceptor(interceptor);
-                }
+                StoryDispatcher = StaticServiceLocator.GetService<StoryDispatcher>();
+            }
+            else
+            {
+                StoryDispatcher = new StoryDispatcher();
             }
         }
 
