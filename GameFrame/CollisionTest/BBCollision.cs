@@ -8,7 +8,7 @@ namespace GameFrame.CollisionTest
     {
         private string _collisionType;
         private Vector2 _velocity;
-        private List<BBObject> _bbObjects;
+        private readonly List<BBObject> _bbObjects;
         readonly BBCollisionSubject _collisionSubject = new BBCollisionSubject();
 
         public int Height { get; set; }
@@ -20,7 +20,6 @@ namespace GameFrame.CollisionTest
             Height = height;
             Width = width;
             var observer1 = new BBCollisionObserver(_collisionSubject);
-            _collisionSubject.RegisterObserver(observer1);
         }
 
         public void Update(GameTime gametime)

@@ -80,6 +80,7 @@ namespace Demos.Pong
 
         private void SetInStartPostion()
         {
+            _originator.GetStateFromMemento(_caretaker.GetMemento(2));
             Ball.Position = _originator.GetSavedPosition();
             _originator.GetStateFromMemento(_caretaker.GetMemento(0));
             PlayerOne.Position = _originator.GetSavedPosition();

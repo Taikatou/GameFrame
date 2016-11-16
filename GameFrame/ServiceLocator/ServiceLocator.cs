@@ -20,7 +20,7 @@ namespace GameFrame.ServiceLocator
             }
             catch (KeyNotFoundException)
             {
-                throw new Exception("The requested service is not registered");
+                throw new Exception($"The requested service is not registered: {typeof(T)}");
             }
         }
 

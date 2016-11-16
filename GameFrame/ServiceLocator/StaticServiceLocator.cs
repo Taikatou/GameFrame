@@ -6,7 +6,7 @@
         private static IServiceLocator _instance;
         public static IServiceLocator Instance => _instance ?? (_instance = new StaticServiceLocator());
 
-        public StaticServiceLocator()
+        protected StaticServiceLocator()
         {
             _serviceLocator = new ServiceLocator();
         }
