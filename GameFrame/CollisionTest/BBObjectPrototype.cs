@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameFrame.CollisionTest
+﻿namespace GameFrame.CollisionTest
 {
-    public abstract class BBObjectPrototype
+    public abstract class BbObjectPrototype
     {
-        public abstract BBObjectPrototype Clone();
+        public abstract BbObjectPrototype Clone();
     }
 }

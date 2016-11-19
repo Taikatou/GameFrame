@@ -140,12 +140,24 @@
     <Content Include="Content\TopDownRpg\PathEnd.png" />
     <Content Include="Content\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.png" />
     <Content Include="Content\TopDownRpg\tileset.png" />
+    <None Include="Entities\dojo_master.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Entities\mom.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Entities\test.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Scripts\dojo_master.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\mom.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demos\Demos.csproj">

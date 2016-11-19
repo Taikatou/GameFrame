@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GameFrame.Common;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +15,16 @@ namespace GameFrame.GUI
         public bool Active { get; private set; }
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
-        public Color FillColor { get; set; }
+        private Color _fillColor;
+        public Color FillColor
+        {
+            get { return _fillColor; }
+            set
+            {
+                _fillColor = value;
+                _fillTexture.SetData(new[] { _fillColor });
+            }
+        }
         public Color BorderColor { get; set; }
         public Color DialogColor { get; set; }
         public int BorderWidth { get; set; }
@@ -32,8 +40,9 @@ namespace GameFrame.GUI
         public Vector2 CharacterSize { get; set; }
         private int MaxCharsPerLine => (int)Math.Floor((Size.X - DialogBoxMargin) / CharacterSize.X);
         private int MaxLines => (int)Math.Floor((Size.Y - DialogBoxMargin) / CharacterSize.Y) - 1;
+        public EventHandler InteractEvent { get; set; }
 
-        private List<Rectangle> BorderRectangles => new List<Rectangle>
+        private IEnumerable<Rectangle> BorderRectangles => new List<Rectangle>
         {
             // Top (contains top-left & top-right corners)
             new Rectangle(TextRectangle.X - BorderWidth, TextRectangle.Y - BorderWidth,
@@ -59,13 +68,11 @@ namespace GameFrame.GUI
             Pages = new List<string>();
             BorderWidth = 2;
             DialogColor = Color.Black;
-            FillColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
             BorderColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
             _fillTexture = new Texture2D(graphicsDevice, 1, 1);
-            _fillTexture.SetData(new[] { FillColor });
 
             _borderTexture = new Texture2D(graphicsDevice, 1, 1);
             _borderTexture.SetData(new[] { BorderColor });
@@ -81,7 +88,6 @@ namespace GameFrame.GUI
             Text = text ?? Text;
 
             CurrentPage = 0;
-
             Show();
         }
 
@@ -114,10 +120,7 @@ namespace GameFrame.GUI
             }
         }
 
-        public virtual void Interact()
-        {
-            
-        }
+        public virtual void Interact() { }
 
         public List<string> WordWrap(string text)
         {

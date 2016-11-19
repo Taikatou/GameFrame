@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameFrame.Controllers;
-using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
 using GameFrame.TextToSpeech;
+using GameFrame.Ink;
+using System.Collections.Generic;
 
 namespace Demos.DesktopGl
 {
@@ -16,7 +16,7 @@ namespace Demos.DesktopGl
             StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
-            StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor()});
+            //StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor()});
 
             using (var game = new DemoGame())
             {

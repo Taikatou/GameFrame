@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Demos.MobileShared;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

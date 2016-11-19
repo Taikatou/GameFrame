@@ -15,7 +15,6 @@ using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Ink;
-using GameFrame.MediaAdapter;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
@@ -49,7 +48,7 @@ namespace Demos.TopDownRpg.GameModes
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private readonly StoryDialogBox _entityDialogBox;
-        private IAudioPlayer audio;
+
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
         {
             _rendererFactory = renderFactory;
@@ -166,47 +165,51 @@ namespace Demos.TopDownRpg.GameModes
         public void BeginMovingPlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
             endPoint /= tileSize;
-            var moveTo = endPoint;
-            var collision = _expiringSpatialHash.CheckCollision(moveTo);
-            var valid = true;
-            if (collision)
+            var mapContainsEndPoint = endPoint.X <= Map.Width && endPoint.Y <= Map.Height;
+            if (mapContainsEndPoint)
             {
-                var heuristic = _possibleMovements.Heuristic;
-                var startPosition = entity.Position.ToPoint();
-                if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
+                var moveTo = endPoint;
+                var collision = _expiringSpatialHash.CheckCollision(moveTo);
+                var valid = true;
+                if (collision)
                 {
-                    Interact(endPoint);
-                    valid = false;
+                    var heuristic = _possibleMovements.Heuristic;
+                    var startPosition = entity.Position.ToPoint();
+                    if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
+                    {
+                        Interact(endPoint);
+                        valid = false;
+                    }
+                    else
+                    {
+                        var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
+                        var minCost = double.MaxValue;
+                        foreach (var position in alternatuvePositions)
+                        {
+                            if (!CollisionSystem.CheckCollision(position))
+                            {
+                                var cost = heuristic.GetTraversalCost(startPosition, position);
+                                if (cost < minCost)
+                                {
+                                    minCost = cost;
+                                    moveTo = position;
+                                }
+                            }
+                        }
+                        if (moveTo == endPoint)
+                        {
+                            valid = false;
+                        }
+                    }
                 }
                 else
                 {
-                    var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
-                    var minCost = double.MaxValue;
-                    foreach (var position in alternatuvePositions)
-                    {
-                        if (!CollisionSystem.CheckCollision(position))
-                        {
-                            var cost = heuristic.GetTraversalCost(startPosition, position);
-                            if (cost < minCost)
-                            {
-                                minCost = cost;
-                                moveTo = position;
-                            }
-                        }
-                    }
-                    if (moveTo == endPoint)
-                    {
-                        valid = false;
-                    }
+                    valid = !CollisionSystem.CheckCollision(moveTo);
                 }
-            }
-            else
-            {
-                valid = !CollisionSystem.CheckCollision(moveTo);
-            }
-            if (valid)
-            {
-                MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+                if (valid)
+                {
+                    MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+                }
             }
         }
 

@@ -2,7 +2,7 @@
 using System.IO;
 using GameFrame.Services;
 
-namespace Demos.MobileShared
+namespace GameFrame.Tests
 {
     public class SaveAndLoad : ISaveAndLoad
     {

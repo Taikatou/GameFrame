@@ -1,49 +1,46 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 
 namespace GameFrame.CollisionTest
 {
-    public class BBCollisionSubject : ISubject
+    public class BbCollisionSubject : ISubject
     {
+        private readonly List<IObserver> _observers;
+        private string _collisionType;
 
-        private List<IObserver> observers;
-        private Vector2 vel;
-        private string collisionType;
-
-        public BBCollisionSubject()
+        public BbCollisionSubject()
         {
-            observers = new List<IObserver>();
+            _observers = new List<IObserver>();
         }
 
         public void RegisterObserver(IObserver observer)
         {
-            observers.Add(observer);
+            _observers.Add(observer);
 
         }
 
         public void UnRegisterObserver(IObserver observer)
         {
-            observers.Remove(observer);
+            _observers.Remove(observer);
         }
 
         public void NotifyObservers()
         {
-            foreach (IObserver ob in observers)
+            foreach (IObserver ob in _observers)
             {
-                ob.Update(collisionType);
+                ob.Update(_collisionType);
             }
         }
 
         public void SetCollisionType(string type)
         {
-            this.collisionType = type;
+            _collisionType = type;
             NotifyObservers();
         }
 
 
         public string GetCollisionType()
         {
-            return collisionType;
+            return _collisionType;
         }
     }
 }

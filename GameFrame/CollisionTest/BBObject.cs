@@ -4,32 +4,26 @@ using System.Diagnostics;
 
 namespace GameFrame.CollisionTest
 {
-    public class BBObject : IPrototype
+    public class BbObject : IPrototype
     {
         readonly Texture2D _texture;
         public Vector2 Position;
         public Vector2 Velocity;
 
 
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle(
-                    (int)Position.X,
-                    (int)Position.Y, 
-                    _texture.Width, 
-                    _texture.Height);
-            }
-        }
+        public Rectangle BoundingBox => new Rectangle(
+            (int)Position.X,
+            (int)Position.Y, 
+            _texture.Width, 
+            _texture.Height);
 
-        public BBObject(Texture2D texture, Vector2 position)
+        public BbObject(Texture2D texture, Vector2 position)
         {
             _texture = texture;
             Position = position;
         }
 
-        public BBObject(Texture2D texture, Vector2 position, Vector2 velocity)
+        public BbObject(Texture2D texture, Vector2 position, Vector2 velocity)
         {
             _texture = texture;
             Position = position;
@@ -49,7 +43,7 @@ namespace GameFrame.CollisionTest
         public IPrototype Clone()
         {
             Debug.WriteLine("Cloning BBObject");
-            return (BBObject)MemberwiseClone();
+            return (BbObject)MemberwiseClone();
         }
     }
 }

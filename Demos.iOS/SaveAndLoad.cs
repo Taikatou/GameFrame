@@ -2,7 +2,7 @@
 using System.IO;
 using GameFrame.Services;
 
-namespace Demos.MobileShared
+namespace Demos.iOS
 {
     public class SaveAndLoad : ISaveAndLoad
     {

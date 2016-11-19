@@ -113,18 +113,6 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/BluePathEnd.png
 
-#begin TopDownRpg/BirabutoKingdom.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:TopDownRpg/BirabutoKingdom.wav
-
-#begin TopDownRpg/piano.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:TopDownRpg/piano.mp3
-
 #begin montserrat-32.fnt
 /importer:BitmapFontImporter
 /processor:BitmapFontProcessor
@@ -178,11 +166,6 @@
 /processorParam:TextureFormat=Color
 /build:Pong/paddle.png
 
-#begin TopDownRpg/house.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/house.tmx
-
 #begin dialog.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -194,4 +177,84 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
 /build:mono.spritefont
+
+#begin TopDownRpg/player_home.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/player_home.tmx
+
+#begin TopDownRpg/1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/1.png
+
+#begin TopDownRpg/2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/2.png
+
+#begin TopDownRpg/3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/3.png
+
+#begin TopDownRpg/4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/4.png
+
+#begin TopDownRpg/5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TopDownRpg/5.png
+
+#begin TopDownRpg/dojo.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/dojo.tmx
+
+#begin TopDownRpg/friend_house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/friend_house.tmx
+
+#begin TopDownRpg/rival_house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/rival_house.tmx
 

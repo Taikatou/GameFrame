@@ -5,25 +5,11 @@ namespace GameFrame.CollisionTest
 {
     public class CollisionType
     {
-        private string type;
-
-        public CollisionType()
-        {
-        }
+        public string Type { get; set; }
 
         public void Update(string collisionType)
         {
-            this.type = collisionType;
-        }
-
-        public string getCollisionType()
-        {
-            return type;
-        }
-
-        public void setCollisionType(string collisionType)
-        {
-            Debug.WriteLine("" + collisionType);
+            Type = collisionType;
         }
     }
 }

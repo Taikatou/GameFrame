@@ -91,7 +91,7 @@ namespace Demos.TopDownRpg
         {
             base.LoadContent();
             PlayerEntity = new Entity("Player", "Character", "") { Position = new Vector2(5, 5) };
-            LoadOpenWorld("level01");
+            LoadOpenWorld("player_home");
         }
 
         public override void Draw(GameTime gameTime)

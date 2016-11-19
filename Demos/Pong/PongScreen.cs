@@ -19,7 +19,7 @@ namespace Demos.Pong
         public override void LoadContent()
         {
             base.LoadContent();
-            var pongGame = new PongGame(_viewPort);
+            var pongGame = new PongGame();
             GameModes.Push(pongGame);
         }
 

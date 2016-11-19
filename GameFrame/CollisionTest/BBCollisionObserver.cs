@@ -2,30 +2,25 @@
 
 namespace GameFrame.CollisionTest
 {
-    public class BBCollisionObserver : IObserver
+    public class BbCollisionObserver : IObserver
     {
-        private string collisionType;
-        private static int observerIDTracker = 0;
-        private int _observerId;
-        private ISubject _subject;
+        private string _collisionType;
 
-        public BBCollisionObserver(ISubject subject)
+        public BbCollisionObserver(ISubject subject)
         {
-            this._subject = subject;
-            this._observerId = ++observerIDTracker;
             subject.RegisterObserver(this);
         }
 
 
         public void Update(string type)
         {
-            this.collisionType = type;
+            _collisionType = type;
             PrintData();
         }
 
         public void PrintData()
         {
-            Debug.WriteLine("Collision Type : " + collisionType);
+            Debug.WriteLine("Collision Type : " + _collisionType);
         }
     }
 }

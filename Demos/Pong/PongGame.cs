@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameFrame.CollisionTest;
-using MonoGame.Extended.ViewportAdapters;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended;
 using GameFrame.Content;
@@ -18,21 +17,20 @@ namespace Demos.Pong
     {
         private string _type;
         private KeyboardState _keyboardState;
-        public BBObject PlayerOne;
-        public BBObject PlayerTwo;
-        public BBObject Ball;
+        public BbObject PlayerOne;
+        public BbObject PlayerTwo;
+        public BbObject Ball;
         private readonly Originator _originator;
         private readonly Caretaker _caretaker;
-        private readonly BBCollision _playerCollision;
-        private readonly BBCollisionSubject _collisionSubject;
+        private readonly BbCollision _playerCollision;
+        private readonly BbCollisionSubject _collisionSubject;
         private readonly Texture2D _paddleTexture;
         private readonly Texture2D _ballTexture;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ContentManager _content;
-        private readonly List<BBObject> _objList;
 
-        public PongGame(ViewportAdapter viewPort)
+        public PongGame()
         {
             UpdateList = new List<IUpdate>();
             RenderList = new List<IRenderable>();
@@ -46,15 +44,15 @@ namespace Demos.Pong
 
             Vector2 position;
             position = new Vector2(0, 150);
-            PlayerOne = new BBObject(_paddleTexture, position);
+            PlayerOne = new BbObject(_paddleTexture, position);
 
             position = new Vector2((800 - _paddleTexture.Width), 150);
-            PlayerTwo = PlayerOne.Clone() as BBObject;
+            PlayerTwo = PlayerOne.Clone() as BbObject;
             PlayerTwo.Position = position;
 
 
             position = new Vector2(PlayerOne.BoundingBox.Right + 1, (350 - _ballTexture.Height) / 2);
-            Ball = new BBObject(_ballTexture, position, new Vector2(2.0f, 2.0f));
+            Ball = new BbObject(_ballTexture, position, new Vector2(2.0f, 2.0f));
 
             _originator.SetObject(PlayerOne.Position);
             _caretaker.AddMemento(_originator.CreateMemento());
@@ -63,13 +61,10 @@ namespace Demos.Pong
             _originator.SetObject(Ball.Position);
             _caretaker.AddMemento(_originator.CreateMemento());
 
-            _objList = new List<BBObject>();
-            _objList.Add(Ball);
-            _objList.Add(PlayerOne);
-            _objList.Add(PlayerTwo);
+            var objList = new List<BbObject> {Ball, PlayerOne, PlayerTwo};
 
 
-            _playerCollision = new BBCollision(_objList, ScreenSize.Width, ScreenSize.Height);
+            _playerCollision = new BbCollision(objList, ScreenSize.Width, ScreenSize.Height);
 
             _collisionSubject = _playerCollision.GetBbCollisionSubject();
             _collisionSubject.SetCollisionType("");

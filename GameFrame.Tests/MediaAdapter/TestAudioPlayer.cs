@@ -1,10 +1,6 @@
-﻿using System;
-using GameFrame.Content;
-using GameFrame.MediaAdapter;
+﻿using GameFrame.MediaAdapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Tests.MediaAdapter
 {
@@ -14,10 +10,10 @@ namespace GameFrame.Tests.MediaAdapter
 
         public TestAudioPlayer()
         {
-            new GraphicsDeviceManager(this);
+            var deviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            base.LoadContent();
+            LoadContent();
         }
 
         [TestMethod]

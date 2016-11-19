@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Ink.Runtime;
+using Microsoft.Xna.Framework;
 
 namespace GameFrame.GUI
 {
     public class OptionTextBox : TextBox
     {
         public override string TextToShow => Pages[CurrentPage];
-        public EventHandler OptionEvent;
         public int OptionIndex;
         public Choice Choice;
 
@@ -16,12 +15,12 @@ namespace GameFrame.GUI
             Text = choice.text;
             OptionIndex = optionIndex;
             Choice = choice;
+            FillColor = new Color(1.0f, 1.0f, 0.55f, 0.5f);
         }
 
         public override void Interact()
         {
-            OptionEvent?.Invoke(this, null);
-            Hide();
+            InteractEvent?.Invoke(this, null);
         }
     }
 }

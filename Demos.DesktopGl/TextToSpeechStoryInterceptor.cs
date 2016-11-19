@@ -1,5 +1,4 @@
 ﻿using GameFrame.Ink;
-using GameFrame.Interceptor;
 using GameFrame.ServiceLocator;
 using GameFrame.TextToSpeech;
 

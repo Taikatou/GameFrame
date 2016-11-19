@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
 
@@ -37,12 +38,7 @@ namespace GameFrame.CollisionSystems
 
         public override bool CheckCollision(Point position)
         {
-            var found = false;
-            foreach (var system in _collisionSystems)
-            {
-                found = found || system.CheckCollision(position);
-            }
-            return found;
+            return _collisionSystems.Any(system => system.CheckCollision(position));
         }
     }
 }

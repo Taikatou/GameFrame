@@ -4,22 +4,21 @@ using MonoGame.Extended;
 
 namespace GameFrame.CollisionTest
 {
-    public class BBCollision : IUpdate
+    public class BbCollision : IUpdate
     {
         private string _collisionType;
-        private Vector2 _velocity;
-        private readonly List<BBObject> _bbObjects;
-        readonly BBCollisionSubject _collisionSubject = new BBCollisionSubject();
+        private readonly List<BbObject> _bbObjects;
+        readonly BbCollisionSubject _collisionSubject = new BbCollisionSubject();
 
         public int Height { get; set; }
         public int Width { get; set; }
 
-        public BBCollision(List<BBObject> _list, int width, int height)
+        public BbCollision(List<BbObject> list, int width, int height)
         {
-            _bbObjects = _list;
+            _bbObjects = list;
             Height = height;
             Width = width;
-            var observer1 = new BBCollisionObserver(_collisionSubject);
+            var observer1 = new BbCollisionObserver(_collisionSubject);
         }
 
         public void Update(GameTime gametime)
@@ -33,7 +32,7 @@ namespace GameFrame.CollisionTest
             _velocity = vel;
         }*/
 
-        public BBCollisionSubject GetBbCollisionSubject()
+        public BbCollisionSubject GetBbCollisionSubject()
         {
             return _collisionSubject;
         }
@@ -61,33 +60,32 @@ namespace GameFrame.CollisionTest
 
         public void CheckWallCollision()
         {
-            for (int i = 0; i < _bbObjects.Count; i++)
+            foreach (BbObject t in _bbObjects)
             {
-                if (_bbObjects[i].Position.Y < 0)
+                if (t.Position.Y < 0)
                 {
                     _collisionType = "Top";
                     _collisionSubject.SetCollisionType(_collisionType);
                 }
 
-                else if (_bbObjects[i].Position.Y > Height - _bbObjects[i].BoundingBox.Height)
+                else if (t.Position.Y > Height - t.BoundingBox.Height)
                 {
                     _collisionType = "Bottom";
                     _collisionSubject.SetCollisionType(_collisionType);
                 }
 
-                else if (_bbObjects[i].Position.X < 0)
+                else if (t.Position.X < 0)
                 {
                     _collisionType = "Left";
                     _collisionSubject.SetCollisionType(_collisionType);
                 }
 
-                else if (_bbObjects[i].Position.X + _bbObjects[i].BoundingBox.Width > Width)
+                else if (t.Position.X + t.BoundingBox.Width > Width)
                 {
                     _collisionType = "Right";
                     _collisionSubject.SetCollisionType(_collisionType);
                 }
             }
-
         }
 
     }
