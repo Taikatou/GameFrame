@@ -107,8 +107,11 @@ namespace Demos.TopDownRpg.GameModes
             {
                 OnButtonJustPressed = (sender, args) =>
                 {
-                    var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
-                    Interact(interactTarget);
+                    if (!_entityDialogBox.Interact())
+                    {
+                        var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
+                        Interact(interactTarget);
+                    }
                 }
             };
             controller.AddButton(smartButton);

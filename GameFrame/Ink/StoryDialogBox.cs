@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using GameFrame.GUI;
 using GameFrame.Movers;
 using GameFrame.Renderers;
@@ -79,8 +81,22 @@ namespace GameFrame.Ink
                 {
                     _activeBoxes.Add(option);
                 }
+                StoryState = StoryState.Option;
             }
-            StoryState = StoryState.Option;
+            else
+            {
+                StoryState = StoryState.Closed;
+            }
+        }
+
+        public bool Interact()
+        {
+            var dialogOpen = StoryState == StoryState.Dialog;
+            if (dialogOpen)
+            {
+                _activeBoxes[0].Interact();
+            }
+            return dialogOpen;
         }
 
         public bool Interact(Point p)
@@ -100,26 +116,36 @@ namespace GameFrame.Ink
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var transformMatrix = _camera.GetViewMatrix();
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
-            foreach (var textBox in _activeBoxes)
+            if (StoryState != StoryState.Closed)
             {
-                textBox.Draw(spriteBatch);   
+                var transformMatrix = _camera.GetViewMatrix();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
+                foreach (var textBox in _activeBoxes)
+                {
+                    textBox.Draw(spriteBatch);
+                }
+                spriteBatch.End();
             }
-            spriteBatch.End();
         }
 
         public void LoadDialogBox()
         {
-            var text = _activeStory.ContinueMaximally();
-            var dialogBox = new DialogBox(_font, text);
-            dialogBox.DialogBoxEvent += s => DialogBoxEvent?.Invoke(_activeStory, s);
-            dialogBox.Show();
-            dialogBox.InteractEvent += (sender, args) => LoadOptions();
-            _activeBoxes.Clear();
-            _activeBoxes.Add(dialogBox);
-            _cachedPosition = _player.Position;
-            StoryState = StoryState.Dialog;
+            if (_activeStory.canContinue)
+            {
+                var text = _activeStory.ContinueMaximally();
+                var dialogBox = new DialogBox(_font, text);
+                dialogBox.DialogBoxEvent += s => DialogBoxEvent?.Invoke(_activeStory, s);
+                dialogBox.Show();
+                dialogBox.InteractEvent += (sender, args) => LoadOptions();
+                _activeBoxes.Clear();
+                _activeBoxes.Add(dialogBox);
+                _cachedPosition = _player.Position;
+                StoryState = StoryState.Dialog;
+            }
+            else
+            {
+                StoryState = StoryState.Closed;
+            }
         }
 
         public void AddDialogBox(Story story)
