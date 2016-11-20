@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="39">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="41">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
   <image source="tileset.png" width="448" height="640"/>
   <terraintypes>
@@ -116,5 +116,8 @@
  </objectgroup>
  <objectgroup name="Entity-Layer">
   <object id="29" name="test" type="1,0" x="144" y="352" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Locations">
+  <object id="39" name="monk" x="80" y="64" width="32" height="16"/>
  </objectgroup>
 </map>

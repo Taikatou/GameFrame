@@ -44,6 +44,8 @@
     <Compile Include="CollisionTest\CollisionType.cs" />
     <Compile Include="CollisionTest\Memento.cs" />
     <Compile Include="CollisionTest\Originator.cs" />
+    <Compile Include="Common\CompleteEvent.cs" />
+    <Compile Include="Common\CompleteEventManager.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\KeyboardUpdater.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="GUI\TextBox.cs" />
     <Compile Include="ICompleteAble.cs" />
     <Compile Include="IGameMode.cs" />
+    <Compile Include="Ink\GameFrameStory.cs" />
     <Compile Include="Ink\StoryDialogBox.cs" />
     <Compile Include="Ink\StoryContext.cs" />
     <Compile Include="Ink\StoryImporter.cs" />

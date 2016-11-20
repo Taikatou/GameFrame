@@ -54,8 +54,6 @@
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
-    <Compile Include="TopDownRpg\Factory\RendererFactory.cs" />
-    <Compile Include="TopDownRpg\Factory\TwoDEntityRenderer.cs" />
     <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
@@ -74,6 +72,10 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Neo.Lua, Version=5.3.0.0, Culture=neutral, PublicKeyToken=fdb0cd4fe8a6e3b2, processorArchitecture=MSIL">
+      <HintPath>..\packages\NeoLua.1.2.8\lib\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\Neo.Lua.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -84,11 +86,6 @@
       <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
       <Name>GameFrame</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TopDownRpg\GameModes\Scripts\hello.ink.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

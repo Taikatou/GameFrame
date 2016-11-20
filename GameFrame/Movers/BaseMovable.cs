@@ -6,7 +6,7 @@ namespace GameFrame.Movers
 {
     public class BaseMovable : IMovable, ISpeed
     {
-        public bool Moving { get; set; }
+        public virtual bool Moving { get; set; }
         public Vector2 FacingDirection { get; set; }
         public Vector2 MovingDirection { get; set; }
         public Vector2 Position { get; set; }

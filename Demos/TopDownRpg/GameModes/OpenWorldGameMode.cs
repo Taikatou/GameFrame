@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demos.TopDownRpg.Factory;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -43,15 +42,14 @@ namespace Demos.TopDownRpg.GameModes
         private readonly IPossibleMovements _possibleMovements;
         public Entity PlayerEntity;
         public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
-        private readonly RendererFactory _rendererFactory;
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private readonly StoryDialogBox _entityDialogBox;
+        private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, RendererFactory renderFactory, ControllerFactory controllerFactory)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory)
         {
-            _rendererFactory = renderFactory;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
@@ -64,10 +62,10 @@ namespace Demos.TopDownRpg.GameModes
             var moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
+            _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             AddEntity(PlayerEntity);
-            var spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
-            AddInteractionController(entityController, controllerFactory);
+            AddInteractionController(entityController, controllerFactory, moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
@@ -76,11 +74,10 @@ namespace Demos.TopDownRpg.GameModes
             CollisionSystem = collisionSystem;
 
             AddClickController(PlayerEntity, _tileSize.ToPoint(), moverManager);
-            spatialHashMover.Add(PlayerEntity);
             PathRenderer = new PathRenderer(moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
-            UpdateList.Add(spatialHashMover);
+            UpdateList.Add(_spatialHashMover);
             UpdateList.Add(moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
@@ -96,11 +93,11 @@ namespace Demos.TopDownRpg.GameModes
                 {
                     storyDispatcher.AddInterceptor(interceptor);
                 }
-                _entityDialogBox.DialogBoxEvent += (story, text) => storyDispatcher.AddStory(story, text);
+                //_entityDialogBox.DialogBoxEvent += (story, text) => storyDispatcher.AddStory(story, text);
             }
         }
 
-        public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory)
+        public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory, MoverManager moverManager)
         {
             var runningButton = new List<IButtonAble> { new KeyButton(Keys.E, controllerFactory.KeyboardUpdater), new GamePadButton(Buttons.A) };
             var smartButton = new CompositeSmartButton(runningButton)
@@ -110,7 +107,7 @@ namespace Demos.TopDownRpg.GameModes
                     if (!_entityDialogBox.Interact())
                     {
                         var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
-                        Interact(interactTarget);
+                        Interact(interactTarget, moverManager);
                     }
                 }
             };
@@ -127,7 +124,6 @@ namespace Demos.TopDownRpg.GameModes
                     var position = entityObject.Position / _tileSize;
                     var entity = Entity.Import(entityObject.Name);
                     entity.Position = position;
-                    entity.FacingDirection = StringToVector.ConvertString(entityObject.Type);
                     AddEntity(entity);
                 }
             }
@@ -135,10 +131,11 @@ namespace Demos.TopDownRpg.GameModes
 
         public void AddEntity(Entity entity)
         {
-            var entityRenderer = _rendererFactory.CreateEntityRenderer(_content, _expiringSpatialHash, entity, _tileSize.ToPoint());
+            var entityRenderer = new EntityRenderer(_content, _expiringSpatialHash, entity, _tileSize.ToPoint());
             _expiringSpatialHash.AddNode(entity.Position.ToPoint(), entity);
             RenderList.Add(entityRenderer);
             EntityRenderersDict[entity] = entityRenderer;
+            _spatialHashMover.Add(entity);
         }
 
         public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
@@ -148,8 +145,8 @@ namespace Demos.TopDownRpg.GameModes
             {
                 if (!_entityDialogBox.Interact(mouseState.Position))
                 {
-                    var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y);
-                    BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                    var endPoint = Camera.ScreenToWorld(mouseState.X, mouseState.Y).ToPoint();
+                    BeginMovingEntityTo(endPoint / tileSize, entity, tileSize, moverManager);
                 }
             };
             var moveGesture = new SmartGesture(GestureType.Tap);
@@ -157,17 +154,16 @@ namespace Demos.TopDownRpg.GameModes
             {
                 if (!_entityDialogBox.Interact(gesture.Position.ToPoint()))
                 {
-                    var endPoint = Camera.ScreenToWorld(gesture.Position);
-                    BeginMovingPlayerTo(endPoint.ToPoint(), entity, tileSize, moverManager);
+                    var endPoint = Camera.ScreenToWorld(gesture.Position).ToPoint();
+                    BeginMovingEntityTo(endPoint / tileSize, entity, tileSize, moverManager);
                 }
             };
             clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             UpdateList.Add(clickController);
         }
 
-        public void BeginMovingPlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
+        public void BeginMovingEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
         {
-            endPoint /= tileSize;
             var mapContainsEndPoint = endPoint.X <= Map.Width && endPoint.Y <= Map.Height;
             if (mapContainsEndPoint)
             {
@@ -180,7 +176,7 @@ namespace Demos.TopDownRpg.GameModes
                     var startPosition = entity.Position.ToPoint();
                     if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                     {
-                        Interact(endPoint);
+                        Interact(endPoint, moverManager);
                         valid = false;
                     }
                     else
@@ -211,12 +207,12 @@ namespace Demos.TopDownRpg.GameModes
                 }
                 if (valid)
                 {
-                    MovePlayerTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+                    MoveEntityTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
                 }
             }
         }
 
-        public void Interact(Point interactTarget)
+        public void Interact(Point interactTarget, MoverManager moverManager)
         {
             var validInteraction = FourWayPossibleMovement.FourWayAdjacentLocations(PlayerEntity.Position.ToPoint()).Contains(interactTarget);
             if (validInteraction)
@@ -226,20 +222,25 @@ namespace Demos.TopDownRpg.GameModes
                 if (interactWith != null)
                 {
                     var story = interactWith.Interact();
-                    _entityDialogBox.AddDialogBox(story);
+                    story.BindFunction("move", (x, y) => {
+                        var endPoint = new Point(x, y);
+                        BeginMovingEntityTo(endPoint, interactWith, _tileSize.ToPoint(), moverManager);
+                    });
+                    story.Continue();
+                    _entityDialogBox.AddDialogBox(story, interactWith);
                 }
             }
         }
 
-        public void MovePlayerTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact, Point interactWith)
+        public void MoveEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact = false, Point? interactWith = null)
         {
             var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
             var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity));
             pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
-            if (interact)
+            if (interact && interactWith != null)
             {
-                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith);
+                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith.Value, moverManager);
             }
             moverManager.AddMover(pathMover);
         }

@@ -3,7 +3,6 @@ using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
-using Ink.Runtime;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -11,14 +10,13 @@ namespace Demos.TopDownRpg
 {
     public class Entity : BaseMovable
     {
-        [JsonProperty("name")]
-        public string Name;
+        [JsonProperty("name")] public string Name;
 
-        [JsonProperty("sprite-sheet")]
-        public string SpriteSheet;
+        [JsonProperty("sprite-sheet")] public string SpriteSheet;
 
-        [JsonProperty("script")]
-        public string Script;
+        [JsonProperty("script")] public string Script;
+
+        private GameFrameStory _story;
 
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.Speed;
@@ -42,14 +40,14 @@ namespace Demos.TopDownRpg
             Position = position;
         }
 
-        public virtual Story Interact()
+        public virtual GameFrameStory Interact()
         {
-            Story story = null;
-            if (!string.IsNullOrEmpty(Script))
+            if (_story == null && !string.IsNullOrEmpty(Script))
             {
-                story = StoryImporter.ReadStory(Script);
+                var storyText = StoryImporter.ReadStory(Script);
+                _story = new GameFrameStory(storyText);
             }
-            return story;
+            return _story;
         }
 
         public static Entity Import(string fileName)

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Movers;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
-using Ink.Runtime;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -18,17 +15,20 @@ namespace GameFrame.Ink
         Option,
         Closed
     }
-    public delegate void StoryDialogBoxEvent(Story story, string text);
-    public class StoryDialogBox : IUpdate
+    public delegate void StoryDialogBoxEvent(GameFrameStory story, string text);
+    public class StoryDialogBox : IUpdate, ICompleteAble
     {
+        public bool Complete => StoryState == StoryState.Closed;
         public StoryState StoryState;
         private readonly List<TextBox> _activeBoxes;
         private readonly BaseMovable _player;
         private Vector2 _cachedPosition;
+        private BaseMovable _interactWith;
+        private Vector2 _interactWithCachedPosition;
         private readonly Camera2D _camera;
         private readonly SpriteFont _font;
-        private Story _activeStory;
-        public StoryDialogBoxEvent DialogBoxEvent;
+        private GameFrameStory _activeStory;
+        public StoryDialogBoxEvent DialogBoxEvent { get; set; }
 
         public StoryDialogBox(SpriteFont font, BaseMovable player)
         {
@@ -42,9 +42,11 @@ namespace GameFrame.Ink
 
         public void Update(GameTime gameTime)
         {
-            if (StoryState != StoryState.Closed && _cachedPosition != _player.Position)
+            if (!Complete && (_cachedPosition != _player.Position || 
+                              _interactWithCachedPosition != _interactWith.Position))
             {
                 _activeBoxes.Clear();
+                StoryState = StoryState.Closed;
             }
         }
 
@@ -52,7 +54,7 @@ namespace GameFrame.Ink
         {
             _activeBoxes.Clear();
             _activeStory.ChooseChoiceIndex(option.OptionIndex);
-            if (_activeStory.canContinue)
+            if (!_activeStory.Complete)
             {
                 LoadDialogBox();
             }
@@ -65,10 +67,14 @@ namespace GameFrame.Ink
         public void LoadOptions()
         {
             _activeBoxes.Clear();
-            if (_activeStory.currentChoices.Count > 0)
+            if (_activeStory.CanContinue)
+            {
+                LoadDialogBox();
+            }
+            else if (_activeStory.Choices.Count > 0)
             {
                 var optionBoxes = new List<OptionTextBox>();
-                var choices = _activeStory.currentChoices;
+                var choices = _activeStory.Choices;
                 for (var i = 0; i < choices.Count; i++)
                 {
                     var option = new OptionTextBox(_font, i, choices[i]);
@@ -116,7 +122,7 @@ namespace GameFrame.Ink
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (StoryState != StoryState.Closed)
+            if (!Complete)
             {
                 var transformMatrix = _camera.GetViewMatrix();
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
@@ -130,13 +136,24 @@ namespace GameFrame.Ink
 
         public void LoadDialogBox()
         {
-            if (_activeStory.canContinue)
+            if (!_activeStory.Complete)
             {
-                var text = _activeStory.ContinueMaximally();
-                var dialogBox = new DialogBox(_font, text);
-                dialogBox.DialogBoxEvent += s => DialogBoxEvent?.Invoke(_activeStory, s);
+                var storyText = _activeStory.CurrentText;
+                var dialogBox = new DialogBox(_font, storyText);
+                dialogBox.InteractEvent += (sender, args) =>
+                {
+                    if (_activeStory.CanContinue)
+                    {
+                        _activeStory.Continue();
+                        _activeBoxes.Clear();
+                        LoadDialogBox();
+                    }
+                    else
+                    {
+                        LoadOptions();
+                    }
+                };
                 dialogBox.Show();
-                dialogBox.InteractEvent += (sender, args) => LoadOptions();
                 _activeBoxes.Clear();
                 _activeBoxes.Add(dialogBox);
                 _cachedPosition = _player.Position;
@@ -148,10 +165,12 @@ namespace GameFrame.Ink
             }
         }
 
-        public void AddDialogBox(Story story)
+        public void AddDialogBox(GameFrameStory story, BaseMovable interactWith)
         {
             _activeStory = story;
             LoadDialogBox();
+            _interactWith = interactWith;
+            _interactWithCachedPosition = interactWith.Position;
         }
     }
 }

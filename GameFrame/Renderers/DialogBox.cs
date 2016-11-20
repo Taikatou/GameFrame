@@ -7,17 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameFrame.Renderers
 {
-    public delegate void DialogBoxEvent(string text);
     public class DialogBox : TextBox
     {
         private int _interval;
         public override string TextToShow => Pages[CurrentPage];
-
         public Stopwatch Stopwatch;
-        public DialogBoxEvent DialogBoxEvent;
+
         public DialogBox(SpriteFont font, string text) : base(font)
         {
             Text = text;
+
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
             var centerScreen = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
             var posX = centerScreen.X - (Size.X / 2f);
@@ -57,7 +56,6 @@ namespace GameFrame.Renderers
                 {
                     CurrentPage++;
                     Stopwatch.Restart();
-                    DialogBoxEvent?.Invoke(TextToShow);
                 }
             }
         }
@@ -67,7 +65,6 @@ namespace GameFrame.Renderers
             base.Show();
             // use stopwatch to manage blinking indicator
             Stopwatch = new Stopwatch();
-            DialogBoxEvent?.Invoke(TextToShow);
             Stopwatch.Start();
         }
 

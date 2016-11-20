@@ -104,6 +104,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Content\bin\DesktopGL\montserrat-32.xnb" />
     <None Include="Content\bin\DesktopGL\montserrat-32_0.xnb" />
     <None Include="Content\bin\DesktopGL\TopDownRpg\BirabutoKingdom.xnb" />

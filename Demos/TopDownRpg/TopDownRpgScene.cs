@@ -39,7 +39,7 @@ namespace Demos.TopDownRpg
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new TwoDEntityRenderer(), new EntityControllerFactory(KeyBoardUpdater));
+            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater));
             var map = _openWorldGameMode.Map;
             var player = _openWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
