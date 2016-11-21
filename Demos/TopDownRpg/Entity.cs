@@ -57,5 +57,10 @@ namespace Demos.TopDownRpg
             var entity = JsonConvert.DeserializeObject<Entity>(jsonText);
             return entity;
         }
+
+        public virtual void CompleteInteract()
+        {
+            
+        }
     }
 }

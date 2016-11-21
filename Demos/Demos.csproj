@@ -53,6 +53,7 @@
     <Compile Include="Screens\VideoOptionsScreen.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
+    <Compile Include="TopDownRpg\EntityStoryBoxDialog.cs" />
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
     <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />

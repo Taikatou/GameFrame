@@ -45,7 +45,7 @@ namespace Demos.TopDownRpg.GameModes
         public List<IUpdate> UpdateList;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
-        private readonly StoryDialogBox _entityDialogBox;
+        private readonly EntityStoryBoxDialog _entityDialogBox;
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory)
@@ -82,7 +82,7 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
-            _entityDialogBox = new StoryDialogBox(dialogFont, playerEntity);
+            _entityDialogBox = new EntityStoryBoxDialog(dialogFont, playerEntity);
             UpdateList.Add(_entityDialogBox);
 
             if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
@@ -222,10 +222,6 @@ namespace Demos.TopDownRpg.GameModes
                 if (interactWith != null)
                 {
                     var story = interactWith.Interact();
-                    story.BindFunction("move", (x, y) => {
-                        var endPoint = new Point(x, y);
-                        BeginMovingEntityTo(endPoint, interactWith, _tileSize.ToPoint(), moverManager);
-                    });
                     story.Continue();
                     _entityDialogBox.AddDialogBox(story, interactWith);
                 }
