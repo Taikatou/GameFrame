@@ -167,7 +167,7 @@ namespace GameFrame.Ink
             }
         }
 
-        public virtual void AddDialogBox(GameFrameStory story)
+        public void StartStory(GameFrameStory story)
         {
             _activeStory = story;
             LoadDialogBox();

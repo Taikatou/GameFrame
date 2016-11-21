@@ -17,9 +17,9 @@ namespace Demos.TopDownRpg
             _interactingWith?.CompleteInteract();
         }
 
-        public void AddDialogBox(GameFrameStory story, Entity interactWith)
+        public void StartStory(GameFrameStory story, Entity interactWith)
         {
-            AddDialogBox(story);
+            StartStory(story);
             _interactingWith = interactWith;
         }
     }

@@ -47,9 +47,11 @@ namespace Demos.TopDownRpg.GameModes
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private readonly EntityStoryBoxDialog _entityDialogBox;
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
+        private readonly EntityManager _entityManager;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory)
         {
+            _entityManager = new EntityManager();
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
@@ -122,7 +124,7 @@ namespace Demos.TopDownRpg.GameModes
                 foreach (var entityObject in entityObjects.Objects)
                 {
                     var position = entityObject.Position / _tileSize;
-                    var entity = Entity.Import(entityObject.Name);
+                    var entity = _entityManager.Import(entityObject.Name);
                     entity.Position = position;
                     AddEntity(entity);
                 }
@@ -223,7 +225,7 @@ namespace Demos.TopDownRpg.GameModes
                 {
                     var story = interactWith.Interact();
                     story.Continue();
-                    _entityDialogBox.AddDialogBox(story, interactWith);
+                    _entityDialogBox.StartStory(story, interactWith);
                 }
             }
         }

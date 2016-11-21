@@ -15,9 +15,7 @@ namespace Demos.TopDownRpg
         [JsonProperty("sprite-sheet")] public string SpriteSheet;
 
         [JsonProperty("script")] public string Script;
-
-        private GameFrameStory _story;
-
+        
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.Speed;
 
@@ -42,20 +40,9 @@ namespace Demos.TopDownRpg
 
         public virtual GameFrameStory Interact()
         {
-            if (_story == null && !string.IsNullOrEmpty(Script))
-            {
-                var storyText = StoryImporter.ReadStory(Script);
-                _story = new GameFrameStory(storyText);
-            }
-            return _story;
-        }
-
-        public static Entity Import(string fileName)
-        {
-            var textReader = StaticServiceLocator.GetService<ISaveAndLoad>();
-            var jsonText = textReader.LoadText($"Entities/{fileName}.json");
-            var entity = JsonConvert.DeserializeObject<Entity>(jsonText);
-            return entity;
+            var storyText = StoryImporter.ReadStory(Script);
+            var story = new GameFrameStory(storyText);
+            return story;
         }
 
         public virtual void CompleteInteract()
