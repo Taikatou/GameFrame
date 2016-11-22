@@ -32,9 +32,8 @@ namespace Demos.TopDownRpg
             BattleProbability = 12;
             KeyBoardUpdater = new KeyboardUpdater();
             Move moveDelegate = (entity, point) => OpenWorldGameMode.Move(entity, point);
-            var gameFlags = new GameFlags();
-            _entityManager = new EntityManager(moveDelegate, gameFlags);
-            _storyEngine = new StoryEngine(moveDelegate, _entityManager, gameFlags);
+            _entityManager = new EntityManager(moveDelegate);
+            _storyEngine = new StoryEngine(moveDelegate, _entityManager);
         }
 
         public override void Update(GameTime gameTime)
@@ -103,7 +102,7 @@ namespace Demos.TopDownRpg
                 SpriteSheet = "Character",
                 Position = new Vector2(5, 5)
             };
-            LoadOpenWorld("player_home");
+            LoadOpenWorld("west_forest");
         }
 
         public override void Draw(GameTime gameTime)

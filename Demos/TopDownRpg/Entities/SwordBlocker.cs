@@ -6,25 +6,24 @@ namespace Demos.TopDownRpg.Entities
 {
     public class SwordBlocker : NpcEntity
     {
-        private readonly GameFlags _gameFlags;
         private bool _complete;
         private bool _moved;
 
-        public SwordBlocker(GameFlags gameFlags)
+        public SwordBlocker()
         {
             Name = "Concerned country man";
             SpriteSheet = "3";
-            _gameFlags = gameFlags;
         }
 
         public override GameFrameStory Interact()
         {
-            var acquiredSword = _gameFlags.GetFlag<bool>("acquire_sword");
+            var acquiredSword = GameFlags.GetFlag<bool>("acquire_sword");
             GameFrameStory toReturn = null;
             if (acquiredSword)
             {
                 _complete = true;
                 toReturn = ReadStory("sword_blocker_complete.ink");
+                GameFlags.AddObject("sword_blocker_moved", true);
             }
             else if(!_moved)
             {

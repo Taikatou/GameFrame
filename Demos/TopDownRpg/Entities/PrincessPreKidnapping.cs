@@ -26,6 +26,7 @@ namespace Demos.TopDownRpg.Entities
                     Fwacked = true;
                     _removeEntity.Invoke(_fakeGuard);
                     _removeEntity.Invoke(this);
+                    GameFlags.AddObject("princess_kidnapped", true);
                 }
             });
             return GameStory;

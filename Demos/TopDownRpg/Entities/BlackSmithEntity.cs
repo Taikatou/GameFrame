@@ -8,13 +8,11 @@ namespace Demos.TopDownRpg.Entities
         public override GameFrameStory StoryScript => ReadStory("black_smith.ink");
         public override GameFrameStory CompleteScript => ReadStory("black_smith_complete.ink");
         public bool AcquireSword;
-        private readonly GameFlags _gameFlags;
 
-        public BlackSmithEntity(GameFlags gameFlags)
+        public BlackSmithEntity()
         {
             Name = "Dojo Master";
             SpriteSheet = "2";
-            _gameFlags = gameFlags;
         }
 
         public override GameFrameStory Interact()
@@ -22,7 +20,7 @@ namespace Demos.TopDownRpg.Entities
             if (StoryOver && !AcquireSword)
             {
                 AcquireSword = true;
-                _gameFlags.AddObject("acquire_sword", true);
+                GameFlags.AddObject("acquire_sword", true);
                 return ReadStory("dojo_master_acquire_sword.ink");
             }
             else

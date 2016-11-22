@@ -523,9 +523,7 @@
 330,330,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,330,330,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Entity-Layer">
-  <object id="5" name="sword_blocker" x="32" y="336" width="16" height="16"/>
- </objectgroup>
+ <objectgroup name="Entity-Layer"/>
  <objectgroup name="Teleport-Layer">
   <object id="1" name="shack" type="5, 7" x="1488" y="128" width="16" height="16"/>
   <object id="2" name="black_smith_west_forest" type="5, 7" x="304" y="112" width="16" height="16"/>

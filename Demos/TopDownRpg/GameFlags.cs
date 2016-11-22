@@ -4,24 +4,26 @@ namespace Demos.TopDownRpg
 {
     public class GameFlags
     {
+        private static GameFlags _instance;
+        public static GameFlags Instance => _instance ?? (_instance = new GameFlags());
         private readonly Dictionary<string, object> _variables;
 
-        public GameFlags()
+        protected GameFlags()
         {
             _variables = new Dictionary<string, object>();
         }
 
-        public void AddObject<T>(string variableName, T variable)
+        public static void AddObject<T>(string variableName, T variable)
         {
-            _variables[variableName] = variable;
+            Instance._variables[variableName] = variable;
         }
 
-        public T GetFlag<T>(string variableName, T defaultValue=default(T))
+        public static T GetFlag<T>(string variableName, T defaultValue=default(T))
         {
             T toReturn = defaultValue;
-            if (_variables.ContainsKey(variableName))
+            if (Instance._variables.ContainsKey(variableName))
             {
-                toReturn = (T)_variables[variableName];
+                toReturn = (T)Instance._variables[variableName];
             }
             return toReturn;
         }

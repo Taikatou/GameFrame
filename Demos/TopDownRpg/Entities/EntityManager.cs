@@ -9,15 +9,14 @@ namespace Demos.TopDownRpg.Entities
     {
         private readonly Dictionary<string, Entity> _loadedEntities;
         private readonly Move _moveDelegate;
-        public EntityManager(Move moveDelegate, GameFlags gameFlags)
+        public EntityManager(Move moveDelegate)
         {
             _moveDelegate = moveDelegate;
             _loadedEntities = new Dictionary<string, Entity>
             {
                 ["villager"] = new VillagerEntity { MoveDelegate = moveDelegate },
                 ["dojo_master"] = new DojoMasterEntity { MoveDelegate = moveDelegate },
-                ["black_smith"] = new BlackSmithEntity(gameFlags) { MoveDelegate = moveDelegate },
-                ["sword_blocker"] = new SwordBlocker(gameFlags) { MoveDelegate = moveDelegate },
+                ["black_smith"] = new BlackSmithEntity { MoveDelegate = moveDelegate },
                 ["princess"] = new Princess { MoveDelegate = moveDelegate }
             };
         }

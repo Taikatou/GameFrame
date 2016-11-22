@@ -10,28 +10,35 @@ namespace Demos.TopDownRpg
     {
         private readonly Dictionary<string, StoryEvent> _worldLoadEvents;
         private readonly Move _moveDelegate;
-        private readonly GameFlags _gameFlags;
 
         private readonly EntityManager _entityManager;
-        public StoryEngine(Move moveDelegate, EntityManager entityManager, GameFlags gameFlags)
+        public StoryEngine(Move moveDelegate, EntityManager entityManager)
         {
-            _gameFlags = gameFlags;
             _moveDelegate = moveDelegate;
             _entityManager = entityManager;
-            _worldLoadEvents = new Dictionary<string, StoryEvent>();
-            _worldLoadEvents["west_forest_west_entrance"] = (addEntity, removeEntity) =>
+            _worldLoadEvents = new Dictionary<string, StoryEvent>
             {
-                var princessKidnapped = _gameFlags.GetFlag<bool>("princess_kidnapped");
-                if (!princessKidnapped)
+                ["west_forest_west_entrance"] = (addEntity, removeEntity) =>
                 {
-                    var guard = new FakeGuardEntity {Position = new Vector2(14, 8), MoveDelegate = _moveDelegate};
-                    var princess = new PrincessPreKidnapping(guard, removeEntity)
+                    var princessKidnapped = GameFlags.GetFlag<bool>("princess_kidnapped");
+                    if (!princessKidnapped)
                     {
-                        Position = new Vector2(14, 10),
-                        MoveDelegate = _moveDelegate
-                    };
-                    addEntity.Invoke(princess);
-                    addEntity.Invoke(guard);
+                        var guard = new FakeGuardEntity {Position = new Vector2(14, 8), MoveDelegate = _moveDelegate};
+                        var princess = new PrincessPreKidnapping(guard, removeEntity)
+                        {
+                            Position = new Vector2(14, 10),
+                            MoveDelegate = _moveDelegate
+                        };
+                        addEntity.Invoke(princess);
+                        addEntity.Invoke(guard);
+                    }
+                },
+                ["west_forest"] = (addEntity, removeEntity) =>
+                {
+                    var swordBlocker = new SwordBlocker {MoveDelegate = moveDelegate};
+                    var swordBlockerMoved = GameFlags.GetFlag<bool>("sword_blocker_moved");
+                    swordBlocker.Position = swordBlockerMoved ? new Vector2(2, 20) : new Vector2(2, 21);
+                    addEntity.Invoke(swordBlocker);
                 }
             };
 
