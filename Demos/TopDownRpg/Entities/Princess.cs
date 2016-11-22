@@ -1,6 +1,6 @@
 ﻿namespace Demos.TopDownRpg.Entities
 {
-    public class Princess : NpcEntity
+    public class Princess : MovingEntity
     {
         public Princess()
         {

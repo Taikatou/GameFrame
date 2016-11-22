@@ -23,7 +23,8 @@ namespace Demos.TopDownRpg
         public Entity PlayerEntity;
         public OpenWorldGameMode OpenWorldGameMode { get; set; }
         public KeyboardUpdater KeyBoardUpdater;
-        private EntityManager _entityManager;
+        private readonly EntityManager _entityManager;
+        private readonly StoryEngine _storyEngine;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
@@ -33,6 +34,7 @@ namespace Demos.TopDownRpg
             Move moveDelegate = (entity, point) => OpenWorldGameMode.Move(entity, point);
             var gameFlags = new GameFlags();
             _entityManager = new EntityManager(moveDelegate, gameFlags);
+            _storyEngine = new StoryEngine(moveDelegate, _entityManager, gameFlags);
         }
 
         public override void Update(GameTime gameTime)
@@ -44,7 +46,7 @@ namespace Demos.TopDownRpg
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager);
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
             var player = OpenWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");

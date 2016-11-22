@@ -14,13 +14,11 @@ using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
-using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,6 +30,9 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg.GameModes
 {
+    public delegate void AddEntity(Entity entity);
+
+    public delegate void RemoveEntity(Entity entity);
     public class OpenWorldGameMode : IGameMode
     {
         public TiledMap Map;
@@ -50,14 +51,16 @@ namespace Demos.TopDownRpg.GameModes
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
+        private readonly StoryEngine _storyEngine;
 
         public void Move(Entity entity, Point p)
         {
             BeginMovingEntityTo(p, entity, _tileSize.ToPoint(), _moverManager);
         }
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory, EntityManager entityManager)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
         {
+            _storyEngine = storyEngine;
             _entityManager = entityManager;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
@@ -89,20 +92,10 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(_moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
+            _storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             var dialogFont = _content.Load<SpriteFont>("dialog");
             _entityDialogBox = new EntityStoryBoxDialog(dialogFont, playerEntity);
             UpdateList.Add(_entityDialogBox);
-
-            if (StaticServiceLocator.ContainsService<List<StoryInterceptor>>())
-            {
-                var storyDispatcher = new StoryDispatcher();
-                var interceptors = StaticServiceLocator.GetService<List<StoryInterceptor>>();
-                foreach (var interceptor in interceptors)
-                {
-                    storyDispatcher.AddInterceptor(interceptor);
-                }
-                //_entityDialogBox.DialogBoxEvent += (story, text) => storyDispatcher.AddStory(story, text);
-            }
         }
 
         public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory, MoverManager moverManager)
@@ -135,6 +128,16 @@ namespace Demos.TopDownRpg.GameModes
                     AddEntity(entity);
                 }
             }
+        }
+
+        public void RemoveEntity(Entity entity)
+        {
+            var position = entity.Position.ToPoint();
+            _expiringSpatialHash.RemoveNode(position);
+            var entityRenderer = EntityRenderersDict[entity];
+            RenderList.Remove(entityRenderer);
+            EntityRenderersDict.Remove(entity);
+            _spatialHashMover.Remove(entity);
         }
 
         public void AddEntity(Entity entity)

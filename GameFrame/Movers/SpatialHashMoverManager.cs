@@ -26,6 +26,12 @@ namespace GameFrame.Movers
             _spatialHashLayer.AddNode(character.Position.ToPoint(), character);
         }
 
+        public void Remove(T character)
+        {
+            _characterList.Remove(character);
+            _spatialHashLayer.RemoveNode(character.Position.ToPoint());
+        }
+
         public bool RequestMovement(T character, Vector2 position)
         {
             var startPoint = character.Position.ToPoint();
