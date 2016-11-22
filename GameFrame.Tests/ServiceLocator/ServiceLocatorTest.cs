@@ -1,6 +1,4 @@
-﻿using System;
-using Demos.DesktopGl;
-using GameFrame.Common;
+﻿using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.ServiceLocator;

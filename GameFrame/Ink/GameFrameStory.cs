@@ -27,6 +27,16 @@ namespace GameFrame.Ink
             }
         }
 
+        public T GetVariableState<T>(string variableName)
+        {
+            return (T)_story.variablesState[variableName];
+        }
+
+        public void ObserveVariable(string variableName, Story.VariableObserver observer)
+        {
+            _story.ObserveVariable(variableName, observer);
+        }
+
         public GameFrameStory(string jsonString)
         {
             _functionNames = new HashSet<string>();

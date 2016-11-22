@@ -9,8 +9,6 @@ namespace Demos.Droid
         private TextToSpeech _speaker;
         private string _toSpeak;
 
-        public TextToSpeechImplementation() { }
-
         public void Speak(string text)
         {
             var ctx = Android.App.Application.Context; // useful for many Android SDK features

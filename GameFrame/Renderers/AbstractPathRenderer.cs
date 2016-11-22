@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameFrame.Movers;
-using GameFrame.Paths;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 

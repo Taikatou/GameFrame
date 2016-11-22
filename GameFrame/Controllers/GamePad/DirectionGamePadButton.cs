@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameFrame.Controllers.GamePad
@@ -22,7 +21,7 @@ namespace GameFrame.Controllers.GamePad
             PreviouslyActive = Active;
             _gamePadButton.Update(state);
             JoyStick.Update(state);
-            Active = _gamePadButton.Active || (JoyStick.Button == Button);
+            Active = _gamePadButton.Active || JoyStick.Contains(Button);
         }
     }
 }

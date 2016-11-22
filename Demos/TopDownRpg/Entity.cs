@@ -1,8 +1,6 @@
 ﻿using Demos.TopDownRpg.SpeedState;
 using GameFrame.Ink;
 using GameFrame.Movers;
-using GameFrame.ServiceLocator;
-using GameFrame.Services;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -19,12 +17,8 @@ namespace Demos.TopDownRpg
         public SpeedContext SpeedContext;
         public override float Speed => SpeedContext.Speed;
 
-        [JsonConstructor]
-        public Entity(string name, string spriteSheet, string script)
+        public Entity()
         {
-            Name = name;
-            SpriteSheet = spriteSheet;
-            Script = script;
             SpeedContext = new SpeedContext(4);
         }
 

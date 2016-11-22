@@ -3,8 +3,6 @@ using GameFrame.Controllers;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
 using GameFrame.TextToSpeech;
-using GameFrame.Ink;
-using System.Collections.Generic;
 
 namespace Demos.DesktopGl
 {

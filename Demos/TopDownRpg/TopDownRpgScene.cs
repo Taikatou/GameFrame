@@ -1,4 +1,5 @@
 ﻿using System;
+using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
@@ -20,14 +21,18 @@ namespace Demos.TopDownRpg
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public Entity PlayerEntity;
-        private OpenWorldGameMode _openWorldGameMode;
+        public OpenWorldGameMode OpenWorldGameMode { get; set; }
         public KeyboardUpdater KeyBoardUpdater;
+        private EntityManager _entityManager;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
             BattleProbability = 12;
             KeyBoardUpdater = new KeyboardUpdater();
+            Move moveDelegate = (entity, point) => OpenWorldGameMode.Move(entity, point);
+            var gameFlags = new GameFlags();
+            _entityManager = new EntityManager(moveDelegate, gameFlags);
         }
 
         public override void Update(GameTime gameTime)
@@ -39,14 +44,14 @@ namespace Demos.TopDownRpg
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            _openWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater));
-            var map = _openWorldGameMode.Map;
-            var player = _openWorldGameMode.PlayerEntity;
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager);
+            var map = OpenWorldGameMode.Map;
+            var player = OpenWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
             if (grassLayer != null)
             {
                 var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
-                _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+                OpenWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
                 {
                     var random = new Random();
                     var point = player.Position.ToPoint();
@@ -71,7 +76,7 @@ namespace Demos.TopDownRpg
             {
                 var tileSize = new Point(map.TileWidth, map.TileHeight);
                 var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-                _openWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+                OpenWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
                 {
                     var point = player.Position.ToPoint();
                     if (teleporters.CheckCollision(point))
@@ -84,13 +89,18 @@ namespace Demos.TopDownRpg
                     }
                 };
             }
-            GameModes.Push(_openWorldGameMode);
+            GameModes.Push(OpenWorldGameMode);
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
-            PlayerEntity = new Entity("Player", "Character", "") { Position = new Vector2(5, 5) };
+            PlayerEntity = new Entity
+            {
+                Name ="Player",
+                SpriteSheet = "Character",
+                Position = new Vector2(5, 5)
+            };
             LoadOpenWorld("player_home");
         }
 

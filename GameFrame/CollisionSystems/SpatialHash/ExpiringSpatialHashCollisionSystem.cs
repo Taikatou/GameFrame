@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using GameFrame.Common;
 using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;

@@ -2,7 +2,6 @@
 using Demos.DesktopGl;
 using GameFrame.Common;
 using GameFrame.Controllers;
-using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;

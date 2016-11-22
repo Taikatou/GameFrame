@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="41">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="48">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
   <image source="tileset.png" width="448" height="640"/>
   <terraintypes>
@@ -90,17 +90,17 @@
  </layer>
  <layer name="details" width="42" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmUtuwjAURe0hlG3wKWUT0PKZt/ugLWtAgnZUygJA/PbAjHYPnbdL6Ap6kTKwSrCDc1+IhK90hPxALycYJ0ZR6nKyEGRoOe49eKCfjV9Wlvf64DErEUdsnnmKhOdYK/UCXjVnLOW5Qv812GjOWMpzh/4f4FNzxlKeEgme3JieI1JP6fXO8pRe7yxP6fXO8pRI8OTG17MAiuAKlKhG8fH1LIMKqIIa0ecba+dHH9Z9PZugBW7BXYrj75NkbvLw+0wyN+e4b/7/bo/Njfm5S76/SyR4uhN3DWBfl7JO8OQmeHITPLnJo+c1qIMb0IhqefRsgw7ogl5Us3lK7YV9YvM8dS/MyhN4BgOj5pr3rahR8rg8v07o1cT+oXXkv0XaxHm+GbXf6HUC3sFURsMZ03Om0j07WRq92M9l5sRzziJ/evmitA==
+   eJztmUtuwjAURe1hgW20QOkmSPnN6T7KJpAojKBdQCt+e2AG7IE5LKEr6K2UgQXBBue+EAlf6SiyiV5OYpw4ilL3k6kgfctxu+CNfjZ+mVt+ewe9rEQcsXnmKRKeH1qpIRhpTlvKc476C7DUnLaU5xr1N2CrOW0pT4kET25MzwGppvR8Z3lKz3eWp/R8Z3lKJHhy4+v5AAqgCEpUo+T4ej6CJ1AGFaLPHnPnoE/7fT3rIAKvoJHi+P+5ZGzy8P+8ZGxu8dw8vrbnxsbc756f7xIJnu4k3QPY96WsEzy5CZ7cBE9u8uhZBc+gBl7ivjx6NkELtEEn7rN5Sq2FfWLzvHYtLBnXuK+yEnHE5bm7olYd64fozLtF2iR5jo2+33g7AZ/gS0bDGdPzW6X7djIzarG/y/wQzzmL/AH4dqFe
   </data>
  </layer>
  <layer name="above-details" width="42" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt1k8OQ0AYh+GZZf8lLqH3qUabHoKuSndcjnP5rawsGsZ8ou+TvAsSTBiTcQ5Y5uady9TdhzleS6H7l+rtwxwD/4j/HQDi67QW9YbrkfXz9+zXd8s3gKWp+cecBID5LqpRrUpshxLUQR3VSZ2Nx7JFuXqop/VAAnnNvC7V/uEacQ/xmThXqVp94w0DGA3TmyTT
+   eJzt1ksOgjAUheHboaCJm8D9oCMXAY5AZ7I5WJdn5KgDA21vIv+XnEGbFG76Ss2AbdpgdlVuIU07l07f75VHSNMG9ojzDgDlzbqLFsf7yPv//+zXuWUN4Cm2/9iTALDeSXkrk3L2LSWpg1IptXJ0rgX53VeOa/R+uBR8QwyRvlF5Kq9yZQBfH8NXI9E=
   </data>
  </layer>
  <layer name="Collision-Layer" width="42" height="42" visible="0" opacity="0.75">
   <data encoding="base64" compression="zlib">
-   eJztmeENgjAQhY/gfwcRNU5BnMNBTHQME3QPB+kgLiBNvHg5rtDi0VLDS15KodAvtFe4tCoAqkTett613nu0ewLAYfWbj8W0tozISYXXqXibofNa+gfOEOXISeeUVL+UANePrR7l95xUT8nJuZrWd0c9FWcjcKGl+lScUyhXziFDT7tYnHyt5KKcfeLzS4qbkDpymgScffHtivfXxJyh8e2K93Xhx5lSlm2TCWedCecpE07fdYnfx7+HGrqzOKf9jeXE0uc+V/8h/Y3h1JTP2FDOWOLv1jU2tF0KzjGaw7j7aOEclrQGaK9LsbVw6mrh1NXCqas5ckr/JchpYF6cWNJjy/iCLqdhTinMi9fCv58hZUxOw0orzIs3yvmDtjAvrhU4tXMl/uz6k3PSOSu1c12LIcyLz0V3PRhj+lxtW8aQ/aah/apf97tce2C31m+O+7yM
+   eJztmWFuwjAMhR2x/xwE2MQp0HoNDoLEjjEJdg8OwkG4wBppFpZxSOI6NZ36pCeRNrRfmtrEZB0A1k7e9H7v/VHQ7wIA27dh/gxtHRmRkwrPU/E+ueNWasHZhbst2jnOGv1HzuMC4OvPUT+L+zGp7cnJuU69z4m2F+dJ4EJL7VacLTTVOMoZnvQbi5PnytQzyz13/n5JcVPTRs6rA+ez+E7F+60xZ218p+J9Gco4PRXZVhPh3E2Ec6/gpLmjMxxf6no1eYl/j1p7f64zi3MLTsqrvX9UydxoOYdI+q2R5ob2o5xjiT/b1NzQfh6cGnnMu0aenFLcWOclC0k5wDovja2Z01Yzp61mTr2kdckrckrrEuS8wiNnq7VwCSflxc+R8fZCnJKwLl4K613+/4SnsC5eEU4tU8vxYF28y3B2BWMorUE0wrp4z95ZqV/q3BjCuvgQHvOBxvS61o6MNftNuf2qoftdqT2w796/RnbSpg==
   </data>
  </layer>
  <layer name="Grass-Layer" width="42" height="42">
@@ -113,11 +113,13 @@
   <object id="36" name="player_home" type="5, 9" x="96" y="576" width="16" height="16"/>
   <object id="37" name="rival_house" type="5, 8" x="208" y="304" width="16" height="16"/>
   <object id="38" name="friend_house" type="5, 8" x="512" y="336" width="16" height="16"/>
+  <object id="43" name="west_forest" type="99, 23" x="16" y="336" width="16" height="16"/>
+  <object id="45" name="west_forest" type="99, 24" x="16" y="352" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
-  <object id="29" name="test" type="1,0" x="144" y="352" width="16" height="16"/>
+  <object id="29" name="villager" type="1,0" x="144" y="352" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Locations">
+ <objectgroup name="Tile Layer 3">
   <object id="39" name="monk" x="80" y="64" width="32" height="16"/>
  </objectgroup>
 </map>

@@ -49,7 +49,7 @@
   <object id="1" name="level01" type="32, 21" x="80" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
-  <object id="2" name="dojo_master" type="0, -1" x="48" y="80" width="16" height="16"/>
+  <object id="2" name="friend" type="0, -1" x="48" y="80" width="16" height="16"/>
  </objectgroup>
  <layer name="Grass-Layer" width="10" height="10">
   <data encoding="csv">

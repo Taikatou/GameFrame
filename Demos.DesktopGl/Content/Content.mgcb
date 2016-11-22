@@ -77,18 +77,6 @@
 /processorParam:TextureFormat=Color
 /build:TopDownRpg/PathEnd.png
 
-#begin TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TopDownRpg/rpg_maker_vx_rtp_tileset_by_telles0808.png
-
 #begin TopDownRpg/tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -257,4 +245,29 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TopDownRpg/rival_house.tmx
+
+#begin TopDownRpg/west_forest.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/west_forest.tmx
+
+#begin TopDownRpg/shack.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/shack.tmx
+
+#begin TopDownRpg/black_smith_west_forest.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/black_smith_west_forest.tmx
+
+#begin TopDownRpg/farmer_west_forest.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/farmer_west_forest.tmx
+
+#begin TopDownRpg/west_forest_west_entrance.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/west_forest_west_entrance.tmx
 

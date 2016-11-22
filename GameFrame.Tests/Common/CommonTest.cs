@@ -1,10 +1,7 @@
-﻿using System;
-using GameFrame.Common;
+﻿using GameFrame.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using NUnit.Framework;
-using MonoGame.Extended.ViewportAdapters;
 using Assert = NUnit.Framework.Assert;
 
 namespace GameFrame.Tests.Common

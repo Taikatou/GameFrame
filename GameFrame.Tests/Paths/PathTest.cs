@@ -1,5 +1,4 @@
 ﻿using GameFrame.CollisionSystems;
-using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.Heuristics;

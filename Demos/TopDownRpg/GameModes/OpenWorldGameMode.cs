@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demos.TopDownRpg.Entities;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -48,10 +49,16 @@ namespace Demos.TopDownRpg.GameModes
         private readonly EntityStoryBoxDialog _entityDialogBox;
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
+        private readonly MoverManager _moverManager;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory)
+        public void Move(Entity entity, Point p)
         {
-            _entityManager = new EntityManager();
+            BeginMovingEntityTo(p, entity, _tileSize.ToPoint(), _moverManager);
+        }
+
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory, EntityManager entityManager)
+        {
+            _entityManager = entityManager;
             EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
@@ -61,26 +68,25 @@ namespace Demos.TopDownRpg.GameModes
             Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
             PlayerEntity = playerEntity;
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
-            var moverManager = new MoverManager();
+            _moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             AddEntity(PlayerEntity);
-            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, moverManager);
-            AddInteractionController(entityController, controllerFactory, moverManager);
+            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, _moverManager);
+            AddInteractionController(entityController, controllerFactory, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
             collisionSystem.AddCollisionSystem(new TiledCollisionSystem(_possibleMovements, Map, "Collision-Layer"));
             collisionSystem.AddCollisionSystem(_expiringSpatialHash);
             CollisionSystem = collisionSystem;
-
-            AddClickController(PlayerEntity, _tileSize.ToPoint(), moverManager);
-            PathRenderer = new PathRenderer(moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
+            AddClickController(PlayerEntity, _tileSize.ToPoint(), _moverManager);
+            PathRenderer = new PathRenderer(_moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
-            UpdateList.Add(moverManager);
+            UpdateList.Add(_moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
@@ -246,7 +252,8 @@ namespace Demos.TopDownRpg.GameModes
         public void Draw(SpriteBatch spriteBatch)
         {
             var transformMatrix = Camera.GetViewMatrix();
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix,
+                              sortMode: SpriteSortMode.BackToFront, depthStencilState: DepthStencilState.Default);
             Map.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {

@@ -111,15 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
-    <Content Include="Content\BirabutoKingdom.wav" />
-    <Content Include="Content\piano.mp3" />
-    <Content Include="Content\TopDownRpg\BluePathEnd.png" />
-    <Content Include="Content\TopDownRpg\Character.png" />
-    <Content Include="Content\TopDownRpg\Fonts\montserrat-32_0.png" />
-    <Content Include="Content\TopDownRpg\Path.png" />
-    <Content Include="Content\TopDownRpg\PathEnd.png" />
-    <Content Include="Content\TopDownRpg\rpg_maker_vx_rtp_tileset_by_telles0808.png" />
-    <Content Include="Content\TopDownRpg\tileset.png" />
+    <None Include="Entities\rival.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Entities\friend.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Entities\dojo_master.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -132,7 +129,28 @@
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Entities\shack_farmer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Entities\west_forest_farmer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\black_smith.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\black_smith_complete.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Scripts\dojo_master.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\dojo_master_acquire_sword.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\dojo_master_complete.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\friend.ink.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Scripts\hello.ink.json">
@@ -141,7 +159,31 @@
     <None Include="Scripts\mom.ink.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\villager.ink.json">
+    <None Include="Scripts\rival.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\shack_farmer.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\sword_blocker.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\sword_blocker_complete.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\sword_blocker_moved.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\villager_monk.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\villager_mountain.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\villager_start.ink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\west_forest_farmer.ink.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -158,9 +200,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="Content\TopDownRpg\Fonts\montserrat-32.fnt" />
-    <None Include="Content\TopDownRpg\level01.tmx" />
-    <None Include="Content\TopDownRpg\level02.tmx" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
