@@ -48,11 +48,6 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/level01.tmx
 
-#begin TopDownRpg/level02.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:TopDownRpg/level02.tmx
-
 #begin TopDownRpg/Path.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -270,4 +265,14 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TopDownRpg/west_forest_west_entrance.tmx
+
+#begin TopDownRpg/northern_desert.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/northern_desert.tmx
+
+#begin TopDownRpg/northern_desert_master_house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/northern_desert_master_house.tmx
 

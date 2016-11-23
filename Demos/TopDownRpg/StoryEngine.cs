@@ -35,14 +35,19 @@ namespace Demos.TopDownRpg
                 },
                 ["west_forest"] = (addEntity, removeEntity) =>
                 {
-                    var swordBlockerMoved = GameFlags.GetFlag<bool>("sword_blocker_moved");
-                    var swordBlocker = new SwordBlocker
+                    var swordBlocker = new SwordBlocker("sword_blocker_moved", new Vector2(2, 21), new Vector2(2, 20))
                     {
                         MoveDelegate = moveDelegate,
-                        AlreadyMoved = swordBlockerMoved,
-                        Position = swordBlockerMoved ? new Vector2(2, 20) : new Vector2(2, 21),
                     };
                     addEntity.Invoke(swordBlocker);
+                },
+                ["northern_desert"] = (addEntity, removeEntity) =>
+                {
+                    var guard = new NorthDesertGuard("first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
+                    {
+                        MoveDelegate = moveDelegate,
+                    };
+                    addEntity.Invoke(guard);
                 }
             };
 

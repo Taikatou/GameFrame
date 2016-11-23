@@ -1,5 +1,4 @@
-﻿using Demos.TopDownRpg.SpeedState;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
 {

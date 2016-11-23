@@ -3,13 +3,12 @@ using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
 {
-    public class SwordBlocker : NpcEntity
+    public class SwordBlocker : SwitchNpcEntity
     {
         private bool _complete;
         private bool _moved;
-        public bool AlreadyMoved;
 
-        public SwordBlocker()
+        public SwordBlocker(string flag, Vector2 startPosition, Vector2 endPosition) : base(flag, startPosition, endPosition)
         {
             Name = "Concerned country man";
             SpriteSheet = "3";

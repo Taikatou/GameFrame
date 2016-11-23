@@ -17,7 +17,8 @@ namespace Demos.TopDownRpg.Entities
                 ["villager"] = new VillagerEntity { MoveDelegate = moveDelegate },
                 ["dojo_master"] = new DojoMasterEntity { MoveDelegate = moveDelegate },
                 ["black_smith"] = new BlackSmithEntity { MoveDelegate = moveDelegate },
-                ["princess"] = new Princess { MoveDelegate = moveDelegate }
+                ["princess"] = new Princess { MoveDelegate = moveDelegate },
+                ["master"] = new Master { MoveDelegate = moveDelegate }
             };
         }
 

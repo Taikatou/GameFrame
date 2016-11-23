@@ -101,7 +101,7 @@ namespace Demos.TopDownRpg
                 SpriteSheet = "Character",
                 Position = new Vector2(5, 5)
             };
-            LoadOpenWorld("west_forest");
+            LoadOpenWorld("west_forest_west_entrance");
         }
 
         public override void Draw(GameTime gameTime)
