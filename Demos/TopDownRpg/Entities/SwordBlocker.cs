@@ -1,5 +1,4 @@
-﻿using System;
-using GameFrame.Ink;
+﻿using GameFrame.Ink;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
@@ -8,6 +7,7 @@ namespace Demos.TopDownRpg.Entities
     {
         private bool _complete;
         private bool _moved;
+        public bool AlreadyMoved;
 
         public SwordBlocker()
         {
@@ -18,7 +18,7 @@ namespace Demos.TopDownRpg.Entities
         public override GameFrameStory Interact()
         {
             var acquiredSword = GameFlags.GetFlag<bool>("acquire_sword");
-            GameFrameStory toReturn = null;
+            GameFrameStory toReturn;
             if (acquiredSword)
             {
                 _complete = true;
@@ -38,7 +38,7 @@ namespace Demos.TopDownRpg.Entities
 
         public override void CompleteInteract()
         {
-            if (_complete && !_moved)
+            if (_complete && !_moved && !AlreadyMoved)
             {
                 MoveDelegate.Invoke(this, new Point(2, 20));
                 _moved = true;

@@ -57,6 +57,7 @@
     <Compile Include="TopDownRpg\Entities\FakeGuardEntity.cs" />
     <Compile Include="TopDownRpg\Entities\MovingEntity.cs" />
     <Compile Include="TopDownRpg\Entities\NpcEntity.cs" />
+    <Compile Include="TopDownRpg\Entities\PlayerEntity.cs" />
     <Compile Include="TopDownRpg\Entities\Princess.cs" />
     <Compile Include="TopDownRpg\Entities\PrincessPreKidnapping.cs" />
     <Compile Include="TopDownRpg\Entities\SwordBlocker.cs" />

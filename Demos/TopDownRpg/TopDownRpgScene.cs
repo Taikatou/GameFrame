@@ -20,7 +20,6 @@ namespace Demos.TopDownRpg
         private readonly ViewportAdapter _viewPort;
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
-        public Entity PlayerEntity;
         public OpenWorldGameMode OpenWorldGameMode { get; set; }
         public KeyboardUpdater KeyBoardUpdater;
         private readonly EntityManager _entityManager;
@@ -45,7 +44,7 @@ namespace Demos.TopDownRpg
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager, _storyEngine);
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity.Instance, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
             var player = OpenWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
@@ -84,7 +83,7 @@ namespace Demos.TopDownRpg
                     {
                         var teleporter = teleporters.GetObjectAt(point);
                         var position = StringToVector.ConvertString(teleporter.Type);
-                        PlayerEntity = new Entity(PlayerEntity, position);
+                        PlayerEntity.Instance = new PlayerEntity(position);
                         GameModeStack.Unload();
                         LoadOpenWorld(teleporter.Name);
                     }
@@ -96,7 +95,7 @@ namespace Demos.TopDownRpg
         public override void LoadContent()
         {
             base.LoadContent();
-            PlayerEntity = new Entity
+            PlayerEntity.Instance = new PlayerEntity
             {
                 Name ="Player",
                 SpriteSheet = "Character",

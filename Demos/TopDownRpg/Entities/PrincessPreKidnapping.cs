@@ -18,7 +18,12 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            GameStory = ReadMovementStory("princess_pre_kidnapping.ink", _fakeGuard);
+            GameStory = ReadStory("princess_pre_kidnapping.ink");
+            GameStory.ObserveVariable("move_bandit", (varName, newValue) =>
+            {
+                var moveTo = PlayerEntity.Instance.Position.ToPoint();
+                MoveDelegate(_fakeGuard, moveTo);
+            });
             GameStory.ObserveVariable("fwacked", (varName, newValue) =>
             {
                 if (!Fwacked)

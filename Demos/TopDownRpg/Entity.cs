@@ -22,16 +22,6 @@ namespace Demos.TopDownRpg
             SpeedContext = new SpeedContext(4);
         }
 
-        public Entity(Entity baseEntity, Vector2 position)
-        {
-            Name = baseEntity.Name;
-            SpriteSheet = baseEntity.SpriteSheet;
-            Script = baseEntity.Script;
-            SpeedContext = new SpeedContext(4);
-            FacingDirection = baseEntity.FacingDirection;
-            Position = position;
-        }
-
         public virtual GameFrameStory Interact()
         {
             var storyText = StoryImporter.ReadStory(Script);

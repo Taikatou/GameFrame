@@ -21,10 +21,6 @@ namespace Demos.TopDownRpg.Entities
             Script = script;
         }
 
-        public NpcEntity(Entity baseEntity, Vector2 position) : base(baseEntity, position)
-        {
-        }
-
         public virtual GameFrameStory ReadStory(string storyName)
         {
             var storyText = StoryImporter.ReadStory(storyName);
