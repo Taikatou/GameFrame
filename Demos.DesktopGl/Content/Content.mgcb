@@ -276,3 +276,8 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/northern_desert_master_house.tmx
 
+#begin TopDownRpg/center_house_west_forest.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/center_house_west_forest.tmx
+

@@ -62,7 +62,7 @@ namespace Demos.TopDownRpg
                         player.SpeedContext.Terrain = new SpeedGrass();
                         if (grassProbability == 0)
                         {
-                            GameModes.Push(new BattleGameMode());
+                            // GameModes.Push(new BattleGameMode());
                         }
                     }
                     else if (player.SpeedContext.Terrain != null)
@@ -101,7 +101,7 @@ namespace Demos.TopDownRpg
                 SpriteSheet = "Character",
                 Position = new Vector2(5, 5)
             };
-            LoadOpenWorld("west_forest_west_entrance");
+            LoadOpenWorld("player_home");
         }
 
         public override void Draw(GameTime gameTime)
