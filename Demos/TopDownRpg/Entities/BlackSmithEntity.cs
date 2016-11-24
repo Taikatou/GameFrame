@@ -20,7 +20,7 @@ namespace Demos.TopDownRpg.Entities
             if (StoryOver && !AcquireSword)
             {
                 AcquireSword = true;
-                GameFlags.AddObject("acquire_sword", true);
+                GameFlags.SetVariable("acquire_sword", true);
                 return ReadStory("dojo_master_acquire_sword.ink");
             }
             else

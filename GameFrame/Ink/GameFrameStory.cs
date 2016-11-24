@@ -32,6 +32,11 @@ namespace GameFrame.Ink
             return (T)_story.variablesState[variableName];
         }
 
+        public void SetVariableState(string variableName, int value)
+        {
+            _story.variablesState[variableName] = value;
+        }
+
         public void ObserveVariable(string variableName, Story.VariableObserver observer)
         {
             _story.ObserveVariable(variableName, observer);
@@ -55,6 +60,11 @@ namespace GameFrame.Ink
                 _story.BindExternalFunction(functionName, action);
                 _functionNames.Add(functionName);
             }
+        }
+
+        public void ChoosePathString(string fishVariable)
+        {
+            _story.ChoosePathString(fishVariable);
         }
     }
 }

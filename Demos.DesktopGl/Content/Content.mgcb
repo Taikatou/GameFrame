@@ -281,3 +281,8 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/center_house_west_forest.tmx
 
+#begin TopDownRpg/west_forest_tent.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/west_forest_tent.tmx
+

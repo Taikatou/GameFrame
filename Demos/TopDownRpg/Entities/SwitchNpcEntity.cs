@@ -7,7 +7,7 @@ namespace Demos.TopDownRpg.Entities
         public bool AlreadyMoved;
         public SwitchNpcEntity(string flag, Vector2 startPosition, Vector2 endPosition)
         {
-            AlreadyMoved = GameFlags.GetFlag<bool>(flag);
+            AlreadyMoved = GameFlags.GetVariable<bool>(flag);
             Position = AlreadyMoved ? endPosition : startPosition;
         }
     }

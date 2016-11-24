@@ -17,7 +17,7 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            var learnedFight = GameFlags.GetFlag<bool>("learned_fight");
+            var learnedFight = GameFlags.GetVariable<bool>("learned_fight");
             var scriptName = learnedFight ? "north_guard_post_fight.ink" : "north_guard_pre_fight.ink";
             _gameStory = ReadStory(scriptName);
             return _gameStory;
@@ -31,7 +31,7 @@ namespace Demos.TopDownRpg.Entities
                 if (toFight)
                 {
                     MoveDelegate?.Invoke(this, new Point(24, 35));
-                    GameFlags.AddObject(_flagName, true);
+                    GameFlags.SetVariable(_flagName, true);
                     AlreadyMoved = true;
                 }
             }

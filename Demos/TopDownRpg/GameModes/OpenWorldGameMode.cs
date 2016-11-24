@@ -14,6 +14,7 @@ using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
+using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
@@ -235,6 +236,33 @@ namespace Demos.TopDownRpg.GameModes
                     var story = interactWith.Interact();
                     story.Continue();
                     _entityDialogBox.StartStory(story, interactWith);
+                }
+                else if (GameFlags.GetVariable<bool>("acquire_rod"))
+                {
+                    var layerName = "Water-Layer";
+                    var waterLayer = Map.GetLayer<TiledTileLayer>(layerName);
+                    if (waterLayer != null)
+                    {
+                        var waterCollision = new TiledCollisionSystem(_possibleMovements, Map, layerName);
+                        if (waterCollision.CheckCollision(interactTarget))
+                        {
+                            var random = new Random();
+                            var fishComplete = random.Next(3) == 0;
+                            var scriptName = fishComplete ? "fish_success.ink" : "fish_fail.ink";
+                            var fishScript = StoryImporter.ReadStory(scriptName);
+                            var story = new GameFrameStory(fishScript);
+                            if (fishComplete)
+                            {
+                                var fishCount = GameFlags.GetVariable(Global.FishCountVariable, 0);
+                                fishCount++;
+                                story.ChoosePathString("dialog");
+                                story.SetVariableState(Global.FishCountVariable, fishCount);
+                                GameFlags.SetVariable(Global.FishCountVariable, fishCount);
+                            }
+                            story.Continue();
+                            _entityDialogBox.StartStory(story, null);
+                        }
+                    }
                 }
             }
         }

@@ -13,12 +13,12 @@ namespace Demos.TopDownRpg
             _variables = new Dictionary<string, object>();
         }
 
-        public static void AddObject<T>(string variableName, T variable)
+        public static void SetVariable<T>(string variableName, T variable)
         {
             Instance._variables[variableName] = variable;
         }
 
-        public static T GetFlag<T>(string variableName, T defaultValue=default(T))
+        public static T GetVariable<T>(string variableName, T defaultValue=default(T))
         {
             T toReturn = defaultValue;
             if (Instance._variables.ContainsKey(variableName))

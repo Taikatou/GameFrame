@@ -20,7 +20,7 @@ namespace Demos.TopDownRpg
             {
                 ["west_forest_west_entrance"] = (addEntity, removeEntity) =>
                 {
-                    var princessKidnapped = GameFlags.GetFlag<bool>("princess_kidnapped");
+                    var princessKidnapped = GameFlags.GetVariable<bool>("princess_kidnapped");
                     if (!princessKidnapped)
                     {
                         var guard = new FakeGuardEntity {Position = new Vector2(14, 8), MoveDelegate = _moveDelegate};

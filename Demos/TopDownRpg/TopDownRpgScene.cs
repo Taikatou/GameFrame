@@ -101,7 +101,8 @@ namespace Demos.TopDownRpg
                 SpriteSheet = "Character",
                 Position = new Vector2(5, 5)
             };
-            LoadOpenWorld("player_home");
+            LoadOpenWorld("west_forest_west_entrance");
+            GameFlags.SetVariable(Global.FishCountVariable, 3);
         }
 
         public override void Draw(GameTime gameTime)

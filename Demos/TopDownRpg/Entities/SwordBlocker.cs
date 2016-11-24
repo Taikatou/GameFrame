@@ -16,13 +16,13 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            var acquiredSword = GameFlags.GetFlag<bool>("acquire_sword");
+            var acquiredSword = GameFlags.GetVariable<bool>("acquire_sword");
             GameFrameStory toReturn;
             if (acquiredSword)
             {
                 _complete = true;
                 toReturn = ReadStory("sword_blocker_complete.ink");
-                GameFlags.AddObject("sword_blocker_moved", true);
+                GameFlags.SetVariable("sword_blocker_moved", true);
             }
             else if(!_moved)
             {
