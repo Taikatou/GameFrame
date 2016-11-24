@@ -77,7 +77,8 @@ namespace GameFrame.PathFinding
         {
             var queue = new List<Node> {startNode};
             var found = false;
-            while (queue.Count > 0 && !found)
+            var count = 0;
+            while (queue.Count > 0 && !found && count < _max)
             {
                 // Sort by F-value so that the shortest possible routes are considered first
                 queue.Sort((node1, node2) => node1.F.CompareTo(node2.F));
@@ -93,6 +94,7 @@ namespace GameFrame.PathFinding
                     GetNodesToAnalysis(currentNode, queue);
                     queue.Remove(currentNode);
                 }
+                count++;
             }
             return found;
         }
