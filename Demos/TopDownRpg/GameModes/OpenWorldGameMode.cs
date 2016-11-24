@@ -180,7 +180,7 @@ namespace Demos.TopDownRpg.GameModes
             if (mapContainsEndPoint)
             {
                 var moveTo = endPoint;
-                var collision = _expiringSpatialHash.CheckCollision(moveTo);
+                var collision = _expiringSpatialHash.CheckCollision(moveTo) || WaterCollision(endPoint);
                 var valid = true;
                 if (collision)
                 {
@@ -239,31 +239,40 @@ namespace Demos.TopDownRpg.GameModes
                 }
                 else if (GameFlags.GetVariable<bool>("acquire_rod"))
                 {
-                    var layerName = "Water-Layer";
-                    var waterLayer = Map.GetLayer<TiledTileLayer>(layerName);
-                    if (waterLayer != null)
+                    if (WaterCollision(interactTarget))
                     {
-                        var waterCollision = new TiledCollisionSystem(_possibleMovements, Map, layerName);
-                        if (waterCollision.CheckCollision(interactTarget))
+                        var random = new Random();
+                        var fishComplete = random.Next(3) == 0;
+                        var scriptName = fishComplete ? "fish_success.ink" : "fish_fail.ink";
+                        var fishScript = StoryImporter.ReadStory(scriptName);
+                        var story = new GameFrameStory(fishScript);
+                        if (fishComplete)
                         {
-                            var random = new Random();
-                            var fishComplete = random.Next(3) == 0;
-                            var scriptName = fishComplete ? "fish_success.ink" : "fish_fail.ink";
-                            var fishScript = StoryImporter.ReadStory(scriptName);
-                            var story = new GameFrameStory(fishScript);
-                            if (fishComplete)
-                            {
-                                var fishCount = GameFlags.GetVariable(Global.FishCountVariable, 0);
-                                fishCount++;
-                                story.ChoosePathString("dialog");
-                                story.SetVariableState(Global.FishCountVariable, fishCount);
-                                GameFlags.SetVariable(Global.FishCountVariable, fishCount);
-                            }
-                            story.Continue();
-                            _entityDialogBox.StartStory(story, null);
+                            var fishCount = GameFlags.GetVariable(Global.FishCountVariable, 0);
+                            fishCount++;
+                            story.ChoosePathString("dialog");
+                            story.SetVariableState(Global.FishCountVariable, fishCount);
+                            GameFlags.SetVariable(Global.FishCountVariable, fishCount);
                         }
+                        story.Continue();
+                        _entityDialogBox.StartStory(story, null);
                     }
                 }
+            }
+        }
+
+        public bool WaterCollision(Point p)
+        {
+            var layerName = "Water-Layer";
+            var waterLayer = Map.GetLayer<TiledTileLayer>(layerName);
+            if (waterLayer != null)
+            {
+                var waterCollision = new TiledCollisionSystem(_possibleMovements, Map, layerName);
+                return waterCollision.CheckCollision(p);
+            }
+            else
+            {
+                return false;
             }
         }
 

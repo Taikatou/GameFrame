@@ -99,10 +99,9 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(5, 5)
+                Position = new Vector2(92, 84)
             };
-            LoadOpenWorld("west_forest_west_entrance");
-            GameFlags.SetVariable(Global.FishCountVariable, 3);
+            LoadOpenWorld("west_forest");
         }
 
         public override void Draw(GameTime gameTime)
