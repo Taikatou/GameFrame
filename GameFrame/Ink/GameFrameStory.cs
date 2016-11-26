@@ -53,7 +53,16 @@ namespace GameFrame.Ink
             _story.ChooseChoiceIndex(index);
         }
 
-        public void BindFunction(string functionName, Action<int, int> action)
+        public void BindFunction<T1, T2>(string functionName, Action<T1, T2> action)
+        {
+            if (!_functionNames.Contains(functionName))
+            {
+                _story.BindExternalFunction(functionName, action);
+                _functionNames.Add(functionName);
+            }
+        }
+
+        public void BindFunction<T1>(string functionName, Action<T1> action)
         {
             if (!_functionNames.Contains(functionName))
             {

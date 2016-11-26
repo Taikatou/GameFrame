@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.GameModes;
+using GameFrame;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
@@ -12,7 +13,7 @@ namespace Demos.TopDownRpg
         private readonly Move _moveDelegate;
 
         private readonly EntityManager _entityManager;
-        public StoryEngine(Move moveDelegate, EntityManager entityManager)
+        public StoryEngine(GameModeController gameModeController, Move moveDelegate, EntityManager entityManager)
         {
             _moveDelegate = moveDelegate;
             _entityManager = entityManager;
@@ -43,7 +44,7 @@ namespace Demos.TopDownRpg
                 },
                 ["northern_desert"] = (addEntity, removeEntity) =>
                 {
-                    var guard = new NorthDesertGuard("first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
+                    var guard = new NorthDesertGuard(gameModeController, "first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
                     {
                         MoveDelegate = moveDelegate,
                     };

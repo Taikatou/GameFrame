@@ -25,7 +25,7 @@ namespace GameFrame.Renderers
             FillColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, float scale = 1.0f)
         {
             base.Draw(spriteBatch);
             if (Active)

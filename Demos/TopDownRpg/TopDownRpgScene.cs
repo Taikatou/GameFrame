@@ -3,6 +3,7 @@ using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
+using GameFrame;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.PathFinding.Heuristics;
@@ -32,7 +33,12 @@ namespace Demos.TopDownRpg
             KeyBoardUpdater = new KeyboardUpdater();
             Move moveDelegate = (entity, point) => OpenWorldGameMode.Move(entity, point);
             _entityManager = new EntityManager(moveDelegate);
-            _storyEngine = new StoryEngine(moveDelegate, _entityManager);
+            var gameModeController = new GameModeController()
+            {
+                PushGameModeDelegate = mode => GameModes.Push(mode),
+                PopGameModeDelegate = () => GameModes.Pop()
+            };
+            _storyEngine = new StoryEngine(gameModeController, moveDelegate, _entityManager);
         }
 
         public override void Update(GameTime gameTime)
@@ -99,9 +105,10 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(92, 84)
+                Position = new Vector2(5, 5)
             };
-            LoadOpenWorld("west_forest");
+            GameFlags.SetVariable("learned_fight", true);
+            LoadOpenWorld("west_forest_west_entrance");
         }
 
         public override void Draw(GameTime gameTime)

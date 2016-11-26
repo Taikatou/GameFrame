@@ -102,7 +102,7 @@ namespace GameFrame.GUI
             Active = false;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, float scale=1.0f)
         {
             if (Active)
             {
@@ -117,6 +117,7 @@ namespace GameFrame.GUI
 
                 // Draw the current page onto the dialog box
                 spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor);
+                //spriteBatch.DrawString(Font, Text, TextPosition, DialogColor, 0.0f, new Vector2(), scale, SpriteEffects.None, 0.0f);
             }
         }
 

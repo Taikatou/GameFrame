@@ -87,6 +87,7 @@
     <Compile Include="Controllers\SmartButton\CompositeSmartButton.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="GameFrameGame.cs" />
+    <Compile Include="GameModeController.cs" />
     <Compile Include="GameModeStack.cs" />
     <Compile Include="GUI\ImageButton.cs" />
     <Compile Include="GUI\OptionTextBox.cs" />

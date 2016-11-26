@@ -1,5 +1,6 @@
-﻿using GameFrame.Ink;
-using GameFrame.Movers;
+﻿using Demos.TopDownRpg.Entities;
+using GameFrame.Ink;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Demos.TopDownRpg
@@ -7,8 +8,19 @@ namespace Demos.TopDownRpg
     public class EntityStoryBoxDialog : StoryDialogBox
     {
         private Entity _interactingWith;
-        public EntityStoryBoxDialog(SpriteFont font, BaseMovable player) : base(font, player)
+        private Vector2 _cachedPosition;
+        private Entity _player => PlayerEntity.Instance;
+        public EntityStoryBoxDialog(SpriteFont font) : base(font)
         {
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (!Complete && _cachedPosition != _player.Position)
+            {
+                EndDialog();   
+            }
         }
 
         public override void EndDialog()
@@ -21,6 +33,12 @@ namespace Demos.TopDownRpg
         {
             StartStory(story);
             _interactingWith = interactWith;
+        }
+
+        public override void StartStory(GameFrameStory story)
+        {
+            base.StartStory(story);
+            _cachedPosition = _player.Position;
         }
     }
 }

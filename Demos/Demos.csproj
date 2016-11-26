@@ -38,7 +38,6 @@
     <Compile Include="Common\ScreenSize.cs" />
     <Compile Include="DemoGame.cs" />
     <Compile Include="DemoScreen.cs" />
-    <Compile Include="Platformer\Entity.cs" />
     <Compile Include="Pong\PongGame.cs" />
     <Compile Include="Pong\PongScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\VideoOptionsScreen.cs" />
     <Compile Include="TopDownRpg\Entities\AbstractCompleteEntity.cs" />
+    <Compile Include="TopDownRpg\Entities\AbsractBattleEntity.cs" />
     <Compile Include="TopDownRpg\Entities\BlackSmithEntity.cs" />
     <Compile Include="TopDownRpg\Entities\DojoMasterEntity.cs" />
     <Compile Include="TopDownRpg\Entities\FakeGuardEntity.cs" />
@@ -73,6 +73,8 @@
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
     <Compile Include="TopDownRpg\GameFlags.cs" />
     <Compile Include="TopDownRpg\GameModes\BattleGameMode.cs" />
+    <Compile Include="TopDownRpg\GameModes\BattleEntityRenderer.cs" />
+    <Compile Include="TopDownRpg\GameModes\BattleStoryBoxDialog.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
     <Compile Include="TopDownRpg\Global.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />

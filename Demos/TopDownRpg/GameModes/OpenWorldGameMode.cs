@@ -95,7 +95,7 @@ namespace Demos.TopDownRpg.GameModes
             LoadEntities();
             _storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             var dialogFont = _content.Load<SpriteFont>("dialog");
-            _entityDialogBox = new EntityStoryBoxDialog(dialogFont, playerEntity);
+            _entityDialogBox = new EntityStoryBoxDialog(dialogFont);
             UpdateList.Add(_entityDialogBox);
         }
 

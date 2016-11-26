@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameFrame.GUI;
-using GameFrame.Movers;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
@@ -21,29 +20,22 @@ namespace GameFrame.Ink
         public bool Complete => StoryState == StoryState.Closed;
         public StoryState StoryState;
         private readonly List<TextBox> _activeBoxes;
-        private readonly BaseMovable _player;
-        private Vector2 _cachedPosition;
         private readonly Camera2D _camera;
         private readonly SpriteFont _font;
         private GameFrameStory _activeStory;
         public StoryDialogBoxEvent DialogBoxEvent { get; set; }
 
-        public StoryDialogBox(SpriteFont font, BaseMovable player)
+        public StoryDialogBox(SpriteFont font)
         {
             _font = font;
             _activeBoxes = new List<TextBox>();
-            _player = player;
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
             _camera = new Camera2D(graphicsDevice) { Zoom = 1.0f };
             StoryState = StoryState.Closed;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
-            if (!Complete && _cachedPosition != _player.Position)
-            {
-                EndDialog();
-            }
         }
 
         public virtual void EndDialog()
@@ -131,7 +123,7 @@ namespace GameFrame.Ink
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
                 foreach (var textBox in _activeBoxes)
                 {
-                    textBox.Draw(spriteBatch);
+                    textBox.Draw(spriteBatch, _camera.Zoom);
                 }
                 spriteBatch.End();
             }
@@ -158,7 +150,6 @@ namespace GameFrame.Ink
                 };
                 dialogBox.Show();
                 _activeBoxes.Add(dialogBox);
-                _cachedPosition = _player.Position;
                 StoryState = StoryState.Dialog;
             }
             else
@@ -167,7 +158,7 @@ namespace GameFrame.Ink
             }
         }
 
-        public void StartStory(GameFrameStory story)
+        public virtual void StartStory(GameFrameStory story)
         {
             _activeStory = story;
             LoadDialogBox();

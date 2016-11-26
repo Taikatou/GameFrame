@@ -1,14 +1,15 @@
-﻿using GameFrame.Ink;
+﻿using GameFrame;
+using GameFrame.Ink;
 using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
 {
-    public class NorthDesertGuard : SwitchNpcEntity
+    public class NorthDesertGuard : AbsractBattleEntity
     {
         private GameFrameStory _gameStory;
         private readonly string _flagName;
-
-        public NorthDesertGuard(string flag, Vector2 startPosition, Vector2 endPosition) : base(flag, startPosition, endPosition)
+        public override string BattleScriptName => "yo_moma.ink";
+        public NorthDesertGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
         {
             _flagName = flag;
             Name = "Guard";
