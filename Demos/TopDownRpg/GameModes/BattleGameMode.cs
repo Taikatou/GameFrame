@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Demos.TopDownRpg.Entities;
 using GameFrame;
 using GameFrame.Content;
+using GameFrame.Controllers.Click;
 using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
@@ -10,77 +13,69 @@ using MonoGame.Extended;
 
 namespace Demos.TopDownRpg.GameModes
 {
-    public class BattleGameMode : IGameMode
+    public class BattleGameMode : AbstractRpgGameMode
     {
-        private Entity _battleWith;
-        public List<IUpdate> UpdateList;
-        public List<IRenderable> RenderList;
+        public List<BattleEntityRenderer> EntityList;
         private readonly ContentManager _content;
-        private readonly BattleStoryBoxDialog _dialogBox;
         private Vector2 _centerPoint;
-        private Rectangle _rectangle;
-        public BattleGameMode(Entity battleWith, string battleScriptName, GameModeController gameModeController)
+        public EventHandler CompleteEvent { get; set; }
+        public BattleGameMode(Entity battleWith)
         {
-            _battleWith = battleWith;
-            UpdateList = new List<IUpdate>();
-            RenderList = new List<IRenderable>();
             _content = ContentManagerFactory.RequestContentManager();
             LoadEntities(battleWith);
             var dialogFont = _content.Load<SpriteFont>("dialog");
-            _dialogBox = new BattleStoryBoxDialog(dialogFont)
+            DialogBox = new BattleStoryBoxDialog(dialogFont)
             {
-                CompleteEvent = (sender, args) => gameModeController.PopGameMode()
+                CompleteEvent = (sender, args) => Complete()
             };
+            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
+            _centerPoint = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
+            UpdateList.Add(DialogBox);
+            var rectangle = new Rectangle(new Point(), new Point(16,16));
+            var enemyEntity = new BattleEntityRenderer(rectangle, battleWith, _content);
+            var playerEntity = new BattleEntityRenderer(rectangle, PlayerEntity.Instance, _content);
+            EntityList = new List<BattleEntityRenderer> { enemyEntity, playerEntity };
+        }
+
+        public void StartStory(string battleScriptName)
+        {
             var storyFile = StoryImporter.ReadStory(battleScriptName);
             var story = new GameFrameStory(storyFile);
             story.Continue();
-            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
-            _centerPoint = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
-            story.ObserveVariable("progress", (varName, newValue) => {
-
+            story.ObserveVariable("progress", (varName, newValue) =>
+            {
+                var value = (int)newValue;
+                _centerPoint.Y = value;
+                if (value <= 0.0f || value >= 1.0f)
+                {
+                    Complete();
+                }
             });
-            _dialogBox.StartStory(story);
-            UpdateList.Add(_dialogBox);
+            DialogBox.StartStory(story);
         }
 
         public void LoadEntities(Entity entity)
         {
-            _frameRectangle = new Rectangle(new Point(), new Point(16, 16));
-            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
-            var posX = _centerPoint.X - (frameRectangle.X / 2f);
-            var posY = graphicsDevice.Viewport.Height - frameRectangle.Y - 30;
-            var position = new Vector2(posX, posY);
-            var enemyRenderer = new BattleEntityRenderer(position, frameRectangle, entity, _content);
-            RenderList.Add(enemyRenderer);
+            
         }
 
-        public int PosX
+        public void Complete()
         {
-            get
-            {
-                return _centerPoint.X - (_frameRectangle.X / 2f);
-            }
+            CompleteEvent?.Invoke(this, null);
         }
-        public void Draw(SpriteBatch spriteBatch)
+
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            foreach (var toRender in RenderList)
+            foreach (var entity in EntityList)
             {
-                toRender.Draw(spriteBatch);
+                entity.Draw(spriteBatch, _centerPoint);
             }
             spriteBatch.End();
-            _dialogBox.Draw(spriteBatch);
+            DialogBox.Draw(spriteBatch);
         }
 
-        public void Update(GameTime gameTime)
-        {
-            foreach (var toUpdate in UpdateList)
-            {
-                toUpdate.Update(gameTime);
-            }
-        }
-
-        public void Dispose()
+        public override void Dispose()
         {
             _content.Unload();
             _content.Dispose();

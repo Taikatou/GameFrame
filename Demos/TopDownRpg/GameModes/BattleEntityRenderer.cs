@@ -1,5 +1,4 @@
-﻿using GameFrame;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,7 +7,6 @@ namespace Demos.TopDownRpg.GameModes
     public class BattleEntityRenderer
     {
         private readonly Texture2D _entityTexture;
-        public Rectangle Area { get; }
         public Rectangle FrameRectangle { get; }
         public BattleEntityRenderer(Rectangle size, Entity entity, ContentManager content)
         {

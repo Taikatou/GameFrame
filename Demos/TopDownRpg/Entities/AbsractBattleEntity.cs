@@ -18,8 +18,17 @@ namespace Demos.TopDownRpg.Entities
         public override GameFrameStory ReadStory(string story)
         {
             var toReturn = base.ReadStory(story);
-            toReturn.BindFunction("battle", (string scriptName) => {
-                _gameModeController.PushGameModeDelegate(new BattleGameMode(this, scriptName, _gameModeController));
+            toReturn.BindFunction("battle", (string scriptName) =>
+            {
+                var battleMode = new BattleGameMode(this)
+                {
+                    CompleteEvent = (sender, args) =>
+                    {
+                        _gameModeController.PopGameMode();
+                    }
+                };
+                battleMode.StartStory(scriptName);
+                _gameModeController.PushGameModeDelegate(battleMode);
             });
             return toReturn;
         }
