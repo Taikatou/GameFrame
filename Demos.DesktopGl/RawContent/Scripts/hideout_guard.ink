@@ -4,7 +4,6 @@ EXTERNAL battle(scriptName)
 VAR to_move = false
 You want some?
 *   Yes
-    Well here goes
     {battle("cow_fight.ink")}
 *   No
     I thought so.

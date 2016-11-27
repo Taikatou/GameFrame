@@ -49,8 +49,7 @@ namespace Demos.TopDownRpg
                         MoveDelegate = moveDelegate
                     };
                     addEntity.Invoke(guard);
-                    var hideoutGuard = new HideoutGuard(gameModeController, "second_guard_defeated", new Vector2(21, 6),
-                        new Vector2(21, 5))
+                    var hideoutGuard = new HideoutGuard(gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5))
                     {
                         MoveDelegate = moveDelegate
                     };

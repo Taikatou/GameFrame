@@ -303,3 +303,13 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/north_desert_house.tmx
 
+#begin TopDownRpg/north_desert_hideout.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/north_desert_hideout.tmx
+
+#begin TopDownRpg/north_desert_hideout_second_floor.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/north_desert_hideout_second_floor.tmx
+

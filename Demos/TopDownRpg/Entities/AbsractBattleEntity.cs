@@ -9,9 +9,12 @@ namespace Demos.TopDownRpg.Entities
     {
         private readonly GameModeController _gameModeController;
         public CompleteEvent CompleteEvent;
+        public GameFrameStory GameStory;
+        public readonly string FlagName;
 
         protected AbsractBattleEntity(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(flag, startPosition, endPosition)
         {
+            FlagName = flag;
             _gameModeController = gameModeController;
         }
 

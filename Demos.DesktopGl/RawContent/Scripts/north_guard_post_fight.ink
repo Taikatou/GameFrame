@@ -6,7 +6,6 @@ What do you want
 *   I want to to fight
     Ok then
     {battle("yo_moma.ink")}
-    Wow I can't complete
 *   Nothing
 - ->END
 

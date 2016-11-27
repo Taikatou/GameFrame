@@ -50,6 +50,7 @@
     <Compile Include="Screens\MouseOptionsScreen.cs" />
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\VideoOptionsScreen.cs" />
+    <Compile Include="TopDownRpg\DirectionMapper.cs" />
     <Compile Include="TopDownRpg\Entities\AbstractCompleteEntity.cs" />
     <Compile Include="TopDownRpg\Entities\AbsractBattleEntity.cs" />
     <Compile Include="TopDownRpg\Entities\BlackSmithEntity.cs" />

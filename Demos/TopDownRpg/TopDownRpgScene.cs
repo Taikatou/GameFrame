@@ -97,8 +97,9 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(33,22)
+                Position = new Vector2(5,37)
             };
+            GameFlags.SetVariable("learned_fight", true);
             LoadOpenWorld("northern_desert");
         }
 

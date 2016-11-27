@@ -7,39 +7,27 @@ namespace Demos.TopDownRpg.Entities
 {
     public class HideoutGuard : AbsractBattleEntity
     {
-        private GameFrameStory _gameStory;
-        private readonly string _flagName;
         public HideoutGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
         {
-            _flagName = flag;
             Name = "Guard";
             SpriteSheet = "1";
         }
 
         public override GameFrameStory Interact()
         {
-            _gameStory = ReadStory("hideout_guard.ink");
-            _gameStory.ChoosePathString("dialog");
+            GameStory = ReadStory("hideout_guard.ink");
+            GameStory.ChoosePathString("dialog");
             CompleteEvent completeEvent = win =>
             {
-                _gameStory.SetVariableState("to_move", true);
-            };
-            ReadStory(_gameStory, completeEvent);
-            return _gameStory;
-        }
-
-        public override void CompleteInteract()
-        {
-            if (!AlreadyMoved)
-            {
-                var toMove = _gameStory.GetVariableState<int>("to_move") == 1;
-                if (toMove)
+                if (win)
                 {
-                    MoveDelegate?.Invoke(this, new Point(24, 35));
-                    GameFlags.SetVariable(_flagName, true);
+                    MoveDelegate?.Invoke(this, EndPosition.ToPoint());
+                    GameFlags.SetVariable(FlagName, true);
                     AlreadyMoved = true;
                 }
-            }
+            };
+            ReadStory(GameStory, completeEvent);
+            return GameStory;
         }
     }
 }
