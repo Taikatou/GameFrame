@@ -7,30 +7,30 @@ namespace Demos.TopDownRpg.Entities
 {
     public abstract class AbsractBattleEntity : SwitchNpcEntity
     {
-        public abstract string BattleScriptName { get; }
         private readonly GameModeController _gameModeController;
+        public CompleteEvent CompleteEvent;
 
         protected AbsractBattleEntity(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(flag, startPosition, endPosition)
         {
             _gameModeController = gameModeController;
         }
 
-        public override GameFrameStory ReadStory(string story)
+        public GameFrameStory ReadStory(GameFrameStory story, CompleteEvent completeEvent)
         {
-            var toReturn = base.ReadStory(story);
-            toReturn.BindFunction("battle", (string scriptName) =>
+            story.BindFunction("battle", (string scriptName) =>
             {
                 var battleMode = new BattleGameMode(this)
                 {
-                    CompleteEvent = (sender, args) =>
+                    CompleteEvent = victory =>
                     {
                         _gameModeController.PopGameMode();
+                        completeEvent?.Invoke(victory);
                     }
                 };
                 battleMode.StartStory(scriptName);
                 _gameModeController.PushGameModeDelegate(battleMode);
             });
-            return toReturn;
+            return story;
         }
     }
 }

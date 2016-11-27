@@ -7,16 +7,19 @@ namespace Demos.TopDownRpg.GameModes
     public class BattleEntityRenderer
     {
         private readonly Texture2D _entityTexture;
+        public Rectangle SourceRectangle;
         public Rectangle FrameRectangle { get; }
-        public BattleEntityRenderer(Rectangle size, Entity entity, ContentManager content)
+
+        public BattleEntityRenderer(Rectangle destinationRectangle, Rectangle sourceRectangle, Entity entity, ContentManager content)
         {
             _entityTexture = content.Load<Texture2D>($"TopDownRpg/{entity.SpriteSheet}");
-            FrameRectangle = size;
+            FrameRectangle = destinationRectangle;
+            SourceRectangle = sourceRectangle;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_entityTexture, position, FrameRectangle, Color.White);
+            spriteBatch.Draw(_entityTexture, FrameRectangle, SourceRectangle, Color.White);
         }
     }
 }

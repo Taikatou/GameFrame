@@ -117,7 +117,7 @@ namespace GameFrame.GUI
 
                 // Draw the current page onto the dialog box
                 spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor);
-                //spriteBatch.DrawString(Font, Text, TextPosition, DialogColor, 0.0f, new Vector2(), scale, SpriteEffects.None, 0.0f);
+                //spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor, 0.0f, new Vector2(), scale, SpriteEffects.None, 0.0f);
             }
         }
 

@@ -32,7 +32,7 @@ namespace GameFrame.Ink
             return (T)_story.variablesState[variableName];
         }
 
-        public void SetVariableState(string variableName, int value)
+        public void SetVariableState<T>(string variableName, T value)
         {
             _story.variablesState[variableName] = value;
         }
@@ -71,9 +71,9 @@ namespace GameFrame.Ink
             }
         }
 
-        public void ChoosePathString(string fishVariable)
+        public void ChoosePathString(string path)
         {
-            _story.ChoosePathString(fishVariable);
+            _story.ChoosePathString(path);
         }
     }
 }

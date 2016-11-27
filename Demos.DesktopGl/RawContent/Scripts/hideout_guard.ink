@@ -2,15 +2,15 @@ EXTERNAL battle(scriptName)
 
 ===dialog===
 VAR to_move = false
-What do you want
-*   I want to to fight
-    Ok then
-    {battle("yo_moma.ink")}
-    Wow I can't complete
-*   Nothing
+You want some?
+*   Yes
+    Well here goes
+    {battle("cow_fight.ink")}
+*   No
+    I thought so.
 - ->END
 
 === function battle(scriptName) ===
 // Usually external functions can only return placeholder
 // results, otherwise they'd be defined in ink!
-~ return 1 
+~ return 1

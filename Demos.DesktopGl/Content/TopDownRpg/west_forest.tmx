@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="20">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="23">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
   <image source="tileset.png" width="448" height="640"/>
  </tileset>
@@ -526,6 +526,7 @@
  <objectgroup name="Entity-Layer">
   <object id="17" name="farmer" type="1, 0" x="896" y="688" width="16" height="16"/>
   <object id="19" name="fisher" type="1, 0" x="1408" y="1360" width="16" height="16"/>
+  <object id="21" name="fisher_two" x="80" y="432" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Teleport-Layer">
   <object id="1" name="shack" type="5, 7" x="1488" y="128" width="16" height="16"/>

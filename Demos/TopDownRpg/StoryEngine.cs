@@ -46,9 +46,15 @@ namespace Demos.TopDownRpg
                 {
                     var guard = new NorthDesertGuard(gameModeController, "first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
                     {
-                        MoveDelegate = moveDelegate,
+                        MoveDelegate = moveDelegate
                     };
                     addEntity.Invoke(guard);
+                    var hideoutGuard = new HideoutGuard(gameModeController, "second_guard_defeated", new Vector2(21, 6),
+                        new Vector2(21, 5))
+                    {
+                        MoveDelegate = moveDelegate
+                    };
+                    addEntity.Invoke(hideoutGuard);
                 }
             };
 

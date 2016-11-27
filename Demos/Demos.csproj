@@ -56,6 +56,7 @@
     <Compile Include="TopDownRpg\Entities\DojoMasterEntity.cs" />
     <Compile Include="TopDownRpg\Entities\FakeGuardEntity.cs" />
     <Compile Include="TopDownRpg\Entities\FisherMan.cs" />
+    <Compile Include="TopDownRpg\Entities\HideoutGuard.cs" />
     <Compile Include="TopDownRpg\Entities\Master.cs" />
     <Compile Include="TopDownRpg\Entities\MovingEntity.cs" />
     <Compile Include="TopDownRpg\Entities\NorthDesertGuard.cs" />

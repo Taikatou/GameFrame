@@ -34,6 +34,7 @@ namespace Demos
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             _rpgScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
+            StaticServiceLocator.AddService(viewportAdapter);
             var screens = new List<Screen>
             {
                 new MainMenuScreen(viewportAdapter, Services, this),

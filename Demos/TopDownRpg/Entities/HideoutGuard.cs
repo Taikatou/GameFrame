@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
 {
-    public class NorthDesertGuard : AbsractBattleEntity
+    public class HideoutGuard : AbsractBattleEntity
     {
         private GameFrameStory _gameStory;
         private readonly string _flagName;
-        public NorthDesertGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
+        public HideoutGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
         {
             _flagName = flag;
             Name = "Guard";
@@ -18,9 +18,7 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            var learnedFight = GameFlags.GetVariable<bool>("learned_fight");
-            var scriptName = learnedFight ? "north_guard_post_fight.ink" : "north_guard_pre_fight.ink";
-            _gameStory = ReadStory(scriptName);
+            _gameStory = ReadStory("hideout_guard.ink");
             _gameStory.ChoosePathString("dialog");
             CompleteEvent completeEvent = win =>
             {

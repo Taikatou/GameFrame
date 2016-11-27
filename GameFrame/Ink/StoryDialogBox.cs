@@ -5,6 +5,7 @@ using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Ink
 {
@@ -29,7 +30,7 @@ namespace GameFrame.Ink
         {
             _font = font;
             _activeBoxes = new List<TextBox>();
-            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
+            var graphicsDevice = StaticServiceLocator.GetService<BoxingViewportAdapter>();
             _camera = new Camera2D(graphicsDevice) { Zoom = 1.0f };
             StoryState = StoryState.Closed;
         }
