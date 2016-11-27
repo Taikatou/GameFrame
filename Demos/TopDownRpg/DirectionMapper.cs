@@ -19,12 +19,12 @@ namespace Demos.TopDownRpg
             {
                 [new Point(0, 1)] = Down,
                 [new Point(1, 0)] = Right,
-                [new Point(1, 1)] = Right,
-                [new Point(1, -1)] = Right,
+                [new Point(1, 1)] = Down,
+                [new Point(1, -1)] = Up,
                 [new Point(0, -1)] = Up,
                 [new Point(-1, 0)] = Left,
-                [new Point(-1, -1)] = Left,
-                [new Point(-1, 1)] = Left
+                [new Point(-1, -1)] = Up,
+                [new Point(-1, 1)] = Down
             };
         }
 

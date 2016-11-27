@@ -1,5 +1,4 @@
-﻿using System;
-using Demos.TopDownRpg.Entities;
+﻿using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
@@ -51,17 +50,11 @@ namespace Demos.TopDownRpg
                 var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
                 OpenWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
                 {
-                    var random = new Random();
                     var point = player.Position.ToPoint();
                     var grassCollision = grassCollisionSystem.CheckCollision(point);
-                    var grassProbability = random.Next(BattleProbability);
                     if (grassCollision)
                     {
                         player.SpeedContext.Terrain = new SpeedGrass();
-                        if (grassProbability == 0)
-                        {
-                            // GameModes.Push(new BattleGameMode());
-                        }
                     }
                     else if (player.SpeedContext.Terrain != null)
                     {
@@ -97,7 +90,7 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(5,37)
+                Position = new Vector2(9,27)
             };
             GameFlags.SetVariable("learned_fight", true);
             LoadOpenWorld("northern_desert");

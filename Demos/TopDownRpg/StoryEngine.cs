@@ -49,11 +49,24 @@ namespace Demos.TopDownRpg
                         MoveDelegate = moveDelegate
                     };
                     addEntity.Invoke(guard);
-                    var hideoutGuard = new HideoutGuard(gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5))
+                    var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5))
                     {
                         MoveDelegate = moveDelegate
                     };
                     addEntity.Invoke(hideoutGuard);
+                },
+                ["north_desert_hideout_second_floor"] = (addEntity, removeEntity) =>
+                {
+                    var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
+                    {
+                        MoveDelegate = moveDelegate
+                    };
+                    addEntity.Invoke(hideoutGuard);
+                    var secondHideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "forth_guard_defeated", new Vector2(18, 12), new Vector2(17, 15))
+                    {
+                        MoveDelegate = moveDelegate
+                    };
+                    addEntity.Invoke(secondHideoutGuard);
                 }
             };
 

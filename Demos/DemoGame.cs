@@ -44,7 +44,6 @@ namespace Demos
                 new VideoOptionsScreen(viewportAdapter, Services),
                 new KeyboardOptionsScreen(viewportAdapter, Services),
                 new MouseOptionsScreen(viewportAdapter, Services),
-                new PongScreen(viewportAdapter, _spriteBatch),
                 _rpgScene
             };
             foreach (var screen in screens)
