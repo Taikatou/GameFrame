@@ -22,7 +22,6 @@ namespace Demos.TopDownRpg
         private PossibleMovementWrapper _possibleMovements;
         public int BattleProbability { get; set; }
         public OpenWorldGameMode OpenWorldGameMode { get; set; }
-        public KeyboardUpdater KeyBoardUpdater;
         private readonly EntityManager _entityManager;
         private readonly StoryEngine _storyEngine;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
@@ -30,8 +29,7 @@ namespace Demos.TopDownRpg
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
             BattleProbability = 12;
-            KeyBoardUpdater = new KeyboardUpdater();
-            Move moveDelegate = (entity, point) => OpenWorldGameMode.Move(entity, point);
+            Move moveDelegate = (entity, point) => OpenWorldGameMode.BeginMoveTo(entity, point);
             _entityManager = new EntityManager(moveDelegate);
             var gameModeController = new GameModeController()
             {
@@ -41,16 +39,10 @@ namespace Demos.TopDownRpg
             _storyEngine = new StoryEngine(gameModeController, moveDelegate, _entityManager);
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            KeyBoardUpdater.Update(gameTime);
-        }
-
         public void LoadOpenWorld(string levelName)
         {
             _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
-            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity.Instance, levelName , new EntityControllerFactory(KeyBoardUpdater), _entityManager, _storyEngine);
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity.Instance, levelName , new EntityControllerFactory(), _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
             var player = OpenWorldGameMode.PlayerEntity;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");

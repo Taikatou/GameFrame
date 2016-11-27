@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Demos.TopDownRpg.Entities;
-using GameFrame;
 using GameFrame.Content;
-using GameFrame.Controllers.Click;
 using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 
 namespace Demos.TopDownRpg.GameModes
 {
@@ -35,6 +32,7 @@ namespace Demos.TopDownRpg.GameModes
             var enemyEntity = new BattleEntityRenderer(rectangle, battleWith, _content);
             var playerEntity = new BattleEntityRenderer(rectangle, PlayerEntity.Instance, _content);
             EntityList = new List<BattleEntityRenderer> { enemyEntity, playerEntity };
+            AddInteractionController();
         }
 
         public void StartStory(string battleScriptName)

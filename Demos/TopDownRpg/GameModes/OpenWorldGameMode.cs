@@ -9,9 +9,6 @@ using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Controllers;
-using GameFrame.Controllers.GamePad;
-using GameFrame.Controllers.KeyBoard;
-using GameFrame.Controllers.SmartButton;
 using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
@@ -21,7 +18,6 @@ using GameFrame.Renderers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
@@ -48,11 +44,6 @@ namespace Demos.TopDownRpg.GameModes
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
 
-        public void Move(Entity entity, Point p)
-        {
-            BeginMovingEntityTo(p, entity, _tileSize.ToPoint(), _moverManager);
-        }
-
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
         {
             _entityManager = entityManager;
@@ -70,14 +61,13 @@ namespace Demos.TopDownRpg.GameModes
             _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             AddEntity(PlayerEntity);
             var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, _moverManager);
-            AddInteractionController(entityController, controllerFactory, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
             collisionSystem.AddCollisionSystem(new TiledCollisionSystem(_possibleMovements, Map, "Collision-Layer"));
             collisionSystem.AddCollisionSystem(_expiringSpatialHash);
             CollisionSystem = collisionSystem;
-            AddClickController(PlayerEntity, _tileSize.ToPoint(), _moverManager);
+            AddClickController(PlayerEntity);
             PathRenderer = new PathRenderer(_moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
@@ -89,23 +79,12 @@ namespace Demos.TopDownRpg.GameModes
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(dialogFont);
             UpdateList.Add(DialogBox);
-        }
-
-        public void AddInteractionController(BaseMovableController controller, ControllerFactory controllerFactory, MoverManager moverManager)
-        {
-            var runningButton = new List<IButtonAble> { new KeyButton(Keys.E, controllerFactory.KeyboardUpdater), new GamePadButton(Buttons.A) };
-            var smartButton = new CompositeSmartButton(runningButton)
+            InteractEvent += (sender, args) =>
             {
-                OnButtonJustPressed = (sender, args) =>
-                {
-                    if (!DialogBox.Interact())
-                    {
-                        var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
-                        Interact(interactTarget, moverManager);
-                    }
-                }
+                var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
+                Interact(interactTarget);
             };
-            controller.AddButton(smartButton);
+            AddInteractionController();
         }
 
         public void LoadEntities()
@@ -142,16 +121,16 @@ namespace Demos.TopDownRpg.GameModes
             _spatialHashMover.Add(entity);
         }
 
-        public void AddClickController(Entity entity, Point tileSize, MoverManager moverManager)
+        public void AddClickController(Entity entity)
         {
             ClickEvent = point =>
             {
                 var endPoint = Camera.ScreenToWorld(point.X, point.Y).ToPoint();
-                BeginMovingEntityTo(endPoint / tileSize, entity, tileSize, moverManager);
+                BeginMoveTo(entity, endPoint / _tileSize.ToPoint());
             };
         }
 
-        public void BeginMovingEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager)
+        public void BeginMoveTo(Entity entity, Point endPoint)
         {
             var mapContainsEndPoint = endPoint.X <= Map.Width && endPoint.Y <= Map.Height;
             if (mapContainsEndPoint)
@@ -165,7 +144,7 @@ namespace Demos.TopDownRpg.GameModes
                     var startPosition = entity.Position.ToPoint();
                     if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                     {
-                        Interact(endPoint, moverManager);
+                        Interact(endPoint);
                         valid = false;
                     }
                     else
@@ -196,12 +175,12 @@ namespace Demos.TopDownRpg.GameModes
                 }
                 if (valid)
                 {
-                    MoveEntityTo(moveTo, entity, tileSize, moverManager, collision, endPoint);
+                    MoveEntityTo(moveTo, entity, _tileSize.ToPoint(), _moverManager, collision, endPoint);
                 }
             }
         }
 
-        public void Interact(Point interactTarget, MoverManager moverManager)
+        public void Interact(Point interactTarget)
         {
             var validInteraction = FourWayPossibleMovement.FourWayAdjacentLocations(PlayerEntity.Position.ToPoint()).Contains(interactTarget);
             if (validInteraction)
@@ -241,17 +220,15 @@ namespace Demos.TopDownRpg.GameModes
 
         public bool WaterCollision(Point p)
         {
-            var layerName = "Water-Layer";
+            const string layerName = "Water-Layer";
             var waterLayer = Map.GetLayer<TiledTileLayer>(layerName);
+            var collision = false;
             if (waterLayer != null)
             {
                 var waterCollision = new TiledCollisionSystem(_possibleMovements, Map, layerName);
-                return waterCollision.CheckCollision(p);
+                collision = waterCollision.CheckCollision(p);
             }
-            else
-            {
-                return false;
-            }
+            return collision;
         }
 
         public void MoveEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact = false, Point? interactWith = null)
@@ -262,7 +239,7 @@ namespace Demos.TopDownRpg.GameModes
             pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
             if (interact && interactWith != null)
             {
-                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith.Value, moverManager);
+                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith.Value);
             }
             moverManager.AddMover(pathMover);
         }

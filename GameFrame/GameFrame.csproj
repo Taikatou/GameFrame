@@ -48,7 +48,6 @@
     <Compile Include="Common\CompleteEventManager.cs" />
     <Compile Include="Common\DelayTracker.cs" />
     <Compile Include="Common\Distance.cs" />
-    <Compile Include="Common\KeyboardUpdater.cs" />
     <Compile Include="Common\StringToVector.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\BaseMovableController.cs" />

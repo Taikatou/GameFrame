@@ -12,9 +12,8 @@ namespace GameFrame.Controllers
     public class SinglePlayerControllerFactory : ControllerFactory
     {
         public IControllerSettings ControllerSettings;
-        public SinglePlayerControllerFactory(KeyboardUpdater keyboardUpdater)
+        public SinglePlayerControllerFactory()
         {
-            KeyboardUpdater = keyboardUpdater;
             ControllerSettings = StaticServiceLocator.GetService<IControllerSettings>();
         }
 
@@ -22,7 +21,7 @@ namespace GameFrame.Controllers
         {
             if (ControllerSettings.KeyBoardMouseEnabled)
             {
-                buttonList.Add(new KeyButton(key, KeyboardUpdater));
+                buttonList.Add(new KeyButton(key));
             }
         }
         public void AddGamePadButton(List<IButtonAble> buttonList, Buttons button)
@@ -50,14 +49,14 @@ namespace GameFrame.Controllers
             }
             if (ControllerSettings.KeyBoardMouseEnabled)
             {
-                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.S, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.Down, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.A, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.Left, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.Up, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.W, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.D, KeyboardUpdater));
-                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.Right, KeyboardUpdater));
+                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.S));
+                directions[BaseMovableController.Directions.Down].Add(new KeyButton(Keys.Down));
+                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.A));
+                directions[BaseMovableController.Directions.Left].Add(new KeyButton(Keys.Left));
+                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.Up));
+                directions[BaseMovableController.Directions.Up].Add(new KeyButton(Keys.W));
+                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.D));
+                directions[BaseMovableController.Directions.Right].Add(new KeyButton(Keys.Right));
             }
             return new BaseMovableController(entity, possibleMovements, moverManager, directions);
         }

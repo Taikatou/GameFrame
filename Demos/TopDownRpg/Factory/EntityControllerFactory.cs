@@ -11,9 +11,6 @@ namespace Demos.TopDownRpg.Factory
 {
     public class EntityControllerFactory : SinglePlayerControllerFactory
     {
-        public EntityControllerFactory(KeyboardUpdater keyboardUpdater) : base(keyboardUpdater)
-        {
-        }
 
         public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
         {

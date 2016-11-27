@@ -23,15 +23,14 @@ namespace GameFrame.Tests.Controller
         public void SinglePLayerControllerFactoryTest()
         {
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            var keyBoardUpdator = new KeyboardUpdater();
-            var controller = new SinglePlayerControllerFactory(keyBoardUpdator);
+            var controller = new SinglePlayerControllerFactory();
             controller.CreateEntityController(new BaseMovable(), new EightWayPossibleMovement(new CrowDistance()),
                 new MoverManager());
             const Buttons buttons = Buttons.A;
             controller.AddGamePadButton(new List<IButtonAble>(), buttons);
             controller.AddKeyBoardButton(new List<IButtonAble>(), Keys.A);
 
-            var button = new KeyButton(Keys.A, keyBoardUpdator);
+            var button = new KeyButton(Keys.A);
 
 
             var smart = new SmartController();

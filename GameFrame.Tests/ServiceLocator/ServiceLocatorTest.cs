@@ -13,8 +13,7 @@ namespace GameFrame.Tests.ServiceLocator
         [TestMethod]
         public void AddAndGetServiceTest()
         {
-            var keyBoardUpdator = new KeyboardUpdater();
-            StaticServiceLocator.AddService<IButtonAble>(new KeyButton(Keys.A, keyBoardUpdator));
+            StaticServiceLocator.AddService<IButtonAble>(new KeyButton(Keys.A));
             var settings = StaticServiceLocator.GetService<IButtonAble>();
             Assert.IsInstanceOfType(settings,typeof(IButtonAble));
         }

@@ -12,7 +12,7 @@ namespace GameFrame.Controllers
     public class BaseMovableController : IUpdate
     {
         public enum Directions { Left, Right, Up, Down}
-        private readonly SmartController _smartController;
+        public readonly SmartController SmartController;
         public int ButtonsDown;
         public bool PlayerMove => ButtonsDown != 0;
         public BaseMovable ToMove;
@@ -28,7 +28,7 @@ namespace GameFrame.Controllers
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;
-            _smartController = new SmartController();
+            SmartController = new SmartController();
             CreateCompositeButton(directionButtons[Directions.Up], baseMovable, new Vector2(0, -1), moverManager);
             CreateCompositeButton(directionButtons[Directions.Down], baseMovable, new Vector2(0, 1), moverManager);
             CreateCompositeButton(directionButtons[Directions.Left], baseMovable, new Vector2(-1, 0), moverManager);
@@ -89,12 +89,12 @@ namespace GameFrame.Controllers
 
         public void AddButton(AbstractSmartButton button)
         {
-            _smartController.AddButton(button);
+            SmartController.AddButton(button);
         }
 
         public void Update(GameTime gameTime)
         {
-            _smartController.Update(gameTime);
+            SmartController.Update(gameTime);
         }
     }
 }

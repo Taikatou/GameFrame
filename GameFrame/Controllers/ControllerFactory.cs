@@ -6,7 +6,6 @@ namespace GameFrame.Controllers
 {
     public abstract class ControllerFactory
     {
-        public KeyboardUpdater KeyboardUpdater { get; set; }
         public abstract BaseMovableController CreateEntityController(BaseMovable entity, IPossibleMovements possibleMovements, MoverManager moverManager);
     }
 }
