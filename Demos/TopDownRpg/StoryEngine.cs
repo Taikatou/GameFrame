@@ -74,6 +74,11 @@ namespace Demos.TopDownRpg
                             MoveDelegate = moveDelegate
                         };
                         addEntity.Invoke(princess);
+                        var dojoMaster = new DojoMasterHideout (gameModeController, "master_defeat", new Vector2(13, 13), new Vector2(12, 13))
+                        {
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(dojoMaster);
                     }
                 }
             };

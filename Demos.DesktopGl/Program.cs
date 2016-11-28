@@ -1,5 +1,6 @@
 ﻿using System;
 using GameFrame.Controllers;
+using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
 using GameFrame.TextToSpeech;
@@ -14,7 +15,7 @@ namespace Demos.DesktopGl
             StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
-            //StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor()});
+            StaticServiceLocator.AddService<IPossibleMovements>(new FourWayPossibleMovement());
 
             using (var game = new DemoGame())
             {

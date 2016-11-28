@@ -5,8 +5,8 @@ using Demos.TopDownRpg.SpeedState;
 using GameFrame;
 using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
-using GameFrame.PathFinding.Heuristics;
 using GameFrame.PathFinding.PossibleMovements;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Maps.Tiled;
@@ -30,7 +30,7 @@ namespace Demos.TopDownRpg
             BattleProbability = 12;
             Move moveDelegate = (entity, point) => OpenWorldGameMode.BeginMoveTo(entity, point);
             _entityManager = new EntityManager(moveDelegate);
-            var gameModeController = new GameModeController()
+            var gameModeController = new GameModeController
             {
                 PushGameModeDelegate = mode => GameModes.Push(mode),
                 PopGameModeDelegate = () => GameModes.Pop()
@@ -40,7 +40,8 @@ namespace Demos.TopDownRpg
 
         public void LoadOpenWorld(string levelName)
         {
-            _possibleMovements = new PossibleMovementWrapper(new EightWayPossibleMovement(new CrowDistance()));
+            var possibleMovements = StaticServiceLocator.GetService<IPossibleMovements>();
+            _possibleMovements = new PossibleMovementWrapper(possibleMovements);
             OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, PlayerEntity.Instance, levelName , new EntityControllerFactory(), _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
             var player = OpenWorldGameMode.PlayerEntity;
