@@ -205,11 +205,9 @@ namespace Demos.TopDownRpg.GameModes
                         var story = new GameFrameStory(fishScript);
                         if (fishComplete)
                         {
-                            var fishCount = GameFlags.GetVariable(Global.FishCountVariable, 0);
-                            fishCount++;
+                            Flags.FishCount++;
                             story.ChoosePathString("dialog");
-                            story.SetVariableState(Global.FishCountVariable, fishCount);
-                            GameFlags.SetVariable(Global.FishCountVariable, fishCount);
+                            story.SetVariableState("fish_count", Flags.FishCount);
                         }
                         story.Continue();
                         DialogBox.StartStory(story);

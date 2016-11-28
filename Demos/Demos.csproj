@@ -64,6 +64,7 @@
     <Compile Include="TopDownRpg\Entities\NpcEntity.cs" />
     <Compile Include="TopDownRpg\Entities\PlayerEntity.cs" />
     <Compile Include="TopDownRpg\Entities\Princess.cs" />
+    <Compile Include="TopDownRpg\Entities\PrincessKidnapped.cs" />
     <Compile Include="TopDownRpg\Entities\PrincessPreKidnapping.cs" />
     <Compile Include="TopDownRpg\Entities\SwitchNpcEntity.cs" />
     <Compile Include="TopDownRpg\Entities\SwordBlocker.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="TopDownRpg\GameModes\BattleEntityRenderer.cs" />
     <Compile Include="TopDownRpg\GameModes\BattleStoryBoxDialog.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
-    <Compile Include="TopDownRpg\Global.cs" />
+    <Compile Include="TopDownRpg\Flags.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedGrass.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />

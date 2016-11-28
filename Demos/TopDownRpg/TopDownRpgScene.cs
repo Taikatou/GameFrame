@@ -90,9 +90,10 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(5,5)
+                Position = new Vector2(15,15)
             };
-            LoadOpenWorld("player_home");
+            Flags.PrincessKidnapped = true;
+            LoadOpenWorld("north_desert_hideout_second_floor");
         }
 
         public override void Draw(GameTime gameTime)

@@ -7,7 +7,6 @@ namespace Demos.TopDownRpg.Entities
         public override GameFrameStory StoryScript => ReadStory("master_pre_learn_fight.ink");
         public override GameFrameStory CompleteScript => ReadStory("master_complete.ink");
         public string GaveFishVariable => "give_fish";
-        public bool PrincessKidnapped => GameFlags.GetVariable<bool>("princess_kidnapped");
         public bool GaveFish;
 
 
@@ -20,7 +19,7 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            if (PrincessKidnapped)
+            if (Flags.PrincessKidnapped)
             {
                 if (GaveFish)
                 {
@@ -29,9 +28,9 @@ namespace Demos.TopDownRpg.Entities
                 else
                 {
                     GameStory = ReadStory("master_pre_fishes.ink");
-                    var fishCount = GameFlags.GetVariable(Global.FishCountVariable, 0);
+                    var fishCount = Flags.FishCount;
                     GameStory.ChoosePathString("dialog");
-                    GameStory.SetVariableState(Global.FishCountVariable, fishCount);
+                    GameStory.SetVariableState("fish_count", fishCount);
                 }
             }
             else
@@ -43,7 +42,7 @@ namespace Demos.TopDownRpg.Entities
 
         public override void CompleteInteract()
         {
-            if (PrincessKidnapped)
+            if (Flags.PrincessKidnapped)
             {
                 if (GaveFish)
                 {
@@ -60,8 +59,7 @@ namespace Demos.TopDownRpg.Entities
                     if (GaveFish)
                     {
                         GameFlags.SetVariable(GaveFishVariable, GaveFish);
-                        var fishCount = GameFlags.GetVariable<int>(Global.FishCountVariable);
-                        GameFlags.SetVariable(Global.FishCountVariable, fishCount - 3);
+                        Flags.FishCount -= 3;
                     }
                 }
             }

@@ -21,8 +21,7 @@ namespace Demos.TopDownRpg
             {
                 ["west_forest_west_entrance"] = (addEntity, removeEntity) =>
                 {
-                    var princessKidnapped = GameFlags.GetVariable<bool>("princess_kidnapped");
-                    if (!princessKidnapped)
+                    if (!Flags.PrincessKidnapped)
                     {
                         var guard = new FakeGuardEntity {Position = new Vector2(14, 8), MoveDelegate = _moveDelegate};
                         var princess = new PrincessPreKidnapping(guard, removeEntity)
@@ -57,16 +56,25 @@ namespace Demos.TopDownRpg
                 },
                 ["north_desert_hideout_second_floor"] = (addEntity, removeEntity) =>
                 {
-                    var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
+                    if (Flags.PrincessKidnapped)
                     {
-                        MoveDelegate = moveDelegate
-                    };
-                    addEntity.Invoke(hideoutGuard);
-                    var secondHideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "forth_guard_defeated", new Vector2(18, 12), new Vector2(17, 15))
-                    {
-                        MoveDelegate = moveDelegate
-                    };
-                    addEntity.Invoke(secondHideoutGuard);
+                        var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
+                        {
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(hideoutGuard);
+                        var secondHideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "forth_guard_defeated", new Vector2(18, 12), new Vector2(17, 15))
+                        {
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(secondHideoutGuard);
+                        var princess = new PrincessKidnapped
+                        {
+                            Position = new Vector2(13, 15),
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(princess);
+                    }
                 }
             };
 
