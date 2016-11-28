@@ -90,10 +90,9 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(9,27)
+                Position = new Vector2(5,5)
             };
-            GameFlags.SetVariable("learned_fight", true);
-            LoadOpenWorld("northern_desert");
+            LoadOpenWorld("player_home");
         }
 
         public override void Draw(GameTime gameTime)

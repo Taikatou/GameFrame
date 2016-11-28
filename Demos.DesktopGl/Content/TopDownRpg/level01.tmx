@@ -90,7 +90,7 @@
  </layer>
  <layer name="details" width="42" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmUtuwjAURe1hgW20QOkmSPnN6T7KJpAojKBdQCt+e2AG7IE5LKEr6K2UgQXBBue+EAlf6SiyiV5OYpw4ilL3k6kgfctxu+CNfjZ+mVt+ewe9rEQcsXnmKRKeH1qpIRhpTlvKc476C7DUnLaU5xr1N2CrOW0pT4kET25MzwGppvR8Z3lKz3eWp/R8Z3lKJHhy4+v5AAqgCEpUo+T4ej6CJ1AGFaLPHnPnoE/7fT3rIAKvoJHi+P+5ZGzy8P+8ZGxu8dw8vrbnxsbc756f7xIJnu4k3QPY96WsEzy5CZ7cBE9u8uhZBc+gBl7ivjx6NkELtEEn7rN5Sq2FfWLzvHYtLBnXuK+yEnHE5bm7olYd64fozLtF2iR5jo2+33g7AZ/gS0bDGdPzW6X7djIzarG/y/wQzzmL/AH4dqFe
+   eJztmc1twjAYhu0jtGsALWWJQH+4wx50iUrQnvozQKuWsgO3lh24wwhMwIuUg9UmdmK/X4iEX+lRZCdxnsRx4ihKnU4+BXmwHHcExvSz8cvcsm4C7qsSccTmWadIeM60Uo/gSXPKUp5ztP8NFppTlvL8Qfu/YKU5ZSlPiURPbkzPKalN6fHO8pQe7yxP6fHO8pRI9OTG17MBmuAMnFONsuPr2QJt0AEXRJ8Nxs5W/6/39UxAHwzAdcDxDynSN3W4P4v0zTHem3+vbV7fmNud8vtdItHTnaxnAPu5VHWiJzfRk5voyU0dPS9BF1yBXlpXR88bcAvuwDCts3lKzYV9YvMsOxeWjKvfl1WJOOLyXJdoK8H8oZ/zbRGaLM9no26XLl/AK3iT0XDG9HxXYf9OvgL3t/FBP3PZ7AFGOKKk
   </data>
  </layer>
  <layer name="above-details" width="42" height="42">
@@ -100,7 +100,7 @@
  </layer>
  <layer name="Collision-Layer" width="42" height="42" visible="0" opacity="0.75">
   <data encoding="base64" compression="zlib">
-   eJztmWFuwjAMhR2x/xwE2MQp0HoNDoLEjjEJdg8OwkG4wBppFpZxSOI6NZ36pCeRNrRfmtrEZB0A1k7e9H7v/VHQ7wIA27dh/gxtHRmRkwrPU/E+ueNWasHZhbst2jnOGv1HzuMC4OvPUT+L+zGp7cnJuU69z4m2F+dJ4EJL7VacLTTVOMoZnvQbi5PnytQzyz13/n5JcVPTRs6rA+ez+E7F+60xZ218p+J9Gco4PRXZVhPh3E2Ec6/gpLmjMxxf6no1eYl/j1p7f64zi3MLTsqrvX9UydxoOYdI+q2R5ob2o5xjiT/b1NzQfh6cGnnMu0aenFLcWOclC0k5wDovja2Z01Yzp61mTr2kdckrckrrEuS8wiNnq7VwCSflxc+R8fZCnJKwLl4K613+/4SnsC5eEU4tU8vxYF28y3B2BWMorUE0wrp4z95ZqV/q3BjCuvgQHvOBxvS61o6MNftNuf2qoftdqT2w796/RnbSpg==
+   eJztmWFuwjAMhR2x/xwE2MQp0HoNDoLEjjEJdg8OwkG4wBppFpZxSOI6NZ36pCeR1rRfmtokZB0A1k7e9H7v/VEQdwGA7dswf4a2jozISYXnqXhM7riVWnB24W6Ldo6zRv+R87gA+Ppz1M/ifkxqe3JyrlPvc6LtxXkSuNBSuxVnC001j3KGJ3FjcfJamXpmuefO3y8pb2rayHl14HyW36l8vzXmrM3vVL4vQxmnpyLbaiKcu4lw7hWctHZ0hv1LXa+mLvHvUWvvz3VmeW7BSXm1948qGRst5xBJvzXS2NA4yjmW+LNNjQ2N8+DUyGPcNfLklPLGui5ZSKoB1nVpbM2ctpo5bTVz6iXNS16RU5qXIOcVHjlbzYVLOCkvfo6MtxfilITr4qUw3+X/T3gK18UrwqllatkfXBfvMpxdQR9K1yAa4bp4z95ZKS51bgzhuvgQHuuBxjj2Ftfijow1+025/aqh+12pPbDv3r/f+NM8
   </data>
  </layer>
  <layer name="Grass-Layer" width="42" height="42">

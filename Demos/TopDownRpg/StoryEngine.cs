@@ -57,7 +57,7 @@ namespace Demos.TopDownRpg
                 },
                 ["north_desert_hideout_second_floor"] = (addEntity, removeEntity) =>
                 {
-                    var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
+                    var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
                     {
                         MoveDelegate = moveDelegate
                     };
