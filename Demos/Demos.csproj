@@ -72,6 +72,7 @@
     <Compile Include="TopDownRpg\Entities\VillagerEntity.cs" />
     <Compile Include="TopDownRpg\Entity.cs" />
     <Compile Include="TopDownRpg\Entities\EntityManager.cs" />
+    <Compile Include="TopDownRpg\AbstractEntityRenderer.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\EntityStoryBoxDialog.cs" />
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="TopDownRpg\GameModes\BattleStoryBoxDialog.cs" />
     <Compile Include="TopDownRpg\GameModes\OpenWorldGameMode.cs" />
     <Compile Include="TopDownRpg\Flags.cs" />
+    <Compile Include="TopDownRpg\PlayerEntityRenderer.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedContext.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedGrass.cs" />
     <Compile Include="TopDownRpg\SpeedState\SpeedNormal.cs" />

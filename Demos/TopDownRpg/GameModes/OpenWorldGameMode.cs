@@ -36,30 +36,29 @@ namespace Demos.TopDownRpg.GameModes
         public AbstractCollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private readonly IPossibleMovements _possibleMovements;
-        public Entity PlayerEntity;
-        public Dictionary<Entity, EntityRenderer> EntityRenderersDict;
+        public Dictionary<Entity, AbstractEntityRenderer> EntityRenderersDict;
         public List<IRenderable> RenderList;
         private readonly ExpiringSpatialHashCollisionSystem<Entity> _expiringSpatialHash;
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
+        public Entity PlayerEntity => Entities.PlayerEntity.Instance;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, Entity playerEntity, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
         {
             _entityManager = entityManager;
-            EntityRenderersDict = new Dictionary<Entity, EntityRenderer>();
+            EntityRenderersDict = new Dictionary<Entity, AbstractEntityRenderer>();
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
             RenderList = new List<IRenderable>();
             Camera = new Camera2D(viewPort) { Zoom = 2.0f };
             Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
-            PlayerEntity = playerEntity;
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
-            AddEntity(PlayerEntity);
+            AddPlayer();
             var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
@@ -81,7 +80,8 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
             {
-                var interactTarget = (PlayerEntity.Position + PlayerEntity.FacingDirection).ToPoint();
+                var facingDirection = PlayerEntity.FacingDirection;
+                var interactTarget = (PlayerEntity.Position + facingDirection).ToPoint();
                 Interact(interactTarget);
             };
             AddInteractionController();
@@ -110,6 +110,15 @@ namespace Demos.TopDownRpg.GameModes
             RenderList.Remove(entityRenderer);
             EntityRenderersDict.Remove(entity);
             _spatialHashMover.Remove(entity);
+        }
+
+        public void AddPlayer()
+        {
+            var entityRenderer = new PlayerEntityRenderer(_content, _expiringSpatialHash, PlayerEntity, _tileSize.ToPoint());
+            _expiringSpatialHash.AddNode(PlayerEntity.Position.ToPoint(), PlayerEntity);
+            RenderList.Add(entityRenderer);
+            EntityRenderersDict[PlayerEntity] = entityRenderer;
+            _spatialHashMover.Add(PlayerEntity);
         }
 
         public void AddEntity(Entity entity)
