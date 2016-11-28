@@ -13,5 +13,17 @@
             get { return GameFlags.GetVariable<bool>("princess_kidnapped"); }
             set { GameFlags.SetVariable("princess_kidnapped", value); }
         }
+
+        public static bool MasterDefeated
+        {
+            get { return GameFlags.GetVariable<bool>("master_defeated"); }
+            set { GameFlags.SetVariable("master_defeated", value); }
+        }
+
+        public static bool GameComplete
+        {
+            get { return GameFlags.GetVariable<bool>("game_complete"); }
+            set { GameFlags.SetVariable("game_complete", value); }
+        }
     }
 }

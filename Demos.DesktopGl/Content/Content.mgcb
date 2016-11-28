@@ -313,3 +313,13 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/north_desert_hideout_second_floor.tmx
 
+#begin TopDownRpg/hidden_lake.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/hidden_lake.tmx
+
+#begin TopDownRpg/perfect_house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/perfect_house.tmx
+

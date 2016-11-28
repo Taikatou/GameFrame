@@ -7,6 +7,7 @@ namespace Demos.TopDownRpg.Entities
 {
     public class DojoMasterHideout : AbsractBattleEntity
     {
+        private GameFrameStory _gameStory;
         public DojoMasterHideout(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
         {
             Name = "Dojo Master";
@@ -14,13 +15,25 @@ namespace Demos.TopDownRpg.Entities
         }
         public override GameFrameStory Interact()
         {
-            var story = ReadStory("dojo_master_hideout.ink");
-            CompleteEvent completeEvent = win =>
+            if (!Flags.MasterDefeated)
             {
+                _gameStory = ReadStory("dojo_master_hideout.ink");
+                CompleteEvent completeEvent = win =>
+                {
+                    Flags.MasterDefeated = true;
+                };
+                ReadStory(_gameStory, completeEvent);
+            }
+            else
+            {
+                _gameStory = ReadStory("dojo_master_defeated.ink");
+            }
+            return _gameStory;
+        }
 
-            };
-            ReadStory(story, completeEvent);
-            return story;
+        public override void CompleteInteract()
+        {
+            
         }
     }
 }

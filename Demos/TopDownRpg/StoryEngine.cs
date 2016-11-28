@@ -6,20 +6,22 @@ using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg
 {
-    public delegate void StoryEvent(AddEntity addEntity, RemoveEntity removeEntity);
+    public delegate void StoryEvent(AddEntity addEntity, RemoveEntity removeEntity, Say sayDelegate);
     public class StoryEngine
     {
         private readonly Dictionary<string, StoryEvent> _worldLoadEvents;
         private readonly Move _moveDelegate;
+        private readonly Teleport _teleport;
+        private readonly Say _say;
 
-        private readonly EntityManager _entityManager;
-        public StoryEngine(GameModeController gameModeController, Move moveDelegate, EntityManager entityManager)
+        public StoryEngine(GameModeController gameModeController, Move moveDelegate, Teleport teleport, Say say)
         {
+            _teleport = teleport;
+            _say = say;
             _moveDelegate = moveDelegate;
-            _entityManager = entityManager;
             _worldLoadEvents = new Dictionary<string, StoryEvent>
             {
-                ["west_forest_west_entrance"] = (addEntity, removeEntity) =>
+                ["west_forest_west_entrance"] = (addEntity, removeEntity, sayDelegate) =>
                 {
                     if (!Flags.PrincessKidnapped)
                     {
@@ -33,7 +35,7 @@ namespace Demos.TopDownRpg
                         addEntity.Invoke(guard);
                     }
                 },
-                ["west_forest"] = (addEntity, removeEntity) =>
+                ["west_forest"] = (addEntity, removeEntity, sayDelegate) =>
                 {
                     var swordBlocker = new SwordBlocker("sword_blocker_moved", new Vector2(2, 21), new Vector2(2, 20))
                     {
@@ -41,22 +43,25 @@ namespace Demos.TopDownRpg
                     };
                     addEntity.Invoke(swordBlocker);
                 },
-                ["northern_desert"] = (addEntity, removeEntity) =>
+                ["northern_desert"] = (addEntity, removeEntity, sayDelegate) =>
                 {
-                    var guard = new NorthDesertGuard(gameModeController, "first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
+                    if (!Flags.GameComplete)
                     {
-                        MoveDelegate = moveDelegate
-                    };
-                    addEntity.Invoke(guard);
-                    var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5))
-                    {
-                        MoveDelegate = moveDelegate
-                    };
-                    addEntity.Invoke(hideoutGuard);
+                        var guard = new NorthDesertGuard(gameModeController, "first_guard_defeated", new Vector2(23, 35), new Vector2(24, 35))
+                        {
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(guard);
+                        var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5))
+                        {
+                            MoveDelegate = moveDelegate
+                        };
+                        addEntity.Invoke(hideoutGuard);
+                    }
                 },
-                ["north_desert_hideout_second_floor"] = (addEntity, removeEntity) =>
+                ["north_desert_hideout_second_floor"] = (addEntity, removeEntity, sayDelegate) =>
                 {
-                    if (Flags.PrincessKidnapped)
+                    if (Flags.PrincessKidnapped && !Flags.GameComplete)
                     {
                         var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15))
                         {
@@ -68,7 +73,7 @@ namespace Demos.TopDownRpg
                             MoveDelegate = moveDelegate
                         };
                         addEntity.Invoke(secondHideoutGuard);
-                        var princess = new PrincessKidnapped
+                        var princess = new PrincessKidnapped(teleport, sayDelegate)
                         {
                             Position = new Vector2(13, 15),
                             MoveDelegate = moveDelegate
@@ -80,6 +85,17 @@ namespace Demos.TopDownRpg
                         };
                         addEntity.Invoke(dojoMaster);
                     }
+                },
+                ["perfect_house"] = (addEntity, removeEntity, sayDelegate) =>
+                {
+                    if (Flags.GameComplete)
+                    {
+                        var princess = new PrincessSafe
+                        {
+                            Position = new Vector2(7, 7)
+                        };
+                        addEntity.Invoke(princess);
+                    }
                 }
             };
 
@@ -89,7 +105,7 @@ namespace Demos.TopDownRpg
         {
             if (_worldLoadEvents.ContainsKey(worldName))
             {
-                _worldLoadEvents[worldName]?.Invoke(addEntity, removeEntity);
+                _worldLoadEvents[worldName]?.Invoke(addEntity, removeEntity, _say);
             }
         }
     }

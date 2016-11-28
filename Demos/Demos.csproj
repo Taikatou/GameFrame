@@ -67,6 +67,7 @@
     <Compile Include="TopDownRpg\Entities\Princess.cs" />
     <Compile Include="TopDownRpg\Entities\PrincessKidnapped.cs" />
     <Compile Include="TopDownRpg\Entities\PrincessPreKidnapping.cs" />
+    <Compile Include="TopDownRpg\Entities\PrincessSafe.cs" />
     <Compile Include="TopDownRpg\Entities\SwitchNpcEntity.cs" />
     <Compile Include="TopDownRpg\Entities\SwordBlocker.cs" />
     <Compile Include="TopDownRpg\Entities\VillagerEntity.cs" />

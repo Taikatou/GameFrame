@@ -22,6 +22,9 @@ However I don't think you are happy with that
 
 ===final_battle===
 {battle("final_battle.ink")}
+Gasp, how could you.
+I believed what I was doing what was right.
+You find one key on the floor.
 - ->DONE
 
 === function battle(scriptName) ===

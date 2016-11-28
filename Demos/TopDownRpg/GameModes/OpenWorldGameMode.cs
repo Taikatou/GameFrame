@@ -27,6 +27,9 @@ namespace Demos.TopDownRpg.GameModes
     public delegate void AddEntity(Entity entity);
 
     public delegate void RemoveEntity(Entity entity);
+
+    public delegate void Say(GameFrameStory story);
+
     public class OpenWorldGameMode : AbstractRpgGameMode
     {
         public TiledMap Map;
@@ -74,9 +77,9 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(_moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
-            storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(dialogFont);
+            storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
             {

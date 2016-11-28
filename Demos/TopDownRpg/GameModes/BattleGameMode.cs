@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Demos.TopDownRpg.Entities;
 using GameFrame.Content;
 using GameFrame.Ink;
@@ -36,8 +35,8 @@ namespace Demos.TopDownRpg.GameModes
             };
             UpdateList.Add(DialogBox);
             var rectangle = new Rectangle(new Point(), new Point(16,16));
-            var enemyEntity = new BattleEntityRenderer(new Rectangle(new Point(600, 50), new Point(160, 160)), rectangle, battleWith, _content);
-            var playerEntity = new BattleEntityRenderer(new Rectangle(new Point(50, 200), new Point(160, 160)), rectangle, PlayerEntity.Instance, _content);
+            var enemyEntity = new BattleEntityRenderer(new Rectangle(new Point(600, 300), new Point(160, 160)), rectangle, battleWith, _content);
+            var playerEntity = new BattleEntityRenderer(new Rectangle(new Point(50, 300), new Point(160, 160)), rectangle, PlayerEntity.Instance, _content);
             EntityList = new List<BattleEntityRenderer> { enemyEntity, playerEntity };
             AddInteractionController();
             var boundingRectangle = Camera.GetBoundingRectangle();

@@ -14,6 +14,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
 {
+    public delegate void Teleport(string worldName);
     public class TopDownRpgScene : DemoScreen
     {
         private readonly SpriteBatch _spriteBatch;
@@ -35,7 +36,8 @@ namespace Demos.TopDownRpg
                 PushGameModeDelegate = mode => GameModes.Push(mode),
                 PopGameModeDelegate = () => GameModes.Pop()
             };
-            _storyEngine = new StoryEngine(gameModeController, moveDelegate, _entityManager);
+            Say say = story => OpenWorldGameMode.DialogBox.StartStory(story);
+            _storyEngine = new StoryEngine(gameModeController, moveDelegate, LoadOpenWorld, say);
         }
 
         public void LoadOpenWorld(string levelName)
@@ -95,6 +97,7 @@ namespace Demos.TopDownRpg
             };
             Flags.PrincessKidnapped = true;
             LoadOpenWorld("north_desert_hideout_second_floor");
+            Flags.MasterDefeated = true;
         }
 
         public override void Draw(GameTime gameTime)

@@ -5,6 +5,7 @@ This is a fight between men petty words will be left out of this.
 The dojo master attacks you arm what do you do?
 ->standard_options
 The dojo master lies defeated on the ground.
+You find a key on the floor.
 ~ victory = true
 - ->END
 
