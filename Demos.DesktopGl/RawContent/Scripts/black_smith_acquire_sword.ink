@@ -1,2 +1,2 @@
-Here is your sword
+Here is your sword.
 - ->END
