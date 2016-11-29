@@ -100,7 +100,7 @@
   <object id="4" name="west_forest_west_entrance" type="10, 0" x="48" y="640" width="16" height="16"/>
   <object id="5" name="west_forest_west_entrance" type="12, 0" x="80" y="640" width="16" height="16"/>
   <object id="6" name="northern_desert_master_house" type="8, 11" x="96" y="560" width="16" height="16"/>
-  <object id="7" name="north_desert_farm" x="176" y="384" width="16" height="16"/>
+  <object id="7" name="northern_desert_farm" type="7, 10" x="176" y="384" width="16" height="16"/>
   <object id="8" name="north_desert_house" type="6, 10" x="592" y="288" width="16" height="16"/>
   <object id="9" name="north_desert_hideout" type="7, 10" x="64" y="64" width="16" height="16"/>
  </objectgroup>

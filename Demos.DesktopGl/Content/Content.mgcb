@@ -323,3 +323,8 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/perfect_house.tmx
 
+#begin TopDownRpg/northern_desert_farm.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/northern_desert_farm.tmx
+

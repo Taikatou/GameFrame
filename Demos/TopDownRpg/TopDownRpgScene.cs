@@ -93,9 +93,9 @@ namespace Demos.TopDownRpg
             {
                 Name ="Player",
                 SpriteSheet = "Character",
-                Position = new Vector2(5,5)
+                Position = new Vector2(21,21)
             };
-            LoadOpenWorld("west_forest");
+            LoadOpenWorld("northern_desert");
         }
 
         public override void Draw(GameTime gameTime)
