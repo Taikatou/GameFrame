@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrame.Tests", "GameFram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.Droid", "Demos.Droid\Demos.Droid.csproj", "{B8537D51-9877-46B3-80F1-55B3E6DF52A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCreatePokemon", "LetsCreatePokemon\LetsCreatePokemon.csproj", "{BD1F4549-5F92-4A3A-9831-6E7864B207D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.UWP", "LetsCreatePokemon\Demos.UWP.csproj", "{BD1F4549-5F92-4A3A-9831-6E7864B207D3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

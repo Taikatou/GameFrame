@@ -8,8 +8,8 @@
     <ProjectGuid>{BD1F4549-5F92-4A3A-9831-6E7864B207D3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LetsCreatePokemon</RootNamespace>
-    <AssemblyName>LetsCreatePokemon</AssemblyName>
+    <RootNamespace>Demos.UWP</RootNamespace>
+    <AssemblyName>Demos.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
