@@ -1,13 +1,13 @@
 ﻿using System;
 using GameFrame.Ink;
-using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.BitmapFonts;
 
 namespace Demos.TopDownRpg.GameModes
 {
     public class BattleStoryBoxDialog : StoryDialogBox
     {
         public EventHandler CompleteEvent;
-        public BattleStoryBoxDialog(SpriteFont font) : base(font)
+        public BattleStoryBoxDialog(BitmapFont font) : base(font)
         {
         }
 

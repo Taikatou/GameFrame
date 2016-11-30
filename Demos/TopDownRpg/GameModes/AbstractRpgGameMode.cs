@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Demos.TopDownRpg.Entities;
 using GameFrame;
-using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
@@ -10,7 +8,6 @@ using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Ink;
-using GameFrame.Movers;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

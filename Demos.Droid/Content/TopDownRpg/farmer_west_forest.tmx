@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="3">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
+  <image source="tileset.png" width="448" height="640"/>
+ </tileset>
+ <layer name="details" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,841,842,842,842,842,842,842,846,0,
+0,897,870,871,871,871,871,873,874,0,
+0,897,898,899,899,899,899,901,874,0,
+0,897,898,899,899,899,899,901,902,0,
+0,925,926,927,927,927,928,929,930,0,
+0,953,954,954,954,955,956,957,958,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="above-details" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,1037,0,0,0,1050,1051,0,0,
+0,0,1065,0,0,0,1078,1079,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,1093,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="Collision-Layer" width="10" height="10" visible="0" opacity="0.5">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,330,330,330,330,330,330,330,330,0,
+0,330,330,0,0,0,330,330,330,0,
+0,330,0,0,0,0,0,0,330,0,
+0,330,0,0,0,0,0,0,330,0,
+0,330,330,0,0,0,0,0,330,0,
+0,330,330,330,330,330,0,330,330,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="Teleport-Layer">
+  <object id="1" name="west_forest" type="9, 17" x="96" y="128" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Entity-Layer">
+  <object id="2" name="west_forest_farmer" type="1, 0" x="64" y="64" width="16" height="16"/>
+ </objectgroup>
+</map>

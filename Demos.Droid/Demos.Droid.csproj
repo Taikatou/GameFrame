@@ -86,10 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <AndroidAsset Include="Assets\Entities\test.json">
+    <AndroidAsset Include="Assets\Entities\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
-    <AndroidAsset Include="Assets\Scripts\hello.ink.json">
+    <AndroidAsset Include="Assets\Scripts\*.ink.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
     <None Include="packages.config" />
@@ -103,6 +103,7 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Scripts\" />
     <Folder Include="Resources\Layout\" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg.GameModes
@@ -28,7 +29,7 @@ namespace Demos.TopDownRpg.GameModes
             Camera = new Camera2D(viewPort) { Zoom = 1.0f };
             _content = ContentManagerFactory.RequestContentManager();
             _backgroundTexture = _content.Load<Texture2D>($"TopDownRpg/hills");
-            var dialogFont = _content.Load<SpriteFont>("dialog");
+            var dialogFont = StaticServiceLocator.GetService<BitmapFont>();
             DialogBox = new BattleStoryBoxDialog(dialogFont)
             {
                 CompleteEvent = (sender, args) => Complete()
@@ -70,7 +71,7 @@ namespace Demos.TopDownRpg.GameModes
                 entity.Draw(spriteBatch);
             }
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch);
+            DialogBox.Draw(spriteBatch, Camera);
         }
 
         public override void Dispose()

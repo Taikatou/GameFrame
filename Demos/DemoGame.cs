@@ -7,6 +7,7 @@ using GameFrame;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.ViewportAdapters;
 
@@ -18,9 +19,11 @@ namespace Demos
         private SpriteBatch _spriteBatch;
         private readonly ScreenComponent _screenComponent;
         private TopDownRpgScene _rpgScene;
+        public string FontName;
 
-        public DemoGame()
+        public DemoGame(string fontName)
         {
+            FontName = fontName;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -32,6 +35,8 @@ namespace Demos
             base.LoadContent();
             StaticServiceLocator.AddService(GraphicsDevice);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            var font = Content.Load<BitmapFont>(FontName);
+            StaticServiceLocator.AddService(font);
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             _rpgScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
             StaticServiceLocator.AddService(viewportAdapter);

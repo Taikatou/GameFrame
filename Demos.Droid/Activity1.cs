@@ -6,6 +6,8 @@ using Android.Views;
 using Demos.MobileShared;
 using GameFrame.Controllers;
 using GameFrame.Ink;
+using GameFrame.PathFinding.Heuristics;
+using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
 using GameFrame.TextToSpeech;
@@ -29,7 +31,8 @@ namespace Demos.Droid
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
             StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
             StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor() });
-            var g = new DemoGame();
+            StaticServiceLocator.AddService<IPossibleMovements>(new EightWayPossibleMovement(new CrowDistance()));
+            var g = new DemoGame("montserrat-32");
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
         }

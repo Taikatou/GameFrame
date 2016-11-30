@@ -15,10 +15,12 @@ using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
@@ -77,7 +79,7 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(_moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
-            var dialogFont = _content.Load<SpriteFont>("dialog");
+            var dialogFont = StaticServiceLocator.GetService<BitmapFont>();
             DialogBox = new EntityStoryBoxDialog(dialogFont);
             storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             UpdateList.Add(DialogBox);
@@ -269,7 +271,7 @@ namespace Demos.TopDownRpg.GameModes
             }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch);
+            DialogBox.Draw(spriteBatch, Camera);
         }
 
         public override void Dispose()

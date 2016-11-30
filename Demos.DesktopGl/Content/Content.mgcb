@@ -328,3 +328,20 @@
 /processor:TiledMapProcessor
 /build:TopDownRpg/northern_desert_farm.tmx
 
+#begin courier-new-16.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:courier-new-16.fnt
+
+#begin courier-new-16_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:courier-new-16_0.png
+

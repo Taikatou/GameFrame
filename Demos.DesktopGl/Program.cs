@@ -17,7 +17,7 @@ namespace Demos.DesktopGl
             StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
             StaticServiceLocator.AddService<IPossibleMovements>(new FourWayPossibleMovement());
 
-            using (var game = new DemoGame())
+            using (var game = new DemoGame("courier-new-16"))
             {
                 game.Run();
             }
