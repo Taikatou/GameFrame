@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demos.Droid</RootNamespace>
-    <AssemblyName>Demos.Droid</AssemblyName>
+    <AssemblyName>Ninja Adventure</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -100,10 +100,6 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Scripts\" />
     <Folder Include="Resources\Layout\" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PluginsHelp\SettingsReadme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\icon.png" />
   </ItemGroup>
   <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

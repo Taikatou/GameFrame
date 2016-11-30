@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using GameFrame.Content;
 using GameFrame.Ink;
@@ -29,8 +30,8 @@ namespace Demos.TopDownRpg.GameModes
             Camera = new Camera2D(viewPort) { Zoom = 1.0f };
             _content = ContentManagerFactory.RequestContentManager();
             _backgroundTexture = _content.Load<Texture2D>($"TopDownRpg/hills");
-            var dialogFont = StaticServiceLocator.GetService<BitmapFont>();
-            DialogBox = new BattleStoryBoxDialog(dialogFont)
+            var dialogFont = _content.Load<SpriteFont>("dialog");
+            DialogBox = new BattleStoryBoxDialog(ScreenSize.Size, dialogFont)
             {
                 CompleteEvent = (sender, args) => Complete()
             };
@@ -71,7 +72,7 @@ namespace Demos.TopDownRpg.GameModes
                 entity.Draw(spriteBatch);
             }
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch, Camera);
+            DialogBox.Draw(spriteBatch);
         }
 
         public override void Dispose()

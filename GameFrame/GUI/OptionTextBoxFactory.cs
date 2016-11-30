@@ -2,15 +2,15 @@
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace GameFrame.GUI
 {
     public class OptionTextBoxFactory
     {
-        public static void LineTextBoxes(List<OptionTextBox> options)
+        public static void LineTextBoxes(List<OptionTextBox> options, Size size)
         {
-            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
-            var centerScreen = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
+            var centerScreen = new Vector2(size.Width / 2f, size.Height / 2f);
             for(var i = 0; i < options.Count; i++)
             {
                 var option = options[i];

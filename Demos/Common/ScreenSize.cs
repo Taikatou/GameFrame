@@ -1,8 +1,11 @@
-﻿namespace Demos.Common
+﻿using MonoGame.Extended;
+
+namespace Demos.Common
 {
     public class ScreenSize
     {
-        public static int Width => 800;
-        public static int Height => 480;
+        public static int Width => Size.Width;
+        public static int Height => Size.Height;
+        public static Size Size = new Size(800, 480);
     }
 }

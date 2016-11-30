@@ -2,6 +2,7 @@
 using GameFrame.Ink;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Demos.TopDownRpg
 {
@@ -10,7 +11,7 @@ namespace Demos.TopDownRpg
         private Entity _interactingWith;
         private Vector2 _cachedPosition;
         private Entity _player => PlayerEntity.Instance;
-        public EntityStoryBoxDialog(SpriteFont font) : base(font)
+        public EntityStoryBoxDialog(Size screenSize, SpriteFont font) : base(screenSize, font)
         {
         }
 

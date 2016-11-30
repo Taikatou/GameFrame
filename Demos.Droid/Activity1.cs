@@ -32,7 +32,7 @@ namespace Demos.Droid
             StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
             StaticServiceLocator.AddService(new List<StoryInterceptor> { new TextToSpeechStoryInterceptor() });
             StaticServiceLocator.AddService<IPossibleMovements>(new EightWayPossibleMovement(new CrowDistance()));
-            var g = new DemoGame("montserrat-32");
+            var g = new DemoGame();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
         }

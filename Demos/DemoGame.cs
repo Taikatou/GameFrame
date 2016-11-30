@@ -19,11 +19,9 @@ namespace Demos
         private SpriteBatch _spriteBatch;
         private readonly ScreenComponent _screenComponent;
         private TopDownRpgScene _rpgScene;
-        public string FontName;
 
-        public DemoGame(string fontName)
+        public DemoGame()
         {
-            FontName = fontName;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -35,8 +33,6 @@ namespace Demos
             base.LoadContent();
             StaticServiceLocator.AddService(GraphicsDevice);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var font = Content.Load<BitmapFont>(FontName);
-            StaticServiceLocator.AddService(font);
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenSize.Width, ScreenSize.Height);
             _rpgScene = new TopDownRpgScene(viewportAdapter, _spriteBatch);
             StaticServiceLocator.AddService(viewportAdapter);

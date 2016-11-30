@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using GameFrame;
 using GameFrame.CollisionSystems;
@@ -79,8 +80,8 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(_moverManager);
             UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
-            var dialogFont = StaticServiceLocator.GetService<BitmapFont>();
-            DialogBox = new EntityStoryBoxDialog(dialogFont);
+            var dialogFont = _content.Load<SpriteFont>("dialog");
+            DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
             storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
@@ -271,7 +272,7 @@ namespace Demos.TopDownRpg.GameModes
             }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch, Camera);
+            DialogBox.Draw(spriteBatch);
         }
 
         public override void Dispose()

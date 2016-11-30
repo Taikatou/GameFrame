@@ -4,6 +4,7 @@ using GameFrame.GUI;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace GameFrame.Renderers
 {
@@ -13,19 +14,17 @@ namespace GameFrame.Renderers
         public override string TextToShow => Pages[CurrentPage];
         public Stopwatch Stopwatch;
 
-        public DialogBox(SpriteFont font, string text) : base(font)
+        public DialogBox(Size screenSize, SpriteFont font, string text) : base(screenSize, font)
         {
             Text = text;
-
-            var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
-            var centerScreen = new Vector2(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f);
+            var centerScreen = new Vector2(screenSize.Width / 2f, screenSize.Height / 2f);
             var posX = centerScreen.X - (Size.X / 2f);
-            var posY = graphicsDevice.Viewport.Height - Size.Y - 30;
+            var posY = screenSize.Height - Size.Y - 30;
             Position = new Vector2(posX, posY);
             FillColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, float scale = 1.0f)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
             if (Active)

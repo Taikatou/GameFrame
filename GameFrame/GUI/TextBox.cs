@@ -4,6 +4,8 @@ using System.Text;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.GUI
 {
@@ -61,7 +63,7 @@ namespace GameFrame.GUI
 
         private Vector2 TextPosition => new Vector2(Position.X + DialogBoxMargin / 2, Position.Y + DialogBoxMargin / 2);
 
-        public TextBox(SpriteFont font)
+        public TextBox(Size screensize, SpriteFont font)
         {
             Font = font;
             CharacterSize = font.MeasureString(new StringBuilder("W", 1));
@@ -76,9 +78,9 @@ namespace GameFrame.GUI
 
             _borderTexture = new Texture2D(graphicsDevice, 1, 1);
             _borderTexture.SetData(new[] { BorderColor });
-
-            var sizeX = (int)(graphicsDevice.Viewport.Width * 0.5);
-            var sizeY = (int)(graphicsDevice.Viewport.Height * 0.2);
+            var viewPort = StaticServiceLocator.GetService<BoxingViewportAdapter>();
+            var sizeX = (int)(screensize.Width * 0.5);
+            var sizeY = (int)(screensize.Height * 0.2);
 
             Size = new Vector2(sizeX, sizeY);
         }
@@ -102,7 +104,7 @@ namespace GameFrame.GUI
             Active = false;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, float scale=1.0f)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Active)
             {
@@ -117,7 +119,6 @@ namespace GameFrame.GUI
 
                 // Draw the current page onto the dialog box
                 spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor);
-                //spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor, 0.0f, new Vector2(), scale, SpriteEffects.None, 0.0f);
             }
         }
 

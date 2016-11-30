@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
@@ -25,9 +26,11 @@ namespace GameFrame.Ink
         private readonly SpriteFont _font;
         private GameFrameStory _activeStory;
         public StoryDialogBoxEvent DialogBoxEvent { get; set; }
+        public Size ScreenSize;
 
-        public StoryDialogBox(SpriteFont font)
+        public StoryDialogBox(Size screenSize, SpriteFont font)
         {
+            ScreenSize = screenSize;
             _font = font;
             _activeBoxes = new List<TextBox>();
             var graphicsDevice = StaticServiceLocator.GetService<BoxingViewportAdapter>();
@@ -73,12 +76,12 @@ namespace GameFrame.Ink
                 var choices = _activeStory.Choices;
                 for (var i = 0; i < choices.Count; i++)
                 {
-                    var option = new OptionTextBox(_font, i, choices[i]);
+                    var option = new OptionTextBox(ScreenSize, _font, i, choices[i]);
                     optionBoxes.Add(option);
                     option.Show();
                     option.InteractEvent += (sender, args) => ChooseOption(option);
                 }
-                OptionTextBoxFactory.LineTextBoxes(optionBoxes);
+                OptionTextBoxFactory.LineTextBoxes(optionBoxes, ScreenSize);
                 foreach (var option in optionBoxes)
                 {
                     _activeBoxes.Add(option);
@@ -103,9 +106,10 @@ namespace GameFrame.Ink
 
         public bool Interact(Point p)
         {
+            var point = _camera.ScreenToWorld(p.ToVector2());
             foreach (var textBox in _activeBoxes)
             {
-                var hit = textBox.TextRectangle.Contains(p);
+                var hit = textBox.TextRectangle.Contains(point);
                 var valid = hit && textBox.Active;
                 if (valid)
                 {
@@ -124,7 +128,14 @@ namespace GameFrame.Ink
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
                 foreach (var textBox in _activeBoxes)
                 {
-                    textBox.Draw(spriteBatch, _camera.Zoom);
+                    if (_camera.Contains(textBox.TextRectangle) != ContainmentType.Disjoint)
+                    {
+                        textBox.Draw(spriteBatch);
+                    }
+                    else
+                    {
+                        throw new Exception("I should not be here");
+                    }
                 }
                 spriteBatch.End();
             }
@@ -136,7 +147,7 @@ namespace GameFrame.Ink
             if (!_activeStory.Complete)
             {
                 var storyText = _activeStory.CurrentText;
-                var dialogBox = new DialogBox(_font, storyText);
+                var dialogBox = new DialogBox(ScreenSize, _font, storyText);
                 dialogBox.InteractEvent += (sender, args) =>
                 {
                     if (_activeStory.CanContinue)

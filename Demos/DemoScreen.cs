@@ -53,12 +53,13 @@ namespace Demos
                 CheckHit(gesture.Position);
             };
             _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
+            _clickController.AddSmartGesture(moveGesture);
         }
 
         public void CheckHit(Vector2 point)
         {
-            point = _camera.ScreenToWorld(point);
-            if (_backButton.Hit(point.ToPoint()))
+            var screenPoint = _camera.ScreenToWorld(point);
+            if (_backButton.Hit(screenPoint.ToPoint()))
             {
                 Action action = Show<MainMenuScreen>;
                 action.Invoke();

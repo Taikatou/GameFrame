@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Ink.Runtime;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace GameFrame.GUI
 {
@@ -10,7 +11,7 @@ namespace GameFrame.GUI
         public int OptionIndex;
         public Choice Choice;
 
-        public OptionTextBox(SpriteFont font, int optionIndex, Choice choice) : base(font)
+        public OptionTextBox(Size screenSize, SpriteFont font, int optionIndex, Choice choice) : base(screenSize, font)
         {
             Text = choice.text;
             OptionIndex = optionIndex;
