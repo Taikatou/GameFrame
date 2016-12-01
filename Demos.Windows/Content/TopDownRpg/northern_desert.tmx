@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="13">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
+  <image source="tileset.png" width="448" height="640"/>
+  <terraintypes>
+   <terrain name="snow" tile="553"/>
+   <terrain name="dirt" tile="385"/>
+   <terrain name="dirt temple" tile="390"/>
+   <terrain name="farm" tile="469"/>
+   <terrain name="dark farm" tile="474"/>
+  </terraintypes>
+  <tile id="354" terrain="1,1,1,"/>
+  <tile id="355" terrain="1,1,,1"/>
+  <tile id="356" terrain=",,,1"/>
+  <tile id="357" terrain=",,1,1"/>
+  <tile id="358" terrain=",,1,"/>
+  <tile id="359" terrain="2,2,2,"/>
+  <tile id="360" terrain="2,2,,2"/>
+  <tile id="361" terrain=",,,2"/>
+  <tile id="362" terrain=",,2,2"/>
+  <tile id="363" terrain=",,2,"/>
+  <tile id="382" terrain="1,,1,1"/>
+  <tile id="383" terrain=",1,1,1"/>
+  <tile id="384" terrain=",1,,1"/>
+  <tile id="385" terrain="1,1,1,1"/>
+  <tile id="386" terrain="1,,1,"/>
+  <tile id="387" terrain="2,,2,2"/>
+  <tile id="388" terrain=",2,2,2"/>
+  <tile id="389" terrain=",2,,2"/>
+  <tile id="390" terrain="2,2,2,2"/>
+  <tile id="391" terrain="2,,2,"/>
+  <tile id="412" terrain=",1,,"/>
+  <tile id="413" terrain="1,1,,"/>
+  <tile id="414" terrain="1,,,"/>
+  <tile id="417" terrain=",2,,"/>
+  <tile id="418" terrain="2,2,,"/>
+  <tile id="419" terrain="2,,,"/>
+  <tile id="438" terrain="3,3,3,"/>
+  <tile id="439" terrain="3,3,,3"/>
+  <tile id="440" terrain=",,,3"/>
+  <tile id="441" terrain=",,3,3"/>
+  <tile id="442" terrain=",,3,"/>
+  <tile id="443" terrain="4,4,4,"/>
+  <tile id="444" terrain="4,4,,4"/>
+  <tile id="445" terrain=",,,4"/>
+  <tile id="446" terrain=",,4,4"/>
+  <tile id="447" terrain=",,4,"/>
+  <tile id="466" terrain="3,,3,3"/>
+  <tile id="467" terrain=",3,3,3"/>
+  <tile id="468" terrain=",3,,3"/>
+  <tile id="469" terrain="3,3,3,3"/>
+  <tile id="470" terrain="3,,3,"/>
+  <tile id="471" terrain="4,,4,4"/>
+  <tile id="472" terrain=",4,4,4"/>
+  <tile id="473" terrain=",4,,4"/>
+  <tile id="474" terrain="4,4,4,4"/>
+  <tile id="475" terrain="4,,4,"/>
+  <tile id="496" terrain=",3,,"/>
+  <tile id="497" terrain="3,3,,"/>
+  <tile id="498" terrain="3,,,"/>
+  <tile id="501" terrain=",4,,"/>
+  <tile id="502" terrain="4,4,,"/>
+  <tile id="503" terrain="4,,,"/>
+  <tile id="522" terrain="0,0,0,"/>
+  <tile id="523" terrain="0,0,,0"/>
+  <tile id="524" terrain=",,,0"/>
+  <tile id="525" terrain=",,0,0"/>
+  <tile id="526" terrain=",,0,"/>
+  <tile id="550" terrain="0,,0,0"/>
+  <tile id="551" terrain=",0,0,0"/>
+  <tile id="552" terrain=",0,,0"/>
+  <tile id="553" terrain="0,0,0,0"/>
+  <tile id="554" terrain="0,,0,"/>
+  <tile id="580" terrain=",0,,"/>
+  <tile id="581" terrain="0,0,,"/>
+  <tile id="582" terrain="0,,,"/>
+ </tileset>
+ <layer name="tiles" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJzVmEuOm0AQho18OFjmfQFYRhPlBKBZRYkGsm+W2US+RCIl9wpW6pM/KliDo9kMUglMd1f9XY+/Cx8Oz+d6cTwcXj0irxd5syFvF2mrw6FfpCwyVJffZ+niPsd9iOc5ngeNMa+JewldXO8XW3ePyIdFPm/Ix+NfLCX0n+3WejbmOnAbZ6f57CsL16crGCxfrrx/CH+ebY6LfA27fdg+P0/xPMZ9ivlTjI+BZ0zziRHXtx04r8n34yXe2D2F3UY2u3g/Cm8tX84x9y72yt5v9ec1ebfIyyR1wjDJXyfhbOJ3o3H2Ov9n3G8RfGU8YAKH8xJ/eg+luuT9U+D8tcjPJJNwEOc2xXqO+DJehHmq1rX1FDgfjhdMs2qIOoJzqPO2unBPFznYax9wUat1T4UTveTXqLqgztuUs33yW6nWnNCqFrl+bMRur/w+rvOskR1wTIHrVK3rv4n6HsOvJ2Et0sNVQp/PE+JxnnsvX/jM6KUPHWApkX/YznXSVWt+wv/MAY/zs5Mu8glewP59yCBsjPs8gueJ8yQfgpk9jxobFAviQz5lf3Km4lMw4E/u8C/7AvMkW+gESy/7nAOntCbzP7XE5ffmLp6dA036PUi3+w1yArzo4lzHL+h07FrNM38O0tvLNj5tq7Wf7Peid96H/dJJ/6D1s8ZYl/dtf/Za67ygVsx7jvNWDJzbszB00uGaZQ3jYGWd89N7gbc66ff7RvqcQ+ZA7DCnSNz3Ubs+o2ybNcZZa06vueDCN+B1PrhXzP5yHqIz14M5r99Y4/z0HutqXZ/YBUfOI+emY9hJl33AHtFRkk7Ww21cPkvJc/xLLPFnvaHH3wzEm7mtxthTW63z1fVhjmTv5k9ql3HHJNdSqf71l2vJPa75Ifs27xN9+V0+j9Dtbyvi7LgaG3PxL5xgXPaPuZn9wH+udfdg5qVea+Zq7T/72nlsHnOP0MkOvjf3uxaNf9Bac7PPI+ehcZkTjbGVPfbkOJjf3dc4T82T9rnzzPyJ3kFjRe/yGWobOU7+bVs+53Le5DrAPxmna809hPX5PwP737FyvF3X7C/niM8ExyTniOPeScd9iin6HSP3A8btM8Zn6VYvCE6fvdSSucFxzxxLjvrM3dubOP9qre/0zmdlo3m8d70YZ5NsuL+kFvb2JvZn5m7P2fqfifn+bjbPZ242Z97amxiPOcL53UvsR/NBjrvzyrjcT9zSm/gsM8/lcyT/B7ZV8z7fmVNrzP21a39Pb5K/79iLe4Dck/r8sp+dn0X63V/MSdfe3sSYi+YNyX6uReIFjsxLjNlP+Sy9pTeZtc7ivQ3VNg/kb15/d3iNa4jfcMbe3sQ16Xz23v1NZ3u11jMn8/yQ7OXvg729ifuPzG/u2Z1Tvrt+zUvmaH93ZM7Z25v4vyTzaO45XD/omdM6x939lTnBMXUM/X1Tp7Wun144Mof7W8rc6T42+9M9jXmkTTrcF9m3PGf/mJuc764xc0LuCcBtf7qGzZXuNXxeNUlm2ch5yhzXN/HY4ldyGz88p+sPeVjXrw==
+  </data>
+ </layer>
+ <layer name="details" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztmEkOgjAUhls9huMGHC/gsGHUrQuPocZjqPEY6jnUk+hF9HfRhQSIQqmteV/yBUJp+8prQ/IYI3TF4ozZvPh5arAOG7CZob+DGF0FcQ7gEI7guPjp2A1ruiesK60tC7OyvLEIgsiP7DNOEN9A+89MVOStA7uwB/vFTpWLAIZwAqcJ79A+Nw+ZOdM5/49XXKXkdgvasAXbakKKpYIYqylxOtCFHvQVxWQCOu89XclTl1D5vVXVJQh1rJDPJVxIzOuWy3cH53AjYSzBkcv3BNfwIGEswYW/G60vRts/8Qr38Jyhb1SBh3sfBjDk6uuLBPEPxP3TxbNfX03jCV7fh/I=
+  </data>
+ </layer>
+ <layer name="above" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJzt2DkKgDAQhWG3Ro3LLVzufwU9l6/QziZiTEb+Dx5CLBwyGQWzDKHkSqGUShW5lpRs2pg9978HwD5mHDFx/mz6om+d0iuDMoZ9VHCcc3ve7Jnl/tdKo7SKi1wL/Fk+exax38D/Oc14d855qv8XJxU2K4uy8k4CHrn7pl9rsa8I4wAwfCym
+  </data>
+ </layer>
+ <layer name="Collision-Layer" width="42" height="42" visible="0" opacity="0.5">
+  <data encoding="base64" compression="zlib">
+   eJztl40KhSAMheuB6j3y/R+oeyFhjM3frW3kgWGoeT5DZ6Z929JHQlvYq+TP8cB6LW5rzlJ/jgt69vjNfL9RzhkvzfX65l6Y0Ze+p0VeGh1Dmoer95Lna5zetThl/RanrCT/G6RE5ZKonB7WAcXmkZOSBdeIp8U5pc2p/e9WErU+a30jcFLvaGkmf76pKJxQpf1i5d/aLwqnRy1OWWXO4xdnIY6BOJ/5j7yLx0nomYvaPLj469rnouVenvla+1NnqzZn9vCwfqPtI++KxgnzSFauay25tt5xcAk5qf1yobZaybX1joNLyNlyz7COG6Tvhwk=
+  </data>
+ </layer>
+ <objectgroup name="Teleport-Layer">
+  <object id="2" name="west_forest_west_entrance" type="11, 0" x="64" y="640" width="16" height="16"/>
+  <object id="4" name="west_forest_west_entrance" type="10, 0" x="48" y="640" width="16" height="16"/>
+  <object id="5" name="west_forest_west_entrance" type="12, 0" x="80" y="640" width="16" height="16"/>
+  <object id="6" name="northern_desert_master_house" type="8, 11" x="96" y="560" width="16" height="16"/>
+  <object id="7" name="northern_desert_farm" type="7, 10" x="176" y="384" width="16" height="16"/>
+  <object id="8" name="north_desert_house" type="6, 10" x="592" y="288" width="16" height="16"/>
+  <object id="9" name="north_desert_hideout" type="7, 10" x="64" y="64" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Entity-Layer">
+  <object id="11" name="north_desert_farmer" x="80" y="400" width="16" height="16"/>
+ </objectgroup>
+</map>

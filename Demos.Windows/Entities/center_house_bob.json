@@ -1,0 +1,5 @@
+﻿{
+  "name": "Bob",
+  "sprite-sheet": "2",
+  "script":  "bob.ink"  
+}

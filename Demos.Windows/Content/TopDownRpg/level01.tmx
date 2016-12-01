@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="42" height="42" tilewidth="16" tileheight="16" nextobjectid="48">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
+  <image source="tileset.png" width="448" height="640"/>
+  <terraintypes>
+   <terrain name="snow" tile="553"/>
+   <terrain name="dirt" tile="385"/>
+   <terrain name="dirt temple" tile="390"/>
+   <terrain name="farm" tile="469"/>
+   <terrain name="dark farm" tile="474"/>
+  </terraintypes>
+  <tile id="354" terrain="1,1,1,"/>
+  <tile id="355" terrain="1,1,,1"/>
+  <tile id="356" terrain=",,,1"/>
+  <tile id="357" terrain=",,1,1"/>
+  <tile id="358" terrain=",,1,"/>
+  <tile id="359" terrain="2,2,2,"/>
+  <tile id="360" terrain="2,2,,2"/>
+  <tile id="361" terrain=",,,2"/>
+  <tile id="362" terrain=",,2,2"/>
+  <tile id="363" terrain=",,2,"/>
+  <tile id="382" terrain="1,,1,1"/>
+  <tile id="383" terrain=",1,1,1"/>
+  <tile id="384" terrain=",1,,1"/>
+  <tile id="385" terrain="1,1,1,1"/>
+  <tile id="386" terrain="1,,1,"/>
+  <tile id="387" terrain="2,,2,2"/>
+  <tile id="388" terrain=",2,2,2"/>
+  <tile id="389" terrain=",2,,2"/>
+  <tile id="390" terrain="2,2,2,2"/>
+  <tile id="391" terrain="2,,2,"/>
+  <tile id="412" terrain=",1,,"/>
+  <tile id="413" terrain="1,1,,"/>
+  <tile id="414" terrain="1,,,"/>
+  <tile id="417" terrain=",2,,"/>
+  <tile id="418" terrain="2,2,,"/>
+  <tile id="419" terrain="2,,,"/>
+  <tile id="438" terrain="3,3,3,"/>
+  <tile id="439" terrain="3,3,,3"/>
+  <tile id="440" terrain=",,,3"/>
+  <tile id="441" terrain=",,3,3"/>
+  <tile id="442" terrain=",,3,"/>
+  <tile id="443" terrain="4,4,4,"/>
+  <tile id="444" terrain="4,4,,4"/>
+  <tile id="445" terrain=",,,4"/>
+  <tile id="446" terrain=",,4,4"/>
+  <tile id="447" terrain=",,4,"/>
+  <tile id="466" terrain="3,,3,3"/>
+  <tile id="467" terrain=",3,3,3"/>
+  <tile id="468" terrain=",3,,3"/>
+  <tile id="469" terrain="3,3,3,3"/>
+  <tile id="470" terrain="3,,3,"/>
+  <tile id="471" terrain="4,,4,4"/>
+  <tile id="472" terrain=",4,4,4"/>
+  <tile id="473" terrain=",4,,4"/>
+  <tile id="474" terrain="4,4,4,4"/>
+  <tile id="475" terrain="4,,4,"/>
+  <tile id="496" terrain=",3,,"/>
+  <tile id="497" terrain="3,3,,"/>
+  <tile id="498" terrain="3,,,"/>
+  <tile id="501" terrain=",4,,"/>
+  <tile id="502" terrain="4,4,,"/>
+  <tile id="503" terrain="4,,,"/>
+  <tile id="522" terrain="0,0,0,"/>
+  <tile id="523" terrain="0,0,,0"/>
+  <tile id="524" terrain=",,,0"/>
+  <tile id="525" terrain=",,0,0"/>
+  <tile id="526" terrain=",,0,"/>
+  <tile id="550" terrain="0,,0,0"/>
+  <tile id="551" terrain=",0,0,0"/>
+  <tile id="552" terrain=",0,,0"/>
+  <tile id="553" terrain="0,0,0,0"/>
+  <tile id="554" terrain="0,,0,"/>
+  <tile id="580" terrain=",0,,"/>
+  <tile id="581" terrain="0,0,,"/>
+  <tile id="582" terrain="0,,,"/>
+ </tileset>
+ <layer name="tiles" width="42" height="42">
+  <properties>
+   <property name="TYPE" value="TERRAIN"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVmEuO00AQhtPK4eyZFeJxAnuJBnECezkCkbBvL9mgXAIQ3AtH1Kd8rnFmEjSbsdSK4+6u+rsef5W92byc69V2s3n9xHgzj7cr4908urLZDPOo8xjL6f9x9PE7xe8Y91Pcj5pjXRu/NWRxvZ913T0xPszj08r4uP2HpYb8o95G98bcBG7j7LWec+XBdX8Gg8fnM8+/hD2POnfz+Bp6jzpv434fOHbxbB/r9zG/Czy7tB4fcX27AOe58X178jd6D6G3lc4+nu9itLG2CexTrL2Ls3L2a+15bhztSdwdYjQJw172OghnG/9vNc9Zp//0+2M4+zg/PsPfxgMmcDgusafPUMsp7p8LZ00Y98KBn7vk6yn8y3wV5n1Z5tZz2hPd5NBQTvxCHk+BF+7pI14GnQMu6rTvuXAil/jaKS/Ic+KCmB1kt1vZE07oyikXuX7Mun4+Mn4Fpt8rc3+2yzhrpQcc+8B1KMv8P667C2zkIVjBbZ4nvlxP8Mdx7b1s55oxSB4ywFIj/sjnnCd9WfIT9mcNeByf2Jc6ARbyzThHYWPe9Qied/5jQ+yF/3eaG+UP/EM8ZXtSU7EpGIyzKSf+5Vxg3ktXTViom7flVAccB/jb5yCXuPzc3MW9Y6BN/0fJdr9BTIAXWdR17ILMXms7rTN/jpI7SDc27SQPXVVyatJp7HC6+6lJe5hjXz637Tlor+OCXDHv2c9rPnBsT8LQS4Zzlj3Mg5V9jk+fBd7qJd/PW8lzDIHVccGaquG+j9x1jbJu9hhnozWD1oIL24DX8eBeMdvLcYjMnA/8d5/qPY5Pn7HR+lZ6wYHtb8rDfLAPe8myDTgjsVjLMjbZD7dxuZYS59gXX2LPZkWO3xnwN2s7zXGmrizj1flhjuTs5k9yl3n7JOdSLQ/t5Vxyj2t+yLa9KctzIi8/y/UI2X63ws/2q7GxFvvCCcZl+5ibOQ/851x3D2ZeGrRnKkv72daOY/OYe4ReerC9ud+5aPyj9pqbXY8ch8ZlTjTGTvo4k/1gfndf4zg1T9rmjjPzJ3JHzVU9yzXUOrKf/N+6XOdy3OQ8wD4Zp3PNPYTl+ZuB7W9f2d/Oa86XY8Q1wT7JMWK/90mGfYp8+8j9gHG7xriWrvWC/haRedTcYL9njiVGXXMv7U0cf43293rmWtlqHc+dL8bZJh3uL8mFS3sT2zNzt9esfWdivd+bzfOZm82Z1/YmxmOOcHwPGraj+SD73XFlXO4nrulNXMvMc7mO5G9gaznv+s4af6dwf+3cf6o3WXu/4yzuAXJP6vplOzs+q+S7v5iSrEt7E2OuWjcm/TkX8Rc4Mi8xZzvlWnpNbzJpn4fPNpZ1HsjvvH7v8B7nEP/hjEt7E+ek49ln9zud9TXaz5rM82PSl98PLu1N3H9kfnPP7pjyr/PXvGSO9ntH5pxLexN/SzKP5p7D+YOcKe2z391fmRPsU/vQ7zdN2uv8GYQjc7jfpcyd7mOzPd3TmEe6JMN9kW3LfbaPucnx7hwzJ+SeANy2p3PYXOlew/WqTWOSjhynrHF+4481fiW2scNLuv4CO7vXvQ==
+  </data>
+ </layer>
+ <layer name="terrain" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztlFkKwjAURdPdirqMVl2HugfnYQ+O1VWoYP30BvpAg2BCm6biPXCgzUc5vCRVihBCCCGEFKUZKdWC7Sh0yTvSJSawC2NjPXR7J++ysfcjnXHAmbp0hpwpO/+rU/5HiUNjAw4r7jTnqBsGX6y6UdOvQQMJxwT7PbV0ZpyNJd5XcO35zOjGLdxbujFa73hewKPn3p1Do3gwWnRr9tLro7WMTuGE9bOn1gu+N3ZoHMHbhwZ9TtO8cw4fHmaqW6+Wmo1yj9K8L/PUWIQqZlgGcn/qOENCCCmbJ6c2pLs=
+  </data>
+ </layer>
+ <layer name="details" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztmc1twjAYhu0jtGsALWWJQH+4wx50iUrQnvozQKuWsgO3lh24wwhMwIuUg9UmdmK/X4iEX+lRZCdxnsRx4ihKnU4+BXmwHHcExvSz8cvcsm4C7qsSccTmWadIeM60Uo/gSXPKUp5ztP8NFppTlvL8Qfu/YKU5ZSlPiURPbkzPKalN6fHO8pQe7yxP6fHO8pRI9OTG17MBmuAMnFONsuPr2QJt0AEXRJ8Nxs5W/6/39UxAHwzAdcDxDynSN3W4P4v0zTHem3+vbV7fmNud8vtdItHTnaxnAPu5VHWiJzfRk5voyU0dPS9BF1yBXlpXR88bcAvuwDCts3lKzYV9YvMsOxeWjKvfl1WJOOLyXJdoK8H8oZ/zbRGaLM9no26XLl/AK3iT0XDG9HxXYf9OvgL3t/FBP3PZ7AFGOKKk
+  </data>
+ </layer>
+ <layer name="above-details" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJzt1ksOgjAUheHboaCJm8D9oCMXAY5AZ7I5WJdn5KgDA21vIv+XnEGbFG76Ss2AbdpgdlVuIU07l07f75VHSNMG9ojzDgDlzbqLFsf7yPv//+zXuWUN4Cm2/9iTALDeSXkrk3L2LSWpg1IptXJ0rgX53VeOa/R+uBR8QwyRvlF5Kq9yZQBfH8NXI9E=
+  </data>
+ </layer>
+ <layer name="Collision-Layer" width="42" height="42" visible="0" opacity="0.75">
+  <data encoding="base64" compression="zlib">
+   eJztmWFuwjAMhR2x/xwE2MQp0HoNDoLEjjEJdg8OwkG4wBppFpZxSOI6NZ36pCeR1rRfmtokZB0A1k7e9H7v/VEQdwGA7dswf4a2jozISYXnqXhM7riVWnB24W6Ldo6zRv+R87gA+Ppz1M/ifkxqe3JyrlPvc6LtxXkSuNBSuxVnC001j3KGJ3FjcfJamXpmuefO3y8pb2rayHl14HyW36l8vzXmrM3vVL4vQxmnpyLbaiKcu4lw7hWctHZ0hv1LXa+mLvHvUWvvz3VmeW7BSXm1948qGRst5xBJvzXS2NA4yjmW+LNNjQ2N8+DUyGPcNfLklPLGui5ZSKoB1nVpbM2ctpo5bTVz6iXNS16RU5qXIOcVHjlbzYVLOCkvfo6MtxfilITr4qUw3+X/T3gK18UrwqllatkfXBfvMpxdQR9K1yAa4bp4z95ZKS51bgzhuvgQHuuBxjj2Ftfijow1+025/aqh+12pPbDv3r/f+NM8
+  </data>
+ </layer>
+ <layer name="Grass-Layer" width="42" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJACAMBMH0X2xq8O9DFAJyMAP73yoAAAAATvr3wKYfS3j0Ofvo807KJwD5FgPXSIU=
+  </data>
+ </layer>
+ <objectgroup name="Teleport-Layer">
+  <object id="30" name="dojo" type="5, 8" x="576" y="544" width="16" height="16"/>
+  <object id="36" name="player_home" type="5, 9" x="96" y="576" width="16" height="16"/>
+  <object id="37" name="rival_house" type="5, 8" x="208" y="304" width="16" height="16"/>
+  <object id="38" name="friend_house" type="5, 8" x="512" y="336" width="16" height="16"/>
+  <object id="43" name="west_forest" type="99, 23" x="16" y="336" width="16" height="16"/>
+  <object id="45" name="west_forest" type="99, 24" x="16" y="352" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Entity-Layer">
+  <object id="29" name="villager" type="1,0" x="144" y="352" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Tile Layer 3">
+  <object id="39" name="monk" x="80" y="64" width="32" height="16"/>
+ </objectgroup>
+</map>

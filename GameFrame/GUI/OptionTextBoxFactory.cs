@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
 namespace GameFrame.GUI

@@ -14,12 +14,14 @@ You find a key on the floor.
     You roll and try to cut his leg you leave him with a scratch.
     ~enemy_health = enemy_health - 20
     { enemy_health > 0:
+        Health drops down to {enemy_health}
         ->back_against_wall
     }
 +   Kick him.
     You push him back before he can attack you.
     ~enemy_health = enemy_health - 5
     { enemy_health > 0:
+        Health drops down to {enemy_health}
         ->distance_between
     }
 +   Spit at him.
@@ -33,6 +35,7 @@ You find a key on the floor.
         He pulls back after getting a small cut on his wrist
         ~enemy_health = enemy_health - 10
         { enemy_health > 0:
+            Health drops down to {enemy_health}
             ->distance_between
         }
     +   Dodge to the left predicting he attacks.
@@ -49,6 +52,7 @@ You find a key on the floor.
         You cut his chest leaving him injured.
         ~enemy_health = enemy_health - 10
         { enemy_health > 0:
+            Health drops down to {enemy_health}
             ->standard_options
         }
     +   Charge towards him
@@ -64,11 +68,13 @@ You find a key on the floor.
         ~enemy_health = enemy_health - 30
         { enemy_health > 0:
             The dojo master takes a step back
+            Health drops down to {enemy_health}
             ->standard_options
         }
     +   Kick him onto floor
         { enemy_health > 20:
             The dojo master avoids your kick ad takes a step back.
+            Health drops down to {enemy_health}
             ->standard_options
         - else:
             ~enemy_health = 0
@@ -80,6 +86,7 @@ You find a key on the floor.
     +   Use dragon sword smash on dojo master
         ~enemy_health = enemy_health - 30
         { enemy_health > 0:
+            Health drops down to {enemy_health}
             The dojo master recoils with pain
             ->distance_between
         }
@@ -87,6 +94,7 @@ You find a key on the floor.
         You leave a small cut on his leg.
         ~enemy_health = enemy_health - 15
         { enemy_health > 0:
+            Health drops down to {enemy_health}
             You have closed in on the dojo master
             ->standard_options
         }

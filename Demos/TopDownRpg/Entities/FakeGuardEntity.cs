@@ -1,4 +1,6 @@
-﻿namespace Demos.TopDownRpg.Entities
+﻿using GameFrame.Ink;
+
+namespace Demos.TopDownRpg.Entities
 {
     public class FakeGuardEntity : NpcEntity
     {
@@ -6,6 +8,11 @@
         {
             Name = "Guard";
             SpriteSheet = "5";
+        }
+
+        public override GameFrameStory Interact()
+        {
+            return ReadStory("fake_guard.ink");
         }
     }
 }
