@@ -23,7 +23,7 @@ You find a key on the floor.
         ->distance_between
     }
 +   Spit at him.
-    The dojo master is disgusted at you, however you have distracted him
+    The dojo master is disgusted at you, however, you have distracted him
     ->distracted
 - ->END
 
@@ -37,7 +37,7 @@ You find a key on the floor.
         }
     +   Dodge to the left predicting he attacks.
         His attack misses you.
-        An he is caught un-aware.
+        He is caught un-aware.
         ->caught_unaware
     +   Run at him trying to get closer.
         ->caught_unaware

@@ -26,6 +26,6 @@ You start talking to the fisherman
     ~ acquire_rod = true
     You acquired one fishing rod
     Now every time you go to water you will be able to fish too
-* Nothing I am fine hank you.
+* Nothing I am fine thank you.
     What a polite young boy
 - ->DONE

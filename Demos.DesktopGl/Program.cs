@@ -14,7 +14,6 @@ namespace Demos.DesktopGl
         {
             StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
             StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            StaticServiceLocator.AddService<ITextToSpeech>(new TextToSpeechImplementation());
             StaticServiceLocator.AddService<IPossibleMovements>(new FourWayPossibleMovement());
 
             using (var game = new DemoGame())

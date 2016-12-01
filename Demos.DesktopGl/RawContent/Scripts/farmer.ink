@@ -2,9 +2,9 @@ Farming is my life and trade what do you do?
 *   I am a ninja
     Wow, what does that entail
     * * Murder
-        Ok the I won't ask no more.
+        Ok, the I won't ask any more.
     * * Walking
-        Ah I can relate to that.
+        Ah, I can relate to that.
     * * Talking to strangers
         Ha I like the frankness take this apple
 *   I have been a Mercenary since I was seven
@@ -23,6 +23,6 @@ Farming is my life and trade what do you do?
     * * To the South
         There is nothing north of here please don't lie to me
     * * To the West
-        Wow you are a farmer in the desert I don't know how you do mercinary_request
+        Wow, you are a farmer in the desert I don't know how you do mercinary_request
         
  - ->END

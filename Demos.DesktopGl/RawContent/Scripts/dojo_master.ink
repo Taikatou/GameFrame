@@ -11,7 +11,7 @@ Today is the day are you ready?
     ->describe_mission
 *   Ready for what?
     Today is the day you will finally become a fully qualified ninja.
-    However in order to do so you must pass one last test.
+    However, in order to do so, you must pass one last test.
     ->describe_mission
 - ->END
 
@@ -20,6 +20,6 @@ Today is the day are you ready?
 ~ y_pos = 5
 travel west out in to the forest, we need someone to collect the princess.
 I know this will be hard for you seeing as this is your first mission.
-However we have no other choice, because of the war you are the only fully trained ninja left in the village.
+However, we have no other choice, because of the war you are the only fully trained ninja left in the village.
 ~ story_over = true
 - ->DONE

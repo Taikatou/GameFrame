@@ -1,7 +1,7 @@
 EXTERNAL battle(scriptName)
 
 Hello Taikatou,
-Do you not recogise me?
+Do you not recognise me?
 *   You are the dojo master.
     Very well done.
     ->pre_fight
@@ -13,7 +13,7 @@ Do you not recogise me?
 
 ===pre_fight===
 I kidnapped the princess, she is an important player in the politics of this war. We tricked her by communicating with her for peace. I need you to understand that we did this to save the village, having her as a hostage will improve our relations with our allies and we can use her to bargain.
-However I don't think you are happy with that
+However, I don't think you are happy with that
 *   Attack him
     ->final_battle
 *   Slap him

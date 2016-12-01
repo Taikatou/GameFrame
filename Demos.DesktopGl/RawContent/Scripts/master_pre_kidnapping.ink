@@ -1,2 +1,2 @@
-I hope that sword serves you well
+I hope that sword serves you well.
 - ->END
