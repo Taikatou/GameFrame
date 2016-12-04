@@ -7,10 +7,14 @@ namespace Demos.TopDownRpg.Entities
 {
     public class NorthDesertGuard : AbsractBattleEntity
     {
-        public NorthDesertGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition) : base(gameModeController, flag, startPosition, endPosition)
+        private readonly Vector2 _alternativeEndPoint;
+        private readonly Collision _collision;
+        public NorthDesertGuard(GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition, Vector2 alternativeEndPoint, Collision collision) : base(gameModeController, flag, startPosition, endPosition)
         {
             Name = "Guard";
             SpriteSheet = "1";
+            _alternativeEndPoint = alternativeEndPoint;
+            _collision = collision;
         }
 
         public override GameFrameStory Interact()
@@ -21,11 +25,13 @@ namespace Demos.TopDownRpg.Entities
             if(learnedFight)
             {
                 GameStory.ChoosePathString("dialog");
-                CompleteEvent completeEvent = win =>
+                CompleteEvent completeEvent = victory =>
                 {
-                    if (win)
+                    if (victory)
                     {
-                        MoveDelegate?.Invoke(this, EndPosition.ToPoint());
+                        var collision = _collision.Invoke(Position.ToPoint(), EndPosition.ToPoint());
+                        var endPoint = collision ? _alternativeEndPoint : EndPosition;
+                        MoveDelegate?.Invoke(this, endPoint.ToPoint());
                         GameFlags.SetVariable(FlagName, true);
                         AlreadyMoved = true;
                     }

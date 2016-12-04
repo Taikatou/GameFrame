@@ -7,11 +7,13 @@ namespace Demos.TopDownRpg.Entities
     {
         private bool _complete;
         private bool _moved;
+        private readonly Collision _collision;
 
-        public SwordBlocker(string flag, Vector2 startPosition, Vector2 endPosition) : base(flag, startPosition, endPosition)
+        public SwordBlocker(string flag, Vector2 startPosition, Vector2 endPosition, Collision collision) : base(flag, startPosition, endPosition)
         {
             Name = "Concerned country man";
             SpriteSheet = "3";
+            _collision = collision;
         }
 
         public override GameFrameStory Interact()
@@ -39,7 +41,9 @@ namespace Demos.TopDownRpg.Entities
         {
             if (_complete && !_moved && !AlreadyMoved)
             {
-                MoveDelegate.Invoke(this, new Point(2, 20));
+                var collision = _collision.Invoke(Position.ToPoint(), new Point(2, 20));
+                var endPoint = collision ? new Point(2, 22) : new Point(2, 20);
+                MoveDelegate.Invoke(this, endPoint);
                 _moved = true;
             }
         }

@@ -5,12 +5,12 @@ namespace Demos.TopDownRpg.Entities
 {
     public class PrincessPreKidnapping : Princess
     {
-        private readonly FakeGuardEntity _fakeGuard;
+        private readonly Entity _fakeGuard;
         public GameFrameStory GameStory;
         public bool Fwacked;
         private readonly RemoveEntity _removeEntity;
 
-        public PrincessPreKidnapping(FakeGuardEntity fakeGuard, RemoveEntity removeEntity)
+        public PrincessPreKidnapping(Entity fakeGuard, RemoveEntity removeEntity)
         {
             _fakeGuard = fakeGuard;
             _removeEntity = removeEntity;

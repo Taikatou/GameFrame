@@ -16,12 +16,10 @@ using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
@@ -73,7 +71,7 @@ namespace Demos.TopDownRpg.GameModes
             collisionSystem.AddCollisionSystem(_expiringSpatialHash);
             CollisionSystem = collisionSystem;
             AddClickController(PlayerEntity);
-            PathRenderer = new PathRenderer(_moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint());
+            PathRenderer = new PathRenderer(_moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint(), Map.Width, Map.Height);
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
@@ -82,7 +80,7 @@ namespace Demos.TopDownRpg.GameModes
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
-            storyEngine.LoadWorld(AddEntity, RemoveEntity, worldName);
+            storyEngine.LoadWorld(AddEntity, RemoveEntity, CollisionSystem.CheckMovementCollision, worldName);
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
             {
@@ -147,51 +145,47 @@ namespace Demos.TopDownRpg.GameModes
 
         public void BeginMoveTo(Entity entity, Point endPoint)
         {
-            var mapContainsEndPoint = endPoint.X <= Map.Width && endPoint.Y <= Map.Height;
-            if (mapContainsEndPoint)
+            var moveTo = endPoint;
+            var collision = _expiringSpatialHash.CheckCollision(moveTo) || WaterCollision(endPoint);
+            var valid = true;
+            if (collision)
             {
-                var moveTo = endPoint;
-                var collision = _expiringSpatialHash.CheckCollision(moveTo) || WaterCollision(endPoint);
-                var valid = true;
-                if (collision)
+                var heuristic = _possibleMovements.Heuristic;
+                var startPosition = entity.Position.ToPoint();
+                if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
                 {
-                    var heuristic = _possibleMovements.Heuristic;
-                    var startPosition = entity.Position.ToPoint();
-                    if (Math.Abs(heuristic.GetTraversalCost(startPosition, endPoint) - 1.0f) < 0.1f)
-                    {
-                        Interact(endPoint);
-                        valid = false;
-                    }
-                    else
-                    {
-                        var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
-                        var minCost = double.MaxValue;
-                        foreach (var position in alternatuvePositions)
-                        {
-                            if (!CollisionSystem.CheckCollision(position))
-                            {
-                                var cost = heuristic.GetTraversalCost(startPosition, position);
-                                if (cost < minCost)
-                                {
-                                    minCost = cost;
-                                    moveTo = position;
-                                }
-                            }
-                        }
-                        if (moveTo == endPoint)
-                        {
-                            valid = false;
-                        }
-                    }
+                    Interact(endPoint);
+                    valid = false;
                 }
                 else
                 {
-                    valid = !CollisionSystem.CheckCollision(moveTo);
+                    var alternatuvePositions = FourWayPossibleMovement.FourWayAdjacentLocations(moveTo);
+                    var minCost = double.MaxValue;
+                    foreach (var position in alternatuvePositions)
+                    {
+                        if (!CollisionSystem.CheckCollision(position))
+                        {
+                            var cost = heuristic.GetTraversalCost(startPosition, position);
+                            if (cost < minCost)
+                            {
+                                minCost = cost;
+                                moveTo = position;
+                            }
+                        }
+                    }
+                    if (moveTo == endPoint)
+                    {
+                        valid = false;
+                    }
                 }
-                if (valid)
-                {
-                    MoveEntityTo(moveTo, entity, _tileSize.ToPoint(), _moverManager, collision, endPoint);
-                }
+            }
+            else
+            {
+                valid = !CollisionSystem.CheckCollision(moveTo);
+            }
+            if (valid)
+            {
+                MoveEntityTo(moveTo, entity, _tileSize.ToPoint(), _moverManager, collision, endPoint);
             }
         }
 
