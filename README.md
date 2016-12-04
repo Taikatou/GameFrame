@@ -5,46 +5,4 @@
 Install Visual Studio or MonoDevelop
 Install Monogame 3.5
 
-### Completed design patterns;
-Adapter = William
-
-Bridge = Conor
-
-Command = Conor
-
-State = William
-
-Memento = Andrew
-
-Service Locator = William
-
-Factory = William
-
-Observer = Andrew
-
-Prototype = Andrew
-
-Interceptor = Conor
-
-Composite = Conor
-
-Null Object = Cathal
-
-###Todo
-
-Documentaion
-
-Unit testing
-
-### In progress
-Decorator = Cathal
-
-####Other features
-
-Delegation = Command
-
-Testing = William
-
-Distribution = Conor
-
-Continuos Integration = Conor
+Open GameFrame.sln
