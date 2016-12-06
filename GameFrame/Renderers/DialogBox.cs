@@ -20,7 +20,6 @@ namespace GameFrame.Renderers
             var posX = centerScreen.X - (Size.X / 2f);
             var posY = screenSize.Height - Size.Y - 30;
             Position = new Vector2(posX, posY);
-            FillColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

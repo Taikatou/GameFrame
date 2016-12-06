@@ -45,7 +45,7 @@ namespace Demos.TopDownRpg
         {
             var possibleMovements = StaticServiceLocator.GetService<IPossibleMovements>();
             _possibleMovements = new PossibleMovementWrapper(possibleMovements);
-            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, levelName , new EntityControllerFactory(), _entityManager, _storyEngine);
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, levelName, _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
             var player = PlayerEntity.Instance;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");

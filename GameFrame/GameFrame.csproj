@@ -52,6 +52,7 @@
     <Compile Include="Controllers\CameraController.cs" />
     <Compile Include="Controllers\ControllerFactory.cs" />
     <Compile Include="Controllers\BaseMovableController.cs" />
+    <Compile Include="Controllers\GamePad\JoyStickGamePadButton.cs" />
     <Compile Include="Controllers\IControllerSettings.cs" />
     <Compile Include="Controllers\NullButton\NullButton.cs" />
     <Compile Include="Controllers\SinglePlayerControllerFactory.cs" />

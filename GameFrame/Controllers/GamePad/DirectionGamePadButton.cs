@@ -3,17 +3,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameFrame.Controllers.GamePad
 {
-    public class DirectionGamePadButton : AbstractGamePadButton
+    public class DirectionGamePadButton : JoyStickGamePadButton
     {
         private readonly GamePadButton _gamePadButton;
-        public JoyStick JoyStick { get; set; }
 
-        public DirectionGamePadButton(Buttons button, PlayerIndex player=PlayerIndex.One, bool leftStick=true)
+        public DirectionGamePadButton(Buttons button, PlayerIndex player=PlayerIndex.One, bool leftStick=true) : base(button, player, leftStick)
         {
-            Button = button;
-            Player = player;
             _gamePadButton = new GamePadButton(button, player);
-            JoyStick = new JoyStick(leftStick);
         }
 
         public override void Update(GamePadState state)

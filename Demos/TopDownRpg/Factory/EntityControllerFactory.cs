@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Demos.TopDownRpg.SpeedState;
-using GameFrame.Common;
 using GameFrame.Controllers;
 using GameFrame.Controllers.SmartButton;
 using GameFrame.Movers;
@@ -12,7 +11,8 @@ namespace Demos.TopDownRpg.Factory
     public class EntityControllerFactory : SinglePlayerControllerFactory
     {
 
-        public override BaseMovableController CreateEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
+        public override BaseMovableController CreateEntityController(BaseMovable moveable,
+            IPossibleMovements possibleMovements, MoverManager moverManager)
         {
             var controller = base.CreateEntityController(moveable, possibleMovements, moverManager);
             var runningButton = new List<IButtonAble>();
@@ -30,6 +30,12 @@ namespace Demos.TopDownRpg.Factory
                 controller.AddButton(smartButton);
             }
             return controller;
+        }
+
+        public static BaseMovableController AddEntityController(BaseMovable moveable, IPossibleMovements possibleMovements, MoverManager moverManager)
+        {
+            var controller = new EntityControllerFactory();
+            return controller.CreateEntityController(moveable, possibleMovements, moverManager);
         }
     }
 }

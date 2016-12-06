@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
@@ -88,7 +89,7 @@ namespace GameFrame.Ink
 
         public bool Interact()
         {
-            var dialogOpen = StoryState == StoryState.Dialog;
+            var dialogOpen = StoryState != StoryState.Closed;
             if (dialogOpen)
             {
                 _currentTextBox.Interact();
@@ -145,6 +146,25 @@ namespace GameFrame.Ink
         {
             _activeStory = story;
             LoadDialogBox();
+        }
+
+        public void Down()
+        {
+            MoveOption(1);
+        }
+
+        public void Up()
+        {
+            MoveOption(-1);
+        }
+
+        public void MoveOption(int valueBy)
+        {
+            if (StoryState == StoryState.Option)
+            {
+                var optionBox = _currentTextBox as OptionTextBoxList;
+                optionBox?.MoveOption(valueBy);
+            }
         }
     }
 }

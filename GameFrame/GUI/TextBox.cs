@@ -23,13 +23,13 @@ namespace GameFrame.GUI
             set
             {
                 _fillColor = value;
-                _fillTexture.SetData(new[] { _fillColor });
+                FillTexture.SetData(new[] { _fillColor });
             }
         }
         public Color BorderColor { get; set; }
         public Color DialogColor { get; set; }
         public int BorderWidth { get; set; }
-        private readonly Texture2D _fillTexture;
+        public readonly Texture2D FillTexture;
         private readonly Texture2D _borderTexture;
         public List<string> Pages;
 
@@ -73,7 +73,8 @@ namespace GameFrame.GUI
             BorderColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
             var graphicsDevice = StaticServiceLocator.GetService<GraphicsDevice>();
-            _fillTexture = new Texture2D(graphicsDevice, 1, 1);
+            FillTexture = new Texture2D(graphicsDevice, 1, 1);
+            FillColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
             _borderTexture = new Texture2D(graphicsDevice, 1, 1);
             _borderTexture.SetData(new[] { BorderColor });
@@ -102,7 +103,7 @@ namespace GameFrame.GUI
             Active = false;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture)
         {
             if (Active)
             {
@@ -113,11 +114,16 @@ namespace GameFrame.GUI
                 }
 
                 // Draw background fill texture (in this example, it's 50% transparent white)
-                spriteBatch.Draw(_fillTexture, null, TextRectangle);
+                spriteBatch.Draw(texture, null, TextRectangle);
 
                 // Draw the current page onto the dialog box
                 spriteBatch.DrawString(Font, TextToShow, TextPosition, DialogColor);
             }
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            Draw(spriteBatch, FillTexture);
         }
 
         public virtual void Interact() { }

@@ -1,5 +1,4 @@
-﻿using GameFrame.Common;
-using GameFrame.Movers;
+﻿using GameFrame.Movers;
 using GameFrame.PathFinding.PossibleMovements;
 
 namespace GameFrame.Controllers

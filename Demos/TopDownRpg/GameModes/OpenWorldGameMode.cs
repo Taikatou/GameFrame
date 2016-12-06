@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Demos.Common;
 using Demos.TopDownRpg.Entities;
+using Demos.TopDownRpg.Factory;
 using GameFrame;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
@@ -47,7 +48,7 @@ namespace Demos.TopDownRpg.GameModes
         private readonly MoverManager _moverManager;
         public CameraTracker CameraTracker;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, EntityManager entityManager, StoryEngine storyEngine)
         {
             _entityManager = entityManager;
             EntityRenderersDict = new Dictionary<Entity, AbstractEntityRenderer>();
@@ -61,7 +62,7 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             AddPlayer();
-            var entityController = controllerFactory.CreateEntityController(PlayerEntity.Instance, _possibleMovements, _moverManager);
+            var entityController = EntityControllerFactory.AddEntityController(PlayerEntity.Instance, _possibleMovements, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 

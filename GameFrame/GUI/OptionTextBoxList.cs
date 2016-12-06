@@ -29,9 +29,18 @@ namespace GameFrame.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var option in OptionTextBoxes)
+            for(int i = 0; i < OptionTextBoxes.Count; i++)
             {
-                option.Draw(spriteBatch);
+                OptionTextBoxes[i].Draw(spriteBatch, i == _index);
+            }
+        }
+
+        public void MoveOption(int valueBy)
+        {
+            var newValue = _index + valueBy;
+            if (newValue >= 0 && newValue < OptionTextBoxes.Count)
+            {
+                _index = newValue;
             }
         }
     }

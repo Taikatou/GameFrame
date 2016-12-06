@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameFrame.Common;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Movers;
