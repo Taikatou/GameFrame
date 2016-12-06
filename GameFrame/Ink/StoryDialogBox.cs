@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;
@@ -21,7 +20,7 @@ namespace GameFrame.Ink
     {
         public bool Complete => StoryState == StoryState.Closed;
         public StoryState StoryState;
-        private readonly List<TextBox> _activeBoxes;
+        private ITextBox _currentTextBox;
         private readonly Camera2D _camera;
         private readonly SpriteFont _font;
         private GameFrameStory _activeStory;
@@ -32,7 +31,6 @@ namespace GameFrame.Ink
         {
             ScreenSize = screenSize;
             _font = font;
-            _activeBoxes = new List<TextBox>();
             var graphicsDevice = StaticServiceLocator.GetService<BoxingViewportAdapter>();
             _camera = new Camera2D(graphicsDevice) { Zoom = 1.0f };
             StoryState = StoryState.Closed;
@@ -44,13 +42,11 @@ namespace GameFrame.Ink
 
         public virtual void EndDialog()
         {
-            _activeBoxes.Clear();
             StoryState = StoryState.Closed;
         }
 
         public void ChooseOption(OptionTextBox option)
         {
-            _activeBoxes.Clear();
             _activeStory.ChooseChoiceIndex(option.OptionIndex);
             if (!_activeStory.Complete)
             {
@@ -71,7 +67,6 @@ namespace GameFrame.Ink
             }
             else if (_activeStory.Choices.Count > 0)
             {
-                _activeBoxes.Clear();
                 var optionBoxes = new List<OptionTextBox>();
                 var choices = _activeStory.Choices;
                 for (var i = 0; i < choices.Count; i++)
@@ -82,10 +77,7 @@ namespace GameFrame.Ink
                     option.InteractEvent += (sender, args) => ChooseOption(option);
                 }
                 OptionTextBoxFactory.LineTextBoxes(optionBoxes, ScreenSize);
-                foreach (var option in optionBoxes)
-                {
-                    _activeBoxes.Add(option);
-                }
+                _currentTextBox = new OptionTextBoxList(optionBoxes);
                 StoryState = StoryState.Option;
             }
             else
@@ -99,7 +91,7 @@ namespace GameFrame.Ink
             var dialogOpen = StoryState == StoryState.Dialog;
             if (dialogOpen)
             {
-                _activeBoxes[0].Interact();
+                _currentTextBox.Interact();
             }
             return dialogOpen;
         }
@@ -107,17 +99,7 @@ namespace GameFrame.Ink
         public bool Interact(Point p)
         {
             var point = _camera.ScreenToWorld(p.ToVector2());
-            foreach (var textBox in _activeBoxes)
-            {
-                var hit = textBox.TextRectangle.Contains(point);
-                var valid = hit && textBox.Active;
-                if (valid)
-                {
-                    textBox.Interact();
-                    return true;
-                }
-            }
-            return false;
+            return _currentTextBox != null && _currentTextBox.Interact(point.ToPoint());
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -126,24 +108,13 @@ namespace GameFrame.Ink
             {
                 var transformMatrix = _camera.GetViewMatrix();
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
-                foreach (var textBox in _activeBoxes)
-                {
-                    if (_camera.Contains(textBox.TextRectangle) != ContainmentType.Disjoint)
-                    {
-                        textBox.Draw(spriteBatch);
-                    }
-                    else
-                    {
-                        throw new Exception("I should not be here");
-                    }
-                }
+                _currentTextBox.Draw(spriteBatch);
                 spriteBatch.End();
             }
         }
 
         public void LoadDialogBox()
         {
-            _activeBoxes.Clear();
             if (!_activeStory.Complete)
             {
                 var storyText = _activeStory.CurrentText;
@@ -161,7 +132,7 @@ namespace GameFrame.Ink
                     }
                 };
                 dialogBox.Show();
-                _activeBoxes.Add(dialogBox);
+                _currentTextBox = dialogBox;
                 StoryState = StoryState.Dialog;
             }
             else

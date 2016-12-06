@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using GameFrame.GUI;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;

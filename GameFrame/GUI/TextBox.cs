@@ -5,11 +5,10 @@ using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.GUI
 {
-    public class TextBox
+    public class TextBox : ITextBox
     {
         public int CurrentPage;
         public readonly SpriteFont Font;
@@ -78,7 +77,6 @@ namespace GameFrame.GUI
 
             _borderTexture = new Texture2D(graphicsDevice, 1, 1);
             _borderTexture.SetData(new[] { BorderColor });
-            var viewPort = StaticServiceLocator.GetService<BoxingViewportAdapter>();
             var sizeX = (int)(screensize.Width * 0.5);
             var sizeY = (int)(screensize.Height * 0.2);
 
@@ -183,6 +181,22 @@ namespace GameFrame.GUI
             }
 
             return pages;
+        }
+
+        public bool Hit(Point point)
+        {
+            var valid = Active && TextRectangle.Contains(point);
+            return valid;
+        }
+
+        public bool Interact(Point point)
+        {
+            var valid = Hit(point);
+            if (valid)
+            {
+                Interact();
+            }
+            return valid;
         }
     }
 }
