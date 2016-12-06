@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.ServiceModel;
+using Microsoft.Xna.Framework;
 
 namespace Demos.TopDownRpg.Entities
 {
@@ -8,7 +9,8 @@ namespace Demos.TopDownRpg.Entities
 
         public PlayerEntity()
         {
-            
+            Name = "Player";
+            SpriteSheet = "Character";
         }
 
         public PlayerEntity(Vector2 position)

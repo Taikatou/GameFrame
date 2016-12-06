@@ -90,7 +90,10 @@ namespace Demos.TopDownRpg
         public override void LoadContent()
         {
             base.LoadContent();
-            PlayerEntity.Instance = new PlayerEntity(new Vector2(5, 5));
+            PlayerEntity.Instance = new PlayerEntity
+            {
+                Position = new Vector2(5, 5)
+            };
             Flags.AcquireRod = true;
             LoadOpenWorld("player_home");
         }

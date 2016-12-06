@@ -10,8 +10,10 @@ namespace Demos.TopDownRpg.Entities
         public string ScriptName;
         private readonly Collision _collision;
         private readonly Vector2 _alternativeEndPoint;
-        public HideoutGuard(string scriptName, GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition, Vector2 alternativeEndPoint, Collision collision) : base(gameModeController, flag, startPosition, endPosition)
+        private Say _say;
+        public HideoutGuard(string scriptName, GameModeController gameModeController, string flag, Vector2 startPosition, Vector2 endPosition, Vector2 alternativeEndPoint, Collision collision, Say say) : base(gameModeController, flag, startPosition, endPosition)
         {
+            _say = say;
             Name = "Guard";
             SpriteSheet = "1";
             ScriptName = scriptName;
@@ -33,6 +35,11 @@ namespace Demos.TopDownRpg.Entities
                     GameFlags.SetVariable(FlagName, true);
                     AlreadyMoved = true;
                 }
+                var dialog = win ? "victory.ink" : "defeat.ink";
+                var storyScript = StoryImporter.ReadStory(dialog);
+                var newStory = new GameFrameStory(storyScript);
+                newStory.Continue();
+                _say.Invoke(newStory);
             };
             ReadStory(GameStory, completeEvent);
             return GameStory;

@@ -27,8 +27,11 @@ namespace Demos.TopDownRpg
                 {
                     if (!Flags.PrincessKidnapped)
                     {
-                        var guard = new Entity("Guard", "5", "fake_guard.ink")
+                        var guard = new Entity
                         {
+                            Name = "Guard",
+                            SpriteSheet = "5",
+                            Script = "fake_guard.ink",
                             Position = new Vector2(14, 8),
                         };
                         var princess = new PrincessPreKidnapping(guard, removeEntity)

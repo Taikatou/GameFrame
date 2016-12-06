@@ -76,7 +76,7 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
             UpdateList.Add(_moverManager);
-            UpdateList.Add(new CameraTracker(Camera, EntityRenderersDict[PlayerEntity]));
+            UpdateList.Add(new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity]));
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
@@ -240,7 +240,7 @@ namespace Demos.TopDownRpg.GameModes
 
         public void MoveEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact = false, Point? interactWith = null)
         {
-            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Rectangle(new Point(), tileSize));
+            var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Size(Map.Width, Map.Height));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
             var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity));
             pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
