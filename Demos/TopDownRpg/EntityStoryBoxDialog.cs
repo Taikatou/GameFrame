@@ -8,7 +8,7 @@ namespace Demos.TopDownRpg
 {
     public class EntityStoryBoxDialog : StoryDialogBox
     {
-        private AbstractEntity _interactingWith;
+        private Entity _interactingWith;
         private Vector2 _cachedPosition;
         public EntityStoryBoxDialog(Size screenSize, SpriteFont font) : base(screenSize, font)
         {
@@ -30,7 +30,7 @@ namespace Demos.TopDownRpg
             _interactingWith?.CompleteInteract();
         }
 
-        public void StartStory(GameFrameStory story, AbstractEntity interactWith)
+        public void StartStory(GameFrameStory story, Entity interactWith)
         {
             StartStory(story);
             _interactingWith = interactWith;
