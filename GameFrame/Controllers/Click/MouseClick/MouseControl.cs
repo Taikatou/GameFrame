@@ -5,6 +5,8 @@ using MonoGame.Extended;
 namespace GameFrame.Controllers.Click.MouseClick
 {
     public delegate void MouseEvent(MouseState mouseState, MouseState previousMouseState);
+
+    public delegate void ScrollEvent(int scrollBy);
     public class MouseControl : IUpdate
     {
         private MouseState _previousState;
@@ -13,6 +15,7 @@ namespace GameFrame.Controllers.Click.MouseClick
         public MouseEvent OnPressedEvent;
         public MouseEvent OnHeldDownEvent;
         public MouseEvent OnReleaseEvent;
+        public ScrollEvent OnScrollEvent;
 
         public bool JustPressed => _previousState.LeftButton == ButtonState.Released &&
                                    _mouseState.LeftButton != ButtonState.Released;
@@ -42,6 +45,14 @@ namespace GameFrame.Controllers.Click.MouseClick
             else if (JustReleased)
             {
                 OnReleaseEvent?.Invoke(_mouseState, _previousState);
+            }
+            if (_mouseState.ScrollWheelValue != _previousState.ScrollWheelValue)
+            {
+                if (OnScrollEvent != null)
+                {
+                    var scrollBy = _mouseState.ScrollWheelValue - _previousState.ScrollWheelValue;
+                    OnScrollEvent.Invoke(scrollBy);
+                }
             }
         }
     }

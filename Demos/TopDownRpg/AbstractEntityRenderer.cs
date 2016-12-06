@@ -1,4 +1,5 @@
-﻿using GameFrame;
+﻿using Demos.TopDownRpg.Entities;
+using GameFrame;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.Common;
 using Microsoft.Xna.Framework;
@@ -11,8 +12,8 @@ namespace Demos.TopDownRpg
     {
         public readonly Texture2D EntityTexture;
         public Point TileSize;
-        public readonly Entity Entity;
-        private readonly ExpiringSpatialHashCollisionSystem<Entity> _spaitalHash;
+        public readonly AbstractEntity Entity;
+        private readonly ExpiringSpatialHashCollisionSystem<AbstractEntity> _spaitalHash;
         public Rectangle Area => new Rectangle(Position.ToPoint(), TileSize);
         public abstract Rectangle FrameRectangle { get; }
         public Vector2 Offset { get; }
@@ -34,12 +35,12 @@ namespace Demos.TopDownRpg
             set { Entity.Position = value; }
         }
 
-        public AbstractEntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<Entity> spaitalHash, Entity entity, Point tileSize)
+        public AbstractEntityRenderer(ContentManager content, ExpiringSpatialHashCollisionSystem<AbstractEntity> spaitalHash, AbstractEntity entity, Point tileSize)
         {
             EntityTexture = content.Load<Texture2D>($"TopDownRpg/{entity.SpriteSheet}");
             Entity = entity;
             TileSize = tileSize;
-            Offset = TileSize.ToVector2();
+            Offset = TileSize.ToVector2() / 2;
             _spaitalHash = spaitalHash;
         }
 

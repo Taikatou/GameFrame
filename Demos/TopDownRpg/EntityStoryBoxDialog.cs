@@ -8,9 +8,8 @@ namespace Demos.TopDownRpg
 {
     public class EntityStoryBoxDialog : StoryDialogBox
     {
-        private Entity _interactingWith;
+        private AbstractEntity _interactingWith;
         private Vector2 _cachedPosition;
-        private Entity _player => PlayerEntity.Instance;
         public EntityStoryBoxDialog(Size screenSize, SpriteFont font) : base(screenSize, font)
         {
         }
@@ -18,7 +17,8 @@ namespace Demos.TopDownRpg
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (!Complete && _cachedPosition != _player.Position)
+            var player = PlayerEntity.Instance;
+            if (!Complete && _cachedPosition != player.Position)
             {
                 EndDialog();   
             }
@@ -30,7 +30,7 @@ namespace Demos.TopDownRpg
             _interactingWith?.CompleteInteract();
         }
 
-        public void StartStory(GameFrameStory story, Entity interactWith)
+        public void StartStory(GameFrameStory story, AbstractEntity interactWith)
         {
             StartStory(story);
             _interactingWith = interactWith;
@@ -39,7 +39,8 @@ namespace Demos.TopDownRpg
         public override void StartStory(GameFrameStory story)
         {
             base.StartStory(story);
-            _cachedPosition = _player.Position;
+            var player = PlayerEntity.Instance;
+            _cachedPosition = player.Position;
         }
     }
 }

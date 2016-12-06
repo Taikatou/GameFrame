@@ -24,7 +24,10 @@ namespace GameFrame.Controllers.Click.TouchScreen
             while (TouchPanel.IsGestureAvailable)
             {
                 var gesture = TouchPanel.ReadGesture();
-                _gestureEvents[gesture.GestureType].Trigger(gesture);
+                if (_gestureEvents.ContainsKey(gesture.GestureType))
+                {
+                    _gestureEvents[gesture.GestureType].Trigger(gesture);
+                }
             }
         }
     }

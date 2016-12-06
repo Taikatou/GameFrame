@@ -25,5 +25,29 @@
             get { return GameFlags.GetVariable<bool>("game_complete"); }
             set { GameFlags.SetVariable("game_complete", value); }
         }
+
+        public static bool LearnedFight
+        {
+            get { return GameFlags.GetVariable<bool>("learned_fight"); }
+            set { GameFlags.SetVariable("learned_fight", value); }
+        }
+
+        public static bool AcquiredSword
+        {
+            get { return GameFlags.GetVariable<bool>("acquire_sword"); }
+            set { GameFlags.SetVariable("acquire_sword", value); }
+        }
+
+        public static bool GaveFishes
+        {
+            get { return GameFlags.GetVariable<bool>("give_fish"); }
+            set { GameFlags.SetVariable("give_fish", value); }
+        }
+
+        public static bool AcquireRod
+        {
+            get { return GameFlags.GetVariable<bool>("acquire_rod"); }
+            set { GameFlags.SetVariable("acquire_rod", value); }
+        }
     }
 }

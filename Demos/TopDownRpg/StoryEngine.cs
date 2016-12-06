@@ -27,12 +27,9 @@ namespace Demos.TopDownRpg
                 {
                     if (!Flags.PrincessKidnapped)
                     {
-                        var guard = new Entity
+                        var guard = new Entity("Guard", "5", "fake_guard.ink")
                         {
                             Position = new Vector2(14, 8),
-                            SpriteSheet = "5",
-                            Name ="Guard",
-                            Script = "fake_guard.ink"
                         };
                         var princess = new PrincessPreKidnapping(guard, removeEntity)
                         {
@@ -60,7 +57,7 @@ namespace Demos.TopDownRpg
                             MoveDelegate = moveDelegate
                         };
                         addEntity.Invoke(guard);
-                        var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5), new Vector2(21, 7), collisionDelegate)
+                        var hideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "second_guard_defeated", new Vector2(21, 6), new Vector2(21, 5), new Vector2(21, 7), collisionDelegate, sayDelegate)
                         {
                             MoveDelegate = moveDelegate
                         };
@@ -71,12 +68,12 @@ namespace Demos.TopDownRpg
                 {
                     if (Flags.PrincessKidnapped && !Flags.GameComplete)
                     {
-                        var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15), new Vector2(20, 10), collisionDelegate)
+                        var hideoutGuard = new HideoutGuard("second_hideout_guard.ink", gameModeController, "third_guard_defeated", new Vector2(21, 12), new Vector2(20, 15), new Vector2(20, 10), collisionDelegate, sayDelegate)
                         {
                             MoveDelegate = moveDelegate
                         };
                         addEntity.Invoke(hideoutGuard);
-                        var secondHideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "forth_guard_defeated", new Vector2(18, 12), new Vector2(17, 15), new Vector2(17, 10), collisionDelegate)
+                        var secondHideoutGuard = new HideoutGuard("hideout_guard.ink", gameModeController, "forth_guard_defeated", new Vector2(18, 12), new Vector2(17, 15), new Vector2(17, 10), collisionDelegate, sayDelegate)
                         {
                             MoveDelegate = moveDelegate
                         };

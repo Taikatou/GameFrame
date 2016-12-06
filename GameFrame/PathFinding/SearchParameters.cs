@@ -1,5 +1,6 @@
 ﻿using GameFrame.CollisionSystems;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace GameFrame.PathFinding
 {
@@ -8,11 +9,11 @@ namespace GameFrame.PathFinding
         public Point StartLocation { get; set; }
         public Point EndLocation { get; set; }
         public AbstractCollisionSystem AbstractCollisionSystem { get; set; }
-        public Rectangle Space { get; set; }
+        public Size Space { get; set; }
 
-        public SearchParameters(Point startLocation, Point endLocation, AbstractCollisionSystem abstractCollisionSystem, Rectangle space)
+        public SearchParameters(Point startLocation, Point endLocation, AbstractCollisionSystem abstractCollisionSystem, Size searchSpace)
         {
-            Space = space;
+            Space = searchSpace;
             StartLocation = startLocation;
             EndLocation = endLocation;
             AbstractCollisionSystem = abstractCollisionSystem;

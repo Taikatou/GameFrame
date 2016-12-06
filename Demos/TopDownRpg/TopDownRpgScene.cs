@@ -24,6 +24,7 @@ namespace Demos.TopDownRpg
         public OpenWorldGameMode OpenWorldGameMode { get; set; }
         private readonly EntityManager _entityManager;
         private readonly StoryEngine _storyEngine;
+        public static int Speed = 4;
         public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
         {
             _viewPort = viewPort;
@@ -46,12 +47,12 @@ namespace Demos.TopDownRpg
             _possibleMovements = new PossibleMovementWrapper(possibleMovements);
             OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, levelName , new EntityControllerFactory(), _entityManager, _storyEngine);
             var map = OpenWorldGameMode.Map;
-            var player = OpenWorldGameMode.PlayerEntity;
+            var player = PlayerEntity.Instance;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");
             if (grassLayer != null)
             {
                 var grassCollisionSystem = new TiledCollisionSystem(_possibleMovements, map, "Grass-Layer");
-                OpenWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+                PlayerEntity.Instance.OnMoveEvent += (sender, args) =>
                 {
                     var point = player.Position.ToPoint();
                     var grassCollision = grassCollisionSystem.CheckCollision(point);
@@ -70,7 +71,7 @@ namespace Demos.TopDownRpg
             {
                 var tileSize = new Point(map.TileWidth, map.TileHeight);
                 var teleporters = new TiledObjectCollisionSystem(_possibleMovements, map, tileSize, "Teleport-Layer");
-                OpenWorldGameMode.PlayerEntity.OnMoveEvent += (sender, args) =>
+                PlayerEntity.Instance.OnMoveEvent += (sender, args) =>
                 {
                     var point = player.Position.ToPoint();
                     if (teleporters.CheckCollision(point))
@@ -89,14 +90,9 @@ namespace Demos.TopDownRpg
         public override void LoadContent()
         {
             base.LoadContent();
-            PlayerEntity.Instance = new PlayerEntity
-            {
-                Name ="Player",
-                SpriteSheet = "Character",
-                Position = new Vector2(5,5)
-            };
-            Flags.FishCount = 3;
-            LoadOpenWorld("west_forest");
+            PlayerEntity.Instance = new PlayerEntity(new Vector2(5, 5));
+            Flags.AcquireRod = true;
+            LoadOpenWorld("player_home");
         }
 
         public override void Draw(GameTime gameTime)

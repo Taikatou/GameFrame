@@ -24,29 +24,37 @@ namespace Demos.TopDownRpg.GameModes
         public StoryDialogBox DialogBox { get; set; }
         public ClickEvent ClickEvent { get; set; }
         public EventHandler InteractEvent { get; set; }
+        public ClickController ClickController { get; set; }
 
         protected AbstractRpgGameMode()
         {
             UpdateList = new List<IUpdate>();
-            var clickController = new ClickController();
-            clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            ClickController = new ClickController
             {
-                if (!DialogBox.Interact(mouseState.Position))
+                MouseControl =
                 {
-                    ClickEvent?.Invoke(mouseState.Position);
+                    OnPressedEvent = (state, mouseState) =>
+                    {
+                        if (!DialogBox.Interact(mouseState.Position))
+                        {
+                            ClickEvent?.Invoke(mouseState.Position);
+                        }
+                    }
                 }
             };
-            var moveGesture = new SmartGesture(GestureType.Tap);
-            moveGesture.GestureEvent += gesture =>
+            var moveGesture = new SmartGesture(GestureType.Tap)
             {
-                var position = gesture.Position.ToPoint();
-                if (!DialogBox.Interact(position))
+                GestureEvent = gesture =>
                 {
-                    ClickEvent?.Invoke(position);
+                    var position = gesture.Position.ToPoint();
+                    if (!DialogBox.Interact(position))
+                    {
+                        ClickEvent?.Invoke(position);
+                    }
                 }
             };
-            clickController.TouchScreenControl.AddSmartGesture(moveGesture);
-            UpdateList.Add(clickController);
+            ClickController.TouchScreenControl.AddSmartGesture(moveGesture);
+            UpdateList.Add(ClickController);
         }
 
         public void AddInteractionController()
