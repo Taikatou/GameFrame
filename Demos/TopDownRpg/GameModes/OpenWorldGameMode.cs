@@ -70,13 +70,12 @@ namespace Demos.TopDownRpg.GameModes
             CollisionSystem = collisionSystem;
             AddClickController(PlayerEntity.Instance);
             PathRenderer = new PathRenderer(_moverManager, PlayerEntity.Instance, texture, endTexture, _tileSize.ToPoint(), Map.Width, Map.Height);
-            CameraTracker = new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]);
-            UpdateList.Add(CameraTracker);
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
             UpdateList.Add(_moverManager);
-            UpdateList.Add(new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]));
+            CameraTracker = new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]);
+            UpdateList.Add(CameraTracker);
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
