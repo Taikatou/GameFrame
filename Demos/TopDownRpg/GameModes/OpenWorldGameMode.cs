@@ -36,7 +36,6 @@ namespace Demos.TopDownRpg.GameModes
         public TiledMap Map;
         private Vector2 _tileSize;
         private readonly ContentManager _content;
-        public readonly Camera2D Camera;
         public AbstractCollisionSystem CollisionSystem;
         public AbstractPathRenderer PathRenderer;
         private readonly IPossibleMovements _possibleMovements;
@@ -46,6 +45,7 @@ namespace Demos.TopDownRpg.GameModes
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
+        public CameraTracker CameraTracker;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
         {
@@ -54,7 +54,6 @@ namespace Demos.TopDownRpg.GameModes
             _possibleMovements = possibleMovements;
             _content = ContentManagerFactory.RequestContentManager();
             RenderList = new List<IRenderable>();
-            Camera = new Camera2D(viewPort) { Zoom = 2.0f };
             Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
@@ -71,6 +70,8 @@ namespace Demos.TopDownRpg.GameModes
             CollisionSystem = collisionSystem;
             AddClickController(PlayerEntity.Instance);
             PathRenderer = new PathRenderer(_moverManager, PlayerEntity.Instance, texture, endTexture, _tileSize.ToPoint(), Map.Width, Map.Height);
+            CameraTracker = new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]);
+            UpdateList.Add(CameraTracker);
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
@@ -88,6 +89,8 @@ namespace Demos.TopDownRpg.GameModes
                 Interact(interactTarget);
             };
             AddInteractionController();
+            CameraController.AddCameraZoomController(CameraTracker, ClickController);
+            CameraController.AddCameraMovementController(CameraTracker, ClickController);
         }
 
         public void LoadEntities()
@@ -137,7 +140,7 @@ namespace Demos.TopDownRpg.GameModes
         {
             ClickEvent = point =>
             {
-                var endPoint = Camera.ScreenToWorld(point.X, point.Y).ToPoint();
+                var endPoint = CameraTracker.ScreenToWorld(point.X, point.Y).ToPoint();
                 BeginMoveTo(entity, endPoint / _tileSize.ToPoint());
             };
         }
@@ -252,13 +255,13 @@ namespace Demos.TopDownRpg.GameModes
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var transformMatrix = Camera.GetViewMatrix();
+            var transformMatrix = CameraTracker.TransformationMatrix;
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix,
                               sortMode: SpriteSortMode.BackToFront, depthStencilState: DepthStencilState.Default);
             Map.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {
-                if (Camera.Contains(toRender.Area) != ContainmentType.Disjoint)
+                if (CameraTracker.Contains(toRender.Area))
                 {
                     toRender.Draw(spriteBatch);
                 }

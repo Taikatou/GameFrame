@@ -64,7 +64,7 @@ namespace GameFrame.Controllers
                 {
                     GestureEvent = gesture =>
                     {
-                        camera.Camera.Position += gesture.Delta*camera.CameraZoom;
+                        camera.Camera.Position -= gesture.Delta/camera.CameraZoom;
                     }
                 };
                 clickController.TouchScreenControl.AddSmartGesture(dragGesture);
