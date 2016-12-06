@@ -13,16 +13,14 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            var hasRod = GameFlags.GetVariable<bool>("acquire_rod");
-            var scriptFile = hasRod ? "fisher_complete.ink" : "fisher.ink";
+            var scriptFile = Flags.AcquireRod ? "fisher_complete.ink" : "fisher.ink";
             _gameFrameStory = ReadStory(scriptFile);
             return _gameFrameStory;
         }
 
         public override void CompleteInteract()
         {
-            var hasRod = GameFlags.GetVariable<bool>("acquire_rod");
-            if (!hasRod)
+            if (!Flags.AcquireRod)
             {
                 var storyOver = _gameFrameStory.GetVariableState<int>("acquire_rod") == 1;
                 if (storyOver)

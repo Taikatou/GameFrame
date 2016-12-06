@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Renderers;
 using GameFrame.ServiceLocator;

@@ -19,10 +19,9 @@ namespace Demos.TopDownRpg.Entities
 
         public override GameFrameStory Interact()
         {
-            var learnedFight = GameFlags.GetVariable<bool>("learned_fight");
-            var scriptName = learnedFight ? "north_guard_post_fight.ink" : "north_guard_pre_fight.ink";
+            var scriptName = Flags.LearnedFight ? "north_guard_post_fight.ink" : "north_guard_pre_fight.ink";
             GameStory = ReadStory(scriptName);
-            if(learnedFight)
+            if(Flags.LearnedFight)
             {
                 GameStory.ChoosePathString("dialog");
                 CompleteEvent completeEvent = victory =>

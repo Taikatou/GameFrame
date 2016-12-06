@@ -94,7 +94,6 @@ namespace Demos.TopDownRpg
             {
                 Position = new Vector2(5, 5)
             };
-            Flags.AcquireRod = true;
             LoadOpenWorld("player_home");
         }
 

@@ -82,7 +82,7 @@ namespace Demos.TopDownRpg.GameModes
                 }
             };
             controller.AddButton(smartButton);
-            var upButton = new List<IButtonAble> {new JoyStickGamePadButton(Buttons.DPadUp, PlayerIndex.One, false)};
+            var upButton = new List<IButtonAble> {new DirectionGamePadButton(Buttons.DPadUp, PlayerIndex.One, false)};
             var smartUpButton = new CompositeSmartButton(upButton)
             {
                 OnButtonJustPressed = (sender, args) =>
@@ -91,7 +91,7 @@ namespace Demos.TopDownRpg.GameModes
                 }
             };
             controller.AddButton(smartUpButton);
-            var downButton = new List<IButtonAble> { new JoyStickGamePadButton(Buttons.DPadDown, PlayerIndex.One, false) };
+            var downButton = new List<IButtonAble> { new DirectionGamePadButton(Buttons.DPadDown, PlayerIndex.One, false) };
             var smartDownButton = new CompositeSmartButton(downButton)
             {
                 OnButtonJustPressed = (sender, args) =>

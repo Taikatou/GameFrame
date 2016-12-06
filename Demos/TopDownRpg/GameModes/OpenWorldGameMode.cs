@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.Factory;
@@ -205,7 +206,7 @@ namespace Demos.TopDownRpg.GameModes
                     var entityDialogBox = DialogBox as EntityStoryBoxDialog;
                     entityDialogBox?.StartStory(story, interactWith);
                 }
-                else if (GameFlags.GetVariable<bool>("acquire_rod"))
+                else if (Flags.AcquireRod)
                 {
                     if (WaterCollision(interactTarget))
                     {
@@ -240,17 +241,20 @@ namespace Demos.TopDownRpg.GameModes
             return collision;
         }
 
-        public void MoveEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact = false, Point? interactWith = null)
+        public async void MoveEntityTo(Point endPoint, Entity entity, Point tileSize, MoverManager moverManager, bool interact = false, Point? interactWith = null)
         {
             var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Size(Map.Width, Map.Height));
-            var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
-            var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity.Instance));
-            pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
-            if (interact && interactWith != null)
+            await Task.Run(() =>
             {
-                pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith.Value);
-            }
-            moverManager.AddMover(pathMover);
+                var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
+                var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity.Instance));
+                pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
+                if (interact && interactWith != null)
+                {
+                    pathMover.OnCompleteEvent += (sender, args) => Interact(interactWith.Value);
+                }
+                moverManager.AddMover(pathMover);
+            });
         }
 
         public override void Draw(SpriteBatch spriteBatch)
