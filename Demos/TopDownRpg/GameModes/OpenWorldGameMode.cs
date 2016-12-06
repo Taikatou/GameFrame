@@ -46,7 +46,6 @@ namespace Demos.TopDownRpg.GameModes
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
-        public Entity PlayerEntity => Entities.PlayerEntity.Instance;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, ControllerFactory controllerFactory, EntityManager entityManager, StoryEngine storyEngine)
         {
@@ -63,20 +62,20 @@ namespace Demos.TopDownRpg.GameModes
             _expiringSpatialHash = new ExpiringSpatialHashCollisionSystem<Entity>(_possibleMovements);
             _spatialHashMover = new SpatialHashMoverManager<Entity>(collisionSystem, _expiringSpatialHash);
             AddPlayer();
-            var entityController = controllerFactory.CreateEntityController(PlayerEntity, _possibleMovements, _moverManager);
+            var entityController = controllerFactory.CreateEntityController(PlayerEntity.Instance, _possibleMovements, _moverManager);
             var texture = _content.Load<Texture2D>("TopDownRpg/Path");
             var endTexture = _content.Load<Texture2D>("TopDownRpg/BluePathEnd");
 
             collisionSystem.AddCollisionSystem(new TiledCollisionSystem(_possibleMovements, Map, "Collision-Layer"));
             collisionSystem.AddCollisionSystem(_expiringSpatialHash);
             CollisionSystem = collisionSystem;
-            AddClickController(PlayerEntity);
-            PathRenderer = new PathRenderer(_moverManager, PlayerEntity, texture, endTexture, _tileSize.ToPoint(), Map.Width, Map.Height);
+            AddClickController(PlayerEntity.Instance);
+            PathRenderer = new PathRenderer(_moverManager, PlayerEntity.Instance, texture, endTexture, _tileSize.ToPoint(), Map.Width, Map.Height);
             UpdateList.Add(_expiringSpatialHash);
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
             UpdateList.Add(_moverManager);
-            UpdateList.Add(new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity]));
+            UpdateList.Add(new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]));
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
             DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
@@ -84,8 +83,8 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
             {
-                var facingDirection = PlayerEntity.FacingDirection;
-                var interactTarget = (PlayerEntity.Position + facingDirection).ToPoint();
+                var facingDirection = PlayerEntity.Instance.FacingDirection;
+                var interactTarget = (PlayerEntity.Instance.Position + facingDirection).ToPoint();
                 Interact(interactTarget);
             };
             AddInteractionController();
@@ -118,11 +117,11 @@ namespace Demos.TopDownRpg.GameModes
 
         public void AddPlayer()
         {
-            var entityRenderer = new PlayerEntityRenderer(_content, _expiringSpatialHash, PlayerEntity, _tileSize.ToPoint());
-            _expiringSpatialHash.AddNode(PlayerEntity.Position.ToPoint(), PlayerEntity);
+            var entityRenderer = new PlayerEntityRenderer(_content, _expiringSpatialHash, PlayerEntity.Instance, _tileSize.ToPoint());
+            _expiringSpatialHash.AddNode(PlayerEntity.Instance.Position.ToPoint(), PlayerEntity.Instance);
             RenderList.Add(entityRenderer);
-            EntityRenderersDict[PlayerEntity] = entityRenderer;
-            _spatialHashMover.Add(PlayerEntity);
+            EntityRenderersDict[PlayerEntity.Instance] = entityRenderer;
+            _spatialHashMover.Add(PlayerEntity.Instance);
         }
 
         public void AddEntity(Entity entity)
@@ -191,10 +190,10 @@ namespace Demos.TopDownRpg.GameModes
 
         public void Interact(Point interactTarget)
         {
-            var validInteraction = FourWayPossibleMovement.FourWayAdjacentLocations(PlayerEntity.Position.ToPoint()).Contains(interactTarget);
+            var validInteraction = FourWayPossibleMovement.FourWayAdjacentLocations(PlayerEntity.Instance.Position.ToPoint()).Contains(interactTarget);
             if (validInteraction)
             {
-                PlayerEntity.FacingDirection = interactTarget.ToVector2() - PlayerEntity.Position;
+                PlayerEntity.Instance.FacingDirection = interactTarget.ToVector2() - PlayerEntity.Instance.Position;
                 var interactWith = _expiringSpatialHash.ValueAt(interactTarget);
                 if (interactWith != null)
                 {
@@ -242,7 +241,7 @@ namespace Demos.TopDownRpg.GameModes
         {
             var searchParams = new SearchParameters(entity.Position.ToPoint(), endPoint, CollisionSystem, new Size(Map.Width, Map.Height));
             var path = new AStarPathFinder(searchParams, _possibleMovements).FindPath();
-            var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity));
+            var pathMover = new PathMover(entity, new FinitePath(path), new ExpiringSpatialHashMovementComplete<Entity>(_expiringSpatialHash, PlayerEntity.Instance));
             pathMover.OnCancelEvent += (sender, args) => entity.MovingDirection = new Vector2();
             if (interact && interactWith != null)
             {
