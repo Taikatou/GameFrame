@@ -110,7 +110,7 @@
  </layer>
  <objectgroup name="Teleport-Layer">
   <object id="30" name="dojo" type="5, 8" x="576" y="544" width="16" height="16"/>
-  <object id="36" name="player_home" type="5, 9" x="96" y="576" width="16" height="16"/>
+  <object id="36" name="player_home" type="5, 8" x="96" y="576" width="16" height="16"/>
   <object id="37" name="rival_house" type="5, 8" x="208" y="304" width="16" height="16"/>
   <object id="38" name="friend_house" type="5, 8" x="512" y="336" width="16" height="16"/>
   <object id="43" name="west_forest" type="99, 23" x="16" y="336" width="16" height="16"/>

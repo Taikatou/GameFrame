@@ -31,13 +31,18 @@ namespace GameFrame.Common
             _following = following;
         }
 
+        public void ReFocus()
+        {
+            var focusOn = _following.Position + _following.Offset;
+            Camera.LookAt(focusOn);
+            _cachedPosition = _following.Position;
+        }
+
         public void Update(GameTime gameTime)
         {
             if (_cachedPosition != _following.Position)
             {
-                var focusOn = _following.Position + _following.Offset;
-                Camera.LookAt(focusOn);
-                _cachedPosition = _following.Position;
+                ReFocus();
             }
         }
 

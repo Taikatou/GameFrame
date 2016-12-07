@@ -80,7 +80,7 @@
 </data>
  </layer>
  <objectgroup name="Teleport-Layer">
-  <object id="1" name="hidden_lake" type="19, 23" x="128" y="176" width="16" height="16"/>
+  <object id="1" name="hidden_lake" type="19, 23" x="128" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer"/>
 </map>

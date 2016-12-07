@@ -67,7 +67,15 @@ namespace GameFrame.Controllers
                         camera.Camera.Position -= gesture.Delta/camera.CameraZoom;
                     }
                 };
-                clickController.TouchScreenControl.AddSmartGesture(dragGesture);
+                clickController.AddSmartGesture(dragGesture);
+                var doubleTap = new SmartGesture(GestureType.DoubleTap)
+                {
+                    GestureEvent = gesture =>
+                    {
+                        camera.ReFocus();
+                    }
+                };
+                clickController.AddSmartGesture(doubleTap);
             }
         }
     }

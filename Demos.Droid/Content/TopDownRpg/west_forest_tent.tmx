@@ -61,7 +61,7 @@
 </data>
  </layer>
  <objectgroup name="Teleport-Layer">
-  <object id="1" name="west_forest" type="93, 72" x="144" y="176" width="16" height="16"/>
+  <object id="1" name="west_forest" type="93, 72" x="144" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer"/>
 </map>

@@ -3,7 +3,6 @@ using GameFrame.Controllers;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.ServiceLocator;
 using GameFrame.Services;
-using GameFrame.TextToSpeech;
 
 namespace Demos.DesktopGl
 {

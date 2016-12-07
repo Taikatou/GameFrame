@@ -46,7 +46,7 @@
 </data>
  </layer>
  <objectgroup name="Teleport-Layer">
-  <object id="4" name="west_forest" type="19, 7" x="80" y="128" width="16" height="16"/>
+  <object id="4" name="west_forest" type="19, 7" x="80" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
   <object id="6" name="black_smith" type="1, 0" x="48" y="64" width="16" height="16"/>

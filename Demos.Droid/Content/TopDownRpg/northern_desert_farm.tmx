@@ -80,7 +80,7 @@
 </data>
  </layer>
  <objectgroup name="Teleport-Layer">
-  <object id="1" name="northern_desert" type="11,24" x="112" y="176" width="16" height="16"/>
+  <object id="1" name="northern_desert" type="11,24" x="112" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer"/>
 </map>
