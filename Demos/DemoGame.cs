@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using Demos.Common;
-using Demos.Pong;
 using Demos.Screens;
 using Demos.TopDownRpg;
 using GameFrame;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.ViewportAdapters;
 
