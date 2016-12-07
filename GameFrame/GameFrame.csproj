@@ -89,6 +89,7 @@
     <Compile Include="GameFrameGame.cs" />
     <Compile Include="GameModeController.cs" />
     <Compile Include="GameModeStack.cs" />
+    <Compile Include="GUI\BackButtonGuiLayer.cs" />
     <Compile Include="GUI\GuiManager.cs" />
     <Compile Include="GUI\IGuiLayer.cs" />
     <Compile Include="GUI\ImageButton.cs" />

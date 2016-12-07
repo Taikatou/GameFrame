@@ -1,4 +1,6 @@
-﻿using Demos.TopDownRpg.Entities;
+﻿using System;
+using Demos.Screens;
+using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
 using GameFrame;
@@ -14,7 +16,7 @@ using MonoGame.Extended.ViewportAdapters;
 namespace Demos.TopDownRpg
 {
     public delegate void Teleport(string worldName);
-    public class TopDownRpgScene : DemoScreen
+    public class TopDownRpgScene : GameFrameScreen
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly ViewportAdapter _viewPort;
@@ -24,7 +26,7 @@ namespace Demos.TopDownRpg
         private readonly EntityManager _entityManager;
         private readonly StoryEngine _storyEngine;
         public static int Speed = 4;
-        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch) : base(viewPort, spriteBatch)
+        public TopDownRpgScene(ViewportAdapter viewPort, SpriteBatch spriteBatch)
         {
             _viewPort = viewPort;
             _spriteBatch = spriteBatch;
@@ -40,11 +42,17 @@ namespace Demos.TopDownRpg
             _storyEngine = new StoryEngine(gameModeController, moveDelegate, LoadOpenWorld, say);
         }
 
+        public static EventHandler ClickEvent;
         public void LoadOpenWorld(string levelName)
         {
             var possibleMovements = StaticServiceLocator.GetService<IPossibleMovements>();
             _possibleMovements = new PossibleMovementWrapper(possibleMovements);
-            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, levelName, _entityManager, _storyEngine);
+            ClickEvent = (sender, args) =>
+            {
+                Action action = Show<MainMenuScreen>;
+                action.Invoke();
+            };
+            OpenWorldGameMode = new OpenWorldGameMode(_viewPort, _possibleMovements, levelName, _entityManager, _storyEngine, ClickEvent);
             var map = OpenWorldGameMode.Map;
             var player = PlayerEntity.Instance;
             var grassLayer = map.GetLayer<TiledTileLayer>("Grass-Layer");

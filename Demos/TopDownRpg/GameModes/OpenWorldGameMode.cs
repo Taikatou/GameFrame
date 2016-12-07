@@ -12,7 +12,6 @@ using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Controllers;
-using GameFrame.GUI;
 using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
@@ -51,7 +50,7 @@ namespace Demos.TopDownRpg.GameModes
         private readonly MoverManager _moverManager;
         public CameraTracker CameraTracker;
 
-        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, EntityManager entityManager, StoryEngine storyEngine)
+        public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, EntityManager entityManager, StoryEngine storyEngine, EventHandler clickEvent): base(clickEvent)
         {
             _entityManager = entityManager;
             EntityRenderersDict = new Dictionary<Entity, AbstractEntityRenderer>();

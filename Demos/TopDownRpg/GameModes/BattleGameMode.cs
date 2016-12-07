@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using GameFrame.Content;
@@ -24,7 +25,7 @@ namespace Demos.TopDownRpg.GameModes
         private readonly Rectangle _destinationRectangle;
         private GameFrameStory _activeStory;
 
-        public BattleGameMode(Entity battleWith)
+        public BattleGameMode(Entity battleWith, EventHandler clickEvent) : base(clickEvent)
         {
             var viewPort = StaticServiceLocator.GetService<BoxingViewportAdapter>();
             Camera = new Camera2D(viewPort) { Zoom = 1.0f };

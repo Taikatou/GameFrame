@@ -22,7 +22,7 @@ namespace Demos.TopDownRpg.Entities
         {
             story.BindFunction("battle", (string scriptName) =>
             {
-                var battleMode = new BattleGameMode(this)
+                var battleMode = new BattleGameMode(this, TopDownRpgScene.ClickEvent)
                 {
                     CompleteEvent = victory =>
                     {

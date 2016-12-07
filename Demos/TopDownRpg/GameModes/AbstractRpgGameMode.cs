@@ -28,9 +28,14 @@ namespace Demos.TopDownRpg.GameModes
         public EventHandler InteractEvent { get; set; }
         public ClickController ClickController { get; set; }
 
-        protected AbstractRpgGameMode()
+        protected AbstractRpgGameMode(EventHandler clickEvent)
         {
             GuiManager = new GuiManager();
+            var backButton = new BackButtonGuiLayer
+            {
+                ClickEvent = clickEvent
+            };
+            GuiManager.AddGuiLayer(backButton);
             UpdateList = new List<IUpdate> { GuiManager };
             ClickController = new ClickController
             {
@@ -38,7 +43,7 @@ namespace Demos.TopDownRpg.GameModes
                 {
                     OnPressedEvent = (state, mouseState) =>
                     {
-                        if (!DialogBox.Interact(mouseState.Position))
+                        if (!GuiManager.Interact(mouseState.Position))
                         {
                             ClickEvent?.Invoke(mouseState.Position);
                         }
@@ -50,7 +55,7 @@ namespace Demos.TopDownRpg.GameModes
                 GestureEvent = gesture =>
                 {
                     var position = gesture.Position.ToPoint();
-                    if (!DialogBox.Interact(position))
+                    if (!GuiManager.Interact(position))
                     {
                         ClickEvent?.Invoke(position);
                     }
