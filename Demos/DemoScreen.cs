@@ -42,17 +42,23 @@ namespace Demos
             var buttonSize = new Rectangle(15, 15, 45, 45);
             _backButton = new ImageButton(buttonTexture, buttonSize);
 
-            _clickController = new ClickController();
-            _clickController.MouseControl.OnPressedEvent += (state, mouseState) =>
+            _clickController = new ClickController
             {
-                CheckHit(mouseState.Position.ToVector2());
+                MouseControl =
+                {
+                    OnPressedEvent = (state, mouseState) =>
+                    {
+                        CheckHit(mouseState.Position.ToVector2());
+                    }
+                }
             };
-            var moveGesture = new SmartGesture(GestureType.Tap);
-            moveGesture.GestureEvent += gesture =>
+            var moveGesture = new SmartGesture(GestureType.Tap)
             {
-                CheckHit(gesture.Position);
+                GestureEvent = gesture =>
+                {
+                    CheckHit(gesture.Position);
+                }
             };
-            _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
             _clickController.AddSmartGesture(moveGesture);
         }
 

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using GameFrame.GUI;
 using GameFrame.Renderers;
-using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Ink
 {
@@ -16,25 +14,22 @@ namespace GameFrame.Ink
         Closed
     }
     public delegate void StoryDialogBoxEvent(GameFrameStory story, string text);
-    public class StoryDialogBox : IUpdate, ICompleteAble
+    public class StoryDialogBox : IGuiLayer, ICompleteAble
     {
         public bool Complete => StoryState == StoryState.Closed;
         public StoryState StoryState;
         private ITextBox _currentTextBox;
-        private readonly Camera2D _camera;
         private readonly SpriteFont _font;
         private GameFrameStory _activeStory;
         public StoryDialogBoxEvent DialogBoxEvent { get; set; }
         public Size ScreenSize;
-        private bool _gamePad;
+        private readonly bool _gamePad;
 
         public StoryDialogBox(Size screenSize, SpriteFont font, bool gamePad)
         {
             _gamePad = gamePad;
             ScreenSize = screenSize;
             _font = font;
-            var graphicsDevice = StaticServiceLocator.GetService<BoxingViewportAdapter>();
-            _camera = new Camera2D(graphicsDevice) { Zoom = 1.0f };
             StoryState = StoryState.Closed;
         }
 
@@ -98,20 +93,16 @@ namespace GameFrame.Ink
             return dialogOpen;
         }
 
-        public bool Interact(Point p)
+        public bool Interact(Point point)
         {
-            var point = _camera.ScreenToWorld(p.ToVector2());
-            return _currentTextBox != null && _currentTextBox.Interact(point.ToPoint());
+            return _currentTextBox != null && _currentTextBox.Interact(point);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (!Complete)
             {
-                var transformMatrix = _camera.GetViewMatrix();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, transformMatrix: transformMatrix);
                 _currentTextBox.Draw(spriteBatch);
-                spriteBatch.End();
             }
         }
 

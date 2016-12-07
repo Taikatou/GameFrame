@@ -7,6 +7,7 @@ using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.Controllers.GamePad;
 using GameFrame.Controllers.KeyBoard;
 using GameFrame.Controllers.SmartButton;
+using GameFrame.GUI;
 using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
@@ -22,13 +23,15 @@ namespace Demos.TopDownRpg.GameModes
     {
         public List<IUpdate> UpdateList { get; }
         public StoryDialogBox DialogBox { get; set; }
+        public GuiManager GuiManager { get; set; }
         public ClickEvent ClickEvent { get; set; }
         public EventHandler InteractEvent { get; set; }
         public ClickController ClickController { get; set; }
 
         protected AbstractRpgGameMode()
         {
-            UpdateList = new List<IUpdate>();
+            GuiManager = new GuiManager();
+            UpdateList = new List<IUpdate> { GuiManager };
             ClickController = new ClickController
             {
                 MouseControl =

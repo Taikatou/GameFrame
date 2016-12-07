@@ -12,6 +12,7 @@ using GameFrame.CollisionSystems.Tiled;
 using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Controllers;
+using GameFrame.GUI;
 using GameFrame.Ink;
 using GameFrame.Movers;
 using GameFrame.PathFinding;
@@ -83,8 +84,8 @@ namespace Demos.TopDownRpg.GameModes
             var dialogFont = _content.Load<SpriteFont>("dialog");
             var settings = StaticServiceLocator.GetService<IControllerSettings>();
             DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont, settings.GamePadEnabled);
+            GuiManager.AddGuiLayer(DialogBox);
             storyEngine.LoadWorld(AddEntity, RemoveEntity, CollisionSystem.CheckMovementCollision, worldName);
-            UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>
             {
                 var facingDirection = PlayerEntity.Instance.FacingDirection;
@@ -274,7 +275,7 @@ namespace Demos.TopDownRpg.GameModes
             }
             PathRenderer.Draw(spriteBatch);
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch);
+            GuiManager.Draw(spriteBatch);
         }
 
         public override void Dispose()

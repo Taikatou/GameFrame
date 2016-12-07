@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg.GameModes
@@ -37,7 +36,7 @@ namespace Demos.TopDownRpg.GameModes
             {
                 CompleteEvent = (sender, args) => Complete()
             };
-            UpdateList.Add(DialogBox);
+            GuiManager.AddGuiLayer(DialogBox);
             var rectangle = new Rectangle(new Point(), new Point(16,16));
             var enemyEntity = new BattleEntityRenderer(new Rectangle(new Point(600, 300), new Point(160, 160)), rectangle, battleWith, _content);
             var playerEntity = new BattleEntityRenderer(new Rectangle(new Point(50, 300), new Point(160, 160)), rectangle, PlayerEntity.Instance, _content);
