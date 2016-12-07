@@ -63,6 +63,6 @@
  <objectgroup name="Entity-Layer"/>
  <objectgroup name="Teleport-Layer">
   <object id="3" name="north_desert_hideout_second_floor" type="23, 17" x="176" y="144" width="16" height="16"/>
-  <object id="4" name="northern_desert" type="4, 4" x="112" y="176" width="16" height="16"/>
+  <object id="4" name="northern_desert" type="4, 4" x="112" y="160" width="16" height="16"/>
  </objectgroup>
 </map>

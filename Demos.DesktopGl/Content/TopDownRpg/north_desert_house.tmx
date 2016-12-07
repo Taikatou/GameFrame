@@ -61,7 +61,7 @@
 </data>
  </layer>
  <objectgroup name="Teleport-Layer">
-  <object id="1" name="northern_desert" type="37, 18" x="96" y="176" width="16" height="16"/>
+  <object id="1" name="northern_desert" type="37, 18" x="96" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
   <object id="2" name="concerned_villager" type="1, 0" x="80" y="96" width="16" height="16"/>

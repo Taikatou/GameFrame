@@ -1,5 +1,4 @@
 ﻿using Demos.TopDownRpg.Entities;
-using Demos.TopDownRpg.Factory;
 using Demos.TopDownRpg.GameModes;
 using Demos.TopDownRpg.SpeedState;
 using GameFrame;

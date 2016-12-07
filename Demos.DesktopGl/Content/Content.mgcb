@@ -345,3 +345,8 @@
 /processorParam:TextureFormat=Color
 /build:courier-new-16_0.png
 
+#begin TopDownRpg/middle_house.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TopDownRpg/middle_house.tmx
+
