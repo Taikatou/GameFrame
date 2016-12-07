@@ -10,7 +10,7 @@ namespace Demos.TopDownRpg
     {
         private Entity _interactingWith;
         private Vector2 _cachedPosition;
-        public EntityStoryBoxDialog(Size screenSize, SpriteFont font) : base(screenSize, font)
+        public EntityStoryBoxDialog(Size screenSize, SpriteFont font, bool gamePad) : base(screenSize, font, gamePad)
         {
         }
 

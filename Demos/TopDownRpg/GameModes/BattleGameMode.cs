@@ -2,6 +2,7 @@
 using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using GameFrame.Content;
+using GameFrame.Controllers;
 using GameFrame.Ink;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
@@ -31,7 +32,8 @@ namespace Demos.TopDownRpg.GameModes
             _content = ContentManagerFactory.RequestContentManager();
             _backgroundTexture = _content.Load<Texture2D>($"TopDownRpg/hills");
             var dialogFont = _content.Load<SpriteFont>("dialog");
-            DialogBox = new BattleStoryBoxDialog(ScreenSize.Size, dialogFont)
+            var settings = StaticServiceLocator.GetService<IControllerSettings>();
+            DialogBox = new BattleStoryBoxDialog(ScreenSize.Size, dialogFont, settings.GamePadEnabled)
             {
                 CompleteEvent = (sender, args) => Complete()
             };

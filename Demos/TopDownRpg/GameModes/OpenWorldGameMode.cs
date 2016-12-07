@@ -18,6 +18,7 @@ using GameFrame.PathFinding;
 using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.Paths;
 using GameFrame.Renderers;
+using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -80,7 +81,8 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(CameraTracker);
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");
-            DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont);
+            var settings = StaticServiceLocator.GetService<IControllerSettings>();
+            DialogBox = new EntityStoryBoxDialog(ScreenSize.Size, dialogFont, settings.GamePadEnabled);
             storyEngine.LoadWorld(AddEntity, RemoveEntity, CollisionSystem.CheckMovementCollision, worldName);
             UpdateList.Add(DialogBox);
             InteractEvent += (sender, args) =>

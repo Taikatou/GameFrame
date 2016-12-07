@@ -26,9 +26,11 @@ namespace GameFrame.Ink
         private GameFrameStory _activeStory;
         public StoryDialogBoxEvent DialogBoxEvent { get; set; }
         public Size ScreenSize;
+        private bool _gamePad;
 
-        public StoryDialogBox(Size screenSize, SpriteFont font)
+        public StoryDialogBox(Size screenSize, SpriteFont font, bool gamePad)
         {
+            _gamePad = gamePad;
             ScreenSize = screenSize;
             _font = font;
             var graphicsDevice = StaticServiceLocator.GetService<BoxingViewportAdapter>();
@@ -77,7 +79,7 @@ namespace GameFrame.Ink
                     option.InteractEvent += (sender, args) => ChooseOption(option);
                 }
                 OptionTextBoxFactory.LineTextBoxes(optionBoxes, ScreenSize);
-                _currentTextBox = new OptionTextBoxList(optionBoxes);
+                _currentTextBox = new OptionTextBoxList(optionBoxes, _gamePad);
                 StoryState = StoryState.Option;
             }
             else

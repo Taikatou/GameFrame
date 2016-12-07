@@ -9,9 +9,11 @@ namespace GameFrame.GUI
     {
         private int _index = 0;
         public List<OptionTextBox> OptionTextBoxes;
+        private bool _gamePad;
 
-        public OptionTextBoxList(List<OptionTextBox> options)
+        public OptionTextBoxList(List<OptionTextBox> options, bool gamePad)
         {
+            _gamePad = gamePad;
             OptionTextBoxes = options;
         }
         public void Interact()
@@ -29,9 +31,10 @@ namespace GameFrame.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for(int i = 0; i < OptionTextBoxes.Count; i++)
+            for(var i = 0; i < OptionTextBoxes.Count; i++)
             {
-                OptionTextBoxes[i].Draw(spriteBatch, i == _index);
+                var colorYellow = !_gamePad || i == _index;
+                OptionTextBoxes[i].Draw(spriteBatch, colorYellow);
             }
         }
 
