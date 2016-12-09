@@ -1,0 +1,5 @@
+{
+  "name": "Concerned Villager",
+  "sprite-sheet": "3",
+  "script":  "concerned_villager.ink"  
+}

@@ -25,6 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.iOS", "Demos.iOS\Demo
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Demos.MobileShared\Demos.MobileShared.projitems*{02ff8001-f14d-4086-8ee3-2e210df8ad7d}*SharedItemsImports = 4
 		Demos.MobileShared\Demos.MobileShared.projitems*{b8537d51-9877-46b3-80f1-55b3e6df52a0}*SharedItemsImports = 4
 		Demos.MobileShared\Demos.MobileShared.projitems*{e4dc2861-65f1-460e-bcf9-b91d32bf6423}*SharedItemsImports = 13
 	EndGlobalSection

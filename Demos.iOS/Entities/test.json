@@ -1,0 +1,5 @@
+﻿{
+  "name": "Test",
+  "sprite-sheet": "Character",
+  "script":  "villager.ink"  
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Farmer",
+  "sprite-sheet": "5",
+  "script":  "north_desert_farmer.ink"  
+}
