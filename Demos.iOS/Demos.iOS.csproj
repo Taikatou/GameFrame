@@ -5,11 +5,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{92C3BB58-E56E-4FA0-AD15-83A1DF2EEBD9}</ProjectGuid>
+    <ProjectGuid>{02FF8001-F14D-4086-8EE3-2E210DF8AD7D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Demos.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>DemosiOS</AssemblyName>
+    <AssemblyName>Demos.iOS</AssemblyName>
     <MonoGamePlatform>iOS</MonoGamePlatform>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -102,22 +102,6 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HockeySDK, Version=1.0.6103.22142, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="HockeySDK.iOSBindings, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Refractored.Xam.Settings, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugins.Settings.1.5.2\lib\Xamarin.iOS10\Refractored.Xam.Settings.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Refractored.Xam.Settings.Abstractions, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugins.Settings.1.5.2\lib\Xamarin.iOS10\Refractored.Xam.Settings.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -127,40 +111,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveAndLoad.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
-    <None Include="packages.config" />
+    <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Default.png" />
     <BundleResource Include="GameThumbnail.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Demos\Demos.csproj">
-      <Project>{A0778009-BE06-4DD2-8F41-8E9F665F385F}</Project>
-      <Name>Demos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GameFrame\GameFrame.csproj">
-      <Project>{645b4968-1b54-41a3-a490-cb10c10cdc83}</Project>
-      <Name>GameFrame</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="SettingsPlugin">
-      <Visible>False</Visible>
-      <Version>1.5.2</Version>
-    </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="PluginsHelp\SettingsReadme.txt" />
-  </ItemGroup>
-  <Import Project="..\Demos.MobileShared\Demos.MobileShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
 </Project>

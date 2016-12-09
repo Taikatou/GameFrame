@@ -1,27 +1,23 @@
-﻿using Foundation;
-using HockeyApp.iOS;
+﻿using System;
+using Foundation;
 using UIKit;
-using Demos.Common;
-using Demos.MobileShared;
-using GameFrame.Controllers;
-using GameFrame.ServiceLocator;
-using GameFrame.Services;
 
 namespace Demos.iOS
 {
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
     {
-        private static DemoGame _game;
+        private static Game1 game;
 
         internal static void RunGame()
         {
-            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
-            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
-            _game = new DemoGame();
-            _game.Run();
+            game = new Game1();
+            game.Run();
         }
 
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
         static void Main(string[] args)
         {
             UIApplication.Main(args, null, "AppDelegate");
@@ -29,10 +25,6 @@ namespace Demos.iOS
 
         public override void FinishedLaunching(UIApplication app)
         {
-            var manager = BITHockeyManager.SharedHockeyManager;
-            manager.Configure(IdManager.HockeyAppId);
-            manager.StartManager();
-            manager.Authenticator.AuthenticateInstallation();
             RunGame();
         }
     }
