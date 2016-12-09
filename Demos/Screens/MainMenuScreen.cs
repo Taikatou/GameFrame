@@ -19,10 +19,7 @@ namespace Demos.Screens
         {
             base.LoadContent();
 
-            AddMenuItem("New Game", Show<TopDownRpgScene>);
-            AddMenuItem("Load Game", Show<LoadGameScreen>);
-            AddMenuItem("Options", Show<OptionsScreen>);
-            AddMenuItem("Exit", _game.Exit);
+            AddMenuItem("Play Game", Show<TopDownRpgScene>);
         }
     }
 }

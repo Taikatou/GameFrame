@@ -12,7 +12,7 @@ namespace Demos.iOS
 
         public string LoadText(string filename)
         {
-            var text = File.ReadAllText("TestData/ReadMe.txt");
+            var text = File.ReadAllText(filename);
             return text;
         }
     }

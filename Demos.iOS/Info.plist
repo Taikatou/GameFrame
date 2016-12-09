@@ -9,15 +9,12 @@
 		<string>Icon@2x.png</string>
 		<string>Icon.png</string>
 		<string>Icon-60@2x.png</string>
-		<string>Default.png</string>
-		<string>Default@2x.png</string>
-		<string>Default-568h@2x.png</string>
 		<string>Icon-Small@2x.png</string>
 		<string>Icon-Small.png</string>
 		<string>Icon-Small-40@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>project.MonoGame.Demos.iOS</string>
+	<string>project.MonoGame.Ninjagame</string>
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
 	<key>UISupportedInterfaceOrientations</key>
