@@ -1,5 +1,11 @@
 ﻿using System;
+using Demos.MobileShared;
 using Foundation;
+using GameFrame.Controllers;
+using GameFrame.PathFinding.Heuristics;
+using GameFrame.PathFinding.PossibleMovements;
+using GameFrame.ServiceLocator;
+using GameFrame.Services;
 using UIKit;
 
 namespace Demos.iOS
@@ -7,11 +13,14 @@ namespace Demos.iOS
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
     {
-        private static Game1 game;
+        private static DemoGame game;
 
         internal static void RunGame()
         {
-            game = new Game1();
+            StaticServiceLocator.AddService<ISaveAndLoad>(new SaveAndLoad());
+            StaticServiceLocator.AddService<IControllerSettings>(new ControllerSettings());
+            StaticServiceLocator.AddService<IPossibleMovements>(new EightWayPossibleMovement(new CrowDistance()));
+            game = new DemoGame();
             game.Run();
         }
 
