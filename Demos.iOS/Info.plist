@@ -6,15 +6,29 @@
 	<string>Demos.iOS</string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>Icon-72@2x.png</string>
+		<string>Icon-72.png</string>
 		<string>Icon@2x.png</string>
 		<string>Icon.png</string>
 		<string>Icon-60@2x.png</string>
-		<string>Icon-Small@2x.png</string>
-		<string>Icon-Small.png</string>
+		<string>Icon-76.png</string>
+		<string>Icon-76@2x.png</string>
+		<string>Default.png</string>
+		<string>Default@2x.png</string>
+		<string>Default-568h@2x.png</string>
+		<string>Default-Landscape.png</string>
+		<string>Default-Landscape@2x.png</string>
+		<string>Default-Portrait.png</string>
+		<string>Default-Portrait@2x.png</string>
+		<string>Icon-Small-50@2x.png</string>
+		<string>Icon-Small-50.png</string>
+		<string>Icon-Small-40.png</string>
 		<string>Icon-Small-40@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>project.MonoGame.Ninjagame</string>
+	<string>project.Monogame.NinjaGame</string>
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
 	<key>UISupportedInterfaceOrientations</key>
@@ -25,10 +39,13 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
+		<integer>2</integer>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string></string>
+	<string>1.1</string>
 	<key>CFBundleVersion</key>
 	<string></string>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array/>
 </dict>
 </plist>
