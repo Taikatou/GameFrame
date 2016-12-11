@@ -74,7 +74,7 @@ namespace Demos.TopDownRpg.GameModes
                 entity.Draw(spriteBatch);
             }
             spriteBatch.End();
-            DialogBox.Draw(spriteBatch);
+            GuiManager.Draw(spriteBatch);
         }
 
         public override void Dispose()

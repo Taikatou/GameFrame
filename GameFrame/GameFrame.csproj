@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Camera\AbstractCameraTracker.cs" />
+    <Compile Include="Camera\OutdoorCameraTracker.cs" />
     <Compile Include="CollisionSystems\Tiled\TiledObjectCollisionSystem.cs" />
     <Compile Include="CollisionTest\BBCollisionObserver.cs" />
     <Compile Include="CollisionTest\BBCollisionSubject.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="CollisionTest\IObserver.cs" />
     <Compile Include="CollisionTest\ISubject.cs" />
     <Compile Include="Common\ExpiringKey.cs" />
-    <Compile Include="Common\CameraTracker.cs" />
+    <Compile Include="Camera\IndoorCameraTracker.cs" />
     <Compile Include="Common\IFocusAble.cs" />
     <Compile Include="Common\FollowTracker.cs" />
     <Compile Include="Content\ContentManagerFactory.cs" />

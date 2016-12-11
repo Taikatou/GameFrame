@@ -1,4 +1,5 @@
-﻿using GameFrame.Common;
+﻿using GameFrame.Camera;
+using GameFrame.Common;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
 using GameFrame.ServiceLocator;
@@ -27,7 +28,7 @@ namespace GameFrame.Controllers
             }
         }
 
-        public static void AddCameraZoomController(CameraTracker camera, ClickController clickController)
+        public static void AddCameraZoomController(AbstractCameraTracker camera, ClickController clickController)
         {
             if (TouchScreenEnabled)
             {
@@ -56,7 +57,7 @@ namespace GameFrame.Controllers
             }
         }
 
-        public static void AddCameraMovementController(CameraTracker camera, ClickController clickController)
+        public static void AddCameraMovementController(AbstractCameraTracker camera, ClickController clickController)
         {
             if (TouchScreenEnabled)
             {

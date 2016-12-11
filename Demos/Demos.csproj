@@ -72,6 +72,7 @@
     <Compile Include="TopDownRpg\AbstractEntityRenderer.cs" />
     <Compile Include="TopDownRpg\EntityRenderer.cs" />
     <Compile Include="TopDownRpg\EntityStoryBoxDialog.cs" />
+    <Compile Include="TopDownRpg\Factory\CameraTrackerFactory.cs" />
     <Compile Include="TopDownRpg\Factory\EntityControllerFactory.cs" />
     <Compile Include="TopDownRpg\GameFlags.cs" />
     <Compile Include="TopDownRpg\GameModes\AbstractRpgGameMode.cs" />

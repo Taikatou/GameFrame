@@ -1,15 +1,22 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameFrame.Common;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
 
-namespace GameFrame.Common
+namespace GameFrame.Camera
 {
-    public class CameraTracker : IUpdate
+    public abstract class AbstractCameraTracker : IUpdate
     {
         public Camera2D Camera;
-        private readonly IFocusAble _following;
-        private Vector2 _cachedPosition;
+        public readonly IFocusAble Following;
+        public Vector2 CachedPosition;
         private static float _cameraZoom = 2.0f;
+        public Matrix TransformationMatrix => Camera.GetViewMatrix();
+
+        public Vector2 GetFocus()
+        {
+            return Following.Position + Following.Offset;
+        }
         public float CameraZoom
         {
             get { return _cameraZoom; }
@@ -22,27 +29,17 @@ namespace GameFrame.Common
                 }
             }
         }
-
-        public Matrix TransformationMatrix => Camera.GetViewMatrix();
-
-        public CameraTracker(ViewportAdapter viewPort, IFocusAble following)
+        public AbstractCameraTracker(ViewportAdapter viewPort, IFocusAble following)
         {
             Camera = new Camera2D(viewPort) { Zoom = CameraZoom };
-            _following = following;
+            Following = following;
         }
-
-        public void ReFocus()
-        {
-            var focusOn = _following.Position + _following.Offset;
-            Camera.LookAt(focusOn);
-            _cachedPosition = _following.Position;
-        }
-
         public void Update(GameTime gameTime)
         {
-            if (_cachedPosition != _following.Position)
+            if (CachedPosition != Following.Position)
             {
                 ReFocus();
+                CachedPosition = Following.Position;
             }
         }
 
@@ -62,9 +59,8 @@ namespace GameFrame.Common
             return contains != ContainmentType.Disjoint;
         }
 
-        public void Zoom(float zoomBy)
-        {
-            CameraZoom += zoomBy;
-        }
+        public abstract void Zoom(float zoomBy);
+
+        public abstract void ReFocus();
     }
 }

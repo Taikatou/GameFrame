@@ -80,7 +80,7 @@
    <property name="TYPE" value="TERRAIN"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="terrain" width="42" height="42">
@@ -90,7 +90,7 @@
  </layer>
  <layer name="details" width="42" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmc1twjAYhu0jtGsALWWJQH+4wx50iUrQnvozQKuWsgO3lh24wwhMwIuUg9UmdmK/X4iEX+lRZCdxnsRx4ihKnU4+BXmwHHcExvSz8cvcsm4C7qsSccTmWadIeM60Uo/gSXPKUp5ztP8NFppTlvL8Qfu/YKU5ZSlPiURPbkzPKalN6fHO8pQe7yxP6fHO8pRI9OTG17MBmuAMnFONsuPr2QJt0AEXRJ8Nxs5W/6/39UxAHwzAdcDxDynSN3W4P4v0zTHem3+vbV7fmNud8vtdItHTnaxnAPu5VHWiJzfRk5voyU0dPS9BF1yBXlpXR88bcAvuwDCts3lKzYV9YvMsOxeWjKvfl1WJOOLyXJdoK8H8oZ/zbRGaLM9no26XLl/AK3iT0XDG9HxXYf9OvgL3t/FBP3PZ7AFGOKKk
+   eJztmVkOATEch9tHyzXsLmH3zj04BInlyXIAIsMdvOEO3jmCE/hJkMlkOkv922mkX/KFDqkvmk4qRoyxneGO4YSZj8P8O3uwr7klCFHnAA41twQh6jQN6s4pZ2wG55xmrKrTwfx7eOA0Y1WdJ8x/hhdOM1bVqQrbSYvd7zRjVZ12v9tOSmQ6UzANMzBLXuSPTGcO5mEBFglbbtg7d+7/mkxnDdZhAzZ//Pyoa/Pq3MSJJCbq2jh6cr54v1vR2njfp7tTllfnKOmICPzz/ZMCv3sA9X0pCWwnLbaTFttJi2mdJViGFVh1XTetswXbsAO7ruuiTlVnYVlEnXHPwqoJWvejzpAQgjqvMeap4fxQF5whKPB2LlzPH+/HJVzBtbqMUEzb7yI+v+OS/h8rzC18AihFtnY=
   </data>
  </layer>
  <layer name="above-details" width="42" height="42">
@@ -100,7 +100,7 @@
  </layer>
  <layer name="Collision-Layer" width="42" height="42" visible="0" opacity="0.75">
   <data encoding="base64" compression="zlib">
-   eJztmWFuwjAMhR2x/xwE2MQp0HoNDoLEjjEJdg8OwkG4wBppFpZxSOI6NZ36pCeR1rRfmtokZB0A1k7e9H7v/VEQdwGA7dswf4a2jozISYXnqXhM7riVWnB24W6Ldo6zRv+R87gA+Ppz1M/ifkxqe3JyrlPvc6LtxXkSuNBSuxVnC001j3KGJ3FjcfJamXpmuefO3y8pb2rayHl14HyW36l8vzXmrM3vVL4vQxmnpyLbaiKcu4lw7hWctHZ0hv1LXa+mLvHvUWvvz3VmeW7BSXm1948qGRst5xBJvzXS2NA4yjmW+LNNjQ2N8+DUyGPcNfLklPLGui5ZSKoB1nVpbM2ctpo5bTVz6iXNS16RU5qXIOcVHjlbzYVLOCkvfo6MtxfilITr4qUw3+X/T3gK18UrwqllatkfXBfvMpxdQR9K1yAa4bp4z95ZKS51bgzhuvgQHuuBxjj2Ftfijow1+025/aqh+12pPbDv3r/f+NM8
+   eJztme0JwjAQQBP0fwfxC6couoaDCDqGUN2jgziIC9igoeG4ay5p0jPSB4dEg30mveNq1lqptVBsuth2sWPMa5VS++W4yE2rek+Xg/6EC+VToudR95Fi7PMM4R89Lwulrt8wPBb9e9hY0hN6NV3cibGUZ4N42cDGuTxzUWIecWq5r87n9uSumW/d4f2F5U3I2PIU8BzKbyrfX5k9Q/ObyvdK8zylWRXiWRfieYrwdGsHrB9jGPo+bl1ysT0f1vuFXt/ljuS5JdbTvnI8h67P3ZsYzzFAH2pv4LypcwiuLbU3cF4JuW6Yet9jkfLE8iZ1XUoBVgNS1yUJZs+0zJ5pmT3joPqSX/Ok+hLj+ETm5+qFfVB9iXF8IfOlPCmMY4V4wP8npKmAR6xT7t+zYni6a0vBfQaJpUaeAzAH6rOpOP3I/efjrMPOm3znVWPPu6gzsFsXb0rtrE4=
   </data>
  </layer>
  <layer name="Grass-Layer" width="42" height="42">
@@ -113,8 +113,8 @@
   <object id="36" name="player_home" type="5, 8" x="96" y="576" width="16" height="16"/>
   <object id="37" name="rival_house" type="5, 8" x="208" y="304" width="16" height="16"/>
   <object id="38" name="friend_house" type="5, 8" x="512" y="336" width="16" height="16"/>
-  <object id="43" name="west_forest" type="99, 23" x="16" y="336" width="16" height="16"/>
-  <object id="45" name="west_forest" type="99, 24" x="16" y="352" width="16" height="16"/>
+  <object id="43" name="west_forest" type="99, 23" x="0" y="336" width="16" height="16"/>
+  <object id="45" name="west_forest" type="99, 24" x="0" y="352" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Entity-Layer">
   <object id="29" name="villager" type="1,0" x="144" y="352" width="16" height="16"/>

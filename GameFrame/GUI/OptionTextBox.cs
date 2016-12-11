@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Ink.Runtime;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
-using System;
 
 namespace GameFrame.GUI
 {

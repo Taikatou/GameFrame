@@ -6,10 +6,10 @@ using Demos.Common;
 using Demos.TopDownRpg.Entities;
 using Demos.TopDownRpg.Factory;
 using GameFrame;
+using GameFrame.Camera;
 using GameFrame.CollisionSystems;
 using GameFrame.CollisionSystems.SpatialHash;
 using GameFrame.CollisionSystems.Tiled;
-using GameFrame.Common;
 using GameFrame.Content;
 using GameFrame.Controllers;
 using GameFrame.Ink;
@@ -48,7 +48,7 @@ namespace Demos.TopDownRpg.GameModes
         private readonly SpatialHashMoverManager<Entity> _spatialHashMover;
         private readonly EntityManager _entityManager;
         private readonly MoverManager _moverManager;
-        public CameraTracker CameraTracker;
+        public AbstractCameraTracker CameraTracker;
 
         public OpenWorldGameMode(ViewportAdapter viewPort, IPossibleMovements possibleMovements, string worldName, EntityManager entityManager, StoryEngine storyEngine, EventHandler clickEvent): base(clickEvent)
         {
@@ -77,7 +77,7 @@ namespace Demos.TopDownRpg.GameModes
             UpdateList.Add(entityController);
             UpdateList.Add(_spatialHashMover);
             UpdateList.Add(_moverManager);
-            CameraTracker = new CameraTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance]);
+            CameraTracker = CameraTrackerFactory.CreateTracker(viewPort, EntityRenderersDict[PlayerEntity.Instance], Map);
             UpdateList.Add(CameraTracker);
             LoadEntities();
             var dialogFont = _content.Load<SpriteFont>("dialog");

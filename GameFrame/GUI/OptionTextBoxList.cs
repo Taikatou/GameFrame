@@ -9,7 +9,7 @@ namespace GameFrame.GUI
     {
         private int _index = 0;
         public List<OptionTextBox> OptionTextBoxes;
-        private bool _gamePad;
+        private readonly bool _gamePad;
 
         public OptionTextBoxList(List<OptionTextBox> options, bool gamePad)
         {
