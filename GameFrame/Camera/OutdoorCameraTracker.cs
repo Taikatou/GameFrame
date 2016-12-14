@@ -21,6 +21,7 @@ namespace GameFrame.Camera
             {
                 CameraZoom = 2.0f;
             }
+            Camera.MinimumZoom = 0.5f;
         }
 
         public bool ZoomToBig(float zoom)
@@ -34,7 +35,7 @@ namespace GameFrame.Camera
         public override void Zoom(float zoomBy)
         {
             var newCamera = CameraZoom + zoomBy;
-            if (newCamera < CameraZoom || ZoomToBig(newCamera))
+            if (newCamera > CameraZoom || ZoomToBig(newCamera))
             {
                 CameraZoom = newCamera;
                 ReFocus();

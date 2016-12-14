@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.Droid", "Demos.Droid\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.Windows", "Demos.Windows\Demos.Windows.csproj", "{B4AC93D3-6EF7-46CA-AEE9-CC2D9F600A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.iOS", "Demos.iOS\Demos.iOS.csproj", "{02FF8001-F14D-4086-8EE3-2E210DF8AD7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaAdventure", "Demos.iOS\NinjaAdventure.csproj", "{02FF8001-F14D-4086-8EE3-2E210DF8AD7D}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

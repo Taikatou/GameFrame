@@ -529,18 +529,18 @@
   <object id="21" name="fisher_two" x="80" y="432" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Teleport-Layer">
-  <object id="1" name="shack" type="5, 7" x="1488" y="128" width="16" height="16"/>
-  <object id="2" name="black_smith_west_forest" type="5, 7" x="304" y="112" width="16" height="16"/>
-  <object id="3" name="farmer_west_forest" type="6, 7" x="144" y="272" width="16" height="16"/>
+  <object id="1" name="shack" type="5, 6" x="1488" y="128" width="16" height="16"/>
+  <object id="2" name="black_smith_west_forest" type="5, 6" x="304" y="112" width="16" height="16"/>
+  <object id="3" name="farmer_west_forest" type="6, 6" x="144" y="272" width="16" height="16"/>
   <object id="6" name="level01" type="1, 22" x="1584" y="368" width="16" height="16"/>
   <object id="7" name="level01" type="1, 22" x="1584" y="384" width="16" height="16"/>
-  <object id="9" name="west_forest_tent" type="9, 10" x="1488" y="1152" width="16" height="16"/>
-  <object id="10" name="center_house_west_forest" type="6, 10" x="688" y="544" width="16" height="16"/>
+  <object id="9" name="west_forest_tent" type="9, 9" x="1488" y="1152" width="16" height="16"/>
+  <object id="10" name="center_house_west_forest" type="6, 9" x="688" y="544" width="16" height="16"/>
   <object id="11" name="west_forest_west_entrance" type="24,11" x="0" y="336" width="16" height="16"/>
   <object id="23" name="hidden_lake" type="0,7" x="1584" y="1104" width="16" height="16"/>
   <object id="24" name="hidden_lake" type="0,8" x="1584" y="1120" width="16" height="16"/>
   <object id="25" name="hidden_lake" type="0,9" x="1584" y="1136" width="16" height="16"/>
-  <object id="26" name="middle_house" type="7,9" x="976" y="128" width="16" height="16"/>
+  <object id="26" name="middle_house" type="7,8" x="976" y="128" width="16" height="16"/>
  </objectgroup>
  <layer name="Water-Layer" width="100" height="100" visible="0" opacity="0.5">
   <data encoding="csv">
