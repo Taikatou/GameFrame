@@ -1,0 +1,1 @@
+﻿{"inkVersion":15,"root":["done",{"dialog":[["^You caught a fish you now have ","G>","ev",{"VAR?":"fish_count"},"out","/ev","G<","^ fish","\n",["end",{"#f":7,"#n":"g-0"}],null],{"#f":3}],"global decl":["ev",0,{"VAR=":"fish_count"},"/ev","end",null],"#f":3}]}
