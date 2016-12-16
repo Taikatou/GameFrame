@@ -23,6 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.Windows", "Demos.Wind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.iOS", "Demos.iOS\Demos.iOS.csproj", "{02FF8001-F14D-4086-8EE3-2E210DF8AD7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demos.UWP", "SpeedCodingPokemon\LetsCreatePokemon\Demos.UWP.csproj", "{BD1F4549-5F92-4A3A-9831-6E7864B207D3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
