@@ -24,7 +24,7 @@ namespace GameFrame.Controllers
             set { ToMove.MovingDirection = value; }
         }
 
-        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, Dictionary<Directions, List<IButtonAble>> directionButtons)
+        public BaseMovableController(BaseMovable baseMovable, IPossibleMovements possibleMovements, MoverManager moverManager, IReadOnlyDictionary<Directions, List<IButtonAble>> directionButtons)
         {
             _possibleMovements = possibleMovements;
             ToMove = baseMovable;

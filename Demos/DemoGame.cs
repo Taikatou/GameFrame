@@ -6,7 +6,6 @@ using GameFrame;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.ViewportAdapters;
 
@@ -44,6 +43,7 @@ namespace Demos
                 new VideoOptionsScreen(viewportAdapter, Services),
                 new KeyboardOptionsScreen(viewportAdapter, Services),
                 new MouseOptionsScreen(viewportAdapter, Services),
+                new HelpScreen(viewportAdapter, Services),
                 _rpgScene
             };
             foreach (var screen in screens)

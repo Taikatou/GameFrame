@@ -27,9 +27,10 @@ namespace Demos.TopDownRpg.GameModes
         public ClickEvent ClickEvent { get; set; }
         public EventHandler InteractEvent { get; set; }
         public ClickController ClickController { get; set; }
-
+        private EventHandler _backButtonClickEvent;
         protected AbstractRpgGameMode(EventHandler clickEvent)
         {
+            _backButtonClickEvent = clickEvent;
             GuiManager = new GuiManager();
             var backButton = new BackButtonGuiLayer
             {
@@ -108,6 +109,19 @@ namespace Demos.TopDownRpg.GameModes
                 }
             };
             controller.AddButton(smartDownButton);
+            var optionsButtons = new List<IButtonAble>
+            {
+                new KeyButton(Keys.Escape),
+                new GamePadButton(Buttons.Start)
+            };
+            var optionsAction = new CompositeSmartButton(optionsButtons)
+            {
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    _backButtonClickEvent.Invoke(this, null);
+                }
+            };
+            controller.AddButton(optionsAction);
             UpdateList.Add(controller);
         }
 

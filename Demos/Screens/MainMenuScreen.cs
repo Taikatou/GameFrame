@@ -20,6 +20,7 @@ namespace Demos.Screens
             base.LoadContent();
 
             AddMenuItem("Play Game", Show<TopDownRpgScene>);
+            AddMenuItem("Help", Show<HelpScreen>);
         }
     }
 }

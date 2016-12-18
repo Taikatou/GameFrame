@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameFrame.Content;
+using GameFrame.Controllers;
 using GameFrame.Controllers.Click;
 using GameFrame.Controllers.Click.TouchScreen;
+using GameFrame.Controllers.GamePad;
+using GameFrame.Controllers.KeyBoard;
+using GameFrame.Controllers.SmartButton;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,6 +28,22 @@ namespace Demos.Screens
         private ContentManager _content;
         private readonly ClickController _clickController;
         private readonly Camera2D _camera;
+        private int _selected;
+        private readonly SmartController _controller;
+        public int Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                if (value >= 0 && value < MenuItems.Count)
+                {
+                    _selected = value;
+                }
+            }
+        }
 
         protected MenuScreen(ViewportAdapter viewPort, IServiceProvider serviceProvider)
         {
@@ -42,6 +62,48 @@ namespace Demos.Screens
                 CheckClick(gesture.Position);
             };
             _clickController.TouchScreenControl.AddSmartGesture(moveGesture);
+            var upButtons = new List<IButtonAble>
+            {
+                new DirectionGamePadButton(Buttons.DPadUp),
+                new KeyButton(Keys.W),
+                new KeyButton(Keys.Up)
+            };
+            var downButtons = new List<IButtonAble>
+            {
+                new DirectionGamePadButton(Buttons.DPadDown),
+                new KeyButton(Keys.S),
+                new KeyButton(Keys.Down)
+            };
+            var actionButtons = new List<IButtonAble>
+            {
+                new GamePadButton(Buttons.A),
+                new KeyButton(Keys.E)
+            };
+            var upAction = new CompositeSmartButton(upButtons)
+            {
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    Selected--;
+                }
+            };
+            var downAction = new CompositeSmartButton(downButtons)
+            {
+                OnButtonJustPressed = (sender, args) =>
+                {
+                    Selected++;
+                }
+            };
+            var action = new CompositeSmartButton(actionButtons)
+            {
+                OnButtonReleased = (sender, args) =>
+                {
+                    MenuItems[Selected].Action.Invoke();
+                }
+            };
+            _controller = new SmartController();
+            _controller.AddButton(upAction);
+            _controller.AddButton(downAction);
+            _controller.AddButton(action);
         }
 
         protected void AddMenuItem(string text, Action action)
@@ -97,13 +159,23 @@ namespace Demos.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            _controller.Update(gameTime);
             _clickController.Update(gameTime);
             var mouseState = Mouse.GetState();
-            foreach (var menuItem in MenuItems)
+            for(var i = 0; i < MenuItems.Count; i++)
             {
-                var isHovered = menuItem.BoundingRectangle.Contains(mouseState.X, mouseState.Y);
-                menuItem.Color = isHovered ? Color.Yellow : Color.White;
+                var isHovered = MenuItems[i].BoundingRectangle.Contains(mouseState.X, mouseState.Y);
+                if (isHovered)
+                {
+                    MenuItems[i].Color = Color.Yellow;
+                    Selected = i;
+                }
+                else
+                {
+                    MenuItems[i].Color = Color.White;
+                }
             }
+            MenuItems[Selected].Color = Color.Yellow;
         }
 
         public override void Draw(GameTime gameTime)
