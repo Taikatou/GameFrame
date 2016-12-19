@@ -98,11 +98,11 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Reference Include="ink-engine-pcl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\ink-engine-pcl.dll</HintPath>
+      <HintPath>..\Dependencies\ink-engine-pcl.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\MonoGame.Extended.dll</HintPath>
+      <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\WindowsUniversal\MonoGame.Framework.dll</HintPath>

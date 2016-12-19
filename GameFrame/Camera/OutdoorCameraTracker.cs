@@ -1,6 +1,6 @@
 ﻿using GameFrame.Common;
 using MonoGame.Extended;
-using MonoGame.Extended.Maps.Tiled;
+using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace GameFrame.Camera

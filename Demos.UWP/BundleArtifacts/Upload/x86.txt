@@ -1,2 +1,2 @@
-MainPackage=C:\Users\conor\Documents\GitHub\GameFrame\Demos.UWP\bin\WindowsUniversal\x86\Release\Upload\Demos.UWP_1.1.0.0_x86.appx
-SymbolPackage=C:\Users\conor\Documents\GitHub\GameFrame\Demos.UWP\AppPackages\Demos.UWP_1.1.0.0\Demos.UWP_1.1.0.0_x86.appxsym
+MainPackage=C:\Users\conor\Documents\GitHub\GameFrame\Demos.UWP\bin\WindowsUniversal\x86\Release\Upload\Demos.UWP_1.1.5.0_x86.appx
+SymbolPackage=C:\Users\conor\Documents\GitHub\GameFrame\Demos.UWP\AppPackages\Demos.UWP_1.1.5.0\Demos.UWP_1.1.5.0_x86.appxsym

@@ -1,6 +1,6 @@
 ﻿using GameFrame.PathFinding.PossibleMovements;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended.Maps.Tiled;
+using MonoGame.Extended.Tiled;
 
 namespace GameFrame.CollisionSystems.Tiled
 {

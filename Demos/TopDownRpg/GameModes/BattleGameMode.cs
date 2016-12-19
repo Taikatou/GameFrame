@@ -43,7 +43,7 @@ namespace Demos.TopDownRpg.GameModes
             var playerEntity = new BattleEntityRenderer(new Rectangle(new Point(50, 300), new Point(160, 160)), rectangle, PlayerEntity.Instance, _content);
             EntityList = new List<BattleEntityRenderer> { enemyEntity, playerEntity };
             AddInteractionController();
-            var boundingRectangle = Camera.GetBoundingRectangle();
+            var boundingRectangle = Camera.BoundingRectangle;
             var size = new Point((int) boundingRectangle.Size.Width, (int) boundingRectangle.Size.Height);
             _destinationRectangle = new Rectangle(boundingRectangle.Location.ToPoint(), size);
         }

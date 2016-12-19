@@ -162,6 +162,9 @@
     <Reference Include="MonoGame.Extended">
       <HintPath>..\Dependencies\MonoGame.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Extended.Tiled">
+      <HintPath>..\Dependencies\MonoGame.Extended.Tiled.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\Dependencies\MonoGame.Framework.dll</HintPath>
     </Reference>

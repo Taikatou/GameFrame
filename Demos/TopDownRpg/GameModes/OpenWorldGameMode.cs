@@ -23,7 +23,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.Maps.Tiled;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg.GameModes
@@ -37,6 +38,7 @@ namespace Demos.TopDownRpg.GameModes
     public class OpenWorldGameMode : AbstractRpgGameMode
     {
         public TiledMap Map;
+        private IMapRenderer _mapRenderer;
         private Vector2 _tileSize;
         private readonly ContentManager _content;
         public AbstractCollisionSystem CollisionSystem;
@@ -58,6 +60,9 @@ namespace Demos.TopDownRpg.GameModes
             _content = ContentManagerFactory.RequestContentManager();
             RenderList = new List<IRenderable>();
             Map = _content.Load<TiledMap>($"TopDownRpg/{worldName}");
+            var graphics = StaticServiceLocator.GetService<GraphicsDevice>();
+            _mapRenderer = new FullMapRenderer(graphics);
+            _mapRenderer.SwapMap(Map);
             _tileSize = new Vector2(Map.TileWidth, Map.TileHeight);
             _moverManager = new MoverManager();
             var collisionSystem = new CompositeAbstractCollisionSystem(_possibleMovements);
@@ -264,7 +269,7 @@ namespace Demos.TopDownRpg.GameModes
             var transformMatrix = CameraTracker.TransformationMatrix;
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix,
                               sortMode: SpriteSortMode.BackToFront, depthStencilState: DepthStencilState.Default);
-            Map.Draw(transformMatrix);
+            _mapRenderer.Draw(transformMatrix);
             foreach (var toRender in RenderList)
             {
                 if (CameraTracker.Contains(toRender.Area))

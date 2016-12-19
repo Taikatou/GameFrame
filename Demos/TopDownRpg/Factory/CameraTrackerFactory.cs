@@ -1,6 +1,6 @@
 ﻿using GameFrame.Camera;
 using GameFrame.Common;
-using MonoGame.Extended.Maps.Tiled;
+using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg.Factory

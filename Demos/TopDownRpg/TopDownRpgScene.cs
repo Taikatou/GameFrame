@@ -10,7 +10,7 @@ using GameFrame.PathFinding.PossibleMovements;
 using GameFrame.ServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Maps.Tiled;
+using MonoGame.Extended.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace Demos.TopDownRpg
