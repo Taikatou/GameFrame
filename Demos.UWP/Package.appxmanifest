@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="44228GreenCheeseGames.Ninja-Adventure" Publisher="CN=480BABDB-62FE-4353-AFCC-AA2CC461F199" Version="1.1.5.0" />
+  <Identity Name="44228GreenCheeseGames.Ninja-Adventure" Publisher="CN=480BABDB-62FE-4353-AFCC-AA2CC461F199" Version="1.1.6.0" />
   <mp:PhoneIdentity PhoneProductId="f13aebb8-7290-4e1f-82f4-49228c5c05e8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Ninja-Adventure</DisplayName>
