@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended;
-using MonoGame.Extended.ViewportAdapters;
+﻿using MonoGame.Extended.ViewportAdapters;
 using GameFrame.Common;
 
 namespace GameFrame.Camera

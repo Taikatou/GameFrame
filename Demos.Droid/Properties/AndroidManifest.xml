@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gameframe.demos" android:versionName="1.7.8" android:installLocation="preferExternal" android:versionCode="14">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gameframe.demos" android:versionName="1.8" android:installLocation="preferExternal" android:versionCode="15">
 	<uses-sdk />
 	<application android:label="Ninja Adventure"></application>
 </manifest>
