@@ -11,3 +11,6 @@ Open GameFrame.sln
 Assets are from Nez a gorgeous C# game framework.
 Tilemap rendering is courtesy of Monogame Extended.
 Dialog is a combination of Ink scripting language and Monogame-Tutorial-DialogBox
+
+### Play
+https://taikatou.itch.io/ninja-adventure
